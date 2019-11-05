@@ -82,6 +82,7 @@ obj/
 *.iws
 .idea/
 /out/
+prototype/app/app.iml
 
 # User-specific configurations
 .idea/caches/
