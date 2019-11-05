@@ -1,4 +1,4 @@
 # Brainy: Make-A-Story
 
-###Demo Prototype
+### Demo Prototype
 Adding a locked word to a story template
