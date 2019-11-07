@@ -3,4 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="colorDarkTeal">#16887b</color>
+    <color name="colorLightTeal">#82cbc3</color>
+    <color name="colorPurple">#7c55fb</color>
+    <color name="colorYellow">#fcd530</color>
+    <color name="colorPaper">#fcfcfc</color>
+    <color name="colorBlack">#212121</color>
 </resources>
+

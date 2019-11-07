@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Make-A-Story-Prototype</string>
+    <string name="category_image">category image</string>
+    <string name="food">Food</string>
 </resources>

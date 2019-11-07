@@ -1,7 +1,10 @@
-package com.example.make_a_story_prototype;
+package com.example.make_a_story_prototype.main.View;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.make_a_story_prototype.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class StoryActivity extends AppCompatActivity {
 
