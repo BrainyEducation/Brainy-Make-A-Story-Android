@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorDarkTeal" format="color" />
-    <attr name="colorLightTeal" format="color" />
-    <attr name="colorPurple" format="color" />
-    <attr name="colorYellow" format="color" />
-    <attr name="colorPaper" format="color" />
-    <attr name="colorBlack" format="color" />
+    <attr name="colorButton" format="color" />
+    <attr name="colorPrimaryLight" format="color" />
 
 
 
