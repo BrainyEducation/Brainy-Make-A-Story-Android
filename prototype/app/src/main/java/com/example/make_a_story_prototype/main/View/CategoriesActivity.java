@@ -2,11 +2,13 @@ package com.example.make_a_story_prototype.main.View;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
@@ -23,7 +25,6 @@ public class CategoriesActivity extends AppCompatActivity {
 
     private static final String TAG = "CategoriesActivity";
 
-    //fields
     private ArrayList<String> categoryNames = new ArrayList<>();
     private ArrayList<String> categoryImages = new ArrayList<>();
 
@@ -74,6 +75,7 @@ public class CategoriesActivity extends AppCompatActivity {
         }
     }
 
+    // temp images
     private void initImageBitmaps() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps");
         categoryImages.add("https://i.imgur.com/EEHhpyt.png");
