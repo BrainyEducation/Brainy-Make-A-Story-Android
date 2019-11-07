@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
@@ -33,6 +35,16 @@ public class CategoriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
+        // Now get a handle to any View contained
+        // within the main layout you are using
+        View view = findViewById(R.id.relative_layout);
+
+        // Find the root view
+        View root = view.getRootView();
+
+        // Set the color
+        root.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryLight));
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -43,16 +55,22 @@ public class CategoriesActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
 
+        // back arrow to left
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
-            getSupportActionBar().setTitle("Categories");
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         }
+
+        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        title.setText("Categories");
 
         Log.d(TAG, "onCreate: started");
         initImageBitmaps();
     }
 
+    // storybook icon
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

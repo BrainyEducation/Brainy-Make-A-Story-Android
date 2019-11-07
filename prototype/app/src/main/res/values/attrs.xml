@@ -3,6 +3,20 @@
     <attr name="colorButton" format="color" />
     <attr name="colorPrimaryLight" format="color" />
 
+    <attr name="colorLightRed" format="color" />
+    <attr name="colorContrastRed" format="color" />
+
+    <attr name="colorLightOrange" format="color" />
+    <attr name="colorContrastOrange" format="color" />
+
+    <attr name="colorLightGreen" format="color" />
+    <attr name="colorContrastGreen" format="color" />
+
+    <attr name="colorLightPurple" format="color" />
+    <attr name="colorContrastPurple" format="color" />
+
+    <attr name="colorLightBlue" format="color" />
+    <attr name="colorContrastBlue" format="color" />
 
 
 </resources>
