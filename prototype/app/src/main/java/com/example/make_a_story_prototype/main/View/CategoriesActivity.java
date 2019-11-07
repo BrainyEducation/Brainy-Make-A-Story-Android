@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.ViewModel.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +24,9 @@ public class CategoriesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         Log.d(TAG, "onCreate: started");
         initImageBitmaps();
     }
@@ -45,14 +48,6 @@ public class CategoriesActivity extends AppCompatActivity {
         categoryImages.add("https://i.imgur.com/EEHhpyt.png");
         categoryNames.add("Food");
 
-        categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-        categoryNames.add("Food");
-
-        categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-        categoryNames.add("Food");
-
-        categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-        categoryNames.add("Food");
 
         initRecyclerView();
 

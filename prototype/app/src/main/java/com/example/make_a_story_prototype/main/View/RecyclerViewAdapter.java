@@ -1,10 +1,6 @@
-package com.example.make_a_story_prototype.main.ViewModel;
+package com.example.make_a_story_prototype.main.View;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.LightingColorFilter;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
