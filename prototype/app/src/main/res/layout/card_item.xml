@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp">
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_margin="6dp"
+    card_view:cardCornerRadius="10dp"
+    app:strokeColor="@color/colorContrastBlue"
+    app:strokeWidth="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp">
+        android:id="@+id/parentLayout"
+        android:layout_margin="4dp"
+        >
 
         <ImageView
             android:id="@+id/categoryImage"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:padding="2dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="35dp"
             />
 
         <TextView
-            android:id="@+id/categoryName"
+            android:id="@+id/categoryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/categoryImage"
             android:layout_alignRight="@id/categoryImage"
             android:layout_alignLeft="@id/categoryImage"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="65dp"
-            android:layout_marginStart="65dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginStart="55dp"
             android:layout_marginBottom="3dp"
             android:text="line 1"
             android:textSize="20sp"
-            android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark" />
 
     </RelativeLayout>

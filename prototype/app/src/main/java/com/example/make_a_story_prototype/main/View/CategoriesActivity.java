@@ -25,6 +25,7 @@ public class CategoriesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
+    private ArrayList<CardItem> cardList;
 
 
     private static final String TAG = "CategoriesActivity";
@@ -36,11 +37,10 @@ public class CategoriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
-        ArrayList<CardItem> cardList = new ArrayList<>();
-        cardList.add(new CardItem(R.drawable.ic_ac_unit_black_24dp, "Line 1"));
-        cardList.add(new CardItem(R.drawable.ic_ac_unit_black_24dp, "Line 1"));
-        cardList.add(new CardItem(R.drawable.ic_ac_unit_black_24dp, "Line 2"));
-        cardList.add(new CardItem(R.drawable.ic_ac_unit_black_24dp, "Line 2"));
+        cardList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            cardList.add(new CardItem(R.drawable.ic_apple, "Food"));
+        }
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -109,8 +109,9 @@ public class CategoriesActivity extends AppCompatActivity {
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview");
         recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(categoryNames, categoryImages, this);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerViewAdapter = new RecyclerViewAdapter(this, cardList);
+        recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }
 }

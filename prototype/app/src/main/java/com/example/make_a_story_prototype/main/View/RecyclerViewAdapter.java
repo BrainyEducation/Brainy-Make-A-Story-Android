@@ -1,10 +1,6 @@
 package com.example.make_a_story_prototype.main.View;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,33 +10,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.make_a_story_prototype.R;
-
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private static final String TAG = "RecyclerViewAdapter";
-
-    private ArrayList<String> categoryNames = new ArrayList<>();
-    private ArrayList<String> categoryImages = new ArrayList<>();
+    private ArrayList<CardItem> cardList;
     private Context context;
 
-    public RecyclerViewAdapter(ArrayList<String> categoryNames, ArrayList<String> categoryImages, Context context) {
-        this.categoryNames = categoryNames;
-        this.categoryImages = categoryImages;
+    public RecyclerViewAdapter(Context context, ArrayList<CardItem> cardList) {
         this.context = context;
+        this.cardList = cardList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -48,11 +38,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
-
-        Glide.with(context)
-                .asBitmap()
-                .load(categoryImages.get(position))
-                .into(holder.category);
 
         int backgroundColors[] = {
                 ContextCompat.getColor(context, R.color.colorLightRed),
@@ -71,16 +56,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         };
 
 
+        CardItem currentCard = cardList.get(position);
+        holder.category.setImageResource(currentCard.getImageResource());
+        holder.categoryName.setText(currentCard.getImageLabel());
         holder.categoryName.setTextColor(detailColors[position % detailColors.length]);
         holder.itemView.setBackgroundColor(backgroundColors[position % backgroundColors.length]);
-        holder.categoryName.setText(categoryNames.get(position));
+
 
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on: " + categoryNames.get(position));
-                Toast.makeText(context, categoryNames.get(position), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onClick: clicked on: " + cardList.get(position));
+                Toast.makeText(context, cardList.get(position).getImageLabel(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -88,7 +76,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return categoryNames.size();
+        return cardList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -97,11 +85,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
-
             super(itemView);
-            category = itemView.findViewById(R.id.categoryView);
-            categoryName = itemView.findViewById(R.id.category_name);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+            this.category = itemView.findViewById(R.id.categoryImage);
+            this.categoryName = itemView.findViewById(R.id.categoryText);
+            this.parentLayout = itemView.findViewById(R.id.parentLayout);
         }
     }
 }
