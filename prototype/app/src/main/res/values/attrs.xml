@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorButton" format="color" />
+    <attr name="colorButtonPurple" format="color" />
+    <attr name="colorButtonBlue" format="color" />
+    <attr name="colorDarkGray" format="color" />
+    <attr name="colorGold" format="color" />
     <attr name="colorPrimaryLight" format="color" />
 
     <attr name="colorLightRed" format="color" />
@@ -17,6 +20,5 @@
 
     <attr name="colorLightBlue" format="color" />
     <attr name="colorContrastBlue" format="color" />
-
 
 </resources>

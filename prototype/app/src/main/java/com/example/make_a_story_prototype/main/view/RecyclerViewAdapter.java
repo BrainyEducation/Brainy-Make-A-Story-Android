@@ -1,6 +1,7 @@
-package com.example.make_a_story_prototype.main.View;
+package com.example.make_a_story_prototype.main.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,15 +64,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setBackgroundColor(backgroundColors[position % backgroundColors.length]);
 
 
-
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: " + cardList.get(position));
                 Toast.makeText(context, cardList.get(position).getImageLabel(), Toast.LENGTH_SHORT).show();
-
+                openWordBankActivity();
             }
         });
+    }
+
+    // need to fix
+    private void openWordBankActivity() {
+        Intent intent = new Intent(context, QuizActivity.class);
+        context.startActivity(intent);
     }
 
     @Override

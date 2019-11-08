@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".main.view.QuizActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/choice1"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/colorButtonBlue"
+        android:text="@string/button"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speakerIcon" />
+
+    <Button
+        android:id="@+id/choice2"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="55dp"
+        android:background="@color/colorButtonBlue"
+        android:text="@string/button"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/choice1" />
+
+    <Button
+        android:id="@+id/choice3"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorButtonBlue"
+        android:text="@string/button"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/choice1"
+        app:layout_constraintTop_toBottomOf="@+id/choice1" />
+
+    <Button
+        android:id="@+id/choice4"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorButtonBlue"
+        android:text="@string/button"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/choice2"
+        app:layout_constraintTop_toBottomOf="@+id/choice2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="153dp"
+        android:layout_height="164dp"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="129dp"
+        android:contentDescription="@string/word_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_apple" />
+
+    <ImageView
+        android:id="@+id/speakerIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="181dp"
+        android:contentDescription="Repeat audio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/ic_volume_up_24dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

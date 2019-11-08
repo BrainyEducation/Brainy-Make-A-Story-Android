@@ -2,4 +2,6 @@
     <string name="app_name">Make-A-Story-Prototype</string>
     <string name="category_image">category image</string>
     <string name="food">Food</string>
+    <string name="button">Button</string>
+    <string name="word_image">Word image</string>
 </resources>

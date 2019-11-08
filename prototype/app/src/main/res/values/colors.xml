@@ -4,9 +4,15 @@
     <color name="colorPrimaryDark">#0E695C</color>
     <color name="colorPrimaryLight">#82CBC3</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorButton">#7C55FB</color>
+    <color name="colorButtonPurple">#7C55FB</color>
+    <color name="colorButtonBlue">#1D93E7</color>
+    <color name="colorDarkGray">#424242</color>
+    <color name="colorGold">#FDD530</color>
 
-<!-- tile backgrounds  -->
+
+
+
+    <!-- tile backgrounds  -->
     <color name="colorLightRed">#FFEBEE</color>
     <color name="colorContrastRed">#B51F23</color>
 

@@ -8,7 +8,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorPrimaryLight</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorButton">@color/colorButton</item>
+        <item name="colorButtonPurple">@color/colorButtonPurple</item>
 
 
     </style>

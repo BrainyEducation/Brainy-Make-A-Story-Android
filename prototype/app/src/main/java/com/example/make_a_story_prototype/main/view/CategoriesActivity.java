@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.View;
+package com.example.make_a_story_prototype.main.view;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -12,8 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.entity.Categories;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,18 +32,13 @@ public class CategoriesActivity extends AppCompatActivity {
 
 
     private static final String TAG = "CategoriesActivity";
-    private ArrayList<String> categoryNames = new ArrayList<>();
-    private ArrayList<String> categoryImages = new ArrayList<>();
+    private List<String> categoryNames;
+    private List<Integer> categoryImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
-
-        cardList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            cardList.add(new CardItem(R.drawable.ic_apple, "Food"));
-        }
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -68,7 +66,7 @@ public class CategoriesActivity extends AppCompatActivity {
         title.setText("Categories");
 
         Log.d(TAG, "onCreate: started");
-        initImageBitmaps();
+        initImages();
     }
 
     // storybook icon
@@ -95,19 +93,20 @@ public class CategoriesActivity extends AppCompatActivity {
     }
 
     // temp images
-    private void initImageBitmaps() {
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps");
+    private void initImages() {
+        Categories categories = new Categories();
+        categoryNames = Arrays.asList(categories.getCategories());
+        categoryImages = Arrays.asList(categories.getCategoryImages());
 
+        cardList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-            categoryNames.add("Food");
+            cardList.add(new CardItem(categoryImages.get(i), categoryNames.get(i)));
         }
 
         initRecyclerView();
     }
 
     private void initRecyclerView() {
-        Log.d(TAG, "initRecyclerView: init recyclerview");
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerViewAdapter = new RecyclerViewAdapter(this, cardList);
