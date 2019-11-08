@@ -21,20 +21,22 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
-            android:paddingBottom="35dp"
-            />
+            android:contentDescription="category"
+            android:paddingBottom="35dp" />
+
 
         <TextView
             android:id="@+id/categoryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/categoryImage"
-            android:layout_alignRight="@id/categoryImage"
-            android:layout_alignLeft="@id/categoryImage"
+            android:layout_alignEnd="@id/categoryImage"
+            android:layout_alignStart="@id/categoryImage"
+            android:gravity="center_horizontal"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="55dp"
-            android:layout_marginStart="55dp"
             android:layout_marginBottom="3dp"
+            android:drawableLeft="@drawable/ic_volume_up_24dp"
+            android:drawablePadding="-20dp"
             android:text="line 1"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark" />

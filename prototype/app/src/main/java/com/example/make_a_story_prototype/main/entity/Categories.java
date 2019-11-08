@@ -23,10 +23,10 @@ public class Categories {
             R.drawable.ic_cow,
             R.drawable.ic_house,
             R.drawable.ic_soccer,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple
+            R.drawable.ic_dice,
+            R.drawable.ic_colors,
+            R.drawable.ic_rain,
+            R.drawable.ic_bus
     };
 
     public String[] getCategories() {

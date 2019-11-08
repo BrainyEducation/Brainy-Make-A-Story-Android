@@ -2,6 +2,10 @@ package com.example.make_a_story_prototype.main.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,7 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
@@ -54,13 +59,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 ContextCompat.getColor(context, R.color.colorContrastBlue),
         };
 
+        int contrastColor = detailColors[position % detailColors.length];
+        int backgroundColor = backgroundColors[position % backgroundColors.length];
 
         CardItem currentCard = cardList.get(position);
         holder.category.setImageResource(currentCard.getImageResource());
         holder.categoryName.setText(currentCard.getImageLabel());
-        holder.categoryName.setTextColor(detailColors[position % detailColors.length]);
-        holder.itemView.setBackgroundColor(backgroundColors[position % backgroundColors.length]);
+        holder.categoryName.setTextColor(contrastColor);
+        holder.itemView.setBackgroundColor(backgroundColor);
 
+        // setting color for drawableLeft
+        TextView text = holder.itemView.findViewById(R.id.categoryText);
+        Drawable[] d = text.getCompoundDrawables();
+        changeDrawableColor(context,d[0], contrastColor);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +80,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 openWordBankActivity();
             }
         });
+    }
+
+    public static Drawable changeDrawableColor(Context context,Drawable icon, int newColor) {
+        Drawable mDrawable = icon.mutate();
+        mDrawable.setColorFilter(new PorterDuffColorFilter(newColor, PorterDuff.Mode.SRC_IN));
+        return mDrawable;
     }
 
     // need to fix
