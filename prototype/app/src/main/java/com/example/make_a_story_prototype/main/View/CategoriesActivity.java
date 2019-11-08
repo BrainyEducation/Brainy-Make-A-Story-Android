@@ -2,14 +2,12 @@ package com.example.make_a_story_prototype.main.View;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,13 +19,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoriesActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter recyclerViewAdapter;
+    private RecyclerView.LayoutManager rvLayoutManager;
+
 
     private static final String TAG = "CategoriesActivity";
-
     private ArrayList<String> categoryNames = new ArrayList<>();
     private ArrayList<String> categoryImages = new ArrayList<>();
 
@@ -36,14 +36,14 @@ public class CategoriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
-        // Now get a handle to any View contained
-        // within the main layout you are using
+        ArrayList<CardItem> cardList = new ArrayList<>();
+        cardList.add(new CardItem(R.drawable.ic_ac_unit_black_24dp, "Line 1"));
+        cardList.add(new CardItem(R.drawable.ic_ac_unit_black_24dp, "Line 1"));
+        cardList.add(new CardItem(R.drawable.ic_ac_unit_black_24dp, "Line 2"));
+        cardList.add(new CardItem(R.drawable.ic_ac_unit_black_24dp, "Line 2"));
+
         View view = findViewById(R.id.relative_layout);
-
-        // Find the root view
         View root = view.getRootView();
-
-        // Set the color
         root.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryLight));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -98,18 +98,17 @@ public class CategoriesActivity extends AppCompatActivity {
     private void initImageBitmaps() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps");
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 10; i++) {
             categoryImages.add("https://i.imgur.com/EEHhpyt.png");
             categoryNames.add("Food");
         }
 
         initRecyclerView();
-
     }
 
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(categoryNames, categoryImages, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
