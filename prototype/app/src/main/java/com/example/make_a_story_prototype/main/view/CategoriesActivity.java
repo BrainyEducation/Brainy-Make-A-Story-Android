@@ -2,7 +2,6 @@ package com.example.make_a_story_prototype.main.view;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -65,7 +64,6 @@ public class CategoriesActivity extends AppCompatActivity {
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         title.setText("Categories");
 
-        Log.d(TAG, "onCreate: started");
         initImages();
     }
 

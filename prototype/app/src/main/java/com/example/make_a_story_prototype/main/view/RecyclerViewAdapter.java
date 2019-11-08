@@ -2,7 +2,6 @@ package com.example.make_a_story_prototype.main.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: called");
 
         int backgroundColors[] = {
                 ContextCompat.getColor(context, R.color.colorLightRed),
@@ -67,7 +65,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on: " + cardList.get(position));
                 Toast.makeText(context, cardList.get(position).getImageLabel(), Toast.LENGTH_SHORT).show();
                 openWordBankActivity();
             }

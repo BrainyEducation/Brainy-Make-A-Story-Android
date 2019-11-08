@@ -2,6 +2,7 @@
 <resources>
     <attr name="colorButtonPurple" format="color" />
     <attr name="colorButtonBlue" format="color" />
+    <attr name="colorWhite" format="color" />
     <attr name="colorDarkGray" format="color" />
     <attr name="colorGold" format="color" />
     <attr name="colorPrimaryLight" format="color" />

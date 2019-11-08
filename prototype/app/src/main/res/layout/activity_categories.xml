@@ -22,7 +22,7 @@
         android:padding="10dp"
         android:id="@+id/recycler_view"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:background="@drawable/border_recyclerview" />
+        android:background="@drawable/border" />
 
 </RelativeLayout>
 

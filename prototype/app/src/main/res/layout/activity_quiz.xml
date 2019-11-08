@@ -1,80 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".main.view.QuizActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Button
-        android:id="@+id/choice1"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="50dp"
-        android:background="@color/colorButtonBlue"
-        android:text="@string/button"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/speakerIcon" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
-    <Button
-        android:id="@+id/choice2"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="55dp"
-        android:background="@color/colorButtonBlue"
-        android:text="@string/button"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/choice1" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/colorPrimaryLight">
 
-    <Button
-        android:id="@+id/choice3"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@color/colorButtonBlue"
-        android:text="@string/button"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="@+id/choice1"
-        app:layout_constraintTop_toBottomOf="@+id/choice1" />
 
-    <Button
-        android:id="@+id/choice4"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@color/colorButtonBlue"
-        android:text="@string/button"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/choice2"
-        app:layout_constraintTop_toBottomOf="@+id/choice2" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/colorWhite"
+            tools:context=".main.view.QuizActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="153dp"
-        android:layout_height="164dp"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="129dp"
-        android:contentDescription="@string/word_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_apple" />
 
-    <ImageView
-        android:id="@+id/speakerIcon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="181dp"
-        android:contentDescription="Repeat audio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@drawable/ic_volume_up_24dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/option1"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginBottom="50dp"
+                android:background="@color/colorButtonBlue"
+                android:text="@string/button"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toTopOf="@+id/option3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/option2"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="55dp"
+                android:background="@color/colorButtonBlue"
+                android:text="@string/button"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/option1" />
+
+            <Button
+                android:id="@+id/option3"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:background="@color/colorButtonBlue"
+                android:text="@string/button"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/option1" />
+
+            <Button
+                android:id="@+id/option4"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorButtonBlue"
+                android:text="@string/button"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="@+id/option2"
+                app:layout_constraintTop_toTopOf="@+id/option3" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="153dp"
+                android:layout_height="164dp"
+                android:layout_marginStart="129dp"
+                android:layout_marginEnd="129dp"
+                android:layout_marginBottom="25dp"
+                android:contentDescription="@string/word_image"
+                app:layout_constraintBottom_toTopOf="@+id/speakerIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_apple" />
+
+            <ImageView
+                android:id="@+id/speakerIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="180dp"
+                android:layout_marginEnd="181dp"
+                android:layout_marginBottom="25dp"
+                android:contentDescription="Repeat audio"
+                app:layout_constraintBottom_toTopOf="@+id/option1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_volume_up_24dp" />
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="acheivement star 1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/star2"
+                app:srcCompat="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="35dp"
+                android:contentDescription="achievement star 2"
+                app:layout_constraintStart_toEndOf="@+id/star1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="achievement star 3"
+                app:layout_constraintStart_toEndOf="@+id/star2"
+                app:layout_constraintTop_toTopOf="@+id/star2"
+                app:srcCompat="@drawable/ic_star" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
