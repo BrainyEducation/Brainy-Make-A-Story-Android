@@ -1,6 +1,8 @@
 package com.example.make_a_story_prototype.main.View;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

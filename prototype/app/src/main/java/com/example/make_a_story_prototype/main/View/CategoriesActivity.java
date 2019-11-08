@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -96,21 +97,11 @@ public class CategoriesActivity extends AppCompatActivity {
     // temp images
     private void initImageBitmaps() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps");
-        categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-        categoryNames.add("Food");
 
-        categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-        categoryNames.add("Food");
-
-        categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-        categoryNames.add("Food");
-
-        categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-        categoryNames.add("Food");
-
-        categoryImages.add("https://i.imgur.com/EEHhpyt.png");
-        categoryNames.add("Food");
-
+        for (int i = 0; i < 6; i++) {
+            categoryImages.add("https://i.imgur.com/EEHhpyt.png");
+            categoryNames.add("Food");
+        }
 
         initRecyclerView();
 
@@ -121,6 +112,6 @@ public class CategoriesActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(categoryNames, categoryImages, this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }
 }
