@@ -1,17 +1,23 @@
 package com.example.make_a_story_prototype.main.view.quiz;
 
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util;
 import com.example.make_a_story_prototype.main.model.QuizOptions;
+import com.example.make_a_story_prototype.main.vm.QuizViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,25 +27,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-public class QuizActivity extends AppCompatActivity implements View.OnClickListener {
-    private QuizOptions incorrectQuizOptions = new QuizOptions();
-    private int correctAnswersCount = 0;
+public class QuizActivity extends AppCompatActivity implements QuizViewModel.Callback {
 
+    private QuizViewModel vm;
+
+    private View rootView;
+    private ImageView[] stars;
     private Button buttonOption1;
     private Button buttonOption2;
     private Button buttonOption3;
     private Button buttonOption4;
-    List<Button> buttons = new ArrayList<>();
+    private List<Button> buttons = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        // All of toolbar setup needs to be moved out to a base class
         View view = findViewById(R.id.constraint_layout);
-        View root = view.getRootView();
-        root.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
+        rootView = view.getRootView();
+
+        rootView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -47,26 +55,32 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         Util.themeStatusBar(this);
         Util.addBackArrow(this);
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        TextView title = toolbar.findViewById(R.id.toolbar_title);
         title.setText("Learn");
 
-        buttonOption1 = (Button) findViewById(R.id.option1);
-        buttonOption2 = (Button) findViewById(R.id.option2);
-        buttonOption3 = (Button) findViewById(R.id.option3);
-        buttonOption4 = (Button) findViewById(R.id.option4);
+        stars = new ImageView[]{
+                findViewById(R.id.star1),
+                findViewById(R.id.star2),
+                findViewById(R.id.star3)
+        };
+
+        buttonOption1 = findViewById(R.id.option1);
+        buttonOption2 = findViewById(R.id.option2);
+        buttonOption3 = findViewById(R.id.option3);
+        buttonOption4 = findViewById(R.id.option4);
 
         // button listener
-        buttonOption1.setOnClickListener(this);
-        buttonOption2.setOnClickListener(this);
-        buttonOption3.setOnClickListener(this);
-        buttonOption4.setOnClickListener(this);
+        buttonOption1.setOnClickListener(clickListenerForOption(0));
+        buttonOption2.setOnClickListener(clickListenerForOption(1));
+        buttonOption3.setOnClickListener(clickListenerForOption(2));
+        buttonOption4.setOnClickListener(clickListenerForOption(3));
 
         buttons.add(buttonOption1);
         buttons.add(buttonOption2);
         buttons.add(buttonOption3);
         buttons.add(buttonOption4);
 
-        fillButtons();
+        setViewModel(new QuizViewModel());
     }
 
     // storybook icon
@@ -91,47 +105,49 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void fillButtons() {
-        String[] answerOptions = incorrectQuizOptions.getIncorrectOptions();
-        Random random = new Random();
+    private void setViewModel(QuizViewModel vm) {
+        this.vm = vm;
 
-        for (int i = 0; i < 4; i++) {
-            // get random index of answer option
-            int j = random.nextInt(answerOptions.length);
-            buttons.get(i).setText(answerOptions[j]);
-        }
+        vm.callback = this;
 
-        int indexOfCorrectOption = random.nextInt(4);
-        buttons.get(indexOfCorrectOption).setText(QuizOptions.getCorrectOption());
+        vm.getCorrectAnswerCount().subscribe(this::updateStars);
+
+        vm.getOptions().subscribe((String[] options) -> {
+            for (int i = 0; i < 4; i++) {
+                buttons.get(i).setText(options[i]);
+            }
+        });
     }
 
-    private void updateCorrectAnswersCount(boolean isCorrect) {
-        if (isCorrect) {
-            correctAnswersCount++;
-        } else {
-            correctAnswersCount = 0;
-        }
-
-        if (correctAnswersCount == 3) {
-            // go to quiz completion popup
-        }
+    private View.OnClickListener clickListenerForOption(int option) {
+        return v -> vm.onSelectedAnswer(option);
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.option1:
-                Toast.makeText(this,"Option 1 clicked", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.option2:
-                Toast.makeText(this,"Option 2 clicked", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.option3:
-                Toast.makeText(this,"Option 3 clicked", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.option4:
-                Toast.makeText(this,"Option 4 clicked", Toast.LENGTH_SHORT).show();
-                break;
+    public void onComplete() {
+        Toast.makeText(this, "Congrats! You've learned a word!", Toast.LENGTH_SHORT).show();
+
+//        Snackbar.make(rootView, "Congrats! You've learned a word!", Snackbar.LENGTH_SHORT)
+//                .show();
+    }
+
+    private void updateStars(int correctAnswerCount) {
+        for (int i = 0; i < stars.length; i++) {
+            ImageView star = stars[i];
+
+            int backgroundColor;
+            if (i < correctAnswerCount) {
+                backgroundColor = getResources().getColor(R.color.colorGold);
+            } else {
+                backgroundColor = getResources().getColor(R.color.colorDarkGray);
+            }
+
+            Drawable d = star
+                    .getDrawable()
+                    .mutate();
+
+            // TODO: take another look at this
+            d.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.SRC_IN));
         }
     }
 }

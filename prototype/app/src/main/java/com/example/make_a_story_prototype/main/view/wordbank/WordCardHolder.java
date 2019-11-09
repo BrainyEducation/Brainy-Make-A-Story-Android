@@ -13,6 +13,7 @@ import com.example.make_a_story_prototype.main.model.CardItem;
 import com.example.make_a_story_prototype.main.vm.CardItemViewModel;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class WordCardHolder extends RecyclerView.ViewHolder {
@@ -49,7 +50,8 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
         wordImage.setImageResource(vm.cardItem.getImageResource());
         wordText.setText(vm.cardItem.getImageLabel());
         wordText.setTextColor(vm.contrastColor);
-        itemView.setBackgroundColor(vm.backgroundColor);
+        ((CardView)itemView).setCardBackgroundColor(vm.backgroundColor);
+        ((CardView)itemView).setRadius(20);
 
         // setting color for drawableLeft
         TextView text = itemView.findViewById(R.id.cardText);
@@ -57,7 +59,7 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
                 .getCompoundDrawables()[0]
                 .mutate();
 
-        // TODO: does this really work????
+        // TODO: take another look at this
         d.setColorFilter(new PorterDuffColorFilter(vm.contrastColor, PorterDuff.Mode.SRC_IN));
     }
 }

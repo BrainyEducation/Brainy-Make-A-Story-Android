@@ -5,8 +5,16 @@ import java.util.List;
 
 public class UnlockedWords {
     public static List<String> unlockedWords = new ArrayList<String>() {{
-        add("apple");
+        add("juice");
+        add("bread");
+        add("banana");
+        add("bread");
         add("cheese");
+        add("cake");
+        add("carrot");
+        add("sandwich");
+        add("egg");
+        add("jam");
     }};
 
     public static boolean contains(String word) {

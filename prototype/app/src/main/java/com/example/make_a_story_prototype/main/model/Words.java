@@ -13,7 +13,7 @@ public class Words {
             "Carrot",
             "Sandwich",
             "Egg",
-            "Jame"
+            "Jam"
     };
 
     private Integer[] wordImages = {

@@ -2,7 +2,7 @@ package com.example.make_a_story_prototype.main.model;
 
 public class QuizOptions {
     private static String correctOption = "apple";
-    private String incorrectOptions[] = {
+    private static String incorrectOptions[] = {
             "able",
             "ape",
             "addle",
@@ -11,7 +11,7 @@ public class QuizOptions {
             "add"
     };
 
-    public String[] getIncorrectOptions() {
+    public static String[] getIncorrectOptions() {
         return incorrectOptions;
     }
 
