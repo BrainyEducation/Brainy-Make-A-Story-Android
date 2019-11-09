@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view;
+package com.example.make_a_story_prototype.main.view.category;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -71,7 +71,7 @@ public class CategoriesActivity extends AppCompatActivity {
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerViewAdapter = new CardItemRecyclerViewAdapter(this, viewModel);
+        recyclerViewAdapter = new CategoryItemRecyclerViewAdapter(this, viewModel);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }

@@ -11,7 +11,7 @@
     <color name="colorWhite">#FFFFFF</color>
 
 
-    <!-- tile backgrounds  -->
+    <!-- card backgrounds  -->
     <color name="colorLightRed">#FFEBEE</color>
     <color name="colorContrastRed">#B51F23</color>
 
@@ -26,5 +26,11 @@
 
     <color name="colorLightBlue">#E2F5FD</color>
     <color name="colorContrastBlue">#0C5999</color>
+
+    <color name="colorWordBackground">#EDE7F5</color>
+    <color name="colorWordContrast">#31228F</color>
+
+    <color name="colorLockedBackground">#91A4AD</color>
+    <color name="colorLockedContrast">#263238</color>
 </resources>
 

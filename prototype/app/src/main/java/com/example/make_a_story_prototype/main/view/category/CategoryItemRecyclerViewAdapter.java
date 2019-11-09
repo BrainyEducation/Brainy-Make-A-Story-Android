@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view;
+package com.example.make_a_story_prototype.main.view.category;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,18 +8,19 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.entity.CardItem;
+import com.example.make_a_story_prototype.main.model.CardItem;
+import com.example.make_a_story_prototype.main.view.wordbank.WordbankActivity;
 import com.example.make_a_story_prototype.main.vm.CardItemViewModel;
 import com.example.make_a_story_prototype.main.vm.CategoriesViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CardItemRecyclerViewAdapter extends RecyclerView.Adapter<CategoryCardHolder> implements CategoryCardHolder.CategoryCardCallback {
+public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<CategoryCardHolder> implements CategoryCardHolder.CategoryCardCallback {
     private Context context;
     private CategoriesViewModel vm;
 
-    public CardItemRecyclerViewAdapter(Context context, CategoriesViewModel vm) {
+    public CategoryItemRecyclerViewAdapter(Context context, CategoriesViewModel vm) {
         this.context = context;
         this.vm = vm;
     }
@@ -48,8 +49,9 @@ public class CardItemRecyclerViewAdapter extends RecyclerView.Adapter<CategoryCa
     public void onClick(CardItem item) {
         Toast.makeText(context, item.getImageLabel(), Toast.LENGTH_SHORT).show();
 
-        // need to switch from quiz screen to wordbank
-        Intent intent = new Intent(context, QuizActivity.class);
+
+        Intent intent = new Intent(context, WordbankActivity.class);
+        intent.putExtra("source", item.getImageLabel());
         context.startActivity(intent);
     }
 }

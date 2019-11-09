@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view;
+package com.example.make_a_story_prototype.main.view.category;
 
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.entity.CardItem;
+import com.example.make_a_story_prototype.main.model.CardItem;
 import com.example.make_a_story_prototype.main.vm.CardItemViewModel;
 
 import androidx.annotation.NonNull;
@@ -20,8 +20,8 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         void onClick(CardItem item);
     }
 
-    private ImageView category;
-    private TextView categoryName;
+    private ImageView categoryImage;
+    private TextView categoryText;
     private RelativeLayout parentLayout;
     private CardItemViewModel vm;
 
@@ -29,8 +29,8 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
 
     public CategoryCardHolder(@NonNull View itemView) {
         super(itemView);
-        this.category = itemView.findViewById(R.id.categoryImage);
-        this.categoryName = itemView.findViewById(R.id.categoryText);
+        this.categoryImage = itemView.findViewById(R.id.cardImage);
+        this.categoryText = itemView.findViewById(R.id.cardText);
         this.parentLayout = itemView.findViewById(R.id.parentLayout);
 
         parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -46,13 +46,13 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
     public void setViewModel(CardItemViewModel vm) {
         this.vm = vm;
 
-        category.setImageResource(vm.cardItem.getImageResource());
-        categoryName.setText(vm.cardItem.getImageLabel());
-        categoryName.setTextColor(vm.contrastColor);
+        categoryImage.setImageResource(vm.cardItem.getImageResource());
+        categoryText.setText(vm.cardItem.getImageLabel());
+        categoryText.setTextColor(vm.contrastColor);
         itemView.setBackgroundColor(vm.backgroundColor);
 
         // setting color for drawableLeft
-        TextView text = itemView.findViewById(R.id.categoryText);
+        TextView text = itemView.findViewById(R.id.cardText);
         Drawable d = text
                 .getCompoundDrawables()[0]
                 .mutate();

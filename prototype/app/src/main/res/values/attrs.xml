@@ -22,4 +22,13 @@
     <attr name="colorLightBlue" format="color" />
     <attr name="colorContrastBlue" format="color" />
 
+    <attr name="colorWordBackground" format="color" />
+    <attr name="colorWordContrast" format="color" />
+
+    <attr name="colorLockedBackground" format="color" />
+    <attr name="colorLockedContrast" format="color" />
+
+
+
+
 </resources>

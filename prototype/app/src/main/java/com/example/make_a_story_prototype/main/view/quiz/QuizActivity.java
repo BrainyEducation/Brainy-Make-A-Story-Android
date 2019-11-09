@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view;
+package com.example.make_a_story_prototype.main.view.quiz;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util;
-import com.example.make_a_story_prototype.main.entity.QuizOptions;
+import com.example.make_a_story_prototype.main.model.QuizOptions;
 
 import java.util.ArrayList;
 import java.util.List;

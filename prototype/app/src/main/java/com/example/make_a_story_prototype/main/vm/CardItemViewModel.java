@@ -1,6 +1,6 @@
 package com.example.make_a_story_prototype.main.vm;
 
-import com.example.make_a_story_prototype.main.entity.CardItem;
+import com.example.make_a_story_prototype.main.model.CardItem;
 
 public class CardItemViewModel {
     public CardItem cardItem;

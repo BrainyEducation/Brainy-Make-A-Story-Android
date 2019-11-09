@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.entity;
+package com.example.make_a_story_prototype.main.model;
 
 import com.example.make_a_story_prototype.R;
 
