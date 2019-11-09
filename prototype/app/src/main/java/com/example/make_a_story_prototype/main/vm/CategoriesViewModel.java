@@ -3,7 +3,7 @@ package com.example.make_a_story_prototype.main.vm;
 import android.content.Context;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CardItem;
+import com.example.make_a_story_prototype.main.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.model.Categories;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 
 public class CategoriesViewModel {
 
-    private List<CardItemViewModel> cardList = new ArrayList<>();
+    private List<CategoryCardItemViewModel> cardList = new ArrayList<>();
 
     public CategoriesViewModel(Context context) {
         int BackgroundColors[] = {
@@ -39,8 +39,8 @@ public class CategoriesViewModel {
 
         for (int i = 0; i < 10; i++) {
             cardList.add(
-                    new CardItemViewModel(
-                            new CardItem(categoryImages.get(i), categoryNames.get(i)),
+                    new CategoryCardItemViewModel(
+                            new CategoryCardItem(categoryImages.get(i), categoryNames.get(i)),
                             BackgroundColors[i % BackgroundColors.length],
                             DetailColors[i % DetailColors.length]
                     )
@@ -48,7 +48,7 @@ public class CategoriesViewModel {
         }
     }
 
-    public List<CardItemViewModel> getCardList() {
+    public List<CategoryCardItemViewModel> getCardList() {
         return cardList;
     }
 }

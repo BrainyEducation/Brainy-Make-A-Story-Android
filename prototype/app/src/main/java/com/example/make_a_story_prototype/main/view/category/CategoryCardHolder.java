@@ -9,8 +9,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CardItem;
-import com.example.make_a_story_prototype.main.vm.CardItemViewModel;
+import com.example.make_a_story_prototype.main.model.CategoryCardItem;
+import com.example.make_a_story_prototype.main.vm.CategoryCardItemViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -18,13 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryCardHolder extends RecyclerView.ViewHolder {
     public interface CategoryCardCallback {
-        void onClick(CardItem item);
+        void onClick(CategoryCardItem item);
     }
 
     private ImageView categoryImage;
     private TextView categoryText;
     private RelativeLayout parentLayout;
-    private CardItemViewModel vm;
+    private CategoryCardItemViewModel vm;
 
     public CategoryCardCallback callback;
 
@@ -44,7 +44,7 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setViewModel(CardItemViewModel vm) {
+    public void setViewModel(CategoryCardItemViewModel vm) {
         this.vm = vm;
 
         categoryImage.setImageResource(vm.cardItem.getImageResource());

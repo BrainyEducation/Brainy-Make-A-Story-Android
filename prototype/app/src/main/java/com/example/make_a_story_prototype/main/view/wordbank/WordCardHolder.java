@@ -9,8 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CardItem;
-import com.example.make_a_story_prototype.main.vm.CardItemViewModel;
+import com.example.make_a_story_prototype.main.vm.WordCardItemViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -18,13 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class WordCardHolder extends RecyclerView.ViewHolder {
     public interface WordCardCallback {
-        void onClick(CardItem item);
+        void onClick(WordCardItemViewModel item);
     }
 
     private ImageView wordImage;
     private TextView wordText;
     private RelativeLayout parentLayout;
-    private CardItemViewModel vm;
+    private WordCardItemViewModel vm;
 
     public WordCardCallback callback;
 
@@ -38,13 +37,17 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 if (callback != null && vm != null) {
-                    callback.onClick(vm.cardItem);
+                    callback.onClick(vm);
                 }
             }
         });
     }
 
-    public void setViewModel(CardItemViewModel vm) {
+    public WordCardItemViewModel getViewModel() {
+        return vm;
+    }
+
+    public void setViewModel(WordCardItemViewModel vm) {
         this.vm = vm;
 
         wordImage.setImageResource(vm.cardItem.getImageResource());

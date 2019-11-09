@@ -3,8 +3,9 @@ package com.example.make_a_story_prototype.main.vm;
 import android.content.Context;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CardItem;
+import com.example.make_a_story_prototype.main.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.model.UnlockedWords;
+import com.example.make_a_story_prototype.main.model.WordCardItem;
 import com.example.make_a_story_prototype.main.model.Words;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.Map;
 import androidx.core.content.ContextCompat;
 
 public class WordbankViewModel {
-    private List<CardItemViewModel> cardList = new ArrayList<>();
+    private List<WordCardItemViewModel> cardList = new ArrayList<>();
 
     public WordbankViewModel(Context context) {
         Map<String, Integer> colors = new HashMap<>();
@@ -40,17 +41,18 @@ public class WordbankViewModel {
                 backgroundKey = "locked background";
                 contrastKey = "locked contrast";
             }
+            String wordName = wordNames.get(i);
             cardList.add(
-                    new CardItemViewModel(
-                            new CardItem(wordImages.get(i), wordNames.get(i)),
+                    new WordCardItemViewModel(
+                            new WordCardItem(wordImages.get(i), wordName),
                             colors.get(backgroundKey),
-                            colors.get(contrastKey)
+                            colors.get(contrastKey), UnlockedWords.contains(wordName.toLowerCase())
                     )
             );
         }
     }
 
-    public List<CardItemViewModel> getCardList() {
+    public List<WordCardItemViewModel> getCardList() {
         return cardList;
     }
 }

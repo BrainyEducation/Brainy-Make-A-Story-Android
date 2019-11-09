@@ -1,10 +1,10 @@
 package com.example.make_a_story_prototype.main.model;
 
-public class CardItem {
+public class WordCardItem {
     private int imageResource;
     private String imageLabel;
 
-    public CardItem(int imageResource, String imageLabel) {
+    public WordCardItem(int imageResource, String imageLabel) {
         this.imageResource = imageResource;
         this.imageLabel = imageLabel;
     }

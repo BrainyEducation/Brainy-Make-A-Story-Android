@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CardItem;
+import com.example.make_a_story_prototype.main.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.view.wordbank.WordbankActivity;
-import com.example.make_a_story_prototype.main.vm.CardItemViewModel;
+import com.example.make_a_story_prototype.main.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.vm.CategoriesViewModel;
 
 import androidx.annotation.NonNull;
@@ -36,7 +36,7 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryCardHolder holder, final int position) {
-        CardItemViewModel currentCard = vm.getCardList().get(position);
+        CategoryCardItemViewModel currentCard = vm.getCardList().get(position);
         holder.setViewModel(currentCard);
     }
 
@@ -46,7 +46,7 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
     }
 
     @Override
-    public void onClick(CardItem item) {
+    public void onClick(CategoryCardItem item) {
         Toast.makeText(context, item.getImageLabel(), Toast.LENGTH_SHORT).show();
 
 

@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CardItem;
+import com.example.make_a_story_prototype.main.model.WordCardItem;
 import com.example.make_a_story_prototype.main.view.quiz.QuizActivity;
-import com.example.make_a_story_prototype.main.vm.CardItemViewModel;
+import com.example.make_a_story_prototype.main.vm.WordCardItemViewModel;
 import com.example.make_a_story_prototype.main.vm.WordbankViewModel;
 
 import androidx.annotation.NonNull;
@@ -36,7 +36,7 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
 
     @Override
     public void onBindViewHolder(@NonNull WordCardHolder holder, final int position) {
-        CardItemViewModel currentCard = vm.getCardList().get(position);
+        WordCardItemViewModel currentCard = vm.getCardList().get(position);
         holder.setViewModel(currentCard);
     }
 
@@ -46,12 +46,13 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
     }
 
     @Override
-    public void onClick(CardItem item) {
-        Toast.makeText(context, item.getImageLabel(), Toast.LENGTH_SHORT).show();
-
-
-        Intent intent = new Intent(context, QuizActivity.class);
-        intent.putExtra("source", item.getImageLabel());
-        context.startActivity(intent);
+    public void onClick(WordCardItemViewModel vm) {
+        if (vm.isUnlocked) {
+            Toast.makeText(context, vm.cardItem.getImageLabel() + " is already unlocked", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(context, QuizActivity.class);
+            intent.putExtra("source", vm.cardItem.getImageLabel());
+            context.startActivity(intent);
+        }
     }
 }
