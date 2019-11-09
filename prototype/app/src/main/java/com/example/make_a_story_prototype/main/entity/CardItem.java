@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view;
+package com.example.make_a_story_prototype.main.entity;
 
 public class CardItem {
     private int imageResource;

@@ -1,17 +1,16 @@
 package com.example.make_a_story_prototype.main.view;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Util;
 import com.example.make_a_story_prototype.main.entity.QuizOptions;
 
 import java.util.ArrayList;
@@ -45,19 +44,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // workaround for status bar
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-        }
-
-        // back arrow to left
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+        Util.themeStatusBar(this);
+        Util.addBackArrow(this);
 
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         title.setText("Learn");
@@ -100,7 +88,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
