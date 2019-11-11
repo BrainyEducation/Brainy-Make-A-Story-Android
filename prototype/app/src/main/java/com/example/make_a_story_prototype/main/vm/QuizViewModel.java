@@ -39,16 +39,16 @@ public class QuizViewModel {
                     ];
 
             nextOptions[i] = incorrectOption;
+            if (i == 3) {
+                correctOptionIndex = random.nextInt(4);
+                nextOptions[correctOptionIndex] = QuizOptions.getCorrectOption();
+            }
         }
-
-        // fill the correct option in a random index
-        correctOptionIndex = random.nextInt(4);
-        nextOptions[correctOptionIndex] = QuizOptions.getCorrectOption();
 
         options.onNext(nextOptions);
     }
 
-    // Obervables
+    // Observables
 
     public Observable<String[]> getOptions() {
         return options;

@@ -1,6 +1,9 @@
 package com.example.make_a_story_prototype.main.vm;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.model.CategoryCardItem;
@@ -40,6 +43,7 @@ public class WordbankViewModel {
             } else {
                 backgroundKey = "locked background";
                 contrastKey = "locked contrast";
+                // do stuff
             }
             String wordName = wordNames.get(i);
             cardList.add(
