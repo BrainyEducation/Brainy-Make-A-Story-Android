@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Util;
 import com.example.make_a_story_prototype.main.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.vm.CategoryCardItemViewModel;
 
@@ -50,8 +51,12 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         categoryImage.setImageResource(vm.cardItem.getImageResource());
         categoryText.setText(vm.cardItem.getImageLabel());
         categoryText.setTextColor(vm.contrastColor);
-        ((CardView)itemView).setCardBackgroundColor(vm.backgroundColor);
-        ((CardView)itemView).setRadius(20);
+
+        Drawable imageBackground = parentLayout.getBackground();
+        Drawable imageBorder = itemView.getBackground();
+        Util.changeDrawableColor(imageBackground, vm.backgroundColor);
+        Util.changeDrawableColor(imageBorder, vm.contrastColor);
+        ((CardView)itemView).setRadius(23);
 
         // setting color for drawableLeft
         TextView text = itemView.findViewById(R.id.cardText);

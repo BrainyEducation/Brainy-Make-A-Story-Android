@@ -16,6 +16,8 @@ import com.example.make_a_story_prototype.main.vm.WordbankViewModel;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
 public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCardHolder> implements WordCardHolder.WordCardCallback {
     private Context context;
     private WordbankViewModel vm;

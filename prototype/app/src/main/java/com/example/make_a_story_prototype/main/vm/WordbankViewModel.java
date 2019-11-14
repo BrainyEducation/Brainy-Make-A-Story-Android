@@ -43,7 +43,6 @@ public class WordbankViewModel {
             } else {
                 backgroundKey = "locked background";
                 contrastKey = "locked contrast";
-                // do stuff
             }
             String wordName = wordNames.get(i);
             cardList.add(

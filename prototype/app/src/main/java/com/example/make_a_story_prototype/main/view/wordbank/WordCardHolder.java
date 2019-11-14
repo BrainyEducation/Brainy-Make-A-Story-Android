@@ -1,7 +1,5 @@
 package com.example.make_a_story_prototype.main.view.wordbank;
 
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,11 +7,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Util;
 import com.example.make_a_story_prototype.main.vm.WordCardItemViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static com.example.make_a_story_prototype.main.Util.*;
 
 public class WordCardHolder extends RecyclerView.ViewHolder {
     public interface WordCardCallback {
@@ -53,16 +54,22 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
         wordImage.setImageResource(vm.cardItem.getImageResource());
         wordText.setText(vm.cardItem.getImageLabel());
         wordText.setTextColor(vm.contrastColor);
-        ((CardView)itemView).setCardBackgroundColor(vm.backgroundColor);
-        ((CardView)itemView).setRadius(20);
+
+        Drawable imageBackground = parentLayout.getBackground();
+        Drawable imageBorder = itemView.getBackground();
+        Util.changeDrawableColor(imageBackground, vm.backgroundColor);
+        Util.changeDrawableColor(imageBorder, vm.contrastColor);
+        ((CardView)itemView).setRadius(23);
+
+        if(!vm.isUnlocked) {
+            Drawable cardImage = wordImage.getDrawable();
+            setDrawableToGrayscale(cardImage);
+        }
 
         // setting color for drawableLeft
         TextView text = itemView.findViewById(R.id.cardText);
-        Drawable d = text
-                .getCompoundDrawables()[0]
-                .mutate();
-
-        // TODO: take another look at this
-        d.setColorFilter(new PorterDuffColorFilter(vm.contrastColor, PorterDuff.Mode.SRC_IN));
+        Drawable drawableSpeaker = text
+                .getCompoundDrawables()[0];
+        changeDrawableColor(drawableSpeaker, vm.contrastColor);
     }
 }
