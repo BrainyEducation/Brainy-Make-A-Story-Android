@@ -45,8 +45,13 @@ public class WordbankActivity extends AppCompatActivity {
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         title.setText(category);
 
-        viewModel = new WordbankViewModel(this);
+        viewModel = WordbankViewModel.instance(this);
         initRecyclerView();
+
+        viewModel.getCardListObservable().subscribe((list) -> {
+            recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, viewModel);
+            recyclerView.setAdapter(recyclerViewAdapter);
+        });
     }
 
     // storybook icon
@@ -74,8 +79,6 @@ public class WordbankActivity extends AppCompatActivity {
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, viewModel);
-        recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }
 }

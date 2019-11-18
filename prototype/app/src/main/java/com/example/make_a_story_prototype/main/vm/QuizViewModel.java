@@ -1,7 +1,6 @@
 package com.example.make_a_story_prototype.main.vm;
 
 import com.example.make_a_story_prototype.main.model.QuizOptions;
-import com.example.make_a_story_prototype.main.model.UnlockedWords;
 
 import java.util.Random;
 
@@ -76,7 +75,8 @@ public class QuizViewModel {
         correctAnswersCount.onNext(correctAnswersCount.getValue() + 1);
 
         if (correctAnswersCount.getValue() == 3) {
-            UnlockedWords.unlockedWords.add(QuizOptions.getCorrectOption().toLowerCase());
+            WordbankViewModel.instance().unlockWord(QuizOptions.getCorrectOption().toLowerCase());
+
             callback.onComplete();
         }
     }

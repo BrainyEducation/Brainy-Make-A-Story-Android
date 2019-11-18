@@ -1,7 +1,5 @@
 package com.example.make_a_story_prototype.main.view.quiz;
 
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,13 +13,10 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util;
-import com.example.make_a_story_prototype.main.model.QuizOptions;
 import com.example.make_a_story_prototype.main.vm.QuizViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -142,12 +137,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
                 backgroundColor = getResources().getColor(R.color.colorDarkGray);
             }
 
-            Drawable d = star
-                    .getDrawable()
-                    .mutate();
-
-            // TODO: take another look at this
-            d.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.SRC_IN));
+            Drawable d = star.getDrawable();
+            Util.changeDrawableColor(d, backgroundColor);
         }
     }
 }
