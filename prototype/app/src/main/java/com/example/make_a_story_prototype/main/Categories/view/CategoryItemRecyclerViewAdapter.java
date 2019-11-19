@@ -47,11 +47,13 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
 
     @Override
     public void onClick(CategoryCardItem item) {
-        Toast.makeText(context, item.getImageLabel(), Toast.LENGTH_SHORT).show();
 
-
-        Intent intent = new Intent(context, WordbankActivity.class);
-        intent.putExtra("source", item.getImageLabel());
-        context.startActivity(intent);
+        if (item.getImageLabel().toLowerCase().equals("food")) {
+            Intent intent = new Intent(context, WordbankActivity.class);
+            intent.putExtra("source", item.getImageLabel());
+            context.startActivity(intent);
+        } else {
+            Toast.makeText(context, (item.getImageLabel() + " isn't currently available"), Toast.LENGTH_SHORT).show();
+        }
     }
 }
