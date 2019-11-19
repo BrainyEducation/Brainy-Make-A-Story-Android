@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.model;
+package com.example.make_a_story_prototype.main.Quiz.model;
 
 public class QuizOptions {
     private static String correctOption = "apple";

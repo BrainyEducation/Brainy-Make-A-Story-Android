@@ -1,7 +1,6 @@
-package com.example.make_a_story_prototype.main.vm;
+package com.example.make_a_story_prototype.main.Wordbank.vm;
 
-import com.example.make_a_story_prototype.main.model.CategoryCardItem;
-import com.example.make_a_story_prototype.main.model.WordCardItem;
+import com.example.make_a_story_prototype.main.Wordbank.model.WordCardItem;
 
 public class WordCardItemViewModel {
     public WordCardItem cardItem;

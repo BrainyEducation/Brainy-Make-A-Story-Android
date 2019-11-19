@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view.category;
+package com.example.make_a_story_prototype.main.Wordbank.view;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util;
-import com.example.make_a_story_prototype.main.vm.CategoriesViewModel;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,16 +18,19 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CategoriesActivity extends AppCompatActivity {
+public class WordbankActivity extends AppCompatActivity {
+    private String category;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
-    private CategoriesViewModel viewModel;
+    private WordbankViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+
+        String category = getIntent().getStringExtra("source");
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -40,10 +43,15 @@ public class CategoriesActivity extends AppCompatActivity {
         Util.addBackArrow(this);
 
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        title.setText("Categories");
+        title.setText(category);
 
-        viewModel = new CategoriesViewModel(this);
+        viewModel = WordbankViewModel.instance(this);
         initRecyclerView();
+
+        viewModel.getCardListObservable().subscribe((list) -> {
+            recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, viewModel);
+            recyclerView.setAdapter(recyclerViewAdapter);
+        });
     }
 
     // storybook icon
@@ -58,7 +66,7 @@ public class CategoriesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Toast.makeText(this, "Todo: back button", Toast.LENGTH_SHORT).show();
+                super.finish();
                 return true;
             case R.id.storybook:
                 Toast.makeText(this, "Todo: storybook button", Toast.LENGTH_SHORT).show();
@@ -71,8 +79,7 @@ public class CategoriesActivity extends AppCompatActivity {
     private void initRecyclerView() {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerViewAdapter = new CategoryItemRecyclerViewAdapter(this, viewModel);
-        recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }
 }
+

@@ -1,6 +1,7 @@
-package com.example.make_a_story_prototype.main.vm;
+package com.example.make_a_story_prototype.main.Quiz.vm;
 
-import com.example.make_a_story_prototype.main.model.QuizOptions;
+import com.example.make_a_story_prototype.main.Quiz.model.QuizOptions;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 
 import java.util.Random;
 

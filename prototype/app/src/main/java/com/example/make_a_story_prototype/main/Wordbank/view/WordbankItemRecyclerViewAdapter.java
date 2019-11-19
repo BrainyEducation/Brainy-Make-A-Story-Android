@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view.wordbank;
+package com.example.make_a_story_prototype.main.Wordbank.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,15 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.WordCardItem;
-import com.example.make_a_story_prototype.main.view.quiz.QuizActivity;
-import com.example.make_a_story_prototype.main.vm.WordCardItemViewModel;
-import com.example.make_a_story_prototype.main.vm.WordbankViewModel;
+import com.example.make_a_story_prototype.main.Quiz.view.QuizActivity;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCardHolder> implements WordCardHolder.WordCardCallback {
     private Context context;

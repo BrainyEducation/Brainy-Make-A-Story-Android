@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.model;
+package com.example.make_a_story_prototype.main.Categories.model;
 
 public class CategoryCardItem {
     private int imageResource;

@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.model;
+package com.example.make_a_story_prototype.main.Wordbank.model;
 
 public class WordCardItem {
     private int imageResource;

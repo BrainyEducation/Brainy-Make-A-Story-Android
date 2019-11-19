@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view.category;
+package com.example.make_a_story_prototype.main.Categories.view;
 
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util;
-import com.example.make_a_story_prototype.main.model.CategoryCardItem;
-import com.example.make_a_story_prototype.main.vm.CategoryCardItemViewModel;
+import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
+import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;

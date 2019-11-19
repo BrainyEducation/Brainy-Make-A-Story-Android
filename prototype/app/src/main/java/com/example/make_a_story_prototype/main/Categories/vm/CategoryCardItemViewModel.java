@@ -1,6 +1,6 @@
-package com.example.make_a_story_prototype.main.vm;
+package com.example.make_a_story_prototype.main.Categories.vm;
 
-import com.example.make_a_story_prototype.main.model.CategoryCardItem;
+import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
 
 public class CategoryCardItemViewModel {
     public CategoryCardItem cardItem;

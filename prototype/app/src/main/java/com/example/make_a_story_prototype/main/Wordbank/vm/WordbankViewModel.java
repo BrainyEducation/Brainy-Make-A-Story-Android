@@ -1,14 +1,10 @@
-package com.example.make_a_story_prototype.main.vm;
+package com.example.make_a_story_prototype.main.Wordbank.vm;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CategoryCardItem;
-import com.example.make_a_story_prototype.main.model.WordCardItem;
-import com.example.make_a_story_prototype.main.model.Words;
+import com.example.make_a_story_prototype.main.Wordbank.model.WordCardItem;
+import com.example.make_a_story_prototype.main.Wordbank.model.Words;
 
 import java.util.ArrayList;
 import java.util.Arrays;

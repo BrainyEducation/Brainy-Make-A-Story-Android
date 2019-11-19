@@ -1,10 +1,10 @@
-package com.example.make_a_story_prototype.main.vm;
+package com.example.make_a_story_prototype.main.Categories.vm;
 
 import android.content.Context;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CategoryCardItem;
-import com.example.make_a_story_prototype.main.model.Categories;
+import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
+import com.example.make_a_story_prototype.main.Categories.model.Categories;
 
 import java.util.ArrayList;
 import java.util.Arrays;

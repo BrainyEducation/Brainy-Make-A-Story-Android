@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view.category;
+package com.example.make_a_story_prototype.main.Categories.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.model.CategoryCardItem;
-import com.example.make_a_story_prototype.main.view.wordbank.WordbankActivity;
-import com.example.make_a_story_prototype.main.vm.CategoryCardItemViewModel;
-import com.example.make_a_story_prototype.main.vm.CategoriesViewModel;
+import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
+import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
+import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
+import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

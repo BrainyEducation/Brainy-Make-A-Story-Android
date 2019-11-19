@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view.wordbank;
+package com.example.make_a_story_prototype.main.Wordbank.view;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util;
-import com.example.make_a_story_prototype.main.vm.WordCardItemViewModel;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;

@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.view.quiz;
+package com.example.make_a_story_prototype.main.Quiz.view;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util;
-import com.example.make_a_story_prototype.main.vm.QuizViewModel;
+import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
