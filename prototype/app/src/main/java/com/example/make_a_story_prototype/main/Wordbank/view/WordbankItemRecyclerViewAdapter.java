@@ -45,7 +45,24 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
     }
 
     @Override
-    public void onClick(WordCardItemViewModel vm) {
+    public void showConfirmationButtons(WordCardItemViewModel vm) {
+        for (WordCardItemViewModel cardVm : this.vm.getCardList()) {
+            cardVm.isSelected = false;
+        }
+
+        vm.isSelected = true;
+
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void hideConfirmationButtons(WordCardItemViewModel vm) {
+        vm.isSelected = false;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void confirmSelection(WordCardItemViewModel vm) {
         if (vm.isUnlocked) {
             Toast.makeText(context, vm.cardItem.getImageLabel() + " is already unlocked", Toast.LENGTH_SHORT).show();
         } else {

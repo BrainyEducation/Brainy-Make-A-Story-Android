@@ -7,10 +7,12 @@ public class CategoryCardItemViewModel {
 
     public int backgroundColor;
     public int contrastColor;
+    public boolean isSelected;
 
     public CategoryCardItemViewModel(CategoryCardItem cardItem, int backgroundColor, int contrastColor) {
         this.cardItem = cardItem;
         this.backgroundColor = backgroundColor;
         this.contrastColor = contrastColor;
+        this.isSelected = false;
     }
 }

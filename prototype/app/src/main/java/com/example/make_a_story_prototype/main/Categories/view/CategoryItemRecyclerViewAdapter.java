@@ -9,9 +9,9 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
-import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
-import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
+import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
+import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +46,25 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
     }
 
     @Override
-    public void onClick(CategoryCardItem item) {
+    public void showConfirmationButtons(CategoryCardItemViewModel vm) {
+        for (CategoryCardItemViewModel cardVm : this.vm.getCardList()) {
+            cardVm.isSelected = false;
+        }
+
+        vm.isSelected = true;
+
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void hideConfirmationButtons(CategoryCardItemViewModel vm) {
+        vm.isSelected = false;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void confirmSelection(CategoryCardItemViewModel vm) {
+        CategoryCardItem item = vm.cardItem;
 
         if (item.getImageLabel().toLowerCase().equals("food")) {
             Intent intent = new Intent(context, WordbankActivity.class);

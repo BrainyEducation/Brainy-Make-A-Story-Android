@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.Quiz.view;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,8 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Util;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
+import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
+import com.example.make_a_story_prototype.main.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +34,16 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     private Button buttonOption2;
     private Button buttonOption3;
     private Button buttonOption4;
+    private ImageView quizImage;
+    private QuizWordViewModel quizWordVM;
     private List<Button> buttons = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        Intent intent = getIntent();
+        String wordBeingQuizzed = intent.getStringExtra("source");
 
         View view = findViewById(R.id.constraint_layout);
         rootView = view.getRootView();
