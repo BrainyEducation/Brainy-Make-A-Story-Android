@@ -3,6 +3,7 @@ package com.example.make_a_story_prototype.main.Quiz.view;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import io.reactivex.rxjava3.core.Observable;
 
 public class QuizActivity extends AppCompatActivity implements QuizViewModel.Callback {
 
@@ -111,7 +113,15 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
         vm.callback = this;
 
-        vm.getCorrectAnswerCount().subscribe(this::updateStars);
+        Observable.combineLatest(
+                vm.getCorrectAnswerCount(),
+                vm.getMaxAnswerCount(),
+                (current, max) -> new Pair<>(current, max))
+                .subscribe(value -> {
+                    updateStars(value.first, value.second);
+                });
+
+        vm.getCorrectAnswerCount().subscribe();
 
         vm.getOptions().subscribe((String[] options) -> {
             for (int i = 0; i < 4; i++) {
@@ -132,13 +142,15 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 //                .show();
     }
 
-    private void updateStars(int correctAnswerCount) {
+    private void updateStars(int correctAnswerCount, int maxCorrectCount) {
         for (int i = 0; i < stars.length; i++) {
             ImageView star = stars[i];
 
             int backgroundColor;
             if (i < correctAnswerCount) {
                 backgroundColor = getResources().getColor(R.color.colorGold);
+            } else if (i < maxCorrectCount) {
+                backgroundColor = getResources().getColor(R.color.colorSilver);
             } else {
                 backgroundColor = getResources().getColor(R.color.colorDarkGray);
             }

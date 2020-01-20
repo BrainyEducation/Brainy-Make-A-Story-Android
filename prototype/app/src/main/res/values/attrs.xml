@@ -5,6 +5,7 @@
     <attr name="colorWhite" format="color" />
     <attr name="colorDarkGray" format="color" />
     <attr name="colorGold" format="color" />
+    <attr name="colorSilver" format="color" />
     <attr name="colorPrimaryLight" format="color" />
 
     <attr name="colorLightRed" format="color" />

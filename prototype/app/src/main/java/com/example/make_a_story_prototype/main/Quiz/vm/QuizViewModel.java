@@ -8,6 +8,8 @@ import java.util.Random;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 
+import static java.lang.Math.max;
+
 public class QuizViewModel {
 
     public interface Callback {
@@ -18,6 +20,7 @@ public class QuizViewModel {
 
     private BehaviorSubject<String[]> options = BehaviorSubject.create();
     private BehaviorSubject<Integer> correctAnswersCount = BehaviorSubject.createDefault(0);
+    private BehaviorSubject<Integer> maxCorrectAnswersCount = BehaviorSubject.createDefault(0);
 
     private int correctOptionIndex;
 
@@ -58,6 +61,10 @@ public class QuizViewModel {
         return correctAnswersCount;
     }
 
+    public Observable<Integer> getMaxAnswerCount() {
+        return maxCorrectAnswersCount;
+    }
+
     // Actions
 
     public void onSelectedAnswer(int option) {
@@ -74,6 +81,11 @@ public class QuizViewModel {
 
     private void onCorrectAnswer() {
         correctAnswersCount.onNext(correctAnswersCount.getValue() + 1);
+
+        maxCorrectAnswersCount.onNext(max(
+                maxCorrectAnswersCount.getValue(),
+                correctAnswersCount.getValue()
+        ));
 
         if (correctAnswersCount.getValue() == 3) {
             WordbankViewModel.instance().unlockWord(QuizOptions.getCorrectOption().toLowerCase());
