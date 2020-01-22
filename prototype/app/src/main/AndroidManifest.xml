@@ -12,12 +12,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".main.Categories.view.CategoriesActivity">
+        <activity android:name=".main.views.HomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.Categories.view.CategoriesActivity"/>
         <activity android:name=".main.Quiz.view.QuizActivity"/>
         <activity android:name=".main.Wordbank.view.WordbankActivity"/>
     </application>
