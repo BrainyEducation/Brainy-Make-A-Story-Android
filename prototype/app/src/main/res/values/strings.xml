@@ -4,4 +4,7 @@
     <string name="food">Food</string>
     <string name="button">Button</string>
     <string name="word_image">Word image</string>
+    <string name="word_bank">Word Bank</string>
+    <string name="stories">Stories</string>
+    <string name="logo_description">Logo for the Make-A-Story app.</string>
 </resources>
