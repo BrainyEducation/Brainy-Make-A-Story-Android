@@ -4,7 +4,7 @@ import com.example.make_a_story_prototype.R;
 
 public class Categories {
     private String[] categories = {
-            "Food",
+            "Toys",
             "Nature",
             "Clothing",
             "Animals",
@@ -17,7 +17,7 @@ public class Categories {
     };
 
     private Integer[] categoryImages = {
-            R.drawable.ic_apple,
+            R.drawable.ball,
             R.drawable.ic_tree,
             R.drawable.ic_pullover,
             R.drawable.ic_cow,

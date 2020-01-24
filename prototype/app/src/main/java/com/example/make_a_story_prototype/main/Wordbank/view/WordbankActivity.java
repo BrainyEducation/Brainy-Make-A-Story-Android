@@ -46,6 +46,8 @@ public class WordbankActivity extends AppCompatActivity {
         title.setText(category);
 
         viewModel = WordbankViewModel.instance(this);
+        viewModel.setCategory(category);
+
         initRecyclerView();
 
         viewModel.getCardListObservable().subscribe((list) -> {
