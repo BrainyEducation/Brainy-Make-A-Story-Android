@@ -31,13 +31,13 @@ public class Categories {
 
     private Integer[] categoryAudio = {
             R.raw.food,
+            R.raw.outdoors,
+            R.raw.clothes,
+            R.raw.animals,
+            R.raw.house_stuff,
             R.raw.food,
             R.raw.food,
-            R.raw.food,
-            R.raw.food,
-            R.raw.food,
-            R.raw.food,
-            R.raw.food,
+            R.raw.colors,
             R.raw.food,
             R.raw.food,
     };

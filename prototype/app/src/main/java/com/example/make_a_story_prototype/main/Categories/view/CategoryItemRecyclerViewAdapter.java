@@ -56,7 +56,7 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
 
         notifyDataSetChanged();
 
-        MediaPlayer audioPlayer = MediaPlayer.create(context, R.raw.food);
+        MediaPlayer audioPlayer = MediaPlayer.create(context, vm.cardItem.getImageAudio());
         audioPlayer.start();
     }
 
