@@ -29,11 +29,28 @@ public class Categories {
             R.drawable.ic_bus
     };
 
+    private Integer[] categoryAudio = {
+            R.raw.food,
+            R.raw.food,
+            R.raw.food,
+            R.raw.food,
+            R.raw.food,
+            R.raw.food,
+            R.raw.food,
+            R.raw.food,
+            R.raw.food,
+            R.raw.food,
+    };
+
     public String[] getCategories() {
         return categories;
     }
 
     public Integer[] getCategoryImages() {
         return categoryImages;
+    }
+
+    public Integer[] getCategoryAudio() {
+        return categoryAudio;
     }
 }

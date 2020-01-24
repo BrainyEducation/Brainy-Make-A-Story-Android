@@ -36,11 +36,12 @@ public class CategoriesViewModel {
         Categories categories = new Categories();
         List<String> categoryNames = Arrays.asList(categories.getCategories());
         List<Integer> categoryImages = Arrays.asList(categories.getCategoryImages());
+        List<Integer> categoryAudio = Arrays.asList(categories.getCategoryAudio());
 
         for (int i = 0; i < 10; i++) {
             cardList.add(
                     new CategoryCardItemViewModel(
-                            new CategoryCardItem(categoryImages.get(i), categoryNames.get(i)),
+                            new CategoryCardItem(categoryAudio.get(i), categoryImages.get(i), categoryNames.get(i)),
                             BackgroundColors[i % BackgroundColors.length],
                             DetailColors[i % DetailColors.length]
                     )
