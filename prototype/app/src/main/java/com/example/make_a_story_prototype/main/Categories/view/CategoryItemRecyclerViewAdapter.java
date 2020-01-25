@@ -2,6 +2,7 @@ package com.example.make_a_story_prototype.main.Categories.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
     }
 
     @Override
-    public void showConfirmationButtons(CategoryCardItemViewModel vm) {
+    public void cardTappedOn(CategoryCardItemViewModel vm) {
         for (CategoryCardItemViewModel cardVm : this.vm.getCardList()) {
             cardVm.isSelected = false;
         }
@@ -54,6 +55,9 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         vm.isSelected = true;
 
         notifyDataSetChanged();
+
+        MediaPlayer audioPlayer = MediaPlayer.create(context, vm.cardItem.getImageAudio());
+        audioPlayer.start();
     }
 
     @Override

@@ -45,7 +45,7 @@
                     android:layout_alignEnd="@id/cardImage"
                     android:layout_alignBottom="@id/cardImage"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="2dp"
                     android:layout_marginBottom="3dp"
                     android:drawableLeft="@drawable/ic_volume_up_24dp"
                     android:drawablePadding="-20dp"

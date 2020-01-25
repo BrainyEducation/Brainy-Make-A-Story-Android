@@ -4,20 +4,20 @@ import com.example.make_a_story_prototype.R;
 
 public class Categories {
     private String[] categories = {
-            "Toys",
-            "Nature",
-            "Clothing",
+            "Food",
+            "Outdoors",
+            "Clothes",
             "Animals",
-            "Home",
-            "Sports",
-            "Numbers",
+            "House Stuff",
+            "Toys",
+            "Places",
             "Colors",
-            "Weather",
-            "School"
+            "Birds",
+            "Vehicles"
     };
 
     private Integer[] categoryImages = {
-            R.drawable.ball,
+            R.drawable.ic_apple,
             R.drawable.ic_tree,
             R.drawable.ic_pullover,
             R.drawable.ic_cow,
@@ -29,11 +29,28 @@ public class Categories {
             R.drawable.ic_bus
     };
 
+    private Integer[] categoryAudio = {
+            R.raw.food,
+            R.raw.outdoors,
+            R.raw.clothes,
+            R.raw.animals,
+            R.raw.house_stuff,
+            R.raw.toys,
+            R.raw.places,
+            R.raw.colors,
+            R.raw.birds,
+            R.raw.vehicles,
+    };
+
     public String[] getCategories() {
         return categories;
     }
 
     public Integer[] getCategoryImages() {
         return categoryImages;
+    }
+
+    public Integer[] getCategoryAudio() {
+        return categoryAudio;
     }
 }

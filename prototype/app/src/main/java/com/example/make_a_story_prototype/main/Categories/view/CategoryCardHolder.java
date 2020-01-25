@@ -20,10 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryCardHolder extends RecyclerView.ViewHolder {
     public interface CategoryCardCallback {
-        void showConfirmationButtons(CategoryCardItemViewModel vm);
+        void cardTappedOn(CategoryCardItemViewModel vm);
         void hideConfirmationButtons(CategoryCardItemViewModel vm);
         void confirmSelection(CategoryCardItemViewModel vm);
-
     }
 
     private ImageView categoryImage;
@@ -45,7 +44,7 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
 
         parentLayout.setOnClickListener(v -> {
             if (callback != null && vm != null) {
-                callback.showConfirmationButtons(vm);
+                callback.cardTappedOn(vm);
             }
         });
 
