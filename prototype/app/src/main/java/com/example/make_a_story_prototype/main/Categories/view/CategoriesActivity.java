@@ -58,7 +58,7 @@ public class CategoriesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Toast.makeText(this, "Todo: back button", Toast.LENGTH_SHORT).show();
+                super.finish();
                 return true;
             case R.id.storybook:
                 Toast.makeText(this, "Todo: storybook button", Toast.LENGTH_SHORT).show();
