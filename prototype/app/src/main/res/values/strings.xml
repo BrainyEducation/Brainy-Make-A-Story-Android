@@ -7,4 +7,44 @@
     <string name="word_bank">Word Bank</string>
     <string name="stories">Stories</string>
     <string name="logo_description">Logo for the Make-A-Story app.</string>
+    <string name="test">test</string>
+    <string-array name="categoryNames">
+        <item>Toys</item>
+        <item>Food</item>
+        <item>Clothing</item>
+        <item>Animals</item>
+        <item>Home</item>
+        <item>Sports</item>
+        <item>Numbers</item>
+        <item>Colors</item>
+        <item>Weather</item>
+        <item>School</item>
+    </string-array>
+    <string-array name="ToysWords">
+        <item>ball</item>
+        <item>boat</item>
+        <item>car</item>
+    </string-array>
+    <string-array name="FoodWords">
+        <item>apple</item>
+        <item>bread</item>
+        <item>burger</item>
+        <item>cake</item>
+        <item>candy</item>
+        <item>carrots</item>
+        <item>cone</item>
+        <item>cookies</item>
+        <item>corn</item>
+        <item>grapes</item>
+        <item>hotdog</item>
+        <item>lettuce</item>
+        <item>milk</item>
+        <item>nuts</item>
+        <item>nuts</item>
+        <item>pie</item>
+        <item>plum</item>
+        <item>pretzel</item>
+        <item>snack</item>
+        <item>tea</item>
+    </string-array>
 </resources>

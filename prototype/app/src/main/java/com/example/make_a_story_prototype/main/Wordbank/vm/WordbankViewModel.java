@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.Wordbank.vm;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Wordbank.model.WordCardItem;
@@ -28,7 +29,13 @@ public class WordbankViewModel {
         add("sandwich");
         add("egg");
         add("jam");
+        add("ball");
     }};
+
+    private String category;
+
+    private Resources resources;
+    private String packageName;
 
     private static WordbankViewModel _instance;
 
@@ -55,6 +62,9 @@ public class WordbankViewModel {
         colors.put("unlocked background", ContextCompat.getColor(context, R.color.colorWordBackground));
         colors.put("unlocked contrast", ContextCompat.getColor(context, R.color.colorWordContrast));
 
+        resources = context.getResources();
+        packageName = context.getPackageName();
+
         updateCardList();
     }
 
@@ -73,14 +83,31 @@ public class WordbankViewModel {
         updateCardList();
     }
 
+    public void setCategory(String activityCategory){
+        category = activityCategory;
+
+        updateCardList();
+    }
+
     private void updateCardList() {
         cardList.clear();
+        if(category == null) {
+            return;
+        }
 
         Words words = new Words();
-        List<String> wordNames = Arrays.asList(words.getWords());
-        List<Integer> wordImages = Arrays.asList(words.getWordImages());
+        String identifierName = category + "Words";
+        String [] categoryWords = resources.getStringArray(
+                resources.getIdentifier(identifierName,"array",packageName));
+        for (String word:categoryWords) {
+            words.addWord(word);
+            String pictureName = category + "_" + word;
+            words.addWordImage(resources.getIdentifier(pictureName.toLowerCase(),"drawable",packageName));
+        }
+        List<String> wordNames = words.getWords();
+        List<Integer> wordImages = words.getWordImages();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < wordNames.size(); i++) {
             String backgroundKey;
             String contrastKey;
 

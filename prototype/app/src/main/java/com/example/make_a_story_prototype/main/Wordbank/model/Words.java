@@ -2,38 +2,27 @@ package com.example.make_a_story_prototype.main.Wordbank.model;
 
 import com.example.make_a_story_prototype.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Words {
-    private String[] words = {
-            "Apple",
-            "Juice",
-            "Bread",
-            "Banana",
-            "Cheese",
-            "Cake",
-            "Carrot",
-            "Sandwich",
-            "Egg",
-            "Jam"
-    };
+    private List<String> words = new ArrayList<>();
 
-    private Integer[] wordImages = {
-            R.drawable.ic_apple,
-            R.drawable.ic_juice,
-            R.drawable.ic_bread,
-            R.drawable.ic_banana,
-            R.drawable.ic_cheese,
-            R.drawable.ic_cake,
-            R.drawable.ic_carrot,
-            R.drawable.ic_sandwich,
-            R.drawable.ic_egg,
-            R.drawable.ic_jam,
-    };
+    private List<Integer> wordImages = new ArrayList<>();
 
-    public String[] getWords() {
+    public List<String> getWords() {
         return words;
     }
 
-    public Integer[] getWordImages() {
+    public List<Integer> getWordImages() {
         return wordImages;
+    }
+
+    public void addWord(String word){
+        words.add(word);
+    }
+
+    public void addWordImage(int wordImage){
+        wordImages.add(wordImage);
     }
 }
