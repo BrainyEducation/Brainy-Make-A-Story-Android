@@ -70,7 +70,7 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
     public void confirmSelection(CategoryCardItemViewModel vm) {
         CategoryCardItem item = vm.cardItem;
 
-        if (item.getImageLabel().toLowerCase().equals("toys")) {
+        if (item.getImageLabel().toLowerCase().equals("food")) {
             Intent intent = new Intent(context, WordbankActivity.class);
             intent.putExtra("source", item.getImageLabel());
             context.startActivity(intent);

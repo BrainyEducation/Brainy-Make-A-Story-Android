@@ -101,7 +101,8 @@ public class WordbankViewModel {
                 resources.getIdentifier(identifierName,"array",packageName));
         for (String word:categoryWords) {
             words.addWord(word);
-            words.addWordImage(resources.getIdentifier(word,"drawable",packageName));
+            String pictureName = category + "_" + word;
+            words.addWordImage(resources.getIdentifier(pictureName.toLowerCase(),"drawable",packageName));
         }
         List<String> wordNames = words.getWords();
         List<Integer> wordImages = words.getWordImages();
