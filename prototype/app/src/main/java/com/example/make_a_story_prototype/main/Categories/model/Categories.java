@@ -5,15 +5,15 @@ import com.example.make_a_story_prototype.R;
 public class Categories {
     private String[] categories = {
             "Food",
-            "Nature",
-            "Clothing",
+            "Outdoors",
+            "Clothes",
             "Animals",
-            "Home",
-            "Sports",
-            "Numbers",
+            "House Stuff",
+            "Toys",
+            "Places",
             "Colors",
-            "Weather",
-            "School"
+            "Birds",
+            "Vehicles"
     };
 
     private Integer[] categoryImages = {
@@ -35,11 +35,11 @@ public class Categories {
             R.raw.clothes,
             R.raw.animals,
             R.raw.house_stuff,
-            R.raw.food,
-            R.raw.food,
+            R.raw.toys,
+            R.raw.places,
             R.raw.colors,
-            R.raw.food,
-            R.raw.food,
+            R.raw.birds,
+            R.raw.vehicles,
     };
 
     public String[] getCategories() {
