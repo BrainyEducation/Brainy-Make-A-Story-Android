@@ -8,6 +8,8 @@
     <string name="stories">Stories</string>
     <string name="logo_description">Logo for the Make-A-Story app.</string>
     <string name="test">test</string>
+    <string name="special_invention_image_description">This is the illustration for story The Special Invention</string>
+    <string name="santas_elf_image_description">Santa\'s Mixedup helper elf image.</string>
     <string-array name="categoryNames">
         <item>Toys</item>
         <item>Food</item>
