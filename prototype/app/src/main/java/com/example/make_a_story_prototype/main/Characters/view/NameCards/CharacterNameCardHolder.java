@@ -1,12 +1,7 @@
-package com.example.make_a_story_prototype.main.Characters.view;
+package com.example.make_a_story_prototype.main.Characters.view.NameCards;
 
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,16 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-public class CharacterImageCardHolder extends RecyclerView.ViewHolder{
-
-    private ImageView characterImage;
+public class CharacterNameCardHolder extends RecyclerView.ViewHolder{
+    private TextView characterName;
     private RelativeLayout parentLayout;
     private CharacterCardItemViewModel vm;
 
-    public CharacterImageCardHolder(@NonNull View itemView) {
+    public CharacterNameCardHolder(@NonNull View itemView) {
         super(itemView);
-        this.characterImage = itemView.findViewById(R.id.characterImage);
+        this.characterName = itemView.findViewById(R.id.characterName);
         this.parentLayout = itemView.findViewById(R.id.parentLayout);
     }
 
@@ -35,7 +28,7 @@ public class CharacterImageCardHolder extends RecyclerView.ViewHolder{
         this.vm = vm;
 
         // null?
-        characterImage.setImageResource(vm.cardItem.getImageResource());
+        characterName.setText(vm.cardItem.getImageLabel());
 
         Drawable imageBackground = parentLayout.getBackground();
         Util.changeDrawableColor(imageBackground, vm.backgroundColor);

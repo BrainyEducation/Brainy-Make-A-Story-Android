@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.Characters.view;
+package com.example.make_a_story_prototype.main.Characters.view.NameCards;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -24,7 +24,7 @@ public class CharacterNamesRecyclerViewAdapter extends RecyclerView.Adapter<Char
     @NonNull
     @Override
     public CharacterNameCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.text_card_item, parent, false);
         CharacterNameCardHolder viewHolder = new CharacterNameCardHolder(view);
         return viewHolder;
     }

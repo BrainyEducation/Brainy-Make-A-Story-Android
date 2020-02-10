@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.Characters.view;
+package com.example.make_a_story_prototype.main.Characters.view.ImageCards;
 
 import android.content.Context;
 import android.view.LayoutInflater;

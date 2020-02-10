@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Characters.view.ImageCards.CharacterImagesRecyclerViewAdapter;
+import com.example.make_a_story_prototype.main.Characters.view.NameCards.CharacterNamesRecyclerViewAdapter;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterViewModel;
 import com.example.make_a_story_prototype.main.Util;
 
@@ -71,7 +73,7 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     private void initNameRecyclerView() {
-        nameRecyclerView = findViewById(R.id.character_image_recycler_view);
+        nameRecyclerView = findViewById(R.id.character_name_recycler_view);
         nameRecyclerView.setHasFixedSize(true);
         namesRecyclerViewAdapter = new CharacterNamesRecyclerViewAdapter(this, viewModel);
         nameRecyclerView.setAdapter(namesRecyclerViewAdapter);
