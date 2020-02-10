@@ -10,8 +10,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorButtonPurple">@color/colorButtonPurple</item>
 
-
     </style>
-
 
 </resources>
