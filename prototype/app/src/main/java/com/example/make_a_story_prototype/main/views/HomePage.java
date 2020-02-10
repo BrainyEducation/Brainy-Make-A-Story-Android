@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
+import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,6 +45,6 @@ public class HomePage extends AppCompatActivity {
      * @param v view
      */
     public void characterPageButtonOnClick(View v) {
-        Toast.makeText(this, "Todo: character page button", Toast.LENGTH_SHORT).show();
-    }
+        Intent intent = new Intent(this, CharacterActivity.class);
+        this.startActivity(intent);    }
 }
