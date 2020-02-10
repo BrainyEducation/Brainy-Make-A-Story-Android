@@ -3,12 +3,21 @@ package com.example.make_a_story_prototype.main.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
+import com.example.make_a_story_prototype.main.Categories.view.CategoryItemRecyclerViewAdapter;
+import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
+import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
 * Class for Home page activities, including redirection to word bank and story screen.
@@ -18,8 +27,7 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.home_page);
     }
 
     /**
@@ -37,13 +45,5 @@ public class HomePage extends AppCompatActivity {
      */
     public void storyPageButtonOnClick(View v) {
         Toast.makeText(this, "Todo: story page button", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * temp button to character screen for demo purposes
-     * @param v view
-     */
-    public void characterPageButtonOnClick(View v) {
-        Toast.makeText(this, "Todo: character button", Toast.LENGTH_SHORT).show();
     }
 }
