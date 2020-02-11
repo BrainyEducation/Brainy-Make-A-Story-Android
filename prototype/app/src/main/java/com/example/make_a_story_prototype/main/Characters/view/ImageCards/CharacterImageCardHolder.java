@@ -1,14 +1,9 @@
 package com.example.make_a_story_prototype.main.Characters.view.ImageCards;
 
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterCardItemViewModel;

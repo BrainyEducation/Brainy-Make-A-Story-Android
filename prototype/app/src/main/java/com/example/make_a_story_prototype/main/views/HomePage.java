@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
+import com.example.make_a_story_prototype.main.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,8 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_home);
+        Util.themeStatusBar(this, false);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     /**

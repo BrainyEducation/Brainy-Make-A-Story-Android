@@ -55,7 +55,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Util.themeStatusBar(this);
+        Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
         TextView title = toolbar.findViewById(R.id.toolbar_title);

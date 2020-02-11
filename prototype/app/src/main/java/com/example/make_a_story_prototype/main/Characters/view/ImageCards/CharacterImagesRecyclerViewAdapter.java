@@ -29,12 +29,6 @@ public class CharacterImagesRecyclerViewAdapter extends RecyclerView.Adapter<Cha
         return viewHolder;
     }
 
-//    @Override
-//    public void onBindViewHolder(@NonNull CategoryCardHolder holder, final int position) {
-//        CategoryCardItemViewModel currentCard = vm.getCardList().get(position);
-//        holder.setViewModel(currentCard);
-//    }
-
     @Override
     public void onBindViewHolder(@NonNull CharacterImageCardHolder holder, final int position) {
         CharacterCardItemViewModel currentCard = vm.getCardList().get(position);

@@ -16,20 +16,27 @@ public class CharacterViewModel {
     private List<CharacterCardItemViewModel> cardList = new ArrayList<>();
 
     public CharacterViewModel(Context context) {
-        int BackgroundColors[] = {
-                ContextCompat.getColor(context, R.color.colorLightRed),
-                ContextCompat.getColor(context, R.color.colorLightOrange),
+
+        int coolCardBackgroundColors[] = {
                 ContextCompat.getColor(context, R.color.colorLightGreen),
                 ContextCompat.getColor(context, R.color.colorLightPurple),
                 ContextCompat.getColor(context, R.color.colorLightBlue),
         };
 
-        int DetailColors[] = {
-                ContextCompat.getColor(context, R.color.colorContrastRed),
-                ContextCompat.getColor(context, R.color.colorContrastOrange),
+        int coolCardDetailColors[] = {
                 ContextCompat.getColor(context, R.color.colorContrastGreen),
                 ContextCompat.getColor(context, R.color.colorContrastPurple),
                 ContextCompat.getColor(context, R.color.colorContrastBlue),
+        };
+
+        int warmCardBackgroundColors[] = {
+                ContextCompat.getColor(context, R.color.colorLightRed),
+                ContextCompat.getColor(context, R.color.colorLightOrange),
+        };
+
+        int warmCardDetailColors[] = {
+                ContextCompat.getColor(context, R.color.colorContrastRed),
+                ContextCompat.getColor(context, R.color.colorContrastOrange),
         };
 
         Characters characters = new Characters();
@@ -40,8 +47,8 @@ public class CharacterViewModel {
             cardList.add(
                     new CharacterCardItemViewModel(
                             new CharacterCardItem(characterImages.get(i), characterNames.get(i)),
-                            BackgroundColors[i % BackgroundColors.length],
-                            DetailColors[i % DetailColors.length]
+                            coolCardBackgroundColors[i % coolCardBackgroundColors.length],
+                            coolCardDetailColors[i % coolCardDetailColors.length]
                     )
             );
         }

@@ -39,7 +39,7 @@ public class CharacterActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Util.themeStatusBar(this);
+        Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);

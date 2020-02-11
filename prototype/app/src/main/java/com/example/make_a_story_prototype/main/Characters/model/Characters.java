@@ -33,22 +33,13 @@ public class Characters {
             R.drawable.ic_apple,
             R.drawable.ic_apple,
             R.drawable.ic_apple,
-            R.drawable.ic_house,
-            R.drawable.ic_soccer,
-            R.drawable.ic_dice,
-            R.drawable.ic_colors,
-            R.drawable.ic_rain,
-            R.drawable.ic_bus,
             R.drawable.ic_apple,
-            R.drawable.ic_tree,
-            R.drawable.ic_pullover,
-            R.drawable.ic_cow,
-            R.drawable.ic_house,
-            R.drawable.ic_soccer,
-            R.drawable.ic_dice,
-            R.drawable.ic_colors,
-            R.drawable.ic_rain,
-            R.drawable.ic_bus
+            R.drawable.ic_apple,
+            R.drawable.ic_apple,
+            R.drawable.ic_apple,
+            R.drawable.ic_apple,
+            R.drawable.ic_apple,
+            R.drawable.ic_apple
     };
 
     public String[] getCharacterNames() {

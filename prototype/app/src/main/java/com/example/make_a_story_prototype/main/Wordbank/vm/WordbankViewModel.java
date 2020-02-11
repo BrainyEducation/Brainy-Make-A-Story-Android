@@ -8,7 +8,6 @@ import com.example.make_a_story_prototype.main.Wordbank.model.WordCardItem;
 import com.example.make_a_story_prototype.main.Wordbank.model.Words;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,5 @@
 package com.example.make_a_story_prototype.main.Wordbank.model;
 
-import com.example.make_a_story_prototype.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
