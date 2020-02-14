@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.core.content.ContextCompat;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class WordbankViewModel {
     private static List<String> unlockedWords = new ArrayList<String>() {{

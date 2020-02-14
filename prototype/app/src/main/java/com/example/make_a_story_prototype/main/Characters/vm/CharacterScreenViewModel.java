@@ -5,40 +5,41 @@ import android.content.Context;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Characters.model.CharacterCardItem;
 import com.example.make_a_story_prototype.main.Characters.model.Characters;
+import com.example.make_a_story_prototype.main.Util.Optional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.core.content.ContextCompat;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class CharacterScreenViewModel {
 
     //region Types
 
     public class NameCardViewModel {
-        String name;
+        public String name;
 
-        int foregroundColor;
-        int backgroundColor;
+        public int contrastColor;
+        public int backgroundColor;
 
-        public NameCardViewModel(String name, int foregroundColor, int backgroundColor) {
+        public NameCardViewModel(String name, int contrastColor, int backgroundColor) {
             this.name = name;
-            this.foregroundColor = foregroundColor;
+            this.contrastColor = contrastColor;
             this.backgroundColor = backgroundColor;
         }
     }
 
     public class ImageCardViewModel {
-        int image;
+        public int image;
 
-        int foregroundColor;
-        int backgroundColor;
+        public int contrastColor;
+        public int backgroundColor;
 
-        public ImageCardViewModel(int image, int foregroundColor, int backgroundColor) {
+        public ImageCardViewModel(int image, int contrastColor, int backgroundColor) {
             this.image = image;
-            this.foregroundColor = foregroundColor;
+            this.contrastColor = contrastColor;
             this.backgroundColor = backgroundColor;
         }
     }
@@ -50,7 +51,7 @@ public class CharacterScreenViewModel {
     private BehaviorSubject<List<ImageCardViewModel>> _characterImages;
     private BehaviorSubject<NameCardViewModel> _selectedCharacterName;
     private BehaviorSubject<ImageCardViewModel> _selectedCharacterImage;
-    private BehaviorSubject<CharacterCardItem> _selectedCharacter;
+    private BehaviorSubject<Optional<CharacterCardItem>> _selectedCharacter;
 
     //endregion
     //region Public Properties
@@ -69,7 +70,7 @@ public class CharacterScreenViewModel {
         return _selectedCharacterImage;
     }
 
-    public Observable<CharacterCardItem> selectedCharacter() {
+    public Observable<Optional<CharacterCardItem>> selectedCharacter() {
         return _selectedCharacter;
     }
 
@@ -92,7 +93,7 @@ public class CharacterScreenViewModel {
     }
 
     public void cancelConfirmingCharacter() {
-        _selectedCharacter.onNext(null);
+        _selectedCharacter.onNext(new Optional(null));
     }
 
     //endregion
@@ -103,7 +104,7 @@ public class CharacterScreenViewModel {
         ImageCardViewModel imageCard = _selectedCharacterImage.getValue();
 
         if (nameCard != null && imageCard != null) {
-            _selectedCharacter.onNext(new CharacterCardItem(imageCard.image, nameCard.name));
+            _selectedCharacter.onNext(new Optional(new CharacterCardItem(imageCard.image, nameCard.name)));
         }
     }
 
@@ -162,9 +163,9 @@ public class CharacterScreenViewModel {
         _characterNames = BehaviorSubject.createDefault(characterNames);
         _characterImages = BehaviorSubject.createDefault(characterImages);
 
-        _selectedCharacterName = BehaviorSubject.createDefault(null);
-        _selectedCharacterImage = BehaviorSubject.createDefault(null);
-        _selectedCharacter = BehaviorSubject.createDefault(null);
+        _selectedCharacterName = BehaviorSubject.create();
+        _selectedCharacterImage = BehaviorSubject.create();
+        _selectedCharacter = BehaviorSubject.create();
     }
 
     //endregion

@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main;
+package com.example.make_a_story_prototype.main.Util;
 
 import android.app.Activity;
 import android.graphics.ColorMatrix;
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 public class Util {
+
     public static void themeStatusBar(Activity activity, boolean isDark) {
         // workaround for status bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

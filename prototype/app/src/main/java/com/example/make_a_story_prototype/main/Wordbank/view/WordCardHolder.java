@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 
 import androidx.annotation.NonNull;
@@ -17,8 +17,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.View.GONE;
-import static com.example.make_a_story_prototype.main.Util.changeDrawableColor;
-import static com.example.make_a_story_prototype.main.Util.setDrawableToGrayscale;
+import static com.example.make_a_story_prototype.main.Util.Util.changeDrawableColor;
+import static com.example.make_a_story_prototype.main.Util.Util.setDrawableToGrayscale;
 
 public class WordCardHolder extends RecyclerView.ViewHolder {
     public interface WordCardCallback {

@@ -6,8 +6,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Characters.vm.CharacterCardItemViewModel;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel.NameCardViewModel;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -16,15 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CharacterNameCardHolder extends RecyclerView.ViewHolder {
 
     public interface CharacterNameCallback {
-        void nameTappedOn(CharacterCardItemViewModel vm);
+        void nameTappedOn(NameCardViewModel vm);
     }
 
     public CharacterNameCallback callback;
 
-
     private TextView characterName;
     private RelativeLayout parentLayout;
-    private CharacterCardItemViewModel vm;
+    private NameCardViewModel vm;
 
     public CharacterNameCardHolder(@NonNull View itemView) {
         super(itemView);
@@ -38,10 +37,10 @@ public class CharacterNameCardHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setViewModel(CharacterCardItemViewModel vm) {
+    public void setViewModel(NameCardViewModel vm) {
         this.vm = vm;
 
-        characterName.setText(vm.cardItem.getImageLabel());
+        characterName.setText(vm.name);
 
         Drawable imageBackground = parentLayout.getBackground();
         Util.changeDrawableColor(imageBackground, vm.backgroundColor);

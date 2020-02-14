@@ -7,8 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Characters.vm.CharacterCardItemViewModel;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel.ImageCardViewModel;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -17,14 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CharacterImageCardHolder extends RecyclerView.ViewHolder {
 
     public interface CharacterImageCallback {
-        void imageTappedOn(CharacterCardItemViewModel vm);
+        void imageTappedOn(ImageCardViewModel vm);
     }
 
     public CharacterImageCallback callback;
 
     private ImageView characterImage;
     private RelativeLayout parentLayout;
-    private CharacterCardItemViewModel vm;
+    private ImageCardViewModel vm;
     private LinearLayout shadow;
 
 
@@ -41,10 +41,10 @@ public class CharacterImageCardHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setViewModel(CharacterCardItemViewModel vm) {
+    public void setViewModel(ImageCardViewModel vm) {
         this.vm = vm;
 
-        characterImage.setImageResource(vm.cardItem.getImageResource());
+        characterImage.setImageResource(vm.image);
 
         Drawable imageBackground = parentLayout.getBackground();
         Util.changeDrawableColor(imageBackground, vm.backgroundColor);

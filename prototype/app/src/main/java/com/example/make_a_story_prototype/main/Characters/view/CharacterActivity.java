@@ -9,10 +9,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Characters.model.CharacterCardItem;
+import com.example.make_a_story_prototype.main.Characters.model.Characters;
 import com.example.make_a_story_prototype.main.Characters.view.ImageCards.CharacterImagesRecyclerViewAdapter;
 import com.example.make_a_story_prototype.main.Characters.view.NameCards.CharacterNamesRecyclerViewAdapter;
-import com.example.make_a_story_prototype.main.Characters.vm.CharacterViewModel;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,7 +27,9 @@ public class CharacterActivity extends AppCompatActivity {
     private RecyclerView imageRecyclerView;
     private RecyclerView.Adapter namesRecyclerViewAdapter;
     private RecyclerView.Adapter imagesRecyclerViewAdapter;
-    private CharacterViewModel viewModel;
+    private CharacterScreenViewModel viewModel;
+
+    private View confirmationDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +49,30 @@ public class CharacterActivity extends AppCompatActivity {
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         title.setText("Friends");
 
-        viewModel = new CharacterViewModel(this);
+        viewModel = new CharacterScreenViewModel(this, new Characters());
         initNameRecyclerView();
         initImageRecyclerView();
+
+        confirmationDialog = findViewById(R.id.confirmation_dialog);
+        findViewById(R.id.confirm_button).setOnClickListener(button -> {
+            viewModel.confirmCharacter();
+        });
+        findViewById(R.id.cancel_button).setOnClickListener(button -> {
+            viewModel.cancelConfirmingCharacter();
+        });
+
+        // TODO: find and setup onclicks and such for confirmation dialog
+
+        viewModel.selectedCharacter().subscribe(wrappedCharacter -> {
+            CharacterCardItem character = wrappedCharacter.getValue();
+            if (character == null) {
+                confirmationDialog.setVisibility(View.GONE);
+                return;
+            }
+
+            // TODO: configure image and labels
+            confirmationDialog.setVisibility(View.VISIBLE);
+        });
     }
 
     // storybook icon
@@ -75,7 +100,7 @@ public class CharacterActivity extends AppCompatActivity {
     private void initNameRecyclerView() {
         nameRecyclerView = findViewById(R.id.character_name_recycler_view);
         nameRecyclerView.setHasFixedSize(true);
-        namesRecyclerViewAdapter = new CharacterNamesRecyclerViewAdapter(this, viewModel);
+        namesRecyclerViewAdapter = new CharacterNamesRecyclerViewAdapter(viewModel);
         nameRecyclerView.setAdapter(namesRecyclerViewAdapter);
         nameRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
     }
@@ -83,7 +108,7 @@ public class CharacterActivity extends AppCompatActivity {
     private void initImageRecyclerView() {
         imageRecyclerView = findViewById(R.id.character_image_recycler_view);
         imageRecyclerView.setHasFixedSize(true);
-        imagesRecyclerViewAdapter = new CharacterImagesRecyclerViewAdapter(this, viewModel);
+        imagesRecyclerViewAdapter = new CharacterImagesRecyclerViewAdapter(viewModel);
         imageRecyclerView.setAdapter(imagesRecyclerViewAdapter);
         imageRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
     }

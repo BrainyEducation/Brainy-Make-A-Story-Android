@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;

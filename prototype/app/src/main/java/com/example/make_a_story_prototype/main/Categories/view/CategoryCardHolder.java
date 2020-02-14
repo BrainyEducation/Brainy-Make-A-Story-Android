@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;

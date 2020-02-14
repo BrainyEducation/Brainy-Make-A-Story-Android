@@ -5,8 +5,8 @@ import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 
 import java.util.Random;
 
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
 
 import static java.lang.Math.max;
 

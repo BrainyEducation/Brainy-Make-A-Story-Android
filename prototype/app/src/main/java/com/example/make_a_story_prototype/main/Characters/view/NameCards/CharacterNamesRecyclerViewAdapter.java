@@ -1,25 +1,36 @@
 package com.example.make_a_story_prototype.main.Characters.view.NameCards;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Characters.vm.CharacterCardItemViewModel;
-import com.example.make_a_story_prototype.main.Characters.vm.CharacterViewModel;
+import com.example.make_a_story_prototype.main.Characters.view.NameCards.CharacterNameCardHolder.CharacterNameCallback;
+import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel;
+import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel.NameCardViewModel;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CharacterNamesRecyclerViewAdapter extends RecyclerView.Adapter<CharacterNameCardHolder> implements CharacterNameCardHolder.CharacterNameCallback {
-    private Context context;
-    private CharacterViewModel vm;
+public class CharacterNamesRecyclerViewAdapter extends RecyclerView.Adapter<CharacterNameCardHolder> implements CharacterNameCallback {
+    private CharacterScreenViewModel vm;
+    private List<NameCardViewModel> cardVms;
+    private NameCardViewModel selectedCardVm;
 
-    public CharacterNamesRecyclerViewAdapter(Context context, CharacterViewModel vm) {
-        this.context = context;
+    public CharacterNamesRecyclerViewAdapter(CharacterScreenViewModel vm) {
         this.vm = vm;
+
+        vm.characterNames().subscribe(cardVms -> {
+            this.cardVms = cardVms;
+            notifyDataSetChanged();
+        });
+
+        vm.selectedCharacterName().subscribe(selectedCardVm -> {
+            this.selectedCardVm = selectedCardVm;
+            notifyDataSetChanged();
+        });
     }
 
     @NonNull
@@ -33,23 +44,22 @@ public class CharacterNamesRecyclerViewAdapter extends RecyclerView.Adapter<Char
 
     @Override
     public void onBindViewHolder(@NonNull CharacterNameCardHolder holder, final int position) {
-        CharacterCardItemViewModel currentCard = vm.getCardList().get(position);
+        NameCardViewModel currentCard = cardVms.get(position);
+        if (currentCard == selectedCardVm) {
+            // TODO:
+        } else {
+            // TODO:
+        }
         holder.setViewModel(currentCard);
     }
 
     @Override
     public int getItemCount() {
-        return vm.getCardList().size();
+        return cardVms.size();
     }
 
     @Override
-    public void nameTappedOn(CharacterCardItemViewModel vm) {
-        for (CharacterCardItemViewModel cardVm : this.vm.getCardList()) {
-            cardVm.isSelected = false;
-        }
-
-        vm.isSelected = true;
-        Log.d("TAG", vm.cardItem.getImageLabel() + "tapped");
-
+    public void nameTappedOn(NameCardViewModel vm) {
+        this.vm.selectNameCard(vm);
     }
 }

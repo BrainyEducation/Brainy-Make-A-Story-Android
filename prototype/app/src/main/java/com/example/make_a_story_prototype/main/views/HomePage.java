@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
 
