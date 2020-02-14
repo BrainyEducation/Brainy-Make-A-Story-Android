@@ -54,7 +54,6 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         }
 
         vm.isSelected = true;
-        Log.d("Tapped", "I've been tapped");
         notifyDataSetChanged();
 
         MediaPlayer audioPlayer = MediaPlayer.create(context, vm.cardItem.getImageAudio());
