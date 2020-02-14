@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.Characters.view;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,12 +18,14 @@ import com.example.make_a_story_prototype.main.Characters.model.Characters;
 import com.example.make_a_story_prototype.main.Characters.view.ImageCards.CharacterImagesRecyclerViewAdapter;
 import com.example.make_a_story_prototype.main.Characters.view.NameCards.CharacterNamesRecyclerViewAdapter;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel;
+import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel.CharacterViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +37,9 @@ public class CharacterActivity extends AppCompatActivity {
     private CharacterScreenViewModel viewModel;
 
     private View confirmationDialog;
+    private View blurredBackground;
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,8 @@ public class CharacterActivity extends AppCompatActivity {
         initNameRecyclerView();
         initImageRecyclerView();
 
+        blurredBackground = findViewById(R.id.blur);
+
         confirmationDialog = findViewById(R.id.confirmation_dialog);
         findViewById(R.id.confirm_button).setOnClickListener(button -> {
             viewModel.confirmCharacter();
@@ -67,27 +74,44 @@ public class CharacterActivity extends AppCompatActivity {
 
         // TODO: setup onclicks and such for confirmation dialog
         viewModel.selectedCharacter().subscribe(wrappedCharacter -> {
-            CharacterCardItem character = wrappedCharacter.getValue();
+            CharacterViewModel character = wrappedCharacter.getValue();
             if (character == null) {
                 confirmationDialog.setVisibility(View.GONE);
+                blurredBackground.setVisibility(View.GONE);
                 return;
             }
 
-            // TODO: configure image and labels
+            // TODO: reconfigure
             TextView selectedName = confirmationDialog.findViewById(R.id.name_selected).findViewById(R.id.character_name);
-            selectedName.setText(character.getImageLabel());
-            View nameCard = confirmationDialog.findViewById(R.id.name_selected);
-            View imageCard = confirmationDialog.findViewById(R.id.image_selected);
+            selectedName.setText(character.name);
+            selectedName.setTextColor(character.nameContrastColor);
 
-
-            Drawable nameBackground = nameCard.findViewById(R.id.parent_layout).getBackground();
-            Util.changeDrawableColor(nameBackground, Color.parseColor("#FFEBEE"));
+            CardView nameCard = confirmationDialog.findViewById(R.id.name_selected).findViewById(R.id.card_view);
+            CardView imageCard = confirmationDialog.findViewById(R.id.image_selected).findViewById(R.id.card_view);
 
             ImageView selectedImage = confirmationDialog.findViewById(R.id.image_selected).findViewById(R.id.characterImage);
-            selectedImage.setImageResource(character.getImageResource());
+            selectedImage.setImageResource(character.image);
 
             Drawable imageBackground = imageCard.findViewById(R.id.parent_layout).getBackground();
-            Util.changeDrawableColor(imageBackground, Color.parseColor("#E2F5FD"));
+            Util.changeDrawableColor(imageBackground, character.imageBackgroundColor);
+
+            Drawable nameBackground = nameCard.findViewById(R.id.parent_layout).getBackground();
+            Util.changeDrawableColor(nameBackground, character.nameBackgroundColor);
+
+            ImageView speakerIcon = nameCard.findViewById(R.id.speaker_icon);
+
+            Drawable speakerDrawable = DrawableCompat.wrap(speakerIcon.getDrawable());
+            Util.changeDrawableColor(speakerDrawable, character.nameContrastColor);
+
+            Drawable nameBorder = nameCard.getBackground();
+            Util.changeDrawableColor(nameBorder, character.nameContrastColor);
+            nameCard.setRadius(23);
+
+            Drawable imageBorder = imageCard.getBackground();
+            Util.changeDrawableColor(imageBorder, character.imageContrastColor);
+            imageCard.setRadius(23);
+
+            blurredBackground.setVisibility(View.VISIBLE);
             confirmationDialog.setVisibility(View.VISIBLE);
         });
     }

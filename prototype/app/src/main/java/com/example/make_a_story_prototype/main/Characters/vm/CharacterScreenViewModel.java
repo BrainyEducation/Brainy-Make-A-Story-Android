@@ -45,6 +45,28 @@ public class CharacterScreenViewModel {
         }
     }
 
+    public class CharacterViewModel {
+        public String name;
+        public int image;
+
+        public int nameContrastColor;
+        public int nameBackgroundColor;
+
+
+        public int imageContrastColor;
+        public int imageBackgroundColor;
+
+        public CharacterViewModel(String name, int image, int nameContrastColor, int nameBackgroundColor, int imageContrastColor, int imageBackgroundColor) {
+            this.name = name;
+            this.image = image;
+
+            this.nameContrastColor = nameContrastColor;
+            this.nameBackgroundColor = nameBackgroundColor;
+            this.imageContrastColor = imageContrastColor;
+            this.imageBackgroundColor = imageBackgroundColor;
+        }
+    }
+
     //endregion
     //region Private Properties
 
@@ -52,7 +74,7 @@ public class CharacterScreenViewModel {
     private BehaviorSubject<List<ImageCardViewModel>> _characterImages;
     private BehaviorSubject<NameCardViewModel> _selectedCharacterName;
     private BehaviorSubject<ImageCardViewModel> _selectedCharacterImage;
-    private BehaviorSubject<Optional<CharacterCardItem>> _selectedCharacter;
+    private BehaviorSubject<Optional<CharacterViewModel>> _selectedCharacter;
 
     //endregion
     //region Public Properties
@@ -71,7 +93,7 @@ public class CharacterScreenViewModel {
         return _selectedCharacterImage;
     }
 
-    public Observable<Optional<CharacterCardItem>> selectedCharacter() {
+    public Observable<Optional<CharacterViewModel>> selectedCharacter() {
         return _selectedCharacter;
     }
 
@@ -105,7 +127,7 @@ public class CharacterScreenViewModel {
         ImageCardViewModel imageCard = _selectedCharacterImage.getValue();
 
         if (nameCard != null && imageCard != null) {
-            _selectedCharacter.onNext(new Optional(new CharacterCardItem(imageCard.image, nameCard.name)));
+            _selectedCharacter.onNext(new Optional(new CharacterViewModel(nameCard.name, imageCard.image, nameCard.contrastColor, nameCard.backgroundColor, imageCard.contrastColor, imageCard.backgroundColor)));
         }
     }
 
