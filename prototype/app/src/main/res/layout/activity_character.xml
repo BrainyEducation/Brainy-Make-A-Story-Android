@@ -32,7 +32,7 @@
                 android:layout_marginRight="5dp"
                 android:id="@+id/character_image_recycler_view"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                android:background="@drawable/border" />
+                android:background="@drawable/border"/>
 
         </LinearLayout>
 

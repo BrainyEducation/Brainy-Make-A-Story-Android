@@ -3,6 +3,7 @@ package com.example.make_a_story_prototype.main.Categories.view;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         }
 
         vm.isSelected = true;
-
+        Log.d("Tapped", "I've been tapped");
         notifyDataSetChanged();
 
         MediaPlayer audioPlayer = MediaPlayer.create(context, vm.cardItem.getImageAudio());

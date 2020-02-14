@@ -137,9 +137,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     @Override
     public void onComplete() {
         Toast.makeText(this, "Congrats! You've learned a word!", Toast.LENGTH_SHORT).show();
-
-//        Snackbar.make(rootView, "Congrats! You've learned a word!", Snackbar.LENGTH_SHORT)
-//                .show();
     }
 
     private void updateStars(int correctAnswerCount, int maxCorrectCount) {

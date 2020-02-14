@@ -17,24 +17,30 @@
             android:layout_height="wrap_content"
             card_view:cardCornerRadius="10dp">
 
-            <RelativeLayout
-                android:id="@+id/parentLayout"
+            <LinearLayout
+                android:id="@+id/shadow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin=".75dp"
-                android:background="@drawable/card_edge">
-
-                <ImageView
-                    android:id="@+id/characterImage"
+                android:layout_height="match_parent" >
+<!--                android:background="@drawable/shadow"-->
+                <RelativeLayout
+                    android:id="@+id/parentLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginEnd="5dp"
-                    android:padding="15dp"
-                    android:contentDescription="character" />
+                    android:layout_height="match_parent"
+                    android:layout_margin=".75dp"
+                    android:background="@drawable/card_edge">
 
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/characterImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="5dp"
+                        android:padding="15dp"
+                        android:contentDescription="character" />
+
+                </RelativeLayout>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
     </FrameLayout>
 

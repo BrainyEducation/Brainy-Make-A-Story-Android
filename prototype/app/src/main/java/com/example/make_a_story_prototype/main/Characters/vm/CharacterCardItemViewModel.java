@@ -14,6 +14,5 @@ public class CharacterCardItemViewModel {
         this.backgroundColor = backgroundColor;
         this.contrastColor = contrastColor;
         this.isSelected = false;
-
     }
 }

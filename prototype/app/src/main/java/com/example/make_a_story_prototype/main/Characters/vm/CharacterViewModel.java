@@ -16,7 +16,6 @@ public class CharacterViewModel {
     private List<CharacterCardItemViewModel> cardList = new ArrayList<>();
 
     public CharacterViewModel(Context context) {
-
         int coolCardBackgroundColors[] = {
                 ContextCompat.getColor(context, R.color.colorLightGreen),
                 ContextCompat.getColor(context, R.color.colorLightPurple),
