@@ -31,7 +31,7 @@ public class CharacterImageCardHolder extends RecyclerView.ViewHolder {
     public CharacterImageCardHolder(@NonNull View itemView) {
         super(itemView);
         this.characterImage = itemView.findViewById(R.id.characterImage);
-        this.parentLayout = itemView.findViewById(R.id.parentLayout);
+        this.parentLayout = itemView.findViewById(R.id.parent_layout);
         this.shadow = itemView.findViewById(R.id.shadow);
 
         parentLayout.setOnClickListener(v -> {

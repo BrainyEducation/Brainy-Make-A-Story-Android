@@ -1,10 +1,12 @@
 package com.example.make_a_story_prototype.main.Characters.view;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +73,19 @@ public class CharacterActivity extends AppCompatActivity {
             }
 
             // TODO: configure image and labels
+            TextView selectedName = confirmationDialog.findViewById(R.id.name_selected).findViewById(R.id.character_name);
+            selectedName.setText(character.getImageLabel());
+            View card = confirmationDialog.findViewById(R.id.name_selected);
+
+//            Drawable nameBackground = card.findViewById(R.id.parent_layout).getBackground();
+//            Util.changeDrawableColor(nameBackground, viewModel.warmCardBackgroundColors[1]);
+
+
+            ImageView selectedImage = confirmationDialog.findViewById(R.id.image_selected).findViewById(R.id.characterImage);
+            selectedImage.setImageResource(character.getImageResource());
+
+//            Drawable imageBackground = card.findViewById(R.id.parent_layout).getBackground();
+//            Util.changeDrawableColor(imageBackground, viewModel.coolCardBackgroundColors[1]);
             confirmationDialog.setVisibility(View.VISIBLE);
         });
     }

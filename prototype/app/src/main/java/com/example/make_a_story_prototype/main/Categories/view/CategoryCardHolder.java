@@ -38,7 +38,7 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.categoryImage = itemView.findViewById(R.id.cardImage);
         this.categoryText = itemView.findViewById(R.id.cardText);
-        this.parentLayout = itemView.findViewById(R.id.parentLayout);
+        this.parentLayout = itemView.findViewById(R.id.parent_layout);
         this.confirmButton = itemView.findViewById(R.id.confirmButton);
         this.cancelButton = itemView.findViewById(R.id.cancelButton);
 

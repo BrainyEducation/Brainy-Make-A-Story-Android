@@ -29,17 +29,18 @@ public class Characters {
     };
 
     private Integer[] characterImages = {
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple,
-            R.drawable.ic_apple
+            R.drawable.ic_kids_01,
+            R.drawable.ic_kids_02,
+            R.drawable.ic_kids_03,
+            R.drawable.ic_kids_01,
+            R.drawable.ic_kids_02,
+            R.drawable.ic_kids_03,
+            R.drawable.ic_kids_01,
+            R.drawable.ic_kids_02,
+            R.drawable.ic_kids_03,
+            R.drawable.ic_kids_01,
+            R.drawable.ic_kids_02,
+            R.drawable.ic_kids_03,
     };
 
     public String[] getCharacterNames() {

@@ -43,7 +43,7 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.wordImage = itemView.findViewById(R.id.cardImage);
         this.wordText = itemView.findViewById(R.id.cardText);
-        this.parentLayout = itemView.findViewById(R.id.parentLayout);
+        this.parentLayout = itemView.findViewById(R.id.parent_layout);
         this.confirmButton = itemView.findViewById(R.id.confirmButton);
         this.cancelButton = itemView.findViewById(R.id.cancelButton);
 

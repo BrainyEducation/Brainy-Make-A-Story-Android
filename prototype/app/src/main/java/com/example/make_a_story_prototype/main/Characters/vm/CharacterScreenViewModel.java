@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.Characters.vm;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Characters.model.CharacterCardItem;
@@ -113,24 +114,24 @@ public class CharacterScreenViewModel {
 
     // TODO: fix this
     public CharacterScreenViewModel(Context context, Characters characters) {
-        int coolCardBackgroundColors[] = {
+        int[] coolCardBackgroundColors = {
                 ContextCompat.getColor(context, R.color.colorLightGreen),
                 ContextCompat.getColor(context, R.color.colorLightPurple),
                 ContextCompat.getColor(context, R.color.colorLightBlue),
         };
 
-        int coolCardDetailColors[] = {
+        int[] coolCardDetailColors = {
                 ContextCompat.getColor(context, R.color.colorContrastGreen),
                 ContextCompat.getColor(context, R.color.colorContrastPurple),
                 ContextCompat.getColor(context, R.color.colorContrastBlue),
         };
 
-        int warmCardBackgroundColors[] = {
+        int[] warmCardBackgroundColors = {
                 ContextCompat.getColor(context, R.color.colorLightRed),
                 ContextCompat.getColor(context, R.color.colorLightOrange),
         };
 
-        int warmCardDetailColors[] = {
+        int[] warmCardDetailColors = {
                 ContextCompat.getColor(context, R.color.colorContrastRed),
                 ContextCompat.getColor(context, R.color.colorContrastOrange),
         };
@@ -142,8 +143,8 @@ public class CharacterScreenViewModel {
 
             characterNames.add(new NameCardViewModel(
                     name,
-                    coolCardBackgroundColors[i % coolCardBackgroundColors.length],
-                    coolCardDetailColors[i % coolCardDetailColors.length]
+                    warmCardDetailColors[i % warmCardDetailColors.length],
+                    warmCardBackgroundColors[i % warmCardBackgroundColors.length]
             ));
         }
 
@@ -155,8 +156,8 @@ public class CharacterScreenViewModel {
 
             characterImages.add(new ImageCardViewModel(
                     image,
-                    coolCardBackgroundColors[i % coolCardBackgroundColors.length],
-                    coolCardDetailColors[i % coolCardDetailColors.length]
+                    coolCardDetailColors[i % coolCardDetailColors.length],
+                    coolCardBackgroundColors[i % coolCardBackgroundColors.length]
             ));
         }
 
