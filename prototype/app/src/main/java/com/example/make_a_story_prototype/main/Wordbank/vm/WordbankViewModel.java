@@ -7,35 +7,33 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Wordbank.model.WordCardItem;
 import com.example.make_a_story_prototype.main.Wordbank.model.Words;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import androidx.core.content.ContextCompat;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 
 public class WordbankViewModel {
-    private static List<String> unlockedWords = new ArrayList<String>() {{
-        add("juice");
-        add("bread");
-        add("banana");
-        add("bread");
-        add("cheese");
-        add("cake");
-        add("carrot");
-        add("sandwich");
-        add("egg");
-        add("jam");
-        add("ball");
-    }};
+
+    private static List<String> unlockedWords = new ArrayList<String>() {{}};
 
     private String category;
 
     private Resources resources;
     private String packageName;
+    private File unlockedWordsFile;
 
     private static WordbankViewModel _instance;
 
@@ -64,6 +62,50 @@ public class WordbankViewModel {
 
         resources = context.getResources();
         packageName = context.getPackageName();
+        unlockedWordsFile = context.getFileStreamPath("unlockedWords.csv");
+        if(unlockedWordsFile.exists()) {
+            try {
+                FileInputStream in = context.openFileInput("unlockedWords.csv");
+                InputStreamReader inputStreamReader = new InputStreamReader(in);
+                BufferedReader br = new BufferedReader(inputStreamReader);
+                String line;
+
+                while ((line = br.readLine()) != null) {
+
+                    // use comma as separator
+                    String[] unlockedWordsArray = line.split(",");
+                    for (String word: unlockedWordsArray) {
+                        unlockedWords.add(word);
+                    }
+
+                    if(unlockedWords.size() == 0) {
+                        unlockedWords.add("apple");
+                    }
+                }
+
+                inputStreamReader.close();
+            } catch (IOException ie) {
+                ie.printStackTrace();
+            }
+        } else {
+            try {
+                String content = "apple";
+                String filePath = context.getFilesDir().getPath().toString() + "/unlockedWords.csv";
+                unlockedWordsFile = new File( filePath);
+                if (!unlockedWordsFile.exists()) {
+                    unlockedWordsFile.createNewFile();
+                }
+
+                FileWriter fw = new FileWriter(unlockedWordsFile.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(content);
+                bw.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         updateCardList();
     }
@@ -80,6 +122,28 @@ public class WordbankViewModel {
     public void unlockWord(String word) {
         unlockedWords.add(word);
 
+        try {
+
+            StringBuilder csvBuilder = new StringBuilder();
+            for(String unlockedWord : unlockedWords){
+                csvBuilder.append(unlockedWord);
+                csvBuilder.append(",");
+            }
+            String content = csvBuilder.toString();
+            content = content.substring(0, content.length() - 1);
+
+            //if (!unlockedWordsFile.exists()) {
+            //    unlockedWordsFile.createNewFile();
+            //}
+
+            FileWriter fw = new FileWriter(unlockedWordsFile.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         updateCardList();
     }
 

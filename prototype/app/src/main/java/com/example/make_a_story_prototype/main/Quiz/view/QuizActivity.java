@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.Quiz.view;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Pair;
@@ -47,6 +48,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Intent intent = getIntent();
         String wordBeingQuizzed = intent.getStringExtra("source");
 
+
         View view = findViewById(R.id.constraint_layout);
         rootView = view.getRootView();
 
@@ -83,7 +85,11 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         buttons.add(buttonOption3);
         buttons.add(buttonOption4);
 
-        setViewModel(new QuizViewModel());
+
+        Resources res = getResources();
+        String [] wordList = res.getStringArray(R.array.WordList);
+        setViewModel(new QuizViewModel(wordBeingQuizzed,wordList));
+
     }
 
     // storybook icon

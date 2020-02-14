@@ -24,7 +24,13 @@ public class QuizViewModel {
 
     private int correctOptionIndex;
 
-    public QuizViewModel() {
+    private String wordBeingQuizzed;
+
+    public QuizViewModel(String quizword, String[] wordList) {
+
+        wordBeingQuizzed = quizword;
+        QuizOptions.setCorrectOption(quizword);
+        QuizOptions.setWordList(wordList);
         shuffle();
     }
 
@@ -97,6 +103,5 @@ public class QuizViewModel {
     private void onIncorrectAnswer() {
         correctAnswersCount.onNext(0);
     }
-
 
 }
