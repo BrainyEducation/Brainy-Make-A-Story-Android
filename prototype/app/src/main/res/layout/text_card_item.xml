@@ -37,7 +37,7 @@
                         android:text="line 1"
                         android:textAlignment="center"
                         android:gravity="center"
-                        android:textColor="@color/colorContrastPurple"
+                        android:textColor="@color/colorContrastRed"
                         android:textSize="20sp" />
 
                     <ImageView

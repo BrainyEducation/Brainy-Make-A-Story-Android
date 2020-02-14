@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.Characters.view;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,8 +65,7 @@ public class CharacterActivity extends AppCompatActivity {
             viewModel.cancelConfirmingCharacter();
         });
 
-        // TODO: find and setup onclicks and such for confirmation dialog
-
+        // TODO: setup onclicks and such for confirmation dialog
         viewModel.selectedCharacter().subscribe(wrappedCharacter -> {
             CharacterCardItem character = wrappedCharacter.getValue();
             if (character == null) {
@@ -75,17 +76,18 @@ public class CharacterActivity extends AppCompatActivity {
             // TODO: configure image and labels
             TextView selectedName = confirmationDialog.findViewById(R.id.name_selected).findViewById(R.id.character_name);
             selectedName.setText(character.getImageLabel());
-            View card = confirmationDialog.findViewById(R.id.name_selected);
+            View nameCard = confirmationDialog.findViewById(R.id.name_selected);
+            View imageCard = confirmationDialog.findViewById(R.id.image_selected);
 
-//            Drawable nameBackground = card.findViewById(R.id.parent_layout).getBackground();
-//            Util.changeDrawableColor(nameBackground, viewModel.warmCardBackgroundColors[1]);
 
+            Drawable nameBackground = nameCard.findViewById(R.id.parent_layout).getBackground();
+            Util.changeDrawableColor(nameBackground, Color.parseColor("#FFEBEE"));
 
             ImageView selectedImage = confirmationDialog.findViewById(R.id.image_selected).findViewById(R.id.characterImage);
             selectedImage.setImageResource(character.getImageResource());
 
-//            Drawable imageBackground = card.findViewById(R.id.parent_layout).getBackground();
-//            Util.changeDrawableColor(imageBackground, viewModel.coolCardBackgroundColors[1]);
+            Drawable imageBackground = imageCard.findViewById(R.id.parent_layout).getBackground();
+            Util.changeDrawableColor(imageBackground, Color.parseColor("#E2F5FD"));
             confirmationDialog.setVisibility(View.VISIBLE);
         });
     }
