@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.CharacterGuideActivity;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
 import com.example.make_a_story_prototype.main.Util;
@@ -142,10 +144,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
     @Override
     public void onComplete() {
-        Toast.makeText(this, "Congrats! You've learned a word!", Toast.LENGTH_SHORT).show();
-
-//        Snackbar.make(rootView, "Congrats! You've learned a word!", Snackbar.LENGTH_SHORT)
-//                .show();
+        displayCharGuide();
     }
 
     private void updateStars(int correctAnswerCount, int maxCorrectCount) {
@@ -164,5 +163,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
             Drawable d = star.getDrawable();
             Util.changeDrawableColor(d, backgroundColor);
         }
+    }
+
+    private void displayCharGuide() {
+        Intent intent = new Intent(this,   CharacterGuideActivity.class);
+        QuizActivity.this.startActivity(intent);
     }
 }
