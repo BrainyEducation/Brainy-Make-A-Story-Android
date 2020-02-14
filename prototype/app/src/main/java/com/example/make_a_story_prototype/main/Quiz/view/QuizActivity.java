@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.Observable;
 
 public class QuizActivity extends AppCompatActivity implements QuizViewModel.Callback {
 
@@ -57,7 +57,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Util.themeStatusBar(this);
+        Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
         TextView title = toolbar.findViewById(R.id.toolbar_title);
@@ -143,9 +143,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     @Override
     public void onComplete() {
         Toast.makeText(this, "Congrats! You've learned a word!", Toast.LENGTH_SHORT).show();
-
-//        Snackbar.make(rootView, "Congrats! You've learned a word!", Snackbar.LENGTH_SHORT)
-//                .show();
     }
 
     private void updateStars(int correctAnswerCount, int maxCorrectCount) {
