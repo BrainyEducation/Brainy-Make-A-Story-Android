@@ -48,4 +48,26 @@
         <item>snack</item>
         <item>tea</item>
     </string-array>
+    <string-array name="WordList">
+        <item>apple</item>
+        <item>bread</item>
+        <item>burger</item>
+        <item>cake</item>
+        <item>candy</item>
+        <item>carrots</item>
+        <item>cone</item>
+        <item>cookies</item>
+        <item>corn</item>
+        <item>grapes</item>
+        <item>hotdog</item>
+        <item>lettuce</item>
+        <item>milk</item>
+        <item>nuts</item>
+        <item>nuts</item>
+        <item>pie</item>
+        <item>plum</item>
+        <item>pretzel</item>
+        <item>snack</item>
+        <item>tea</item>
+    </string-array>
 </resources>
