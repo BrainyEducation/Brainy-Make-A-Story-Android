@@ -20,12 +20,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.Home.view.StorySelectionActivity"/>
         <activity android:name=".main.Home.view.HomeActivity"/>
         <activity android:name=".main.Categories.view.CategoriesActivity"/>
         <activity android:name=".main.Characters.view.CharacterActivity"/>
         <activity android:name=".main.Quiz.view.QuizActivity"/>
         <activity android:name=".main.Wordbank.view.WordbankActivity"/>
         <activity android:name=".main.Quiz.view.CharacterGuideActivity"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

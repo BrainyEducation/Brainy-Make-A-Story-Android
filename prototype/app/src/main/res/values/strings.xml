@@ -9,6 +9,15 @@
     <string name="characters">Characters</string>
     <string name="logo_description">Logo for the Make-A-Story app.</string>
     <string name="test">test</string>
+    <string name="special_invention_image_description">This is the illustration for story The Special Invention</string>
+    <string name="santas_elf_image_description">Santa\'s Mixedup helper elf image.</string>
+    <string name="space_alien_image_description">space_alien_image_description</string>
+    <string name="wacky_costume_party_image_description">wacky_costume_party_image_description</string>
+    <string name="the_special_invention_text">The Special Invention</string>
+    <string name="space_alien_text">the_space_alien_text</string>
+    <string name="the_wacky_costume_party_text">The Wacky Costume Party</string>
+    <string name="the_space_alien_text">The Space Alien</string>
+    <string name="the_space_alien">The Space Alien</string>
     <string-array name="categoryNames">
         <item>Toys</item>
         <item>Food</item>
