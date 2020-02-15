@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:alpha="1"
     android:background="@color/colorPrimary"
-    tools:context=".main.CharacterGuideActivity">
+    tools:context=".main.Quiz.view.CharacterGuideActivity">
 
     <ImageView
         android:id="@+id/charGuide"

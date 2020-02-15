@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.CharacterGuideActivity;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;

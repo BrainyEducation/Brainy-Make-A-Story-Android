@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util.Util;
-import com.example.make_a_story_prototype.main.views.HomePage;
+import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +29,7 @@ public class LaunchActivity extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
 
-            Intent intent = new Intent(this,   HomePage.class);
+            Intent intent = new Intent(this,   HomeActivity.class);
             LaunchActivity.this.startActivity(intent);
 
             LaunchActivity.this.finish();

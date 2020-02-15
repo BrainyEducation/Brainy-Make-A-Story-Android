@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main;
+package com.example.make_a_story_prototype.main.Quiz.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,17 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.content.res.Resources;
-import android.widget.TextView;
 
 import java.util.Objects;
 import java.util.Random;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Quiz.view.QuizActivity;
 
 public class CharacterGuideActivity extends AppCompatActivity {
 

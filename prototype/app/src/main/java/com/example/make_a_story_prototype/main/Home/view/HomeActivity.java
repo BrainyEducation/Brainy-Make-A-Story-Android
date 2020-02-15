@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.views;
+package com.example.make_a_story_prototype.main.Home.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 /**
 * Class for Home page activities, including redirection to word bank and story screen.
 */
-public class HomePage extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
