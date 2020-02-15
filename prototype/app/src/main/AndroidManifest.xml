@@ -26,6 +26,10 @@
         <activity android:name=".main.Quiz.view.QuizActivity"/>
         <activity android:name=".main.Wordbank.view.WordbankActivity"/>
         <activity android:name=".main.Quiz.view.CharacterGuideActivity"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
