@@ -27,7 +27,8 @@
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                android:onClick="SpecialInventionCardOnClick">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout4"
@@ -40,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="special_invention_text_description"
                         android:fontFamily="@font/comfortaa_bold"
-                        android:text="The Special Invention"
+                        android:text="@string/the_special_invention_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +69,8 @@
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                android:onClick="SpaceAlienCardOnClick">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout3"
@@ -79,9 +81,9 @@
                         android:id="@+id/the_space_alien_text"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:contentDescription="the_space_alien_text"
+                        android:contentDescription="@string/space_alien_text"
                         android:fontFamily="@font/comfortaa_bold"
-                        android:text="The Space Alien"
+                        android:text="@string/the_space_alien"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +111,8 @@
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                android:onClick="WackyCostumePartyCardOnClick">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout5"
@@ -122,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="the_wacky_costume_party_text"
                         android:fontFamily="@font/comfortaa_bold"
-                        android:text="The Wacky Costume Party"
+                        android:text="@string/the_wacky_costume_party_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -150,7 +153,8 @@
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                android:onClick="SantasElfCardOnClick">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout6"

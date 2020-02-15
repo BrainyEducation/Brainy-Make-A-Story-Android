@@ -40,7 +40,8 @@ public class HomeActivity extends AppCompatActivity {
      * @param v view
      */
     public void storyPageButtonOnClick(View v) {
-        Toast.makeText(this, "Todo: story page button", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, StorySelectionActivity.class);
+        this.startActivity(intent);
     }
 
     /**
