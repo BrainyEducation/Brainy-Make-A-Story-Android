@@ -3,8 +3,12 @@ package com.example.make_a_story_prototype.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.views.HomePage;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LaunchActivity extends AppCompatActivity {
@@ -13,6 +17,8 @@ public class LaunchActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+        Util.themeStatusBar(this, false);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         scheduleLaunchScreen();
     }

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -38,7 +38,7 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.categoryImage = itemView.findViewById(R.id.cardImage);
         this.categoryText = itemView.findViewById(R.id.cardText);
-        this.parentLayout = itemView.findViewById(R.id.parentLayout);
+        this.parentLayout = itemView.findViewById(R.id.parent_layout);
         this.confirmButton = itemView.findViewById(R.id.confirmButton);
         this.cancelButton = itemView.findViewById(R.id.cancelButton);
 

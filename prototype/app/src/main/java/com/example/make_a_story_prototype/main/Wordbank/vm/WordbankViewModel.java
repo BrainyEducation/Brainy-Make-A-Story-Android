@@ -15,15 +15,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import androidx.core.content.ContextCompat;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class WordbankViewModel {
 
