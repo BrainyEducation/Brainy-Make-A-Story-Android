@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -87,11 +88,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         buttons.add(buttonOption3);
         buttons.add(buttonOption4);
 
-
         Resources res = getResources();
         String [] wordList = res.getStringArray(R.array.WordList);
         setViewModel(new QuizViewModel(wordBeingQuizzed,wordList));
-
     }
 
     // storybook icon
@@ -144,7 +143,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
     @Override
     public void onComplete() {
-        displayCharGuide();
+        Log.d("debug", "display complete");
+        displayCharGuide("goodJob");
     }
 
     private void updateStars(int correctAnswerCount, int maxCorrectCount) {
@@ -154,7 +154,11 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
             int backgroundColor;
             if (i < correctAnswerCount) {
                 backgroundColor = getResources().getColor(R.color.colorGold);
+                Log.d("debug", "display good job");
+//                displayCharGuide("goodJob");
             } else if (i < maxCorrectCount) {
+                Log.d("debug", "display try again");
+//                displayCharGuide("tryAgain");
                 backgroundColor = getResources().getColor(R.color.colorSilver);
             } else {
                 backgroundColor = getResources().getColor(R.color.colorDarkGray);
@@ -165,8 +169,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         }
     }
 
-    private void displayCharGuide() {
+    private void displayCharGuide(String messageType) {
+        Log.d("debug", "entering display intent");
         Intent intent = new Intent(this,   CharacterGuideActivity.class);
+        intent.putExtra("msgType", messageType);
         QuizActivity.this.startActivity(intent);
     }
 }
