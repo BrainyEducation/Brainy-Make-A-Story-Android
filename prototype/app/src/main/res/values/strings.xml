@@ -70,4 +70,18 @@
         <item>snack</item>
         <item>tea</item>
     </string-array>
+    <string-array name="goodJobMessages">
+        <item>Good job!</item>
+        <item>Fantastic!</item>
+        <item>Way to go!</item>
+        <item>Nice job!</item>
+        <item>Awesome!</item>
+        <item>You got it!</item>
+        <item>Super!</item>
+        <item>Excellent!</item>
+    </string-array>
+    <string-array name="tryAgainMessages">
+        <item>Try again.</item>
+        <item>Not quite.</item>
+    </string-array>
 </resources>
