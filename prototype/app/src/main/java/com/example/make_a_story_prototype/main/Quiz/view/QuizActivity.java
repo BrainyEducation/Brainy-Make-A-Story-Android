@@ -1,8 +1,10 @@
 package com.example.make_a_story_prototype.main.Quiz.view;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +18,7 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.Observable;
 
 public class QuizActivity extends AppCompatActivity implements QuizViewModel.Callback {
 
@@ -47,6 +49,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Intent intent = getIntent();
         String wordBeingQuizzed = intent.getStringExtra("source");
 
+
         View view = findViewById(R.id.constraint_layout);
         rootView = view.getRootView();
 
@@ -55,7 +58,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Util.themeStatusBar(this);
+        Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
         TextView title = toolbar.findViewById(R.id.toolbar_title);
@@ -83,7 +86,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         buttons.add(buttonOption3);
         buttons.add(buttonOption4);
 
-        setViewModel(new QuizViewModel());
+        Resources res = getResources();
+        String [] wordList = res.getStringArray(R.array.WordList);
+        setViewModel(new QuizViewModel(wordBeingQuizzed,wordList));
     }
 
     // storybook icon
@@ -136,10 +141,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
     @Override
     public void onComplete() {
-        Toast.makeText(this, "Congrats! You've learned a word!", Toast.LENGTH_SHORT).show();
-
-//        Snackbar.make(rootView, "Congrats! You've learned a word!", Snackbar.LENGTH_SHORT)
-//                .show();
+        Log.d("debug", "display complete");
+        displayCharGuide("goodJob");
     }
 
     private void updateStars(int correctAnswerCount, int maxCorrectCount) {
@@ -149,7 +152,11 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
             int backgroundColor;
             if (i < correctAnswerCount) {
                 backgroundColor = getResources().getColor(R.color.colorGold);
+                Log.d("debug", "display good job");
+//                displayCharGuide("goodJob");
             } else if (i < maxCorrectCount) {
+                Log.d("debug", "display try again");
+//                displayCharGuide("tryAgain");
                 backgroundColor = getResources().getColor(R.color.colorSilver);
             } else {
                 backgroundColor = getResources().getColor(R.color.colorDarkGray);
@@ -158,5 +165,12 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
             Drawable d = star.getDrawable();
             Util.changeDrawableColor(d, backgroundColor);
         }
+    }
+
+    private void displayCharGuide(String messageType) {
+        Log.d("debug", "entering display intent");
+        Intent intent = new Intent(this,   CharacterGuideActivity.class);
+        intent.putExtra("msgType", messageType);
+        QuizActivity.this.startActivity(intent);
     }
 }

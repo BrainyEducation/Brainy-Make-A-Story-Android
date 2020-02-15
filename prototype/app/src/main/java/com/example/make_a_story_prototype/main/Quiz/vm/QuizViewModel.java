@@ -5,8 +5,8 @@ import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 
 import java.util.Random;
 
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
 
 import static java.lang.Math.max;
 
@@ -24,7 +24,13 @@ public class QuizViewModel {
 
     private int correctOptionIndex;
 
-    public QuizViewModel() {
+    private String wordBeingQuizzed;
+
+    public QuizViewModel(String quizword, String[] wordList) {
+
+        wordBeingQuizzed = quizword;
+        QuizOptions.setCorrectOption(quizword);
+        QuizOptions.setWordList(wordList);
         shuffle();
     }
 
@@ -97,6 +103,5 @@ public class QuizViewModel {
     private void onIncorrectAnswer() {
         correctAnswersCount.onNext(0);
     }
-
 
 }

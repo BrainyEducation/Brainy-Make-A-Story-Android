@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
-import com.example.make_a_story_prototype.main.Util;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -36,7 +36,7 @@ public class CategoriesActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Util.themeStatusBar(this);
+        Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);

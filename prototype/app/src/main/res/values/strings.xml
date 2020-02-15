@@ -6,6 +6,7 @@
     <string name="word_image">Word image</string>
     <string name="word_bank">Word Bank</string>
     <string name="stories">Stories</string>
+    <string name="characters">Characters</string>
     <string name="logo_description">Logo for the Make-A-Story app.</string>
     <string name="test">test</string>
     <string name="special_invention_image_description">This is the illustration for story The Special Invention</string>
@@ -48,5 +49,41 @@
         <item>pretzel</item>
         <item>snack</item>
         <item>tea</item>
+    </string-array>
+    <string-array name="WordList">
+        <item>apple</item>
+        <item>bread</item>
+        <item>burger</item>
+        <item>cake</item>
+        <item>candy</item>
+        <item>carrots</item>
+        <item>cone</item>
+        <item>cookies</item>
+        <item>corn</item>
+        <item>grapes</item>
+        <item>hotdog</item>
+        <item>lettuce</item>
+        <item>milk</item>
+        <item>nuts</item>
+        <item>nuts</item>
+        <item>pie</item>
+        <item>plum</item>
+        <item>pretzel</item>
+        <item>snack</item>
+        <item>tea</item>
+    </string-array>
+    <string-array name="goodJobMessages">
+        <item>Good job!</item>
+        <item>Fantastic!</item>
+        <item>Way to go!</item>
+        <item>Nice job!</item>
+        <item>Awesome!</item>
+        <item>You got it!</item>
+        <item>Super!</item>
+        <item>Excellent!</item>
+    </string-array>
+    <string-array name="tryAgainMessages">
+        <item>Try again.</item>
+        <item>Not quite.</item>
     </string-array>
 </resources>

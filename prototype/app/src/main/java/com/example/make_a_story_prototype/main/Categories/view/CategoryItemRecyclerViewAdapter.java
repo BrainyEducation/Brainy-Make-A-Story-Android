@@ -2,7 +2,6 @@ package com.example.make_a_story_prototype.main.Categories.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
+import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
 import androidx.annotation.NonNull;
@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<CategoryCardHolder> implements CategoryCardHolder.CategoryCardCallback {
     private Context context;
     private CategoriesViewModel vm;
+    private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
+
 
     public CategoryItemRecyclerViewAdapter(Context context, CategoriesViewModel vm) {
         this.context = context;
@@ -53,11 +55,12 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         }
 
         vm.isSelected = true;
-
         notifyDataSetChanged();
 
-        MediaPlayer audioPlayer = MediaPlayer.create(context, vm.cardItem.getImageAudio());
-        audioPlayer.start();
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer = android.media.MediaPlayer.create(context, vm.cardItem.getImageAudio());
+            mediaPlayer.start();
+        }
     }
 
     @Override
