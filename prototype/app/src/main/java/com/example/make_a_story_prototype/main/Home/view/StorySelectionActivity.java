@@ -3,14 +3,15 @@ package com.example.make_a_story_prototype.main.Home.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
-import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 /**
  * Class for Story Template Selection activities, including redirection to each story screen.
@@ -20,12 +21,29 @@ public class StorySelectionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
+
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_story_selection);
-        Util.themeStatusBar(this, false);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        View view = findViewById(R.id.relative_layout);
+        View root = view.getRootView();
+        root.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryLight));
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        Util.themeStatusBar(this, true);
+        Util.addBackArrow(this);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+            }
+        });
+
+        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        title.setText("Story Templates");
+
     }
 
     /**
