@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 
 public class CharacterGuideActivity extends AppCompatActivity {
 
@@ -46,7 +47,7 @@ public class CharacterGuideActivity extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
 
-            Intent intent = new Intent(this,   QuizActivity.class);
+            Intent intent = new Intent(this,   HomeActivity.class);
             CharacterGuideActivity.this.startActivity(intent);
             overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
             CharacterGuideActivity.this.finish();
