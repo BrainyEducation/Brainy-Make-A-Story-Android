@@ -35,4 +35,5 @@
         android:onClick="characterPageButtonOnClick"
         android:text="@string/characters"
         android:layout_gravity="center"/>
+
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.example.make_a_story_prototype.main.Media;
 
 import android.app.Application;
-import android.media.MediaPlayer;
 
 public final class AudioPlayer extends Application {
 
