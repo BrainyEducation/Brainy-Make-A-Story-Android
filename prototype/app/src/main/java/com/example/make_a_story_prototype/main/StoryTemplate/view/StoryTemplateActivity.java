@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import androidx.appcompat.widget.Toolbar;
 public class StoryTemplateActivity extends AppCompatActivity {
 
     private TemplateViewModel vm;
+    private ImageView storyImage;
+    private String storyTitle;
 
 
     @Override
@@ -35,9 +38,14 @@ public class StoryTemplateActivity extends AppCompatActivity {
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        String storyTitle = getIntent().getStringExtra("source");
-        TextView title = toolbar.findViewById(R.id.toolbar_title);
-        title.setText(storyTitle);
+        storyTitle = getIntent().getStringExtra("source");
+        TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
+        screenTitle.setText(storyTitle);
+        vm = new TemplateViewModel(storyTitle);
+
+
+        storyImage = findViewById(R.id.story_image);
+        storyImage.setImageResource(vm.getStoryImage());
 
         Toolbar controlsbar = findViewById(R.id.controls_bar);
     }
