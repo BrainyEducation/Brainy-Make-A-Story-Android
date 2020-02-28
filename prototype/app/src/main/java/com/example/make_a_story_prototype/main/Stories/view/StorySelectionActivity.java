@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -52,7 +54,9 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SpecialInventionCardOnClick(View v) {
-        Toast.makeText(this, "Todo: Special Invention Story", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, StoryTemplateActivity.class);
+        intent.putExtra("source", "The Special Invention");
+        this.startActivity(intent);
     }
 
     /**
@@ -60,7 +64,9 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void WackyCostumePartyCardOnClick(View v) {
-        Toast.makeText(this, "Todo: The Wacky Costume Party", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, StoryTemplateActivity.class);
+        intent.putExtra("source", "The Wacky Costume Party");
+        this.startActivity(intent);
     }
 
     /**
@@ -68,7 +74,9 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SantasElfCardOnClick(View v) {
-        Toast.makeText(this, "Todo: Santa's Mixed-up Helper Elf", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, StoryTemplateActivity.class);
+        intent.putExtra("source", "Santa's Mixed-up Helper Elf");
+        this.startActivity(intent);
     }
 
     /**
@@ -76,6 +84,8 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SpaceAlienCardOnClick(View v) {
-        Toast.makeText(this, "Todo: The Space Alien Story", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, StoryTemplateActivity.class);
+        intent.putExtra("source", "The Space Alien");
+        this.startActivity(intent);
     }
 }

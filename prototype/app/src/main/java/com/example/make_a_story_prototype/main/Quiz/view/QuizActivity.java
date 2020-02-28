@@ -95,7 +95,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.icon_menu, menu);
+        inflater.inflate(R.menu.storybook_menu, menu);
         return true;
     }
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight">
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewCharacter"
         android:layout_width="0dp"
@@ -82,3 +83,4 @@
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

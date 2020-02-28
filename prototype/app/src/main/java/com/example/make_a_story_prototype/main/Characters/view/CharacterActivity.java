@@ -1,7 +1,6 @@
 package com.example.make_a_story_prototype.main.Characters.view;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Characters.model.CharacterCardItem;
 import com.example.make_a_story_prototype.main.Characters.model.Characters;
 import com.example.make_a_story_prototype.main.Characters.view.ImageCards.CharacterImagesRecyclerViewAdapter;
 import com.example.make_a_story_prototype.main.Characters.view.NameCards.CharacterNamesRecyclerViewAdapter;
@@ -116,11 +114,11 @@ public class CharacterActivity extends AppCompatActivity {
         });
     }
 
-    // storybook icon
+    // storybook icon returns to story template?
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.icon_menu, menu);
+        inflater.inflate(R.menu.storybook_menu, menu);
         return true;
     }
 

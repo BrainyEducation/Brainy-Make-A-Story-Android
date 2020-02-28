@@ -8,6 +8,7 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
 import com.example.make_a_story_prototype.main.Stories.view.StorySelectionActivity;
+import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,5 +51,7 @@ public class HomeActivity extends AppCompatActivity {
      */
     public void homeCharacterOnClick(View v) {
         Intent intent = new Intent(this, CharacterActivity.class);
-        this.startActivity(intent);    }
+        this.startActivity(intent);
+    }
+
 }
