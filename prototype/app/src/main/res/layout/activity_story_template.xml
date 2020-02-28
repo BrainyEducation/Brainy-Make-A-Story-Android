@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryLight">
 
     <include
         android:id="@+id/toolbar"
@@ -20,34 +21,32 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorPrimaryLight">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/story_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="280dp"
+            android:layout_marginTop="64dp"
             android:layout_marginStart="9dp"
-            android:layout_marginTop="67dp"
             android:layout_marginEnd="9dp"
-            android:contentDescription="story image"
+            android:contentDescription="@string/story_image"
+            android:padding="0dp"
             android:visibility="visible"
             app:srcCompat="@drawable/story_wacky_costume_party" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="bottom"
-            android:layout_marginStart="9dp"
-            android:layout_marginEnd="9dp"
-            android:layout_marginBottom="712dp"
-            android:background="@color/colorWhite" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginBottom="67dp"
+                android:background="@color/colorWhite" />
 
-    </RelativeLayout>
-
+    </LinearLayout>
 
 </RelativeLayout>

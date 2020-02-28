@@ -18,6 +18,10 @@
     <string name="the_wacky_costume_party_text">The Wacky Costume Party</string>
     <string name="the_space_alien_text">The Space Alien</string>
     <string name="the_space_alien">The Space Alien</string>
+    <string name="friends_image_description">image of friends that leads to character screen</string>
+    <string name="wordbank_image_description">image of word bank that leads to quizzes</string>
+    <string name="stories_image_description">image of stories that leads to main story</string>
+    <string name="story_image">story image</string>
     <string-array name="categoryNames">
         <item>Toys</item>
         <item>Food</item>

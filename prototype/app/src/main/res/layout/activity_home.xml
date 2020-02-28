@@ -1,39 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight">
 
-    <Button
-        android:id="@+id/wordBankButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="136dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="25dp"
-        android:onClick="wordBankButtonOnClick"
-        android:text="@string/word_bank"
-        android:layout_gravity="center"/>
 
-    <Button
-        android:id="@+id/storyButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="136dp"
-        android:layout_height="86dp"
-        android:layout_margin="25dp"
-        android:onClick="storyPageButtonOnClick"
-        android:text="@string/stories"
-        android:layout_gravity="center"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewCharacter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:onClick="homeCharacterOnClick"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cardViewWordBank"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewStories">
 
-    <Button
-        android:id="@+id/characterButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="136dp"
-        android:layout_height="86dp"
-        android:layout_margin="25dp"
-        android:onClick="characterPageButtonOnClick"
-        android:text="@string/characters"
-        android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/friends_image"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
+            android:contentDescription="@string/friends_image_description"
+            app:srcCompat="@drawable/homescreen_friends_icon" />
 
-</LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewWordBank"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:onClick="homeWordBankOnClick"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardViewCharacter"
+        app:layout_constraintTop_toBottomOf="@id/cardViewStories">
+
+        <ImageView
+            android:id="@+id/word_bank_image"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
+            android:contentDescription="@string/wordbank_image_description"
+            app:srcCompat="@drawable/homescreen_wordbank_icon" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewStories"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="homeStoriesOnClick"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewWordBank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/stories_image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:contentDescription="@string/stories_image_description"
+            app:srcCompat="@drawable/homescreen_stories_icon" />
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

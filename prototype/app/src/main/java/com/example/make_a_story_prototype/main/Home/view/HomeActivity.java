@@ -28,10 +28,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * goes to the word bank screen
+     * goes to the word bank / quizzes screen
      * @param v view
      */
-    public void wordBankButtonOnClick(View v) {
+    public void homeWordBankOnClick(View v) {
         Intent intent = new Intent(this, CategoriesActivity.class);
         this.startActivity(intent);
     }
@@ -40,16 +40,16 @@ public class HomeActivity extends AppCompatActivity {
      * goes to the story page screen
      * @param v view
      */
-    public void storyPageButtonOnClick(View v) {
+    public void homeStoriesOnClick(View v) {
         Intent intent = new Intent(this, StorySelectionActivity.class);
         this.startActivity(intent);
     }
 
     /**
-     * temp button to go to characters listing for demoing
+     * temp card action to go to characters listing for demoing
      * @param v view
      */
-    public void characterPageButtonOnClick(View v) {
+    public void homeCharacterOnClick(View v) {
         Intent intent = new Intent(this, CharacterActivity.class);
         this.startActivity(intent);
     }
