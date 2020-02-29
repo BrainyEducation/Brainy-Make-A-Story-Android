@@ -1,16 +1,14 @@
-package com.example.make_a_story_prototype.main.Stories.view;
+package com.example.make_a_story_prototype.main.StorySelection.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
-import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

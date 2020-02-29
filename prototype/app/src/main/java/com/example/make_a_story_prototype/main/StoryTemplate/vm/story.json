@@ -1,0 +1,30 @@
+{
+  "title": "",
+  "pages": [
+    {
+      "image": "../../",
+      "blanks": [{
+        "id": "a2",
+        "imageLocation": {}
+      }],
+      "segments": [
+        {
+          "type": "text",
+          "content": "The quick brown"
+        },
+        {
+          "type": "blank",
+          "id": "a2"
+        },
+        {
+          "type": "text",
+          "content": "jumps over the log. Then the "
+        },
+        {
+          "type": "blank",
+          "id": "a2"
+        }
+      ]
+    }
+  ]
+}
