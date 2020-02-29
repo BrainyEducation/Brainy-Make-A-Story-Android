@@ -82,7 +82,7 @@ class StoryPageSampleData {
         List<StorySegment> segments = new ArrayList<>();
         segments.add(new StoryText("One Saturday evening"));
         segments.add(new StoryText("and"));
-        segments.add(new StoryText("made a tent to camp out in the back yard.  They griped and whined and complained to each other about a school assignment due next week:  to stand in front of the whole class and show pictures and talk about a special place they had visited.  Neither one had any special pictures of any place special, and they both just knew the teacher would embarrass them, and the other kids would tease them, and Monday would be terrifishously, awfulishously, horrifishously bad.  Feeling glum, ");
+        segments.add(new StoryText("made a tent to camp out in the back yard.  They griped and whined and complained to each other about a school assignment due next week:  to stand in front of the whole class and show pictures and talk about a special place they had visited.  Neither one had any special pictures of any place special, and they both just knew the teacher would embarrass them, and the other kids would tease them, and Monday would be terrifishously, awfulishously, horrifishously bad.  Feeling glum, "));
         segments.add(new StoryText("snuggled tight in some blankets and"));
         segments.add(new StoryText("curled up in a sleeping bag, when about midnight a strange-shaped shadow flickered on their tent wall.  \n" +
                 "\t\"What’s that” asked "));
