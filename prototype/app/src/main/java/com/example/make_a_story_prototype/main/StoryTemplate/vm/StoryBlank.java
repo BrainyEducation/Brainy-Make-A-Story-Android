@@ -1,7 +1,5 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 
-import androidx.annotation.NonNull;
-
 public class StoryBlank {
     class ImageLocation {
         float x;
@@ -11,21 +9,16 @@ public class StoryBlank {
         float rotation;
     }
 
-    StoryBlankIdentifier identifier;
+    String identifier;
     ImageLocation imageLocation;
 
-    public StoryBlank(StoryBlankIdentifier identifier) {
+    public StoryBlank(String identifier) {
         this(identifier, null);
     }
 
-    public StoryBlank(StoryBlankIdentifier identifier, ImageLocation imageLocation) {
+    public StoryBlank(String identifier, ImageLocation imageLocation) {
         this.identifier = identifier;
         this.imageLocation = imageLocation;
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return " BLANK ";
-    }
 }
