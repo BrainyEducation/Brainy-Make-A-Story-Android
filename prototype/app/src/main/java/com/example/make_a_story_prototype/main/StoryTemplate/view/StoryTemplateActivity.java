@@ -3,8 +3,11 @@ package com.example.make_a_story_prototype.main.StoryTemplate.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -93,37 +96,46 @@ public class StoryTemplateActivity extends AppCompatActivity {
         StoryPage currentPage = vm.getStory().getPages().get(pageNum);
         List<StorySegment> segments = currentPage.getSegments();
 
-        String text = "";
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
         for (StorySegment s : segments) {
             if (s instanceof StoryText) {
                 StoryText textSegment = (StoryText) s;
-                text += textSegment.toString();
+                builder.append(textSegment.getText());
             } else if (s instanceof StoryBlankIdentifier) {
                 StoryBlankIdentifier identifier = (StoryBlankIdentifier) s;
-                text += BLANK_PLACEHOLDER;
-                text += "(" + identifier.get() + ")";
+                StoryViewModel.BlankSelection selection = vm.getSelections().get(identifier.get());
+
+                if (selection == null) {
+                    builder.append(
+                            BLANK_PLACEHOLDER,
+                            new ClickableSpan() {
+                                @Override
+                                public void onClick(@NonNull View widget) {
+                                    onSelectedBlank(identifier.get());
+                                }
+                            },
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    );
+                } else {
+                    builder.append(selection.getText());
+                }
             }
         }
 
         storyTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        storyTextView.setText(text, TextView.BufferType.SPANNABLE);
-        Spannable spannable = (Spannable) storyTextView.getText();
-
-        for (int j = 0; j < text.length() - 4; j++) {
-            if (text.charAt(j) == 'B' && text.charAt(j + 4) == 'K') {
-                spannable.setSpan(new ClickableSpan() {
-                    @Override
-                    public void onClick(@NonNull View widget) {
-                        onSelectedBlank();
-                    }
-                }, j, j + 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
+        storyTextView.setText(builder);
     }
 
-    private void onSelectedBlank() {
-        Log.d("Tag", "Clicked: blank");
-        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
+    private void onSelectedBlank(String blankIdentifier) {
+//        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
+
+        vm.setSelection(blankIdentifier, new StoryViewModel.BlankSelection(
+                "Billy",
+                R.drawable.food_apple
+        ));
+
+        updateTextView(0);
     }
 }
 
