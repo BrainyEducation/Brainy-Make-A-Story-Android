@@ -7,8 +7,7 @@ import android.view.View;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
-import com.example.make_a_story_prototype.main.Stories.view.StorySelectionActivity;
-import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
+import com.example.make_a_story_prototype.main.StorySelection.view.StorySelectionActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +22,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_home);
-        Util.themeStatusBar(this, false);
+        Util.themeStatusBar(this, true);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 

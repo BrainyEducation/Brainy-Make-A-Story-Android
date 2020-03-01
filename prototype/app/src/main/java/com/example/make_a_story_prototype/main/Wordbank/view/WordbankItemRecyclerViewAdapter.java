@@ -16,8 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCardHolder> implements WordCardHolder.WordCardCallback {
+
+    public interface WordbankAdapterHandler {
+        void selectWordCard(WordCardItemViewModel vm);
+    }
+
     private Context context;
     private WordbankViewModel vm;
+
+    public WordbankAdapterHandler handler;
 
     public WordbankItemRecyclerViewAdapter(Context context, WordbankViewModel vm) {
         this.context = context;
@@ -63,12 +70,10 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
 
     @Override
     public void confirmSelection(WordCardItemViewModel vm) {
-        if (vm.isUnlocked) {
-            Toast.makeText(context, vm.cardItem.getImageLabel() + " is already unlocked", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent(context, QuizActivity.class);
-            intent.putExtra("source", vm.cardItem.getImageLabel());
-            context.startActivity(intent);
+        if (handler == null) {
+            return;
         }
+
+        handler.selectWordCard(vm);
     }
 }
