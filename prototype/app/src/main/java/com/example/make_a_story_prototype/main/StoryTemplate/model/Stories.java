@@ -12,7 +12,7 @@ public class Stories {
         stories.put("The Special Invention", R.drawable.story_special_invention);
         stories.put("The Wacky Costume Party", R.drawable.story_wacky_costume_party);
         stories.put("Santa's Mixed-up Helper Elf", R.drawable.story_santas_elf);
-        stories.put("The Space Alien", R.drawable.story_space_alien);
+        stories.put("The Space Alien", R.drawable.story_space_alien_5);
     }
 
     public int getStoryImage(String title) {
