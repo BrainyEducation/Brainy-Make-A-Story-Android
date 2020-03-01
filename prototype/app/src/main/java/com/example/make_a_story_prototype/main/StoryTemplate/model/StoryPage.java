@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.StoryTemplate.vm;
+package com.example.make_a_story_prototype.main.StoryTemplate.model;
 
 import java.util.List;
 
@@ -9,6 +9,10 @@ public class StoryPage {
     public StoryPage(int imageResource, List<StorySegment> segments) {
         this.imageResource = imageResource;
         this.segments = segments;
+    }
+
+    public int getImageResource() {
+        return imageResource;
     }
 
     public List<StorySegment> getSegments() {

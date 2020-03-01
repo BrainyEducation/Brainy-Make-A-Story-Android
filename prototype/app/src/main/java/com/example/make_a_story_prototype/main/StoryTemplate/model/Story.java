@@ -1,15 +1,21 @@
-package com.example.make_a_story_prototype.main.StoryTemplate.vm;
+package com.example.make_a_story_prototype.main.StoryTemplate.model;
 
 import java.util.List;
 import java.util.Map;
 
 public class Story {
+    private String title;
     private List<StoryPage> pages;
     private Map<String, StoryBlank> blanks;
 
-    public Story(List<StoryPage> pages, Map<String, StoryBlank> blanks) {
+    public Story(String title, List<StoryPage> pages, Map<String, StoryBlank> blanks) {
+        this.title = title;
         this.pages = pages;
         this.blanks = blanks;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public List<StoryPage> getPages() {

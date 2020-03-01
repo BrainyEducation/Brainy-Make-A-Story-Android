@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.StoryTemplate.vm;
+package com.example.make_a_story_prototype.main.StoryTemplate.model;
 
 public class StoryBlankIdentifier implements StorySegment {
     private String identifier;

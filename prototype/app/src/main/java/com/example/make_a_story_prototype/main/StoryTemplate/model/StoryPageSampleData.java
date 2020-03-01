@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.StoryTemplate.vm;
+package com.example.make_a_story_prototype.main.StoryTemplate.model;
 
 import com.example.make_a_story_prototype.R;
 
@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 public class StoryPageSampleData {
-    static Story sampleStory() {
+    public static Story sampleStory() {
         List<StoryPage> pages = new ArrayList<>();
         pages.add(sampleStoryPage1());
         pages.add(sampleStoryPage2());
 
         Map<String, StoryBlank> blanks = blanks();
 
-        return new Story(pages, blanks);
+        return new Story("The Special Invention", pages, blanks);
     }
 
     private static StoryPage sampleStoryPage1() {

@@ -16,13 +16,12 @@ import android.widget.TextView;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.Story;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryBlankIdentifier;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryPage;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StorySegment;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryText;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryTextViewModel;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.TemplateViewModel;
+import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryBlankIdentifier;
+import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPage;
+import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPageSampleData;
+import com.example.make_a_story_prototype.main.StoryTemplate.model.StorySegment;
+import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryText;
+import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import java.util.List;
@@ -35,13 +34,10 @@ public class StoryTemplateActivity extends AppCompatActivity {
 
     private static String BLANK_PLACEHOLDER = " BLANK ";
 
-    private TemplateViewModel vm;
-    private StoryTextViewModel stvm;
-    private Story story;
-    private ImageView storyImage;
-    private String storyTitle;
-    private TextView storyTextView;
+    private StoryViewModel vm;
 
+    private ImageView storyImageView;
+    private TextView storyTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,21 +52,18 @@ public class StoryTemplateActivity extends AppCompatActivity {
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        storyTitle = getIntent().getStringExtra("source");
-        TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
-        screenTitle.setText(storyTitle);
-        vm = new TemplateViewModel(storyTitle);
-
-        stvm = new StoryTextViewModel();
-        story = stvm.getStory();
-
-        storyImage = findViewById(R.id.story_image);
-        storyImage.setImageResource(vm.getStoryImage());
-
+        storyImageView = findViewById(R.id.story_image);
         storyTextView = findViewById(R.id.story_text);
-        updateTextView(0);
-
         Toolbar controlsbar = findViewById(R.id.controls_bar);
+
+        vm = new StoryViewModel(StoryPageSampleData.sampleStory());
+
+        TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
+        screenTitle.setText(vm.getStory().getTitle());
+
+        storyImageView.setImageResource(vm.getStory().getPages().get(0).getImageResource());
+
+        updateTextView(0);
     }
 
     // home icon
@@ -97,12 +90,7 @@ public class StoryTemplateActivity extends AppCompatActivity {
     }
 
     public void updateTextView(int pageNum) {
-        if (pageNum >= story.getPages().size()) {
-            Log.d("Tag", "setTextView --> requested page number > # of pages");
-            return;
-        }
-
-        StoryPage currentPage = story.getPages().get(pageNum);
+        StoryPage currentPage = vm.getStory().getPages().get(pageNum);
         List<StorySegment> segments = currentPage.getSegments();
 
         String text = "";

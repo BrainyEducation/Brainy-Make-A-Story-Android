@@ -1,5 +1,8 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 
+import com.example.make_a_story_prototype.main.StoryTemplate.model.Story;
+import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryBlankIdentifier;
+
 import java.util.HashMap;
 import java.util.Map;
 
