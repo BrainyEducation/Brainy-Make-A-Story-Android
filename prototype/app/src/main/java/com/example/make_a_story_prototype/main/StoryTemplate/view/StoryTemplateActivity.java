@@ -3,12 +3,9 @@ package com.example.make_a_story_prototype.main.StoryTemplate.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,9 +32,12 @@ import androidx.appcompat.widget.Toolbar;
 
 public class StoryTemplateActivity extends AppCompatActivity {
 
+    public static String BlankSelectionIntentKey = "BlankSelection";
     private static String BLANK_PLACEHOLDER = " BLANK ";
+    private static StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
+    private static String currentIdentifier;
 
-    private StoryViewModel vm;
+    private StoryViewModel vm = StoryTemplateActivity.sVm;
 
     private ImageView storyImageView;
     private TextView storyTextView;
@@ -59,14 +59,23 @@ public class StoryTemplateActivity extends AppCompatActivity {
         storyTextView = findViewById(R.id.story_text);
         Toolbar controlsbar = findViewById(R.id.controls_bar);
 
-        vm = new StoryViewModel(StoryPageSampleData.sampleStory());
-
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
 
         storyImageView.setImageResource(vm.getStory().getPages().get(0).getImageResource());
 
         updateTextView(0);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
+        }
+
+        StoryViewModel.BlankSelection selection = bundle.getParcelable(BlankSelectionIntentKey);
+        if (currentIdentifier != null && selection != null) {
+            vm.setSelection(currentIdentifier, selection);
+            updateTextView(0);
+        }
     }
 
     // home icon
@@ -128,14 +137,8 @@ public class StoryTemplateActivity extends AppCompatActivity {
     }
 
     private void onSelectedBlank(String blankIdentifier) {
-//        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
-
-        vm.setSelection(blankIdentifier, new StoryViewModel.BlankSelection(
-                "Billy",
-                R.drawable.food_apple
-        ));
-
-        updateTextView(0);
+        currentIdentifier = blankIdentifier;
+        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
     }
 }
 
