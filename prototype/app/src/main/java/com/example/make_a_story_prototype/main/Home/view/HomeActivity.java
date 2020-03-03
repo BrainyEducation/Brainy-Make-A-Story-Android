@@ -7,7 +7,7 @@ import android.view.View;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
-import com.example.make_a_story_prototype.main.Stories.view.StorySelectionActivity;
+import com.example.make_a_story_prototype.main.StorySelection.view.StorySelectionActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,15 +22,15 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_home);
-        Util.themeStatusBar(this, false);
+        Util.themeStatusBar(this, true);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     /**
-     * goes to the word bank screen
+     * goes to the word bank / quizzes screen
      * @param v view
      */
-    public void wordBankButtonOnClick(View v) {
+    public void homeWordBankOnClick(View v) {
         Intent intent = new Intent(this, CategoriesActivity.class);
         this.startActivity(intent);
     }
@@ -39,16 +39,18 @@ public class HomeActivity extends AppCompatActivity {
      * goes to the story page screen
      * @param v view
      */
-    public void storyPageButtonOnClick(View v) {
+    public void homeStoriesOnClick(View v) {
         Intent intent = new Intent(this, StorySelectionActivity.class);
         this.startActivity(intent);
     }
 
     /**
-     * temp button to go to characters listing for demoing
+     * temp card action to go to characters listing for demoing
      * @param v view
      */
-    public void characterPageButtonOnClick(View v) {
+    public void homeCharacterOnClick(View v) {
         Intent intent = new Intent(this, CharacterActivity.class);
-        this.startActivity(intent);    }
+        this.startActivity(intent);
+    }
+
 }

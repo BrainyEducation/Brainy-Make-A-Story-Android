@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.Stories.view.StorySelectionActivity"/>
+        <activity android:name=".main.StorySelection.view.StorySelectionActivity"/>
+        <activity android:name=".main.StoryTemplate.view.StoryTemplateActivity"/>
         <activity android:name=".main.Home.view.HomeActivity"/>
         <activity android:name=".main.Categories.view.CategoriesActivity"/>
         <activity android:name=".main.Characters.view.CharacterActivity"/>

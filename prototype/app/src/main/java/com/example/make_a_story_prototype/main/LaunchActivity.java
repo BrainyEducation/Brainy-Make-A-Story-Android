@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.view.View;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
 

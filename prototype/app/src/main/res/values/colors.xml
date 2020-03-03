@@ -10,6 +10,8 @@
     <color name="colorGold">#FDD530</color>
     <color name="colorSilver">#b8b8b8</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorAppBlack">#212121</color>
+    <color name="colorYellow">#fed62b</color>
 
 
     <!-- card backgrounds  -->

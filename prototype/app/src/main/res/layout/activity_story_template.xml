@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryLight">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <include
+        android:id="@+id/controls_bar"
+        layout="@layout/controls_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/story_image"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="9dp"
+            android:contentDescription="@string/story_image"
+            android:padding="0dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/story_wacky_costume_party" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="67dp"
+            android:padding="2dp"
+            android:scrollbars="none"
+            android:background="@color/colorWhite">
+        <TextView
+            android:id="@+id/story_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textSize="12pt"
+            android:lineSpacingMultiplier="1.5"
+            android:lineSpacingExtra="3dp"
+            android:textColor="@color/colorAppBlack" />
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

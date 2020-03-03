@@ -1,10 +1,8 @@
 package com.example.make_a_story_prototype.main.Characters.vm;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Characters.model.CharacterCardItem;
 import com.example.make_a_story_prototype.main.Characters.model.Characters;
 import com.example.make_a_story_prototype.main.Util.Optional;
 

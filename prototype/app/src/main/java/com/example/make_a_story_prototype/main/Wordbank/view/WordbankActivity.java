@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.Wordbank.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Quiz.view.QuizActivity;
+import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
+import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +23,12 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class WordbankActivity extends AppCompatActivity {
+import static com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity.BlankSelectionIntentKey;
+
+public class WordbankActivity extends AppCompatActivity implements WordbankItemRecyclerViewAdapter.WordbankAdapterHandler {
     private String category;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter recyclerViewAdapter;
+    private WordbankItemRecyclerViewAdapter recyclerViewAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
     private WordbankViewModel viewModel;
 
@@ -52,6 +59,8 @@ public class WordbankActivity extends AppCompatActivity {
 
         viewModel.getCardListObservable().subscribe((list) -> {
             recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, viewModel);
+            recyclerViewAdapter.handler = this;
+
             recyclerView.setAdapter(recyclerViewAdapter);
         });
     }
@@ -60,7 +69,7 @@ public class WordbankActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.icon_menu, menu);
+        inflater.inflate(R.menu.storybook_menu, menu);
         return true;
     }
 
@@ -82,6 +91,24 @@ public class WordbankActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+    }
+
+    @Override
+    public void selectWordCard(WordCardItemViewModel vm) {
+        if (vm.isUnlocked) {
+            Intent intent = new Intent(this, StoryTemplateActivity.class);
+            intent.putExtra(BlankSelectionIntentKey,  new StoryViewModel.BlankSelection(
+                    vm.cardItem.getImageLabel(),
+                    vm.cardItem.getImageResource()
+            ));
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, QuizActivity.class);
+            intent.putExtra("source", vm.cardItem.getImageLabel());
+            this.startActivity(intent);
+        }
     }
 }
 

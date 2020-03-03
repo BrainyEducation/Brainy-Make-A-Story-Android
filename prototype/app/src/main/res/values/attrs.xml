@@ -7,6 +7,9 @@
     <attr name="colorGold" format="color" />
     <attr name="colorSilver" format="color" />
     <attr name="colorPrimaryLight" format="color" />
+    <attr name="colorAppBlack" format="color" />
+    <attr name="colorYellow" format="color" />
+
 
     <attr name="colorLightRed" format="color" />
     <attr name="colorContrastRed" format="color" />
