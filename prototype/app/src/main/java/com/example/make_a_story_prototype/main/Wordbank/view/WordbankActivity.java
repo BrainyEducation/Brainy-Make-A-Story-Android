@@ -107,6 +107,8 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
         } else {
             Intent intent = new Intent(this, QuizActivity.class);
             intent.putExtra("source", vm.cardItem.getImageLabel());
+            intent.putExtra("audio", vm.cardItem.getAudioResource());
+            intent.putExtra("image", vm.cardItem.getImageResource());
             this.startActivity(intent);
         }
     }
