@@ -165,9 +165,11 @@ public class WordbankViewModel {
             words.addWord(word);
             String pictureName = category + "_" + word;
             words.addWordImage(resources.getIdentifier(pictureName.toLowerCase(),"drawable",packageName));
+            words.addWordAudio(resources.getIdentifier(pictureName.toLowerCase(), "raw", packageName));
         }
         List<String> wordNames = words.getWords();
         List<Integer> wordImages = words.getWordImages();
+        List<Integer> wordAudios = words.getWordAudio();
 
         for (int i = 0; i < wordNames.size(); i++) {
             String backgroundKey;
@@ -183,7 +185,7 @@ public class WordbankViewModel {
             String wordName = wordNames.get(i);
             cardList.add(
                     new WordCardItemViewModel(
-                            new WordCardItem(wordImages.get(i), wordName),
+                            new WordCardItem(wordImages.get(i), wordName, wordAudios.get(i)),
                             colors.get(backgroundKey),
                             colors.get(contrastKey), unlockedWords.contains(wordName.toLowerCase())
                     )
