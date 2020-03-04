@@ -22,6 +22,7 @@ public class CharacterGuideActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.partialfade_in, R.anim.partialfade_out);
         setContentView(R.layout.activity_character_guide);
 
         Resources res = getResources();
