@@ -39,7 +39,7 @@ public class QuizOptions {
         }
         while(possibleIncorrects.size() < 5) {
             String word = wordList[new Random().nextInt(wordList.length)];
-            if(!word.equals(correctOption)){
+            if(!word.equals(correctOption) && !possibleIncorrects.contains(word)){
                 possibleIncorrects.add(word);
             }
         }

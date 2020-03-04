@@ -162,10 +162,15 @@ public class WordbankViewModel {
         String [] categoryWords = resources.getStringArray(
                 resources.getIdentifier(identifierName,"array",packageName));
         for (String word:categoryWords) {
-            words.addWord(word);
             String pictureName = category + "_" + word;
-            words.addWordImage(resources.getIdentifier(pictureName.toLowerCase(),"drawable",packageName));
-            words.addWordAudio(resources.getIdentifier(pictureName.toLowerCase(), "raw", packageName));
+            int wordImage = resources.getIdentifier(pictureName.toLowerCase(),"drawable",packageName);
+            int wordAudio = resources.getIdentifier(pictureName.toLowerCase(), "raw", packageName);
+            if(wordImage!= 0 && wordAudio !=0) {
+                words.addWordImage(wordImage);
+                words.addWordAudio(wordAudio);
+                words.addWord(word);
+            }
+
         }
         List<String> wordNames = words.getWords();
         List<Integer> wordImages = words.getWordImages();
