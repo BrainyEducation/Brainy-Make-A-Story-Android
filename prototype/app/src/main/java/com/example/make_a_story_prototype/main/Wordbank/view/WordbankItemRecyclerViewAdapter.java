@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import com.example.make_a_story_prototype.main.Quiz.view.QuizActivity;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
@@ -23,6 +24,7 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
 
     private Context context;
     private WordbankViewModel vm;
+    private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
 
     public WordbankAdapterHandler handler;
 
@@ -58,7 +60,10 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
         }
 
         vm.isSelected = true;
-
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer = android.media.MediaPlayer.create(context, vm.cardItem.getAudioResource());
+            mediaPlayer.start();
+        }
         notifyDataSetChanged();
     }
 
@@ -73,7 +78,6 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
         if (handler == null) {
             return;
         }
-
         handler.selectWordCard(vm);
     }
 }

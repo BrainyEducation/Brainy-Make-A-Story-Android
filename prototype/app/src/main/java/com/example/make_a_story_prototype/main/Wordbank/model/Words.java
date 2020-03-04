@@ -8,12 +8,18 @@ public class Words {
 
     private List<Integer> wordImages = new ArrayList<>();
 
+    private List<Integer> wordsAudio = new ArrayList<>();
+
     public List<String> getWords() {
         return words;
     }
 
     public List<Integer> getWordImages() {
         return wordImages;
+    }
+
+    public List<Integer> getWordAudio() {
+        return wordsAudio;
     }
 
     public void addWord(String word){
@@ -23,4 +29,9 @@ public class Words {
     public void addWordImage(int wordImage){
         wordImages.add(wordImage);
     }
+
+    public void addWordAudio(int wordAudio) {
+        wordsAudio.add(wordAudio);
+    }
+
 }
