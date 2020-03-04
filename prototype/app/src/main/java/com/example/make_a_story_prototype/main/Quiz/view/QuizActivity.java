@@ -1,8 +1,10 @@
 package com.example.make_a_story_prototype.main.Quiz.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -41,15 +43,17 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     private ImageView quizImage;
     private QuizWordViewModel quizWordVM;
     private List<Button> buttons = new ArrayList<>();
+    private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         Intent intent = getIntent();
+        //define values passed from word bank in WordBankActivity.java under selectWordCard method
         String wordBeingQuizzed = intent.getStringExtra("source");
         int quizImageFile = intent.getIntExtra("image",0);
-        //int quizAudioFile = intent.getIntExtra("audio",0);
+        int quizAudioFile = intent.getIntExtra("audio",0);
 
 
         View view = findViewById(R.id.constraint_layout);
@@ -66,8 +70,22 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         TextView title = toolbar.findViewById(R.id.toolbar_title);
         title.setText("Learn");
 
-        quizImage = (ImageView) view.findViewById(R.id.quizImage);
+        //display quiz word image
+        quizImage = view.findViewById(R.id.quizImage);
         quizImage.setImageResource(quizImageFile);
+
+        //set up MediaPlayer
+        ImageView speaker = view.findViewById(R.id.speakerIcon);
+        Context quizContext = this;
+        speaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer = android.media.MediaPlayer.create(quizContext, quizAudioFile);
+                    mediaPlayer.start();
+                }
+            }
+        });
 
         stars = new ImageView[]{
                 findViewById(R.id.star1),
