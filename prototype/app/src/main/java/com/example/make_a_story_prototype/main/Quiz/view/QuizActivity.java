@@ -48,6 +48,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         setContentView(R.layout.activity_quiz);
         Intent intent = getIntent();
         String wordBeingQuizzed = intent.getStringExtra("source");
+        int quizImageFile = intent.getIntExtra("image",0);
+        //int quizAudioFile = intent.getIntExtra("audio",0);
 
 
         View view = findViewById(R.id.constraint_layout);
@@ -63,6 +65,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
         TextView title = toolbar.findViewById(R.id.toolbar_title);
         title.setText("Learn");
+
+        quizImage = (ImageView) view.findViewById(R.id.quizImage);
+        quizImage.setImageResource(quizImageFile);
 
         stars = new ImageView[]{
                 findViewById(R.id.star1),
