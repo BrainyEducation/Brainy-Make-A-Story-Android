@@ -2,6 +2,7 @@ package com.example.make_a_story_prototype.main.Wordbank.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,13 +32,16 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
     private WordbankItemRecyclerViewAdapter recyclerViewAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
     private WordbankViewModel viewModel;
+    private String source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
-        String category = getIntent().getStringExtra("source");
+        category = getIntent().getStringExtra("category");
+        Log.d("tag", "onCreate -- category: " + category);
+        source = getIntent().getStringExtra("source");
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -106,9 +110,11 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, QuizActivity.class);
-            intent.putExtra("source", vm.cardItem.getImageLabel());
+            intent.putExtra("word", vm.cardItem.getImageLabel());
             intent.putExtra("audio", vm.cardItem.getAudioResource());
             intent.putExtra("image", vm.cardItem.getImageResource());
+            intent.putExtra("category", category);
+            intent.putExtra("source", source);
             this.startActivity(intent);
         }
     }

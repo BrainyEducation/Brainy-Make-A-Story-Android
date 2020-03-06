@@ -6,11 +6,14 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
@@ -36,11 +39,21 @@ public class StoryTemplateActivity extends AppCompatActivity {
     private static String BLANK_PLACEHOLDER = " BLANK ";
     private static StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
     private static String currentIdentifier;
+    private static int word1Resource = 0;
+    private static int word2Resource = 0;
+    private static int index = 0;
 
     private StoryViewModel vm = StoryTemplateActivity.sVm;
 
     private ImageView storyImageView;
     private TextView storyTextView;
+    private FrameLayout fl;
+    private ImageView image1;
+    private ImageView image2;
+
+    private String source = "template";
+
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +70,10 @@ public class StoryTemplateActivity extends AppCompatActivity {
 
         storyImageView = findViewById(R.id.story_image);
         storyTextView = findViewById(R.id.story_text);
+        image1 = findViewById(R.id.word_image1);
+        image2 = findViewById(R.id.word_image2);
+
+        fl = findViewById(R.id.image_layout);
         Toolbar controlsbar = findViewById(R.id.controls_bar);
 
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
@@ -75,6 +92,7 @@ public class StoryTemplateActivity extends AppCompatActivity {
         if (currentIdentifier != null && selection != null) {
             vm.setSelection(currentIdentifier, selection);
             updateTextView(0);
+            updateImageView(selection.getImageResource());
         }
     }
 
@@ -120,7 +138,7 @@ public class StoryTemplateActivity extends AppCompatActivity {
                             BLANK_PLACEHOLDER,
                             new ClickableSpan() {
                                 @Override
-                                public void onClick(@NonNull View widget) {
+                                public void onClick(@NonNull View v) {
                                     onSelectedBlank(identifier.get());
                                 }
                             },
@@ -136,9 +154,59 @@ public class StoryTemplateActivity extends AppCompatActivity {
         storyTextView.setText(builder);
     }
 
+    public void updateImageView(int resource) {
+        // 12.5%
+        Log.d("tag", "updateImageView: ");
+
+//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+//                FrameLayout.LayoutParams.WRAP_CONTENT,
+//                FrameLayout.LayoutParams.WRAP_CONTENT);
+//
+//        image.setImageResource(resource);
+//
+//        // Adds image to layout
+//        fl.addView(image, params);
+//
+//        int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
+//        image.getLayoutParams().height = dimensionInDp;
+//        image.getLayoutParams().width = dimensionInDp;
+//
+//        image.setX(162);
+//        image.setY(255);
+//        image.requestLayout();
+
+        // TODO: fix this
+        // hard-coding for demo
+        if (index == 0) {
+            word1Resource = resource;
+
+            image1.setImageResource(word1Resource);
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.INVISIBLE);
+
+        } else if (index == 1) {
+            word2Resource = resource;
+            image1.setImageResource(word1Resource);
+            image2.setImageResource(word2Resource);
+
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.VISIBLE);
+        } else {
+            image1.setImageResource(word1Resource);
+            image2.setImageResource(word2Resource);
+
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.VISIBLE);
+        }
+
+        index++;
+    }
+
     private void onSelectedBlank(String blankIdentifier) {
         currentIdentifier = blankIdentifier;
-        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
+        Intent intent = new Intent(this,   CategoriesActivity.class);
+        intent.putExtra("source", source);
+        StoryTemplateActivity.this.startActivity(intent);
     }
 }
 
