@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
+import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
+import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import java.util.ArrayList;
@@ -43,6 +45,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     private ImageView quizImage;
     private QuizWordViewModel quizWordVM;
     private List<Button> buttons = new ArrayList<>();
+    private String source;
+    private String category;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
 
     @Override
@@ -51,10 +55,12 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         setContentView(R.layout.activity_quiz);
         Intent intent = getIntent();
         //define values passed from word bank in WordBankActivity.java under selectWordCard method
-        String wordBeingQuizzed = intent.getStringExtra("source");
+        String wordBeingQuizzed = intent.getStringExtra("word");
         int quizImageFile = intent.getIntExtra("image",0);
         int quizAudioFile = intent.getIntExtra("audio",0);
-
+        source = getIntent().getStringExtra("source");
+        category = getIntent().getStringExtra("category");
+        Log.d("tag", "quiz activity category: " + category);
 
         View view = findViewById(R.id.constraint_layout);
         rootView = view.getRootView();
@@ -194,6 +200,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Log.d("debug", "entering display intent");
         Intent intent = new Intent(this,   CharacterGuideActivity.class);
         intent.putExtra("msgType", messageType);
+        intent.putExtra("source", source);
+        intent.putExtra("category", category);
         QuizActivity.this.startActivity(intent);
+
+
     }
 }

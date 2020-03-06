@@ -26,6 +26,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <FrameLayout
+            android:id="@+id/image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
         <ImageView
             android:id="@+id/story_image"
             android:layout_width="match_parent"
@@ -36,7 +40,37 @@
             android:contentDescription="@string/story_image"
             android:padding="0dp"
             android:visibility="visible"
-            app:srcCompat="@drawable/story_wacky_costume_party" />
+            app:srcCompat="@drawable/story_space_alien_1" />
+
+            <ImageView
+                android:id="@+id/word_image1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="9dp"
+                android:translationX="54dp"
+                android:translationY="32dp"
+                android:layout_marginEnd="9dp"
+                android:contentDescription="word image"
+                android:padding="0dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/food_sandwich" />
+
+            <ImageView
+                android:id="@+id/word_image2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="9dp"
+                android:translationX="300dp"
+                android:translationY="32dp"
+                android:layout_marginEnd="9dp"
+                android:contentDescription="word image"
+                android:padding="0dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/food_sandwich" />
+
+        </FrameLayout>
 
         <ScrollView
             android:layout_width="match_parent"

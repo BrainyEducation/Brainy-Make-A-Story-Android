@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
@@ -52,9 +53,10 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SpecialInventionCardOnClick(View v) {
-        Intent intent = new Intent(this, StoryTemplateActivity.class);
-        intent.putExtra("source", "The Special Invention");
-        this.startActivity(intent);
+//        Intent intent = new Intent(this, StoryTemplateActivity.class);
+//        intent.putExtra("source", "The Special Invention");
+//        this.startActivity(intent);
+        Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -62,9 +64,11 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void WackyCostumePartyCardOnClick(View v) {
-        Intent intent = new Intent(this, StoryTemplateActivity.class);
-        intent.putExtra("source", "The Wacky Costume Party");
-        this.startActivity(intent);
+//        Intent intent = new Intent(this, StoryTemplateActivity.class);
+//        intent.putExtra("source", "The Wacky Costume Party");
+//        this.startActivity(intent);
+        Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
+
     }
 
     /**
@@ -72,9 +76,11 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SantasElfCardOnClick(View v) {
-        Intent intent = new Intent(this, StoryTemplateActivity.class);
-        intent.putExtra("source", "Santa's Mixed-up Helper Elf");
-        this.startActivity(intent);
+//        Intent intent = new Intent(this, StoryTemplateActivity.class);
+//        intent.putExtra("source", "Santa's Mixed-up Helper Elf");
+//        this.startActivity(intent);
+        Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
+
     }
 
     /**
