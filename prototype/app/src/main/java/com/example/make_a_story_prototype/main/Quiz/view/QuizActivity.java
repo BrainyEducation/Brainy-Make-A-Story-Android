@@ -60,7 +60,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         int quizAudioFile = intent.getIntExtra("audio",0);
         source = getIntent().getStringExtra("source");
         category = getIntent().getStringExtra("category");
-        Log.d("tag", "quiz activity category: " + category);
 
         View view = findViewById(R.id.constraint_layout);
         rootView = view.getRootView();

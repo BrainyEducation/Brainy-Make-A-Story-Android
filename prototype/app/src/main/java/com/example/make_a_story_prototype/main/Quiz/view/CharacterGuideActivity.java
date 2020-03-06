@@ -31,7 +31,6 @@ public class CharacterGuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_character_guide);
 
         source = getIntent().getStringExtra("source");
-        Log.d("tag", "character guide category: " + category);
         category = getIntent().getStringExtra("category");
 
 
