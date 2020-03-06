@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -18,10 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
-import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import java.util.ArrayList;

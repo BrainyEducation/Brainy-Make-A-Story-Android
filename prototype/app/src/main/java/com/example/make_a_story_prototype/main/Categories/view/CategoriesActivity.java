@@ -14,13 +14,8 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
-import com.example.make_a_story_prototype.main.Quiz.view.QuizActivity;
-import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
-import com.example.make_a_story_prototype.main.Wordbank.view.WordbankItemRecyclerViewAdapter;
-import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

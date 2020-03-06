@@ -1,6 +1,5 @@
 package com.example.make_a_story_prototype.main.Quiz.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
-import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
 import java.util.Objects;

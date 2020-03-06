@@ -1,21 +1,15 @@
 package com.example.make_a_story_prototype.main.Categories.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.Media.AudioPlayer;
-import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
-import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
-import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
