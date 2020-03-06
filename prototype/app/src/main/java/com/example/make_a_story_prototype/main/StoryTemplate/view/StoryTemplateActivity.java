@@ -11,10 +11,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.view.ViewTreeObserver;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
@@ -33,7 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class StoryTemplateActivity extends AppCompatActivity {
+public class StoryTemplateActivity extends AppCompatActivity implements ObservableScrollView.ScrollViewListener {
 
     public static String BlankSelectionIntentKey = "BlankSelection";
     private static String BLANK_PLACEHOLDER = " BLANK ";
@@ -47,6 +50,7 @@ public class StoryTemplateActivity extends AppCompatActivity {
 
     private ImageView storyImageView;
     private TextView storyTextView;
+    private ObservableScrollView scrollView = null;
     private FrameLayout fl;
     private ImageView image1;
     private ImageView image2;
@@ -70,8 +74,13 @@ public class StoryTemplateActivity extends AppCompatActivity {
 
         storyImageView = findViewById(R.id.story_image);
         storyTextView = findViewById(R.id.story_text);
+        scrollView = findViewById(R.id.story_scroll);
+        progressBar = findViewById(R.id.progress_bar);
         image1 = findViewById(R.id.word_image1);
         image2 = findViewById(R.id.word_image2);
+        scrollView = (ObservableScrollView) findViewById(R.id.story_scroll);
+        scrollView.setScrollViewListener(this);
+
 
         fl = findViewById(R.id.image_layout);
         Toolbar controlsbar = findViewById(R.id.controls_bar);
@@ -119,6 +128,7 @@ public class StoryTemplateActivity extends AppCompatActivity {
         }
     }
 
+
     public void updateTextView(int pageNum) {
         StoryPage currentPage = vm.getStory().getPages().get(pageNum);
         List<StorySegment> segments = currentPage.getSegments();
@@ -155,9 +165,6 @@ public class StoryTemplateActivity extends AppCompatActivity {
     }
 
     public void updateImageView(int resource) {
-        // 12.5%
-        Log.d("tag", "updateImageView: ");
-
 //        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
 //                FrameLayout.LayoutParams.WRAP_CONTENT,
 //                FrameLayout.LayoutParams.WRAP_CONTENT);
@@ -207,6 +214,12 @@ public class StoryTemplateActivity extends AppCompatActivity {
         Intent intent = new Intent(this,   CategoriesActivity.class);
         intent.putExtra("source", source);
         StoryTemplateActivity.this.startActivity(intent);
+    }
+
+    @Override
+    public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+        float percentScrolled = (float) ((y / 3000.0) * 100);
+        progressBar.setProgress(Math.min((int) percentScrolled, 100));
     }
 }
 
