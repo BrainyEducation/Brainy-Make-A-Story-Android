@@ -99,7 +99,9 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
 
     @Override
     public void selectWordCard(WordCardItemViewModel vm) {
-        if (vm.isUnlocked) {
+        if (vm.isUnlocked && source != null) {
+            Log.d("tag", "tapped unlocked word card from story");
+
             Intent intent = new Intent(this, StoryTemplateActivity.class);
             intent.putExtra(BlankSelectionIntentKey,  new StoryViewModel.BlankSelection(
                     vm.cardItem.getImageLabel(),
@@ -108,6 +110,17 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+        } else if (vm.isUnlocked && source == null) {
+            Log.d("tag", "tapped unlocked word card from home");
+            Toast.makeText(this,"Let's review what you've learned!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, QuizActivity.class);
+            intent.putExtra("word", vm.cardItem.getImageLabel());
+            intent.putExtra("audio", vm.cardItem.getAudioResource());
+            intent.putExtra("image", vm.cardItem.getImageResource());
+            intent.putExtra("category", category);
+            intent.putExtra("source", source);
+            this.startActivity(intent);
+
         } else {
             Intent intent = new Intent(this, QuizActivity.class);
             intent.putExtra("word", vm.cardItem.getImageLabel());

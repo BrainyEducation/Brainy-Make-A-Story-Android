@@ -6,18 +6,14 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.view.ViewTreeObserver;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
@@ -72,18 +68,16 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
+        Toolbar controlsbar = findViewById(R.id.controls_bar);
         storyImageView = findViewById(R.id.story_image);
         storyTextView = findViewById(R.id.story_text);
-        scrollView = findViewById(R.id.story_scroll);
         progressBar = findViewById(R.id.progress_bar);
         image1 = findViewById(R.id.word_image1);
         image2 = findViewById(R.id.word_image2);
-        scrollView = (ObservableScrollView) findViewById(R.id.story_scroll);
-        scrollView.setScrollViewListener(this);
-
-
         fl = findViewById(R.id.image_layout);
-        Toolbar controlsbar = findViewById(R.id.controls_bar);
+
+        scrollView = findViewById(R.id.story_scroll);
+        scrollView.setScrollViewListener(this);
 
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
@@ -217,7 +211,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     }
 
     @Override
-    public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+    public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int prevX, int prevY) {
         float percentScrolled = (float) ((y / 3000.0) * 100);
         progressBar.setProgress(Math.min((int) percentScrolled, 100));
     }

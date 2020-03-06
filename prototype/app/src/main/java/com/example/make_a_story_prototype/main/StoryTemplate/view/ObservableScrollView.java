@@ -1,6 +1,5 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
@@ -9,8 +8,7 @@ public class ObservableScrollView extends ScrollView {
 
     public interface ScrollViewListener {
 
-        void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy);
-
+        void onScrollChanged(ObservableScrollView scrollView, int x, int y, int prevX, int prevY);
     }
 
     private ScrollViewListener scrollViewListener = null;
@@ -32,10 +30,10 @@ public class ObservableScrollView extends ScrollView {
     }
 
     @Override
-    protected void onScrollChanged(int x, int y, int oldx, int oldy) {
-        super.onScrollChanged(x, y, oldx, oldy);
+    protected void onScrollChanged(int x, int y, int prevX, int prevY) {
+        super.onScrollChanged(x, y, prevX, prevY);
         if(scrollViewListener != null) {
-            scrollViewListener.onScrollChanged(this, x, y, oldx, oldy);
+            scrollViewListener.onScrollChanged(this, x, y, prevX, prevY);
         }
     }
 
