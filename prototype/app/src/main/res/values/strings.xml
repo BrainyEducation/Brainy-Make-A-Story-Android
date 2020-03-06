@@ -26,66 +26,265 @@
     <string name="play_button">Play button</string>
     <string name="pause_button">Pause button</string>
     <string-array name="categoryNames">
-        <item>Toys</item>
-        <item>Food</item>
-        <item>Clothing</item>
         <item>Animals</item>
-        <item>Home</item>
-        <item>Sports</item>
-        <item>Numbers</item>
+        <item>Birds</item>
+        <item>Body Parts</item>
+        <item>Clothes</item>
         <item>Colors</item>
-        <item>Weather</item>
-        <item>School</item>
+        <item>Sports</item>
+        <item>Describe</item>
+        <item>Food</item>
+        <item>House Stuff</item>
+        <item>Outdoors</item>
+        <item>People</item>
+        <item>Places</item>
+        <item>Things</item>
+        <item>Tools</item>
+        <item>Toys</item>
+        <item>Vehicles</item>
+        <item>Verbs</item>
+        <item>Water Animals</item>
+    </string-array>
+    <string-array name="AnimalsWords">
+        <item>ape</item>
+        <item>bat</item>
+        <item>bear</item>
+        <item>bug</item>
+        <item>camel</item>
+        <item>cat</item>
+        <item>collie</item>
+        <item>cow</item>
+        <item>dog</item>
+        <item>dogs</item>
+        <item>fox</item>
+        <item>goat</item>
+        <item>kitten</item>
+        <item>mole</item>
+        <item>monkey</item>
+        <item>moth</item>
+        <item>mouse</item>
+        <item>rabbit</item>
+        <item>sheep</item>
+        <item>skunk</item>
+        <item>snail</item>
+        <item>tail</item>
+        <item>wasp</item>
+        <item>wolf</item>
+        <item>zebra</item>
+    </string-array>
+    <string-array name="BirdsWords">
+        <item>bird</item>
+        <item>canary</item>
+        <item>ostrich</item>
+        <item>owl</item>
+        <item>parrot</item>
+        <item>swan</item>
+    </string-array>
+    <string-array name="BodyPartsWords">
+        <item>face</item>
+        <item>foot</item>
+        <item>hand</item>
+        <item>mouth</item>
+        <item>nose</item>
+        <item>thumb</item>
+        <item>toe</item>
+    </string-array>
+    <string-array name="ClothesWords">
+        <item>boots</item>
+        <item>clothes</item>
+        <item>glove</item>
+        <item>purse</item>
+        <item>scarf</item>
+        <item>shirt</item>
+        <item>skirt</item>
+        <item>suit</item>
+        <item>tie</item>
+        <item>wig</item>
+    </string-array>
+    <string-array name="ColorsWords">
+        <item>blue</item>
+        <item>brown</item>
+        <item>gold</item>
+        <item>purple</item>
+        <item>silver</item>
+        <item>yellow</item>
+    </string-array>
+    <string-array name="DescribeWords">
+        <item>afraid</item>
+        <item>cloudy</item>
+        <item>dark</item>
+        <item>five</item>
+        <item>hilly</item>
+        <item>hot</item>
+        <item>old</item>
+        <item>quiet</item>
+        <item>silly</item>
+        <item>six</item>
+        <item>sixteen</item>
+        <item>sleepy</item>
+    </string-array>
+    <string-array name="FoodWords">
+        <item>cake</item>
+        <item>candy</item>
+        <item>cookies</item>
+        <item>corn</item>
+        <item>grapes</item>
+        <item>hamburger</item>
+        <item>nuts</item>
+        <item>pie</item>
+        <item>plum</item>
+        <item>pretzel</item>
+        <item>sandwich</item>
+    </string-array>
+    <string-array name="HouseStuffWords">
+        <item>bed</item>
+        <item>blanket</item>
+        <item>broom</item>
+        <item>cushion</item>
+        <item>fork</item>
+        <item>fridge</item>
+        <item>key</item>
+        <item>light</item>
+        <item>oven</item>
+        <item>plug</item>
+        <item>pot</item>
+        <item>saucepan</item>
+        <item>soap</item>
+        <item>sofa</item>
+        <item>spoons</item>
+        <item>teapot</item>
+        <item>toilet</item>
+    </string-array>
+    <string-array name="OutdoorsWords">
+        <item>grass</item>
+        <item>ice</item>
+        <item>moon</item>
+        <item>rainbow</item>
+        <item>sky</item>
+        <item>snow</item>
+        <item>star</item>
+        <item>statue</item>
+        <item>straw</item>
+        <item>tree</item>
+        <item>wall</item>
+    </string-array>
+    <string-array name="PeopleWords">
+        <item>baby</item>
+        <item>boy</item>
+        <item>bride</item>
+        <item>brother</item>
+        <item>child</item>
+        <item>clown</item>
+        <item>daughter</item>
+        <item>family</item>
+        <item>father</item>
+        <item>girl</item>
+        <item>grandfather</item>
+        <item>grandmother</item>
+        <item>juggler</item>
+        <item>king</item>
+        <item>laundress</item>
+        <item>man</item>
+        <item>mother</item>
+        <item>queen</item>
+    </string-array>
+    <string-array name="PlacesWords">
+        <item>bridge</item>
+        <item>playground</item>
+        <item>volcano</item>
+        <item>zoo</item>
+    </string-array>
+    <string-array name="ThingsWords">
+        <item>bag</item>
+        <item>bubble</item>
+        <item>cast</item>
+        <item>cauldron</item>
+        <item>clarinet</item>
+        <item>coin</item>
+        <item>flute</item>
+        <item>flying carpet</item>
+        <item>fringe</item>
+        <item>glass</item>
+        <item>music</item>
+        <item>net</item>
+        <item>pearl</item>
+        <item>pencil</item>
+        <item>question</item>
+        <item>skis</item>
+        <item>square</item>
+        <item>tuba</item>
+        <item>wheel</item>
+        <item>zipper</item>
+    </string-array>
+    <string-array name="ToolsWords">
+        <item>axe</item>
+        <item>drill</item>
+        <item>hatchet</item>
+        <item>nail</item>
+        <item>rake</item>
+        <item>saw</item>
+        <item>tools</item>
     </string-array>
     <string-array name="ToysWords">
         <item>ball</item>
+        <item>block</item>
         <item>boat</item>
         <item>car</item>
+        <item>crayon</item>
+        <item>jeep</item>
+        <item>plane</item>
+        <item>present</item>
+        <item>slide</item>
+        <item>stilts</item>
+        <item>swing</item>
+        <item>toys</item>
+        <item>truck</item>
+        <item>unicycle</item>
+        <item>wagon</item>
+        <item>yoyo</item>
     </string-array>
-    <string-array name="FoodWords">
-<!--        <item>apple</item>-->
-<!--        <item>bread</item>-->
-<!--        <item>burger</item>-->
-        <item>cake</item>
-        <item>candy</item>
-<!--        <item>carrots</item>-->
-<!--        <item>cone</item>-->
-        <item>cookies</item>
-        <item>corn</item>
-        <item>grapes</item>
-<!--        <item>hotdog</item>-->
-        <item>hamburger</item>
-<!--        <item>lettuce</item>-->
-<!--        <item>milk</item>-->
-<!--        <item>nuts</item>-->
-        <item>nuts</item>
-        <item>pie</item>
-        <item>plum</item>
-        <item>pretzel</item>
-<!--        <item>snack</item>-->
-<!--        <item>tea</item>-->
+    <string-array name="VehiclesWords">
+        <item>airplane</item>
+        <item>ambulance</item>
+        <item>boat</item>
+        <item>bug</item>
+        <item>bus</item>
+        <item>car</item>
+        <item>crane</item>
+        <item>dozer</item>
+        <item>jeep</item>
+        <item>taxi</item>
+        <item>truck</item>
+        <item>van</item>
+    </string-array>
+    <string-array name="VerbsWords">
+        <item>balance</item>
+        <item>blew</item>
+        <item>burn</item>
+        <item>clean</item>
+        <item>cry</item>
+        <item>cut</item>
+        <item>dig</item>
+        <item>draw</item>
+        <item>eat</item>
+        <item>fall</item>
+        <item>fish</item>
+        <item>flew</item>
+        <item>hit</item>
+        <item>hug</item>
+        <item>jump</item>
+    </string-array>
+    <string-array name="WaterAnimalsWords">
+        <item>beaver</item>
+        <item>clam</item>
+        <item>fish</item>
+        <item>frog</item>
+        <item>gator</item>
+        <item>oyster</item>
+        <item>walrus</item>
+        <item>whale</item>
     </string-array>
     <string-array name="WordList">
-<!--        <item>apple</item>-->
-<!--        <item>bread</item>-->
-<!--        <item>burger</item>-->
-        <item>cake</item>
-        <item>candy</item>
-<!--        <item>carrots</item>-->
-<!--        <item>cone</item>-->
-        <item>cookies</item>
-        <item>corn</item>
-        <item>grapes</item>
-        <item>hamburger</item>
-<!--        <item>lettuce</item>-->
-<!--        <item>milk</item>-->
-<!--        <item>nuts</item>-->
-        <item>nuts</item>
-        <item>pie</item>
-        <item>plum</item>
-        <item>pretzel</item>
-<!--        <item>snack</item>-->
-<!--        <item>tea</item>-->
     </string-array>
     <string-array name="goodJobMessages">
         <item>Excellent!</item>
