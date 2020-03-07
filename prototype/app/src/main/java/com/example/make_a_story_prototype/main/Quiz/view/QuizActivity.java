@@ -84,11 +84,15 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
             @Override
             public void onClick(View v) {
                 if (!mediaPlayer.isPlaying()) {
-                    mediaPlayer = android.media.MediaPlayer.create(quizContext, quizAudioFile);
+//                    mediaPlayer = android.media.MediaPlayer.create(quizContext, quizAudioFile);
                     mediaPlayer.start();
                 }
             }
         });
+
+        // immediately play quiz word audio
+        mediaPlayer = android.media.MediaPlayer.create(quizContext, quizAudioFile);
+        mediaPlayer.start();
 
         stars = new ImageView[]{
                 findViewById(R.id.star1),
