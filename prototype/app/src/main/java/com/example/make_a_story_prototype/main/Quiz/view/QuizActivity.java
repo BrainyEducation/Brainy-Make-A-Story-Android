@@ -45,6 +45,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     private List<Button> buttons = new ArrayList<>();
     private String source;
     private String category;
+    private int quizAudioFile;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
 
     @Override
@@ -55,7 +56,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         //define values passed from word bank in WordBankActivity.java under selectWordCard method
         String wordBeingQuizzed = intent.getStringExtra("word");
         int quizImageFile = intent.getIntExtra("image",0);
-        int quizAudioFile = intent.getIntExtra("audio",0);
+        quizAudioFile = intent.getIntExtra("audio",0);
         source = getIntent().getStringExtra("source");
         category = getIntent().getStringExtra("category");
 
@@ -195,6 +196,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
             Drawable d = star.getDrawable();
             Util.changeDrawableColor(d, backgroundColor);
         }
+        mediaPlayer.start();
     }
 
     private void displayCharGuide(String messageType) {
