@@ -121,7 +121,7 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
             intent.putExtra("source", source);
             this.startActivity(intent);
 
-        } else if (vm.isUnlocked && source.equals("template")) {
+    //    } else if (vm.isUnlocked && source.equals("template")) {
 
         }else {
             Intent intent = new Intent(this, QuizActivity.class);

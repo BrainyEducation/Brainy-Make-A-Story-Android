@@ -10,10 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
@@ -112,7 +114,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                super.finish();
+                showSaveDialog();
                 return true;
             case R.id.home_menu_icon:
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
@@ -120,6 +122,29 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void showSaveDialog() {
+        View saveDialog = findViewById(R.id.popup_dialog);
+        saveDialog.setVisibility(View.VISIBLE);
+        Button saveButton = findViewById(R.id.save_button);
+        Button noSaveButton = findViewById(R.id.no_save_button);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        noSaveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Not Saving", Toast.LENGTH_SHORT).show();
+                vm.clearSelections();
+                index = 0;
+                finish();
+            }
+        });
     }
 
 
