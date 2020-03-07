@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.Categories.vm;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.model.Categories;
@@ -38,7 +39,7 @@ public class CategoriesViewModel {
         List<Integer> categoryImages = Arrays.asList(categories.getCategoryImages());
         List<Integer> categoryAudio = Arrays.asList(categories.getCategoryAudio());
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < categoryNames.size(); i++) {
             cardList.add(
                     new CategoryCardItemViewModel(
                             new CategoryCardItem(categoryAudio.get(i), categoryImages.get(i), categoryNames.get(i)),

@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/homeImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginBottom="32dp"
         android:contentDescription="@string/logo_description"
