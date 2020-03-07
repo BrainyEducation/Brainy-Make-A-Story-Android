@@ -1,26 +1,30 @@
 package com.example.make_a_story_prototype.main.Categories.view;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.Media.AudioPlayer;
-import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<CategoryCardHolder> implements CategoryCardHolder.CategoryCardCallback {
+
+    public interface CategoryAdapterHandler {
+        void selectCategoryCard(CategoryCardItemViewModel vm);
+    }
+
     private Context context;
     private CategoriesViewModel vm;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
+
+    public CategoryAdapterHandler handler;
 
 
     public CategoryItemRecyclerViewAdapter(Context context, CategoriesViewModel vm) {
@@ -71,14 +75,10 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
 
     @Override
     public void confirmSelection(CategoryCardItemViewModel vm) {
-        CategoryCardItem item = vm.cardItem;
-
-        if (item.getImageLabel().toLowerCase().equals("food")) {
-            Intent intent = new Intent(context, WordbankActivity.class);
-            intent.putExtra("source", item.getImageLabel());
-            context.startActivity(intent);
-        } else {
-            Toast.makeText(context, (item.getImageLabel() + " isn't currently available"), Toast.LENGTH_SHORT).show();
+        if (handler == null) {
+            Log.d("tag", "confirmSelection -- handler is null");
+            return;
         }
+        handler.selectCategoryCard(vm);
     }
 }
