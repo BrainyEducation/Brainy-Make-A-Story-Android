@@ -240,6 +240,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         float percentScrolled = (float) ((y / 3000.0) * 100);
         progressBar.setProgress(Math.min((int) percentScrolled, 100));
     }
+
 }
 
 
