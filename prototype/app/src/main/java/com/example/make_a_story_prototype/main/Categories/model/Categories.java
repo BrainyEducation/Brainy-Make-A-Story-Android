@@ -43,6 +43,7 @@ public class Categories {
             R.drawable.wateranimals_fish
     };
 
+    // TODO: add verb category name audio
     private Integer[] categoryAudio = {
             R.raw.animals,
             R.raw.birds,
@@ -58,6 +59,7 @@ public class Categories {
             R.raw.things,
             R.raw.tools,
             R.raw.toys,
+            R.raw.vehicles,
             R.raw.vehicles,
             R.raw.water_animals,
     };
