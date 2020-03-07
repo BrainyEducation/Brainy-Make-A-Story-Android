@@ -77,4 +77,8 @@ public class StoryViewModel {
         // fire observable
     }
 
+    public void clearSelections() {
+        selections = new HashMap<String, BlankSelection>();
+    }
+
 }
