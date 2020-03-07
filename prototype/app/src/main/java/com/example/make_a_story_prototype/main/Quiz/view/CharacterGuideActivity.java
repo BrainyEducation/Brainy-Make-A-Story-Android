@@ -57,6 +57,7 @@ public class CharacterGuideActivity extends AppCompatActivity {
             if (source != null) {
                 Intent intent = new Intent(this,   WordbankActivity.class);
                 intent.putExtra("category", category);
+                intent.putExtra("source", source);
                 CharacterGuideActivity.this.startActivity(intent);
             } else {
                 Intent intent = new Intent(this, HomeActivity.class);
