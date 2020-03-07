@@ -15,7 +15,7 @@ public class StoryPageSampleData {
 
         Map<String, StoryBlank> blanks = blanks();
 
-        return new Story("The Special Invention", pages, blanks);
+        return new Story("The Space Alien", pages, blanks);
     }
 
     private static StoryPage sampleStoryPage1() {

@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
@@ -30,17 +32,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class StoryTemplateActivity extends AppCompatActivity {
+public class StoryTemplateActivity extends AppCompatActivity implements ObservableScrollView.ScrollViewListener {
 
     public static String BlankSelectionIntentKey = "BlankSelection";
     private static String BLANK_PLACEHOLDER = " BLANK ";
     private static StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
     private static String currentIdentifier;
+    private static int word1Resource = 0;
+    private static int word2Resource = 0;
+    private static int index = 0;
 
     private StoryViewModel vm = StoryTemplateActivity.sVm;
 
     private ImageView storyImageView;
     private TextView storyTextView;
+    private ObservableScrollView scrollView = null;
+    private FrameLayout fl;
+    private ImageView image1;
+    private ImageView image2;
+
+    private String source = "template";
+
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,9 +68,16 @@ public class StoryTemplateActivity extends AppCompatActivity {
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
+        Toolbar controlsbar = findViewById(R.id.controls_bar);
         storyImageView = findViewById(R.id.story_image);
         storyTextView = findViewById(R.id.story_text);
-        Toolbar controlsbar = findViewById(R.id.controls_bar);
+        progressBar = findViewById(R.id.progress_bar);
+        image1 = findViewById(R.id.word_image1);
+        image2 = findViewById(R.id.word_image2);
+        fl = findViewById(R.id.image_layout);
+
+        scrollView = findViewById(R.id.story_scroll);
+        scrollView.setScrollViewListener(this);
 
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
@@ -75,6 +95,7 @@ public class StoryTemplateActivity extends AppCompatActivity {
         if (currentIdentifier != null && selection != null) {
             vm.setSelection(currentIdentifier, selection);
             updateTextView(0);
+            updateImageView(selection.getImageResource());
         }
     }
 
@@ -101,6 +122,7 @@ public class StoryTemplateActivity extends AppCompatActivity {
         }
     }
 
+
     public void updateTextView(int pageNum) {
         StoryPage currentPage = vm.getStory().getPages().get(pageNum);
         List<StorySegment> segments = currentPage.getSegments();
@@ -120,7 +142,7 @@ public class StoryTemplateActivity extends AppCompatActivity {
                             BLANK_PLACEHOLDER,
                             new ClickableSpan() {
                                 @Override
-                                public void onClick(@NonNull View widget) {
+                                public void onClick(@NonNull View v) {
                                     onSelectedBlank(identifier.get());
                                 }
                             },
@@ -136,9 +158,62 @@ public class StoryTemplateActivity extends AppCompatActivity {
         storyTextView.setText(builder);
     }
 
+    public void updateImageView(int resource) {
+//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+//                FrameLayout.LayoutParams.WRAP_CONTENT,
+//                FrameLayout.LayoutParams.WRAP_CONTENT);
+//
+//        image.setImageResource(resource);
+//
+//        // Adds image to layout
+//        fl.addView(image, params);
+//
+//        int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
+//        image.getLayoutParams().height = dimensionInDp;
+//        image.getLayoutParams().width = dimensionInDp;
+//
+//        image.setX(162);
+//        image.setY(255);
+//        image.requestLayout();
+
+        // TODO: fix this
+        // hard-coding for demo
+        if (index == 0) {
+            word1Resource = resource;
+
+            image1.setImageResource(word1Resource);
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.INVISIBLE);
+
+        } else if (index == 1) {
+            word2Resource = resource;
+            image1.setImageResource(word1Resource);
+            image2.setImageResource(word2Resource);
+
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.VISIBLE);
+        } else {
+            image1.setImageResource(word1Resource);
+            image2.setImageResource(word2Resource);
+
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.VISIBLE);
+        }
+
+        index++;
+    }
+
     private void onSelectedBlank(String blankIdentifier) {
         currentIdentifier = blankIdentifier;
-        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
+        Intent intent = new Intent(this,   CategoriesActivity.class);
+        intent.putExtra("source", source);
+        StoryTemplateActivity.this.startActivity(intent);
+    }
+
+    @Override
+    public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int prevX, int prevY) {
+        float percentScrolled = (float) ((y / 3000.0) * 100);
+        progressBar.setProgress(Math.min((int) percentScrolled, 100));
     }
 }
 
