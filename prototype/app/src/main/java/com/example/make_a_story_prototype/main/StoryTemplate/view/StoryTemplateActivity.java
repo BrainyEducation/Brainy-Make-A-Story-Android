@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -10,14 +11,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPage;
 import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPageSampleData;
@@ -50,6 +54,8 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     private FrameLayout fl;
     private ImageView image1;
     private ImageView image2;
+    private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
+    private int quizAudioFile;
 
     private String source = "template";
 
@@ -78,6 +84,10 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
 
         scrollView = findViewById(R.id.story_scroll);
         scrollView.setScrollViewListener(this);
+
+        quizAudioFile =  R.raw.story_full_space_alien;
+        mediaPlayer = android.media.MediaPlayer.create(this, quizAudioFile);
+        //mediaPlayer.start();
 
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
@@ -112,7 +122,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                super.finish();
+                showSaveDialog();
                 return true;
             case R.id.home_menu_icon:
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
@@ -120,6 +130,29 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void showSaveDialog() {
+        View saveDialog = findViewById(R.id.popup_dialog);
+        saveDialog.setVisibility(View.VISIBLE);
+        Button saveButton = findViewById(R.id.save_button);
+        Button noSaveButton = findViewById(R.id.no_save_button);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        noSaveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Not Saving", Toast.LENGTH_SHORT).show();
+                vm.clearSelections();
+                index = 0;
+                finish();
+            }
+        });
     }
 
 
@@ -204,6 +237,10 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     }
 
     private void onSelectedBlank(String blankIdentifier) {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+
         currentIdentifier = blankIdentifier;
         Intent intent = new Intent(this,   CategoriesActivity.class);
         intent.putExtra("source", source);
@@ -215,6 +252,32 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         float percentScrolled = (float) ((y / 3000.0) * 100);
         progressBar.setProgress(Math.min((int) percentScrolled, 100));
     }
+
+    public void onPauseTapped(View v) {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+    }
+
+    public void onPlayTapped(View v) {
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        }
+    }
+
+    public void onReplayTapped(View v) {
+        int rewindTime = 5000;
+
+        if (mediaPlayer.isPlaying()) {
+            int currentPosition = mediaPlayer.getCurrentPosition();
+            if (currentPosition - rewindTime >= 0) {
+                mediaPlayer.seekTo(currentPosition - rewindTime);
+                    } else {
+                mediaPlayer.seekTo(0);
+            }
+        }
+    }
+
 }
 
 

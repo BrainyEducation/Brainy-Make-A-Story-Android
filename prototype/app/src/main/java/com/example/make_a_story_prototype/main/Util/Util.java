@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.example.make_a_story_prototype.R;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -41,14 +42,15 @@ public class Util {
     }
 
     public static Drawable setDrawableToGrayscale(Drawable d) {
-        d.mutate();
+        if (d != null) {
+            d.mutate();
 
-        ColorMatrix matrix = new ColorMatrix();
-        matrix.setSaturation(0);
+            ColorMatrix matrix = new ColorMatrix();
+            matrix.setSaturation(0);
 
-        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-        d.setColorFilter(filter);
-
+            ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+            d.setColorFilter(filter);
+        }
         return d;
     }
 

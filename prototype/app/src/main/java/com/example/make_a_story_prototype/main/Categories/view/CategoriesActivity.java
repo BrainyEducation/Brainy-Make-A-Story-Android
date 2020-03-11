@@ -90,15 +90,12 @@ public class CategoriesActivity extends AppCompatActivity implements CategoryIte
     public void selectCategoryCard(CategoryCardItemViewModel vm) {
         CategoryCardItem item = vm.cardItem;
 
-        if (item.getImageLabel().toLowerCase().equals("food")) {
-            Intent intent = new Intent(this, WordbankActivity.class);
-            intent.putExtra("category", item.getImageLabel());
-            Log.d("tag", "selectCategoryCard intent extra category: " + item.getImageLabel());
-            intent.putExtra("source", source);
-            this.startActivity(intent);
-        } else {
-            Toast.makeText(this, (item.getImageLabel() + " isn't currently available"), Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(this, WordbankActivity.class);
+        intent.putExtra("category", item.getImageLabel());
+        Log.d("tag", "selectCategoryCard intent extra category: " + item.getImageLabel());
+        intent.putExtra("source", source);
+        this.startActivity(intent);
+        
     }
 
 }
