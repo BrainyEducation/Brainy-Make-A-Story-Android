@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 
+import android.app.Application;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,7 +9,9 @@ import com.example.make_a_story_prototype.main.StoryTemplate.model.Story;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StoryViewModel {
+import androidx.lifecycle.AndroidViewModel;
+
+public class StoryViewModel extends AndroidViewModel {
 
     public static class BlankSelection implements Parcelable {
         private String text;
@@ -63,7 +66,8 @@ public class StoryViewModel {
         return story;
     }
 
-    public StoryViewModel(Story story) {
+    public StoryViewModel(Application application, Story story) {
+        super(application);
         this.story = story;
         this.selections = new HashMap<>();
     }

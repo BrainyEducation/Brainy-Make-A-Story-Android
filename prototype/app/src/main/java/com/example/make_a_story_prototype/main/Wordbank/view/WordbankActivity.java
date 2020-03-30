@@ -11,9 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Home.vm.StoryContext;
+import com.example.make_a_story_prototype.main.Navigation.NavigationController;
 import com.example.make_a_story_prototype.main.Quiz.view.QuizActivity;
 import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
@@ -26,13 +29,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import static com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity.BlankSelectionIntentKey;
 
-public class WordbankActivity extends AppCompatActivity implements WordbankItemRecyclerViewAdapter.WordbankAdapterHandler {
+public class WordbankActivity extends BaseActivity implements WordbankItemRecyclerViewAdapter.WordbankAdapterHandler {
     private String category;
     private RecyclerView recyclerView;
     private WordbankItemRecyclerViewAdapter recyclerViewAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
     private WordbankViewModel viewModel;
-    private String source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,6 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
 
         category = getIntent().getStringExtra("category");
         Log.d("tag", "onCreate -- category: " + category);
-        source = getIntent().getStringExtra("source");
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -99,37 +100,51 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
 
     @Override
     public void selectWordCard(WordCardItemViewModel vm) {
-        if (vm.isUnlocked && source != null) {
-            Log.d("tag", "tapped unlocked word card from story");
+        NavigationController.NavigationContext context = getNavigationContext();
+        if (context instanceof StoryContext) {
+            StoryContext storyContext = (StoryContext)context;
 
-            Intent intent = new Intent(this, StoryTemplateActivity.class);
-            intent.putExtra(BlankSelectionIntentKey,  new StoryViewModel.BlankSelection(
-                    vm.cardItem.getImageLabel(),
-                    vm.cardItem.getImageResource()
-            ));
+            if (vm.isUnlocked) {
+                Log.d("TAG", "tapped unlocked word card from story");
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        } else if (vm.isUnlocked && source == null) {
-            Log.d("tag", "tapped unlocked word card from home");
-            Toast.makeText(this,"Let's review what you've learned!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, StoryTemplateActivity.class);
+                intent.putExtra(BlankSelectionIntentKey, new StoryViewModel.BlankSelection(
+                        vm.cardItem.getImageLabel(),
+                        vm.cardItem.getImageResource()
+                ));
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            } else {
+                Log.d("tag", "tapped locked word card from story");
+
+                Intent intent = new Intent(this, QuizActivity.class);
+                intent.putExtra("word", vm.cardItem.getImageLabel());
+                intent.putExtra("audio", vm.cardItem.getAudioResource());
+                intent.putExtra("image", vm.cardItem.getImageResource());
+                intent.putExtra("category", category);
+                this.startActivity(intent);
+            }
+        } else  {
+
+            if (vm.isUnlocked) {
+                Log.d("tag", "tapped unlocked word card from home");
+
+                Toast.makeText(this,"Let's review what you've learned!", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(this, QuizActivity.class);
+//                intent.putExtra("word", vm.cardItem.getImageLabel());
+//                intent.putExtra("audio", vm.cardItem.getAudioResource());
+//                intent.putExtra("image", vm.cardItem.getImageResource());
+//                intent.putExtra("category", category);
+//                this.startActivity(intent);
+            }
+            Log.d("tag", "tapped locked word card from home");
+
             Intent intent = new Intent(this, QuizActivity.class);
             intent.putExtra("word", vm.cardItem.getImageLabel());
             intent.putExtra("audio", vm.cardItem.getAudioResource());
             intent.putExtra("image", vm.cardItem.getImageResource());
             intent.putExtra("category", category);
-            intent.putExtra("source", source);
-            this.startActivity(intent);
-
-    //    } else if (vm.isUnlocked && source.equals("template")) {
-
-        }else {
-            Intent intent = new Intent(this, QuizActivity.class);
-            intent.putExtra("word", vm.cardItem.getImageLabel());
-            intent.putExtra("audio", vm.cardItem.getAudioResource());
-            intent.putExtra("image", vm.cardItem.getImageResource());
-            intent.putExtra("category", category);
-            intent.putExtra("source", source);
             this.startActivity(intent);
         }
     }

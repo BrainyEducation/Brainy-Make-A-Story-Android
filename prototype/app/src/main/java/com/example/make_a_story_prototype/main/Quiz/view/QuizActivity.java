@@ -43,7 +43,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     private ImageView quizImage;
     private QuizWordViewModel quizWordVM;
     private List<Button> buttons = new ArrayList<>();
-    private String source;
     private String category;
     private int quizAudioFile;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
@@ -57,7 +56,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         String wordBeingQuizzed = intent.getStringExtra("word");
         int quizImageFile = intent.getIntExtra("image",0);
         quizAudioFile = intent.getIntExtra("audio",0);
-        source = getIntent().getStringExtra("source");
         category = getIntent().getStringExtra("category");
 
         View view = findViewById(R.id.constraint_layout);
@@ -203,7 +201,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Log.d("debug", "entering display intent");
         Intent intent = new Intent(this,   CharacterGuideActivity.class);
         intent.putExtra("msgType", messageType);
-        intent.putExtra("source", source);
         intent.putExtra("category", category);
         QuizActivity.this.startActivity(intent);
 

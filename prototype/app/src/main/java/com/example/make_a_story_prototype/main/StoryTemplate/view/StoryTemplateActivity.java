@@ -1,7 +1,6 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -28,6 +27,7 @@ import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPageSamp
 import com.example.make_a_story_prototype.main.StoryTemplate.model.StorySegment;
 import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryText;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
+import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModelFactory;
 import com.example.make_a_story_prototype.main.Util.Util;
 
 import java.util.List;
@@ -35,18 +35,26 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
 public class StoryTemplateActivity extends AppCompatActivity implements ObservableScrollView.ScrollViewListener {
 
     public static String BlankSelectionIntentKey = "BlankSelection";
     private static String BLANK_PLACEHOLDER = " BLANK ";
-    private static StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
+    private StoryViewModel sVm =             ViewModelProviders.of(this,
+            new StoryViewModelFactory(this.getApplication(), StoryPageSampleData.sampleStory())
+                    .get(StoryViewModel.class);
+            //new StoryViewModel(this.getApplication(), StoryPageSampleData.sampleStory());
+
+
+
+            //new StoryViewModel(StoryPageSampleData.sampleStory());
     private static String currentIdentifier;
     private static int word1Resource = 0;
     private static int word2Resource = 0;
     private static int index = 0;
 
-    private StoryViewModel vm = StoryTemplateActivity.sVm;
+    private StoryViewModel vm = sVm;
 
     private ImageView storyImageView;
     private TextView storyTextView;
