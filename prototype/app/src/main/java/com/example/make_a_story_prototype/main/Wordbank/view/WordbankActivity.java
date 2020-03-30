@@ -101,6 +101,7 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
     @Override
     public void selectWordCard(WordCardItemViewModel vm) {
         NavigationController.NavigationContext context = getNavigationContext();
+
         if (context instanceof StoryContext) {
             StoryContext storyContext = (StoryContext)context;
 
@@ -116,37 +117,24 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             } else {
-                Log.d("tag", "tapped locked word card from story");
-
-                Intent intent = new Intent(this, QuizActivity.class);
-                intent.putExtra("word", vm.cardItem.getImageLabel());
-                intent.putExtra("audio", vm.cardItem.getAudioResource());
-                intent.putExtra("image", vm.cardItem.getImageResource());
-                intent.putExtra("category", category);
-                this.startActivity(intent);
+                startQuiz(vm);
             }
         } else  {
-
             if (vm.isUnlocked) {
                 Log.d("tag", "tapped unlocked word card from home");
-
                 Toast.makeText(this,"Let's review what you've learned!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(this, QuizActivity.class);
-//                intent.putExtra("word", vm.cardItem.getImageLabel());
-//                intent.putExtra("audio", vm.cardItem.getAudioResource());
-//                intent.putExtra("image", vm.cardItem.getImageResource());
-//                intent.putExtra("category", category);
-//                this.startActivity(intent);
             }
-            Log.d("tag", "tapped locked word card from home");
-
-            Intent intent = new Intent(this, QuizActivity.class);
-            intent.putExtra("word", vm.cardItem.getImageLabel());
-            intent.putExtra("audio", vm.cardItem.getAudioResource());
-            intent.putExtra("image", vm.cardItem.getImageResource());
-            intent.putExtra("category", category);
-            this.startActivity(intent);
+            startQuiz(vm);
         }
+    }
+
+    private void startQuiz(WordCardItemViewModel vm) {
+        Intent intent = new Intent(this, QuizActivity.class);
+        intent.putExtra("word", vm.cardItem.getImageLabel());
+        intent.putExtra("audio", vm.cardItem.getAudioResource());
+        intent.putExtra("image", vm.cardItem.getImageResource());
+        intent.putExtra("category", category);
+        this.startActivity(intent);
     }
 }
 

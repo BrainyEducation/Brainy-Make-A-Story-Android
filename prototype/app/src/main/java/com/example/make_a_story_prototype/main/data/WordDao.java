@@ -1,5 +1,7 @@
 package com.example.make_a_story_prototype.main.data;
 
+import com.example.make_a_story_prototype.main.data.Word.Word;
+
 import java.util.List;
 
 import androidx.lifecycle.LiveData;

@@ -4,11 +4,12 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.model.Categories;
 import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
+import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
+import com.example.make_a_story_prototype.main.data.Word.Category;
+
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import androidx.core.content.ContextCompat;
@@ -34,15 +35,15 @@ public class CategoriesViewModel {
                 ContextCompat.getColor(context, R.color.colorContrastBlue),
         };
 
-        Categories categories = new Categories();
-        List<String> categoryNames = Arrays.asList(categories.getCategories());
-        List<Integer> categoryImages = Arrays.asList(categories.getCategoryImages());
-        List<Integer> categoryAudio = Arrays.asList(categories.getCategoryAudio());
+        DebugWordRepository wordRepo = new DebugWordRepository();
+        List<Category> categories = wordRepo.getCategories();
 
-        for (int i = 0; i < categoryNames.size(); i++) {
+        for (int i = 0; i < categories.size(); i++) {
+            Category category = categories.get(i);
+
             cardList.add(
                     new CategoryCardItemViewModel(
-                            new CategoryCardItem(categoryAudio.get(i), categoryImages.get(i), categoryNames.get(i)),
+                            new CategoryCardItem(category.getAudioResource(), category.getImageResource(), category.getName()),
                             BackgroundColors[i % BackgroundColors.length],
                             DetailColors[i % DetailColors.length]
                     )

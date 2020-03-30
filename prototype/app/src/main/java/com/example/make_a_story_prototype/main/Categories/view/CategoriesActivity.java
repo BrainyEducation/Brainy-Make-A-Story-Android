@@ -29,14 +29,11 @@ public class CategoriesActivity extends BaseActivity implements CategoryItemRecy
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
     private CategoriesViewModel viewModel;
-    private String source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
-
-        source = getIntent().getStringExtra("source");
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -94,7 +91,6 @@ public class CategoriesActivity extends BaseActivity implements CategoryItemRecy
         Intent intent = new Intent(this, WordbankActivity.class);
         intent.putExtra("category", item.getImageLabel());
         Log.d("tag", "selectCategoryCard intent extra category: " + item.getImageLabel());
-        intent.putExtra("source", source);
         this.startActivity(intent);
         
     }

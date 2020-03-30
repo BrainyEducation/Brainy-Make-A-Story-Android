@@ -9,9 +9,7 @@ import com.example.make_a_story_prototype.main.StoryTemplate.model.Story;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.lifecycle.AndroidViewModel;
-
-public class StoryViewModel extends AndroidViewModel {
+public class StoryViewModel {
 
     public static class BlankSelection implements Parcelable {
         private String text;
@@ -66,8 +64,7 @@ public class StoryViewModel extends AndroidViewModel {
         return story;
     }
 
-    public StoryViewModel(Application application, Story story) {
-        super(application);
+    public StoryViewModel( Story story) {
         this.story = story;
         this.selections = new HashMap<>();
     }
