@@ -8,13 +8,13 @@ import java.util.List;
 
 public class DebugWordRepository implements WordRepository {
 
-    private static DebugWordRepository instance;
+    private static DebugWordRepository instance = new DebugWordRepository();
 
     public static DebugWordRepository getInstance() {
         return instance;
     }
 
-    private Category animalCategory = new Category(0,"Animals", R.drawable.animals_dogs, R.raw.animals;
+    private Category animalCategory = new Category(0,"Animals", R.drawable.animals_dogs, R.raw.animals);
     private Category birdCategory = new Category(1,"Birds", R.drawable.birds_bird, R.raw.birds);
     private Category bodyCategory = new Category(2,"Body Parts", R.drawable.bodyparts_face, R.raw.bodyparts);
     private Category clothesCategory = new Category(4,"Clothes", R.drawable.clothes_clothes, R.raw.clothes);
@@ -276,9 +276,24 @@ public class DebugWordRepository implements WordRepository {
 
     };
 
+    private DebugWordRepository() {
+        // do not use
+    }
+
     @Override
     public List<Category> getCategories() {
         return Arrays.asList(categories);
+    }
+
+    @Override
+    public Category getCategory(int id) {
+        for (Category category : categories) {
+            if (category.getId() == id) {
+                return category;
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -302,6 +317,11 @@ public class DebugWordRepository implements WordRepository {
         }
 
         return null;
+    }
+
+    @Override
+    public Word[] getWords() {
+        return words;
     }
 
 }

@@ -62,7 +62,7 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         notifyDataSetChanged();
 
         if (!mediaPlayer.isPlaying()) {
-            mediaPlayer = android.media.MediaPlayer.create(context, vm.cardItem.getImageAudio());
+            mediaPlayer = android.media.MediaPlayer.create(context, vm.category.getAudioResource());
             mediaPlayer.start();
         }
     }

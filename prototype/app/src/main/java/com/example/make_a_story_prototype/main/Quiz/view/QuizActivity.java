@@ -19,8 +19,10 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
-import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.data.Word.Category;
+import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
+import com.example.make_a_story_prototype.main.data.Word.Word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +43,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
     private Button buttonOption3;
     private Button buttonOption4;
     private ImageView quizImage;
-    private QuizWordViewModel quizWordVM;
     private List<Button> buttons = new ArrayList<>();
-    private String category;
-    private int quizAudioFile;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
+    private Word wordBeingQuizzed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,10 +53,11 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         setContentView(R.layout.activity_quiz);
         Intent intent = getIntent();
         //define values passed from word bank in WordBankActivity.java under selectWordCard method
-        String wordBeingQuizzed = intent.getStringExtra("word");
-        int quizImageFile = intent.getIntExtra("image",0);
-        quizAudioFile = intent.getIntExtra("audio",0);
-        category = getIntent().getStringExtra("category");
+        DebugWordRepository wordRepo = DebugWordRepository.getInstance();
+        wordBeingQuizzed = wordRepo.getWord(intent.getIntExtra("word", 0));
+
+        int quizImageFile = wordBeingQuizzed.getImageResource();
+        int quizAudioFile = wordBeingQuizzed.getAudioResource();
 
         View view = findViewById(R.id.constraint_layout);
         rootView = view.getRootView();
@@ -116,8 +117,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         buttons.add(buttonOption4);
 
         Resources res = getResources();
-        String [] wordList = res.getStringArray(R.array.WordList);
-        setViewModel(new QuizViewModel(wordBeingQuizzed,wordList));
+        Word[] wordList = wordRepo.getWords();
+        setViewModel(new QuizViewModel(wordBeingQuizzed, wordList));
     }
 
     // storybook icon
@@ -157,9 +158,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
         vm.getCorrectAnswerCount().subscribe();
 
-        vm.getOptions().subscribe((String[] options) -> {
+        vm.getOptions().subscribe((Word[] options) -> {
             for (int i = 0; i < 4; i++) {
-                buttons.get(i).setText(options[i]);
+                buttons.get(i).setText(options[i].getWord());
             }
         });
     }
@@ -201,7 +202,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Log.d("debug", "entering display intent");
         Intent intent = new Intent(this,   CharacterGuideActivity.class);
         intent.putExtra("msgType", messageType);
-        intent.putExtra("category", category);
+        intent.putExtra("category", wordBeingQuizzed.getCategory().getId());
         QuizActivity.this.startActivity(intent);
 
 

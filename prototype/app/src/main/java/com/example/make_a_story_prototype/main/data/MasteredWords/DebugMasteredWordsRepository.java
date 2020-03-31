@@ -1,7 +1,14 @@
 package com.example.make_a_story_prototype.main.data.MasteredWords;
 
-import com.example.make_a_story_prototype.main.data.Word.Word;
+import android.content.Context;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,21 +16,83 @@ public class DebugMasteredWordsRepository implements MasteredWordsRepository {
 
     private static DebugMasteredWordsRepository instance;
 
+    public static void initialize(Context context) throws IOException {
+        if (instance != null) {
+            throw new RuntimeException("already created");
+        }
+
+        instance = new DebugMasteredWordsRepository(context);
+    }
+
     public static DebugMasteredWordsRepository getInstance() {
         return instance;
     }
 
-    private Set<Word> masteredWords = new HashSet<>();
+    private Context context;
+    private File masteredWordsFile;
+    private Set<Integer> masteredWordIds = new HashSet<>();
 
-    @Override
-    public boolean isMastered(Word word) {
-        return masteredWords.contains(word);
+    private DebugMasteredWordsRepository(Context context) throws IOException {
+        this.context = context;
+
+        masteredWordsFile = context.getFileStreamPath("unlockedWords.csv");
+        if (!masteredWordsFile.exists()) {
+            masteredWordsFile.createNewFile();
+        }
+
+        loadFromFile();
     }
 
     @Override
-    public void setMastered(Word word) {
-        masteredWords.add(word);
+    public boolean isMastered(int wordId) {
+        return masteredWordIds.contains(wordId);
     }
 
+    @Override
+    public void setMastered(int wordId) {
+        masteredWordIds.add(wordId);
+        writeToFile();
+    }
+
+    private void loadFromFile() throws IOException {
+        masteredWordIds.clear();
+
+        FileInputStream in = context.openFileInput("unlockedWords.csv");
+        InputStreamReader inputStreamReader = new InputStreamReader(in);
+        BufferedReader br = new BufferedReader(inputStreamReader);
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            // use comma as separator
+            String[] unlockedWordsArray = line.split(",");
+            for (String wordIdString : unlockedWordsArray) {
+                try {
+                    Integer wordId = Integer.parseInt(wordIdString);
+                    masteredWordIds.add(wordId);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        inputStreamReader.close();
+    }
+
+    private void writeToFile() {
+        try {
+            FileWriter fw = new FileWriter(masteredWordsFile.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            StringBuilder builder = new StringBuilder();
+            for (Integer masteredWordId : masteredWordIds) {
+                builder.append(masteredWordId + ",");
+            }
+
+            bw.write(builder.toString());
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

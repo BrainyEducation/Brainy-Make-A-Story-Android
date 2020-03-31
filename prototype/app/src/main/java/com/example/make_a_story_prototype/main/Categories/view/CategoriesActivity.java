@@ -11,12 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
+import com.example.make_a_story_prototype.main.data.Word.Category;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -86,11 +86,10 @@ public class CategoriesActivity extends BaseActivity implements CategoryItemRecy
 
     @Override
     public void selectCategoryCard(CategoryCardItemViewModel vm) {
-        CategoryCardItem item = vm.cardItem;
+        Category category = vm.category;
 
         Intent intent = new Intent(this, WordbankActivity.class);
-        intent.putExtra("category", item.getImageLabel());
-        Log.d("tag", "selectCategoryCard intent extra category: " + item.getImageLabel());
+        intent.putExtra("category", category.getId());
         this.startActivity(intent);
         
     }

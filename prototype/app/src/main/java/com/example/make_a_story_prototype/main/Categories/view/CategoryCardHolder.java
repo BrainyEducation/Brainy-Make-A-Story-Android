@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.data.Word.Category;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -65,9 +66,10 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
 
     public void setViewModel(CategoryCardItemViewModel vm) {
         this.vm = vm;
+        Category category = vm.category;
 
-        categoryImage.setImageResource(vm.cardItem.getImageResource());
-        categoryText.setText(vm.cardItem.getImageLabel());
+        categoryImage.setImageResource(category.getImageResource());
+        categoryText.setText(category.getName());
         categoryText.setTextColor(vm.contrastColor);
 
         Drawable imageBackground = parentLayout.getBackground();

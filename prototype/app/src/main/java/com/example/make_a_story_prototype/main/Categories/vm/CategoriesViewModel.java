@@ -1,10 +1,8 @@
 package com.example.make_a_story_prototype.main.Categories.vm;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
 import com.example.make_a_story_prototype.main.data.Word.Category;
 
@@ -35,7 +33,7 @@ public class CategoriesViewModel {
                 ContextCompat.getColor(context, R.color.colorContrastBlue),
         };
 
-        DebugWordRepository wordRepo = new DebugWordRepository();
+        DebugWordRepository wordRepo = DebugWordRepository.getInstance();
         List<Category> categories = wordRepo.getCategories();
 
         for (int i = 0; i < categories.size(); i++) {
@@ -43,7 +41,7 @@ public class CategoriesViewModel {
 
             cardList.add(
                     new CategoryCardItemViewModel(
-                            new CategoryCardItem(category.getAudioResource(), category.getImageResource(), category.getName()),
+                            category,
                             BackgroundColors[i % BackgroundColors.length],
                             DetailColors[i % DetailColors.length]
                     )

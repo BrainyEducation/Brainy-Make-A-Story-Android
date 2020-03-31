@@ -2,6 +2,8 @@ package com.example.make_a_story_prototype.main.Wordbank.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,8 +22,9 @@ import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
+import com.example.make_a_story_prototype.main.data.Word.Category;
+import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -30,19 +33,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import static com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity.BlankSelectionIntentKey;
 
 public class WordbankActivity extends BaseActivity implements WordbankItemRecyclerViewAdapter.WordbankAdapterHandler {
-    private String category;
+    private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
+
     private RecyclerView recyclerView;
     private WordbankItemRecyclerViewAdapter recyclerViewAdapter;
-    private RecyclerView.LayoutManager rvLayoutManager;
-    private WordbankViewModel viewModel;
+    private WordbankViewModel vm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        Log.d("tag", "onCreate: VMKEY: " + MY_VM_KEY);
 
-        category = getIntent().getStringExtra("category");
-        Log.d("tag", "onCreate -- category: " + category);
+        if (savedInstanceState == null) {
+            int categoryId = getIntent().getIntExtra("category", 0);
+            vm = new WordbankViewModel(categoryId);
+        } else {
+            vm = savedInstanceState.getParcelable(MY_VM_KEY);
+        }
+        // TODO: or crash
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -55,19 +64,23 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
         Util.addBackArrow(this);
 
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        title.setText(category);
-
-        viewModel = WordbankViewModel.instance(this);
-        viewModel.setCategory(category);
+        title.setText(vm.getCategory().getName());
 
         initRecyclerView();
 
-        viewModel.getCardListObservable().subscribe((list) -> {
-            recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, viewModel);
+        vm.getCardListObservable().subscribe((list) -> {
+            recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, vm);
             recyclerViewAdapter.handler = this;
 
             recyclerView.setAdapter(recyclerViewAdapter);
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+        outState.putParcelable(MY_VM_KEY, vm);
     }
 
     // storybook icon
@@ -110,8 +123,8 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
 
                 Intent intent = new Intent(this, StoryTemplateActivity.class);
                 intent.putExtra(BlankSelectionIntentKey, new StoryViewModel.BlankSelection(
-                        vm.cardItem.getImageLabel(),
-                        vm.cardItem.getImageResource()
+                        vm.word.getWord(),
+                        vm.word.getImageResource()
                 ));
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -130,10 +143,7 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
 
     private void startQuiz(WordCardItemViewModel vm) {
         Intent intent = new Intent(this, QuizActivity.class);
-        intent.putExtra("word", vm.cardItem.getImageLabel());
-        intent.putExtra("audio", vm.cardItem.getAudioResource());
-        intent.putExtra("image", vm.cardItem.getImageResource());
-        intent.putExtra("category", category);
+        intent.putExtra("word", vm.word.getId());
         this.startActivity(intent);
     }
 }

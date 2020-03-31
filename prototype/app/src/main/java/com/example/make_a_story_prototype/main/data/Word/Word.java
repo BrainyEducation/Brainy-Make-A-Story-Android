@@ -41,6 +41,14 @@ public class Word {
 
     public Category getCategory() { return category; }
 
+    public int getImageResource() {
+        return imageResource;
+    }
+
+    public int getAudioResource() {
+        return audioResource;
+    }
+
     public boolean isLocked() {
         return locked;
     }
