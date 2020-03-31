@@ -23,9 +23,6 @@ public interface BlankDao {
     @Delete
     void delete(Blank blank);
 
-    @Query("SELECT * FROM blanks_table WHERE identifier = :identifier")
-    List<Blank> findBlank(String identifier);
-
 //    @Query("SELECT * FROM blanks_table WHERE storyID = :storyID")
 //    List<Blank> getAllBlanksFromStory(String storyID);
 

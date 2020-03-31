@@ -21,7 +21,7 @@ public class Blank {
         this.contents = null;
     }
 
-    public String getIdentifier() {
+    public String getBlankId() {
         return blankId;
     }
 
@@ -34,10 +34,6 @@ public class Blank {
     }
 
     //public String getImageLocationID() { return imageLocationID; }
-
-    public void setIdentifier(String identifier) {
-        this.blankId = blankId;
-    }
 
     public void setContents(String contents) {
         this.contents = contents;

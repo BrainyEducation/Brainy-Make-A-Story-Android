@@ -16,7 +16,4 @@ public interface TextSegmentDao {
 
     @Query("SELECT * FROM text_segments_table")
     List<TextSegment> getAllTextSegments();
-
-    @Query("SELECT * FROM text_segments_table WHERE storyName=:story AND pageNumber=:page")
-    List<TextSegment> getAllTextSegmentsForPage(String story, int page);
 }
