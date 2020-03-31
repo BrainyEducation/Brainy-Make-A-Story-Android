@@ -11,11 +11,13 @@ public class TextSegment {
     private String text;
     private int storyId;
     private int pageNumber;
+    private int audioResource;
 
-    public TextSegment(int storyId, int pageNumber, String text) {
+    public TextSegment(int storyId, int pageNumber, String text, int audioResource) {
         this.storyId = storyId;
         this.pageNumber = pageNumber;
         this.text = text;
+        this.audioResource = audioResource;
     }
 
     public void setId(int id) {
@@ -38,5 +40,8 @@ public class TextSegment {
         return text;
     }
 
+    public int getAudioResource() {
+        return audioResource;
+    }
 }
 

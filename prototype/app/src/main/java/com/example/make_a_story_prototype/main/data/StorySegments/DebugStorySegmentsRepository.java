@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.data.StorySegments;
 
+import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryBlank;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class DebugStorySegmentsRepository implements StorySegmentsRepository {
 
     private TextSegment[] textSegments = {
             // page 1
-            new TextSegment(1, 1,"One Saturday evening "),
+            new TextSegment(1, 1,"One Saturday evening ",
             new TextSegment(1, 1," and "),
             new TextSegment(1, 1," made a tent to camp out in the back "
                     + "yard.  They griped and whined and complained to each other about a school "
