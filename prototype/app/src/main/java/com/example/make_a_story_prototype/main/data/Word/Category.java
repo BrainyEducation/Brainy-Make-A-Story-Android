@@ -3,7 +3,7 @@ package com.example.make_a_story_prototype.main.data.Word;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "words_table")
+@Entity(tableName = "categories_table")
 public class Category {
 
     @PrimaryKey(autoGenerate = true)

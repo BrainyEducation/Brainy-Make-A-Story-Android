@@ -12,6 +12,8 @@ import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
 
+import io.reactivex.Single;
+
 public class DebugMasteredWordsRepository implements MasteredWordsRepository {
 
     private static DebugMasteredWordsRepository instance;
@@ -44,7 +46,7 @@ public class DebugMasteredWordsRepository implements MasteredWordsRepository {
     }
 
     @Override
-    public boolean isMastered(int wordId) {
+    public Boolean isMastered(int wordId) {
         return masteredWordIds.contains(wordId);
     }
 

@@ -6,7 +6,7 @@ import io.reactivex.Single;
 
 public interface MasteredWordsRepository {
 
-    boolean isMastered(int wordId);
+    Boolean isMastered(int wordId);
 
     void setMastered(int wordId);
 

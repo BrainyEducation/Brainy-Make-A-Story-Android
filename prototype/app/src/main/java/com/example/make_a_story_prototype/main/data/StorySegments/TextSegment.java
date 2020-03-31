@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.data;
+package com.example.make_a_story_prototype.main.data.StorySegments;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -6,14 +6,14 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "text_segments_table")
 public class TextSegment {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     private int id;
     private String text;
-    private String storyName;
+    private int storyId;
     private int pageNumber;
 
-    public TextSegment(String storyName, int pageNumber, String text) {
-        this.storyName = storyName;
+    public TextSegment(int storyId, int pageNumber, String text) {
+        this.storyId = storyId;
         this.pageNumber = pageNumber;
         this.text = text;
     }
@@ -26,8 +26,8 @@ public class TextSegment {
         return id;
     }
 
-    public String getStoryName() {
-        return storyName;
+    public int getStoryId() {
+        return storyId;
     }
 
     public int getPageNumber() {

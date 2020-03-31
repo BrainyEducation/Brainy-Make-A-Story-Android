@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.data;
+package com.example.make_a_story_prototype.main.data.StorySegments;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -8,21 +8,21 @@ import androidx.room.PrimaryKey;
 public class Blank {
     @PrimaryKey
     @NonNull
-    private String identifier;
+    private String blankId;
     private String contents;
     //private String imageLocationID;
     // boolean for word or character blank
     private boolean word;
 
-    public Blank(String identifier, boolean word) {
-        this.identifier = identifier;
+    public Blank(String blankId, boolean word) {
+        this.blankId = blankId;
         this.word = word;
         //this.imageLocationID = imageLocationID;
         this.contents = null;
     }
 
     public String getIdentifier() {
-        return identifier;
+        return blankId;
     }
 
     public String getContents() {
@@ -36,7 +36,7 @@ public class Blank {
     //public String getImageLocationID() { return imageLocationID; }
 
     public void setIdentifier(String identifier) {
-        this.identifier = identifier;
+        this.blankId = blankId;
     }
 
     public void setContents(String contents) {

@@ -1,12 +1,12 @@
 package com.example.make_a_story_prototype.main.data;
 
+import com.example.make_a_story_prototype.main.data.StorySegments.TextSegment;
+
 import java.util.List;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 @Dao
 public interface TextSegmentDao {
