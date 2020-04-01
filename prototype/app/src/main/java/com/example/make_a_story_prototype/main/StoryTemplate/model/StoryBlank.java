@@ -1,6 +1,6 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.model;
 
-public class StoryBlank {
+class StoryBlank {
     class ImageLocation {
         float x;
         float y;
@@ -9,14 +9,14 @@ public class StoryBlank {
         float rotation;
     }
 
-    String identifier;
-    ImageLocation imageLocation;
+    private final String identifier;
+    private final ImageLocation imageLocation;
 
     public StoryBlank(String identifier) {
         this(identifier, null);
     }
 
-    public StoryBlank(String identifier, ImageLocation imageLocation) {
+    private StoryBlank(String identifier, ImageLocation imageLocation) {
         this.identifier = identifier;
         this.imageLocation = imageLocation;
     }

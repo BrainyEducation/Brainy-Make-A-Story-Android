@@ -19,8 +19,8 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
         void selectWordCard(WordCardItemViewModel vm);
     }
 
-    private Context context;
-    private WordbankViewModel vm;
+    private final Context context;
+    private final WordbankViewModel vm;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
 
     public WordbankAdapterHandler handler;

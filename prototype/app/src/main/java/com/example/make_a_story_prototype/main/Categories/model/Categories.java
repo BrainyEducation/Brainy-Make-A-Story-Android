@@ -3,7 +3,7 @@ package com.example.make_a_story_prototype.main.Categories.model;
 import com.example.make_a_story_prototype.R;
 
 public class Categories {
-    private String[] categories = {
+    private final String[] categories = {
             "Animals",
             "Birds",
             "Body Parts",
@@ -23,7 +23,7 @@ public class Categories {
             "Water Animals"
     };
 
-    private Integer[] categoryImages = {
+    private final Integer[] categoryImages = {
             R.drawable.animals_dogs,
             R.drawable.birds_bird,
             R.drawable.bodyparts_face,
@@ -44,7 +44,7 @@ public class Categories {
     };
 
     // TODO: add verb category name audio
-    private Integer[] categoryAudio = {
+    private final Integer[] categoryAudio = {
             R.raw.animals,
             R.raw.birds,
             R.raw.bodyparts,

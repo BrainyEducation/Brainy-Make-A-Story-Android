@@ -1,9 +1,9 @@
 package com.example.make_a_story_prototype.main.Wordbank.model;
 
 public class WordCardItem {
-    private int imageResource;
-    private String imageLabel;
-    private int audioResource;
+    private final int imageResource;
+    private final String imageLabel;
+    private final int audioResource;
 
     public WordCardItem(int imageResource, String imageLabel, int audioResource) {
         this.imageResource = imageResource;

@@ -18,17 +18,14 @@ public class QuizViewModel {
 
     public Callback callback;
 
-    private BehaviorSubject<String[]> options = BehaviorSubject.create();
-    private BehaviorSubject<Integer> correctAnswersCount = BehaviorSubject.createDefault(0);
-    private BehaviorSubject<Integer> maxCorrectAnswersCount = BehaviorSubject.createDefault(0);
+    private final BehaviorSubject<String[]> options = BehaviorSubject.create();
+    private final BehaviorSubject<Integer> correctAnswersCount = BehaviorSubject.createDefault(0);
+    private final BehaviorSubject<Integer> maxCorrectAnswersCount = BehaviorSubject.createDefault(0);
 
     private int correctOptionIndex;
 
-    private String wordBeingQuizzed;
-
     public QuizViewModel(String quizword, String[] wordList) {
 
-        wordBeingQuizzed = quizword;
         QuizOptions.setCorrectOption(quizword);
         QuizOptions.setWordList(wordList);
         shuffle();

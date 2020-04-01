@@ -36,14 +36,10 @@ public class StorySelectionActivity extends AppCompatActivity {
 
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-            }
-        });
+        toolbar.setNavigationOnClickListener(
+                v -> startActivity(new Intent(getApplicationContext(), HomeActivity.class)));
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        TextView title = toolbar.findViewById(R.id.toolbar_title);
         title.setText("Story Templates");
 
     }

@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +26,12 @@ import io.reactivex.subjects.BehaviorSubject;
 
 public class WordbankViewModel {
 
-    private static List<String> unlockedWords = new ArrayList<String>() {{}};
+    private static final List<String> unlockedWords = new ArrayList<String>() {{}};
 
     private String category;
 
-    private Resources resources;
-    private String packageName;
+    private final Resources resources;
+    private final String packageName;
     private File unlockedWordsFile;
 
     private static WordbankViewModel _instance;
@@ -47,10 +48,10 @@ public class WordbankViewModel {
         return _instance;
     }
 
-    private Map<String, Integer> colors = new HashMap<>();
-    private List<WordCardItemViewModel> cardList = new ArrayList<>();
+    private final Map<String, Integer> colors = new HashMap<>();
+    private final List<WordCardItemViewModel> cardList = new ArrayList<>();
 
-    public BehaviorSubject<List<WordCardItemViewModel>> _cardList = BehaviorSubject.createDefault(cardList);
+    private final BehaviorSubject<List<WordCardItemViewModel>> _cardList = BehaviorSubject.createDefault(cardList);
 
     private WordbankViewModel(Context context) {
         colors.put("locked background", ContextCompat.getColor(context, R.color.colorLockedBackground));
@@ -72,9 +73,7 @@ public class WordbankViewModel {
 
                     // use comma as separator
                     String[] unlockedWordsArray = line.split(",");
-                    for (String word: unlockedWordsArray) {
-                        unlockedWords.add(word);
-                    }
+                    unlockedWords.addAll(Arrays.asList(unlockedWordsArray));
 
                     if(unlockedWords.size() == 0) {
                         unlockedWords.add("apple");
@@ -88,7 +87,7 @@ public class WordbankViewModel {
         } else {
             try {
                 String content = "apple";
-                String filePath = context.getFilesDir().getPath().toString() + "/unlockedWords.csv";
+                String filePath = context.getFilesDir().getPath() + "/unlockedWords.csv";
                 unlockedWordsFile = new File( filePath);
                 if (!unlockedWordsFile.exists()) {
                     unlockedWordsFile.createNewFile();

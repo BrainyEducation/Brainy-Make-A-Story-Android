@@ -3,7 +3,7 @@ package com.example.make_a_story_prototype.main.Characters.model;
 import com.example.make_a_story_prototype.R;
 
 public class Characters {
-    private String[] characterNames = {
+    private final String[] characterNames = {
             "Ali",
             "Han",
             "Dev",
@@ -28,7 +28,7 @@ public class Characters {
             "Joy"
     };
 
-    private Integer[] characterImages = {
+    private final Integer[] characterImages = {
             R.drawable.ic_kids_01,
             R.drawable.ic_kids_02,
             R.drawable.ic_kids_03,

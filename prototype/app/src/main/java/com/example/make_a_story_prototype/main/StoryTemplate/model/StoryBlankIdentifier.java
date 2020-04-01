@@ -1,7 +1,7 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.model;
 
 public class StoryBlankIdentifier implements StorySegment {
-    private String identifier;
+    private final String identifier;
 
     public String get() {
         return identifier;

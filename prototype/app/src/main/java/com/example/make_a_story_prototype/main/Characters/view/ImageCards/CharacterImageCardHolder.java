@@ -22,10 +22,10 @@ public class CharacterImageCardHolder extends RecyclerView.ViewHolder {
 
     public CharacterImageCallback callback;
 
-    private ImageView characterImage;
-    private RelativeLayout parentLayout;
+    private final ImageView characterImage;
+    private final RelativeLayout parentLayout;
     private ImageCardViewModel vm;
-    private LinearLayout shadow;
+    private final LinearLayout shadow;
 
 
     public CharacterImageCardHolder(@NonNull View itemView) {

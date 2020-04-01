@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Words {
-    private List<String> words = new ArrayList<>();
+    private final List<String> words = new ArrayList<>();
 
-    private List<Integer> wordImages = new ArrayList<>();
+    private final List<Integer> wordImages = new ArrayList<>();
 
-    private List<Integer> wordsAudio = new ArrayList<>();
+    private final List<Integer> wordsAudio = new ArrayList<>();
 
     public List<String> getWords() {
         return words;

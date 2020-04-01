@@ -11,8 +11,8 @@ import java.util.Map;
 public class StoryViewModel {
 
     public static class BlankSelection implements Parcelable {
-        private String text;
-        private int imageResource;
+        private final String text;
+        private final int imageResource;
 
         public BlankSelection(String text, int imageResource) {
             this.text = text;
@@ -27,7 +27,7 @@ public class StoryViewModel {
             return imageResource;
         }
 
-        protected BlankSelection(Parcel in) {
+        BlankSelection(Parcel in) {
             text = in.readString();
             imageResource = in.readInt();
         }
@@ -56,7 +56,7 @@ public class StoryViewModel {
         }
     }
 
-    private Story story;
+    private final Story story;
     private Map<String, BlankSelection> selections;
 
     public Story getStory() {
@@ -78,7 +78,7 @@ public class StoryViewModel {
     }
 
     public void clearSelections() {
-        selections = new HashMap<String, BlankSelection>();
+        selections = new HashMap<>();
     }
 
 }

@@ -18,12 +18,12 @@ public class CharacterScreenViewModel {
     //region Types
 
     public class NameCardViewModel {
-        public String name;
+        public final String name;
 
-        public int contrastColor;
-        public int backgroundColor;
+        public final int contrastColor;
+        public final int backgroundColor;
 
-        public NameCardViewModel(String name, int contrastColor, int backgroundColor) {
+        NameCardViewModel(String name, int contrastColor, int backgroundColor) {
             this.name = name;
             this.contrastColor = contrastColor;
             this.backgroundColor = backgroundColor;
@@ -31,12 +31,12 @@ public class CharacterScreenViewModel {
     }
 
     public class ImageCardViewModel {
-        public int image;
+        public final int image;
 
-        public int contrastColor;
-        public int backgroundColor;
+        public final int contrastColor;
+        public final int backgroundColor;
 
-        public ImageCardViewModel(int image, int contrastColor, int backgroundColor) {
+        ImageCardViewModel(int image, int contrastColor, int backgroundColor) {
             this.image = image;
             this.contrastColor = contrastColor;
             this.backgroundColor = backgroundColor;
@@ -44,17 +44,18 @@ public class CharacterScreenViewModel {
     }
 
     public class CharacterViewModel {
-        public String name;
-        public int image;
+        public final String name;
+        public final int image;
 
-        public int nameContrastColor;
-        public int nameBackgroundColor;
+        public final int nameContrastColor;
+        public final int nameBackgroundColor;
 
 
-        public int imageContrastColor;
-        public int imageBackgroundColor;
+        public final int imageContrastColor;
+        public final int imageBackgroundColor;
 
-        public CharacterViewModel(String name, int image, int nameContrastColor, int nameBackgroundColor, int imageContrastColor, int imageBackgroundColor) {
+        CharacterViewModel(String name, int image, int nameContrastColor, int nameBackgroundColor,
+                int imageContrastColor, int imageBackgroundColor) {
             this.name = name;
             this.image = image;
 
@@ -68,11 +69,11 @@ public class CharacterScreenViewModel {
     //endregion
     //region Private Properties
 
-    private BehaviorSubject<List<NameCardViewModel>> _characterNames;
-    private BehaviorSubject<List<ImageCardViewModel>> _characterImages;
-    private BehaviorSubject<NameCardViewModel> _selectedCharacterName;
-    private BehaviorSubject<ImageCardViewModel> _selectedCharacterImage;
-    private BehaviorSubject<Optional<CharacterViewModel>> _selectedCharacter;
+    private final BehaviorSubject<List<NameCardViewModel>> _characterNames;
+    private final BehaviorSubject<List<ImageCardViewModel>> _characterImages;
+    private final BehaviorSubject<NameCardViewModel> _selectedCharacterName;
+    private final BehaviorSubject<ImageCardViewModel> _selectedCharacterImage;
+    private final BehaviorSubject<Optional<CharacterViewModel>> _selectedCharacter;
 
     //endregion
     //region Public Properties

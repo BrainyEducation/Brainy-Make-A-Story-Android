@@ -18,9 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CharacterGuideActivity extends AppCompatActivity {
 
-    String messageType = "";
-    String source;
-    String category;
+    private String source;
+    private String category;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -38,8 +37,8 @@ public class CharacterGuideActivity extends AppCompatActivity {
 
         Random rand = new Random();
 
-        TextView charTextMessage = (TextView) findViewById(R.id.charTextMsg);
-        messageType = getIntent().getStringExtra("msgType");
+        TextView charTextMessage = findViewById(R.id.charTextMsg);
+        String messageType = getIntent().getStringExtra("msgType");
         if (Objects.equals(messageType, "goodJob")) {
             charTextMessage.setText(goodJobMsg[rand.nextInt(goodJobMsg.length + 1)]);
             Log.d("debug", "set text to good job");

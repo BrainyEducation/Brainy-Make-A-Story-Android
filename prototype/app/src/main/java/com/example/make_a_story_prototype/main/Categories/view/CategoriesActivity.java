@@ -24,8 +24,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoriesActivity extends AppCompatActivity implements CategoryItemRecyclerViewAdapter.CategoryAdapterHandler {
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
     private CategoriesViewModel viewModel;
     private String source;
@@ -47,7 +45,7 @@ public class CategoriesActivity extends AppCompatActivity implements CategoryIte
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        TextView title = toolbar.findViewById(R.id.toolbar_title);
         title.setText("Categories");
 
         viewModel = new CategoriesViewModel(this);
@@ -77,9 +75,10 @@ public class CategoriesActivity extends AppCompatActivity implements CategoryIte
     }
 
     private void initRecyclerView() {
-        recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerViewAdapter = new CategoryItemRecyclerViewAdapter(this, viewModel);
+        RecyclerView.Adapter recyclerViewAdapter =
+                new CategoryItemRecyclerViewAdapter(this, viewModel);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
@@ -91,7 +90,7 @@ public class CategoriesActivity extends AppCompatActivity implements CategoryIte
         CategoryCardItem item = vm.cardItem;
 
         Intent intent = new Intent(this, WordbankActivity.class);
-        intent.putExtra("category", item.getImageLabel());
+        intent.putExtra("category", item.getImageLabel().replaceAll(" ", ""));
         Log.d("tag", "selectCategoryCard intent extra category: " + item.getImageLabel());
         intent.putExtra("source", source);
         this.startActivity(intent);

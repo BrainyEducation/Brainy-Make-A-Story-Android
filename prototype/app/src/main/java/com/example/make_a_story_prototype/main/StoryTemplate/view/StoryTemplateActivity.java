@@ -1,7 +1,7 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -38,26 +38,19 @@ import androidx.appcompat.widget.Toolbar;
 
 public class StoryTemplateActivity extends AppCompatActivity implements ObservableScrollView.ScrollViewListener {
 
-    public static String BlankSelectionIntentKey = "BlankSelection";
-    private static String BLANK_PLACEHOLDER = " BLANK ";
-    private static StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
+    public static final String BlankSelectionIntentKey = "BlankSelection";
+    private static final StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
     private static String currentIdentifier;
     private static int word1Resource = 0;
     private static int word2Resource = 0;
     private static int index = 0;
 
-    private StoryViewModel vm = StoryTemplateActivity.sVm;
+    private final StoryViewModel vm = StoryTemplateActivity.sVm;
 
-    private ImageView storyImageView;
     private TextView storyTextView;
-    private ObservableScrollView scrollView = null;
-    private FrameLayout fl;
     private ImageView image1;
     private ImageView image2;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
-    private int quizAudioFile;
-
-    private String source = "template";
 
     private ProgressBar progressBar;
 
@@ -75,17 +68,17 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         Util.addBackArrow(this);
 
         Toolbar controlsbar = findViewById(R.id.controls_bar);
-        storyImageView = findViewById(R.id.story_image);
+        ImageView storyImageView = findViewById(R.id.story_image);
         storyTextView = findViewById(R.id.story_text);
         progressBar = findViewById(R.id.progress_bar);
         image1 = findViewById(R.id.word_image1);
         image2 = findViewById(R.id.word_image2);
-        fl = findViewById(R.id.image_layout);
+        FrameLayout fl = findViewById(R.id.image_layout);
 
-        scrollView = findViewById(R.id.story_scroll);
+        ObservableScrollView scrollView = findViewById(R.id.story_scroll);
         scrollView.setScrollViewListener(this);
 
-        quizAudioFile =  R.raw.story_full_space_alien;
+        int quizAudioFile = R.raw.story_full_space_alien;
         mediaPlayer = android.media.MediaPlayer.create(this, quizAudioFile);
         //mediaPlayer.start();
 
@@ -132,31 +125,27 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         }
     }
 
-    public void showSaveDialog() {
+    private void showSaveDialog() {
         View saveDialog = findViewById(R.id.popup_dialog);
         saveDialog.setVisibility(View.VISIBLE);
         Button saveButton = findViewById(R.id.save_button);
         Button noSaveButton = findViewById(R.id.no_save_button);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+        saveButton.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
+            finish();
         });
 
-        noSaveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Not Saving", Toast.LENGTH_SHORT).show();
-                vm.clearSelections();
-                index = 0;
-                finish();
-            }
+        noSaveButton.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(),"Not Saving", Toast.LENGTH_SHORT).show();
+            vm.clearSelections();
+            index = 0;
+            finish();
         });
     }
 
 
-    public void updateTextView(int pageNum) {
+    private void updateTextView(int pageNum) {
         StoryPage currentPage = vm.getStory().getPages().get(pageNum);
         List<StorySegment> segments = currentPage.getSegments();
 
@@ -171,16 +160,18 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
                 StoryViewModel.BlankSelection selection = vm.getSelections().get(identifier.get());
 
                 if (selection == null) {
-                    builder.append(
-                            BLANK_PLACEHOLDER,
-                            new ClickableSpan() {
-                                @Override
-                                public void onClick(@NonNull View v) {
-                                    onSelectedBlank(identifier.get());
-                                }
-                            },
-                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                    );
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        String BLANK_PLACEHOLDER = " BLANK ";
+                        builder.append(BLANK_PLACEHOLDER,
+                                new ClickableSpan() {
+                                    @Override
+                                    public void onClick(@NonNull View v) {
+                                        onSelectedBlank(identifier.get());
+                                    }
+                                },
+                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                        );
+                    }
                 } else {
                     builder.append(selection.getText());
                 }
@@ -191,7 +182,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         storyTextView.setText(builder);
     }
 
-    public void updateImageView(int resource) {
+    private void updateImageView(int resource) {
 //        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
 //                FrameLayout.LayoutParams.WRAP_CONTENT,
 //                FrameLayout.LayoutParams.WRAP_CONTENT);
@@ -243,6 +234,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
 
         currentIdentifier = blankIdentifier;
         Intent intent = new Intent(this,   CategoriesActivity.class);
+        String source = "template";
         intent.putExtra("source", source);
         StoryTemplateActivity.this.startActivity(intent);
     }

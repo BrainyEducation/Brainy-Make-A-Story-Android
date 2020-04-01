@@ -53,7 +53,7 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        TextView title = toolbar.findViewById(R.id.toolbar_title);
         title.setText(category);
 
         viewModel = WordbankViewModel.instance(this);
@@ -110,7 +110,7 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        } else if (vm.isUnlocked && source == null) {
+        } else if (vm.isUnlocked) {
             Log.d("tag", "tapped unlocked word card from home");
             Toast.makeText(this,"Let's review what you've learned!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, QuizActivity.class);

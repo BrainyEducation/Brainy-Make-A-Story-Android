@@ -34,18 +34,11 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
     private QuizViewModel vm;
 
-    private View rootView;
     private ImageView[] stars;
-    private Button buttonOption1;
-    private Button buttonOption2;
-    private Button buttonOption3;
-    private Button buttonOption4;
-    private ImageView quizImage;
     private QuizWordViewModel quizWordVM;
-    private List<Button> buttons = new ArrayList<>();
+    private final List<Button> buttons = new ArrayList<>();
     private String source;
     private String category;
-    private int quizAudioFile;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
 
     @Override
@@ -56,12 +49,12 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         //define values passed from word bank in WordBankActivity.java under selectWordCard method
         String wordBeingQuizzed = intent.getStringExtra("word");
         int quizImageFile = intent.getIntExtra("image",0);
-        quizAudioFile = intent.getIntExtra("audio",0);
+        int quizAudioFile = intent.getIntExtra("audio", 0);
         source = getIntent().getStringExtra("source");
         category = getIntent().getStringExtra("category");
 
         View view = findViewById(R.id.constraint_layout);
-        rootView = view.getRootView();
+        View rootView = view.getRootView();
 
         rootView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
 
@@ -75,19 +68,16 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         title.setText("Learn");
 
         //display quiz word image
-        quizImage = view.findViewById(R.id.quizImage);
+        ImageView quizImage = view.findViewById(R.id.quizImage);
         quizImage.setImageResource(quizImageFile);
 
         //set up MediaPlayer
         ImageView speaker = view.findViewById(R.id.speakerIcon);
         Context quizContext = this;
-        speaker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mediaPlayer.isPlaying()) {
+        speaker.setOnClickListener(v -> {
+            if (!mediaPlayer.isPlaying()) {
 //                    mediaPlayer = android.media.MediaPlayer.create(quizContext, quizAudioFile);
-                    mediaPlayer.start();
-                }
+                mediaPlayer.start();
             }
         });
 
@@ -101,10 +91,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
                 findViewById(R.id.star3)
         };
 
-        buttonOption1 = findViewById(R.id.option1);
-        buttonOption2 = findViewById(R.id.option2);
-        buttonOption3 = findViewById(R.id.option3);
-        buttonOption4 = findViewById(R.id.option4);
+        Button buttonOption1 = findViewById(R.id.option1);
+        Button buttonOption2 = findViewById(R.id.option2);
+        Button buttonOption3 = findViewById(R.id.option3);
+        Button buttonOption4 = findViewById(R.id.option4);
 
         // button listener
         buttonOption1.setOnClickListener(clickListenerForOption(0));
@@ -151,11 +141,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
         Observable.combineLatest(
                 vm.getCorrectAnswerCount(),
-                vm.getMaxAnswerCount(),
-                (current, max) -> new Pair<>(current, max))
-                .subscribe(value -> {
-                    updateStars(value.first, value.second);
-                });
+                vm.getMaxAnswerCount(), Pair::new)
+                .subscribe(value -> updateStars(value.first, value.second));
 
         vm.getCorrectAnswerCount().subscribe();
 
@@ -206,7 +193,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         intent.putExtra("source", source);
         intent.putExtra("category", category);
         QuizActivity.this.startActivity(intent);
-
 
     }
 }

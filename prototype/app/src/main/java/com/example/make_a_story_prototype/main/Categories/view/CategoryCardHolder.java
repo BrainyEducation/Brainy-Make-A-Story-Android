@@ -14,6 +14,8 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
 
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,12 +27,10 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         void confirmSelection(CategoryCardItemViewModel vm);
     }
 
-    private ImageView categoryImage;
-    private TextView categoryText;
-    private RelativeLayout parentLayout;
+    private final ImageView categoryImage;
+    private final TextView categoryText;
+    private final RelativeLayout parentLayout;
     private CategoryCardItemViewModel vm;
-    private Button confirmButton;
-    private Button cancelButton;
 
     public CategoryCardCallback callback;
 
@@ -39,8 +39,8 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         this.categoryImage = itemView.findViewById(R.id.cardImage);
         this.categoryText = itemView.findViewById(R.id.cardText);
         this.parentLayout = itemView.findViewById(R.id.parent_layout);
-        this.confirmButton = itemView.findViewById(R.id.confirmButton);
-        this.cancelButton = itemView.findViewById(R.id.cancelButton);
+        Button confirmButton = itemView.findViewById(R.id.confirmButton);
+        Button cancelButton = itemView.findViewById(R.id.cancelButton);
 
         parentLayout.setOnClickListener(v -> {
             if (callback != null && vm != null) {
@@ -59,7 +59,7 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
                 return;
             }
 
-            callback.hideConfirmationButtons(vm);
+            Objects.requireNonNull(callback).hideConfirmationButtons(vm);
         });
     }
 

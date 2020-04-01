@@ -6,14 +6,7 @@ import java.util.Random;
 
 public class QuizOptions {
     private static String correctOption = "apple";
-    private static String incorrectOptions[] = {
-            "able",
-            "ape",
-            "addle",
-            "ate",
-            "apply",
-            "add"
-    };
+    private static String[] incorrectOptions = {"able", "ape", "addle", "ate", "apply", "add"};
 
 
 
@@ -30,7 +23,7 @@ public class QuizOptions {
     }
 
     public static void setWordList(String[] wordList) {
-        List<String> possibleIncorrects = new ArrayList<String>();
+        List<String> possibleIncorrects = new ArrayList<>();
 
         for (String word: wordList) {
             if(!word.equals(correctOption) && word.charAt(0) == correctOption.charAt(0)) {

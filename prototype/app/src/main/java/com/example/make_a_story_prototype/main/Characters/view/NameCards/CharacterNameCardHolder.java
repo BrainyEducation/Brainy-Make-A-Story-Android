@@ -23,8 +23,8 @@ public class CharacterNameCardHolder extends RecyclerView.ViewHolder {
 
     public CharacterNameCallback callback;
 
-    private TextView characterName;
-    private RelativeLayout parentLayout;
+    private final TextView characterName;
+    private final RelativeLayout parentLayout;
     private NameCardViewModel vm;
 
     public CharacterNameCardHolder(@NonNull View itemView) {

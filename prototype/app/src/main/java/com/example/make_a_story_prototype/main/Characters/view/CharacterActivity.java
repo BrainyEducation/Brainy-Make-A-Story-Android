@@ -28,10 +28,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CharacterActivity extends AppCompatActivity {
-    private RecyclerView nameRecyclerView;
-    private RecyclerView imageRecyclerView;
-    private RecyclerView.Adapter namesRecyclerViewAdapter;
-    private RecyclerView.Adapter imagesRecyclerViewAdapter;
     private CharacterScreenViewModel viewModel;
 
     private View confirmationDialog;
@@ -53,7 +49,7 @@ public class CharacterActivity extends AppCompatActivity {
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        TextView title = toolbar.findViewById(R.id.toolbar_title);
         title.setText("Friends");
 
         viewModel = new CharacterScreenViewModel(this, new Characters());
@@ -63,12 +59,8 @@ public class CharacterActivity extends AppCompatActivity {
         blurredBackground = findViewById(R.id.blur);
 
         confirmationDialog = findViewById(R.id.confirmation_dialog);
-        findViewById(R.id.confirm_button).setOnClickListener(button -> {
-            viewModel.confirmCharacter();
-        });
-        findViewById(R.id.cancel_button).setOnClickListener(button -> {
-            viewModel.cancelConfirmingCharacter();
-        });
+        findViewById(R.id.confirm_button).setOnClickListener(button -> viewModel.confirmCharacter());
+        findViewById(R.id.cancel_button).setOnClickListener(button -> viewModel.cancelConfirmingCharacter());
 
         // TODO: setup onclicks and such for confirmation dialog
         viewModel.selectedCharacter().subscribe(wrappedCharacter -> {
@@ -137,17 +129,19 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     private void initNameRecyclerView() {
-        nameRecyclerView = findViewById(R.id.character_name_recycler_view);
+        RecyclerView nameRecyclerView = findViewById(R.id.character_name_recycler_view);
         nameRecyclerView.setHasFixedSize(true);
-        namesRecyclerViewAdapter = new CharacterNamesRecyclerViewAdapter(viewModel);
+        RecyclerView.Adapter namesRecyclerViewAdapter =
+                new CharacterNamesRecyclerViewAdapter(viewModel);
         nameRecyclerView.setAdapter(namesRecyclerViewAdapter);
         nameRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
     }
 
     private void initImageRecyclerView() {
-        imageRecyclerView = findViewById(R.id.character_image_recycler_view);
+        RecyclerView imageRecyclerView = findViewById(R.id.character_image_recycler_view);
         imageRecyclerView.setHasFixedSize(true);
-        imagesRecyclerViewAdapter = new CharacterImagesRecyclerViewAdapter(viewModel);
+        RecyclerView.Adapter imagesRecyclerViewAdapter =
+                new CharacterImagesRecyclerViewAdapter(viewModel);
         imageRecyclerView.setAdapter(imagesRecyclerViewAdapter);
         imageRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
     }

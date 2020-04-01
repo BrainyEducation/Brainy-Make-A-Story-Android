@@ -1,9 +1,9 @@
 package com.example.make_a_story_prototype.main.Categories.model;
 
 public class CategoryCardItem {
-    private int imageResource;
-    private int imageAudio;
-    private String imageLabel;
+    private final int imageResource;
+    private final int imageAudio;
+    private final String imageLabel;
 
     public CategoryCardItem(int imageAudio, int imageResource, String imageLabel) {
         this.imageAudio = imageAudio;

@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CharacterImagesRecyclerViewAdapter extends RecyclerView.Adapter<CharacterImageCardHolder> implements CharacterImageCardHolder.CharacterImageCallback {
-    private CharacterScreenViewModel vm;
+    private final CharacterScreenViewModel vm;
     private List<ImageCardViewModel> cardVms;
 
     public CharacterImagesRecyclerViewAdapter(CharacterScreenViewModel vm) {
