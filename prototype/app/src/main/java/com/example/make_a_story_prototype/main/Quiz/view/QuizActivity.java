@@ -85,7 +85,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
             @Override
             public void onClick(View v) {
                 if (!mediaPlayer.isPlaying()) {
-//                    mediaPlayer = android.media.MediaPlayer.create(quizContext, quizAudioFile);
                     mediaPlayer.start();
                 }
             }

@@ -7,4 +7,8 @@ public class NavigationController {
 
     public NavigationContext context;
 
+    public NavigationContext getContext() {
+        return context;
+    }
+
 }

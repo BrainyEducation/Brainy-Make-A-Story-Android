@@ -6,6 +6,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,7 +21,9 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.Home.vm.StoryContext;
 import com.example.make_a_story_prototype.main.Media.AudioPlayer;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
 import com.example.make_a_story_prototype.main.data.Story.test_data.Data_TheSpaceAlien;
@@ -36,41 +39,37 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class StoryTemplateActivity extends AppCompatActivity implements ObservableScrollView.ScrollViewListener {
+public class StoryTemplateActivity extends BaseActivity implements ObservableScrollView.ScrollViewListener {
 
+    private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
     public static String BlankSelectionIntentKey = "BlankSelection";
     private static String BLANK_PLACEHOLDER = " BLANK ";
-    private static StoryViewModel sVm = new StoryViewModel(Data_TheSpaceAlien.sampleStory());
+    private static StoryViewModel sVm;
     private static String currentIdentifier;
     private static int word1Resource = 0;
     private static int word2Resource = 0;
     private static int index = 0;
-    private int storyId;
 
-    private StoryViewModel vm = StoryTemplateActivity.sVm;
-    private DebugStoryRepository storyRepo;
+    private StoryViewModel vm;
 
     private ImageView storyImageView;
     private TextView storyTextView;
     private ObservableScrollView scrollView = null;
     private ImageView image1;
     private ImageView image2;
-    private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
-    private int quizAudioFile;
-
-    private String source = "template";
-
     private ProgressBar progressBar;
+
+    private int quizAudioFile;
+    private int storyId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_template);
 
-        storyId = getIntent().getIntExtra("story", 0);
-        storyRepo = DebugStoryRepository.getInstance();
-
-        View view = findViewById(R.id.constraint_layout);
+        storyId = ((StoryContext) getNavigationContext()).getStoryId();
+        sVm = new StoryViewModel(storyId);
+        vm =  StoryTemplateActivity.sVm;
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,20 +77,17 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        Toolbar controlsbar = findViewById(R.id.controls_bar);
         storyImageView = findViewById(R.id.story_image);
         storyTextView = findViewById(R.id.story_text);
         progressBar = findViewById(R.id.progress_bar);
         image1 = findViewById(R.id.word_image1);
         image2 = findViewById(R.id.word_image2);
-        FrameLayout fl = findViewById(R.id.image_layout);
 
         scrollView = findViewById(R.id.story_scroll);
         scrollView.setScrollViewListener(this);
 
         quizAudioFile =  R.raw.story_full_space_alien;
         mediaPlayer = android.media.MediaPlayer.create(this, quizAudioFile);
-        //mediaPlayer.start();
 
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
@@ -142,20 +138,19 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         Button saveButton = findViewById(R.id.save_button);
         Button noSaveButton = findViewById(R.id.no_save_button);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+        saveButton.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
+
+            finish();
         });
 
-        noSaveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Not Saving", Toast.LENGTH_SHORT).show();
-                vm.clearSelections();
-                index = 0;
-                finish();
-            }
+        noSaveButton.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(),"Story not saved", Toast.LENGTH_SHORT).show();
+
+            vm.clearSelections();
+            index = 0;
+
+            finish();
         });
     }
 
@@ -163,7 +158,6 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     public void updateTextView(int pageNum) {
         StoryPage currentPage = vm.getStory().getPages().get(pageNum);
         List<StorySegment> segments = currentPage.getSegments();
-        //List<TextSegment> segments = storyRepo.getTextSegmentsForStoryPage(storyId, 1);
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
 
@@ -247,8 +241,8 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         }
 
         currentIdentifier = blankIdentifier;
+
         Intent intent = new Intent(this,   CategoriesActivity.class);
-        intent.putExtra("source", source);
         StoryTemplateActivity.this.startActivity(intent);
     }
 

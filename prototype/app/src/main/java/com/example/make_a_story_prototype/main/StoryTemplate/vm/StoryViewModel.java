@@ -3,12 +3,15 @@ package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
+import com.example.make_a_story_prototype.main.data.Story.StoryRepository;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class StoryViewModel {
+    private StoryRepository storyRepository= DebugStoryRepository.getInstance();
 
     public static class BlankSelection implements Parcelable {
         private String text;
@@ -57,14 +60,12 @@ public class StoryViewModel {
     }
 
     private Story story;
+    private int storyId;
     private Map<String, BlankSelection> selections;
 
-    public Story getStory() {
-        return story;
-    }
-
-    public StoryViewModel( Story story) {
-        this.story = story;
+    public StoryViewModel(int storyId) {
+        this.storyId = storyId;
+        this.story = storyRepository.getStory(storyId);
         this.selections = new HashMap<>();
     }
 
@@ -75,6 +76,10 @@ public class StoryViewModel {
     public void setSelection(String blankIdentifier, BlankSelection selection) {
         selections.put(blankIdentifier, selection);
         // fire observable
+    }
+
+    public Story getStory() {
+        return story;
     }
 
     public void clearSelections() {

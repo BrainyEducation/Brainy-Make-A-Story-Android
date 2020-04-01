@@ -17,8 +17,4 @@ public class StorySelectionViewModel {
     public List<Story> getStories() {
         return stories;
     }
-
-    public Story getStory(int storyId) {
-        return storyRepository.getStory(storyId);
-    }
 }

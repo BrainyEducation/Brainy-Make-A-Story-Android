@@ -26,35 +26,80 @@ public class Data_TheSpecialInvention {
     private static StoryPage sampleStoryPage1() {
         List<StorySegment> segments = new ArrayList<>();
 
-        segments.add(new StoryText("One Saturday evening ", R.raw.space_alien_segment_1));
+        segments.add(new StoryText("\"Get dressed and come to breakfast right now!\"  Mom called sweetly.  \n"
+                + "\t\"I will,\" ", R.raw.space_alien_segment_1));
         segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(" and ", R.raw.space_alien_segment_2));
-        segments.add(new StoryBlankIdentifier("C-2"));
-        segments.add(new StoryText(" made a tent to camp out in the back "
-                + "yard.  They griped and whined and complained to each other about a school "
-                + "assignment due next week:  to stand in front of the whole class and show "
-                + "pictures and talk about a special place they had visited.  Neither one had "
-                + "any special pictures of any place special, and they both just knew the "
-                + "teacher would embarrass them, and the other kids would tease them, and Monday "
-                + "would be terrifishously, awfulishously, horrifishously bad.  "
-                + "Feeling glum, ", R.raw.space_alien_segment_3));
+        segments.add(new StoryText(" said.\n\""
+                + "\t\"You said that twice already!  You’ll make me late for work.\"\n"
+                + "\t\"Okay!\"  ", R.raw.space_alien_segment_2));
         segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(" snuggled tight in some blankets and ", R.raw.space_alien_segment_4));
-        segments.add(new StoryBlankIdentifier("C-2"));
-        segments.add(new StoryText(" curled up in a sleeping bag, when about "
-                + "midnight a strange-shaped shadow flickered on their tent wall.  \n"
-                + "\t\"What’s that” asked ", R.raw.space_alien_segment_5));
+        segments.add(new StoryText("  said.\t\n" +
+                "\tGreat ideas kept ", R.raw.space_alien_segment_3));
         segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(".   \"Maybe some ", R.raw.space_alien_segment_6));
+        segments.add(new StoryText("  thinking till late at night, so every morning it was hard to wake up in time for school. ", R.raw.space_alien_segment_4));
         segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(".\"", -1)); // no audio
-        segments.add(new StoryBlankIdentifier("AA"));
-        segments.add(new StoryText("\" Or a maybe some kind of \"", R.raw.space_alien_segment_7));
+        segments.add(new StoryText(" liked inventing things, and they always worked really well---while ", R.raw.space_alien_segment_6));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText("  was planning and imagining them---and sometimes almost worked after", -1)); // no audio
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText(" actually made them.  A funnel to toss toys in like the ", R.raw.space_alien_segment_7));
         segments.add(new StoryBlankIdentifier("BB"));
-        segments.add(new StoryText(",\" guessed ", R.raw.space_alien_segment_8));
-        segments.add(new StoryBlankIdentifier("C-2"));
-        segments.add(new StoryText(" They stuck their noses outside to find a "
-                + "weird looking space alien just their size.", R.raw.space_alien_segment_9));
+        segments.add(new StoryText(" and the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("CC"));
+        segments.add(new StoryText(" so they’d slide into the toy box to save time cleaning up.  "
+                + "A squirt-gun scraper to scrape dog poop off shoes and wash them at the same time.  "
+                + "A special second string so a kite could drop a little parachute holding a toy ", R.raw.space_alien_segment_9));
+        segments.add(new StoryBlankIdentifier("DD"));
+        segments.add(new StoryText(" \tInteresting inventions.  Helpful inventions!  Wonderful inventions!!\n", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText("  needed a special stay-up-after-wake-up-in-the-morning invention. ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText("  thought about the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("EE"));
+        segments.add(new StoryText(" part all through breakfast, and cogitated about the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("FF"));
+        segments.add(new StoryText(" and the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("GG"));
+        segments.add(new StoryText(" section on the way to school, and devised the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("JJ"));
+        segments.add(new StoryText(" unit at school, and imagined the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("KK"));
+        segments.add(new StoryText(" segment on the way home, and by after school snack time knew the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("LL"));
+        segments.add(new StoryText("  made the final step and then knew exactly how to create it! Every morning on her way to the kitchen Mom opened the bedroom door to politely say, \"Wake up!\"", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText("  tied a string to the door knob, so when the door opened it would drop a toy ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("EE"));
+        segments.add(new StoryText(" up in the air to flip over and land in a box on top of a toy ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("JJ"));
+        segments.add(new StoryText("  on a teeter-totter lever tossing a toy ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("GG"));
+        segments.add(new StoryText("  that would tip to roll down a ramp and knock loose the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("KK"));
+        segments.add(new StoryText(" hooked to the stopper on an old plastic bottle filled with water that would start slowly trickling into a bucket with its handle rubber-banded to a stick taped to a toy ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("LL"));
+        segments.add(new StoryText("taped to a sharp pin on the end that would swing up to smack and pop a balloon that would for sure startle awake even sleepy ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText("Who could sleep after creating such a magnificatious, splendificatory, brilliastonishing, phenomitastic invention?! Not ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText(", not until very late.  \n"
+                + "Too late.", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText(" didn’t wake when Mom opened the door and gently suggested, \"Wake up!\"  Didn’t notice the toy ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("EE"));
+        segments.add(new StoryText(" dropping on the teeter-totter lever that tossed the toy ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("GG"));
+        segments.add(new StoryText(" up into the air to flip and land on the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("JJ"));
+        segments.add(new StoryText(" so hard that it slipped off the track but still bumped the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("KK"));
+        segments.add(new StoryText(" loose, only smacking the stopper so hard the water didn’t trickle out but shot out like a squirt gun and soaked a toy stuffed ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("NN"));
+        segments.add(new StoryText(" on the edge of the shelf that got so wet heavy it fell on the cat that startled and screeched and leaped up high and knocked its hindquarters into the ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("LL"));
+        segments.add(new StoryText("  so the pin sharp stung the cat’s tail and it howled and claw snatched at the balloon that loud-popped scaring the cat to twist land slap on guess-whose  sleeping face. ", R.raw.space_alien_segment_8));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText(" swiped the cat away and jolted straight up and looked at the disrupted contraption— and thought: \"Even if everything didn’t go exactly perfectly according to plan, my stay-up-after-wake-up-in-the-morning invention worked!\"  And it did!", R.raw.space_alien_segment_8));
 
         return new StoryPage(R.drawable.story_special_invention, segments);
     }
@@ -65,30 +110,15 @@ public class Data_TheSpecialInvention {
         Map<String, StoryBlank> blanks = new HashMap<>();
 
         blanks.put("A-2", new StoryBlank("A-2"));
-        blanks.put("C-2", new StoryBlank("C-2"));
-        blanks.put("AA",new StoryBlank("AA"));
         blanks.put("BB",new StoryBlank("BB"));
         blanks.put("CC",new StoryBlank("CC"));
         blanks.put("DD",new StoryBlank("DD"));
-        blanks.put("FF",new StoryBlank("FF"));
+        blanks.put("EE",new StoryBlank("EE"));
         blanks.put("GG",new StoryBlank("GG"));
-        blanks.put("HH",new StoryBlank("HH"));
         blanks.put("JJ",new StoryBlank("JJ"));
         blanks.put("KK",new StoryBlank("KK"));
         blanks.put("LL",new StoryBlank("LL"));
-        blanks.put("MM",new StoryBlank("MM"));
         blanks.put("NN",new StoryBlank("NN"));
-        blanks.put("OO",new StoryBlank("OO"));
-        blanks.put("PP",new StoryBlank("PP"));
-        blanks.put("QQ",new StoryBlank("QQ"));
-        blanks.put("RR",new StoryBlank("RR"));
-        blanks.put("SS",new StoryBlank("SS"));
-        blanks.put("TT",new StoryBlank("TT"));
-        blanks.put("UU",new StoryBlank("UU"));
-        blanks.put("VV",new StoryBlank("VV"));
-        blanks.put("XX",new StoryBlank("XX"));
-        blanks.put("YY",new StoryBlank("YY"));
-        blanks.put("ZZ",new StoryBlank("ZZ"));
 
         return blanks;
     }

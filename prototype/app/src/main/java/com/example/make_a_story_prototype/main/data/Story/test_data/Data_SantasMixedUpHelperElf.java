@@ -28,35 +28,28 @@ public class Data_SantasMixedUpHelperElf {
     private static StoryPage sampleStoryPage1() {
         List<StorySegment> segments = new ArrayList<>();
 
-        segments.add(new StoryText("One Saturday evening ", R.raw.space_alien_segment_1));
+        segments.add(new StoryText("Late one Christmas Eve, frazzled and exhausted and sleepy-tired more than ever, poor shy Elmer, one of Santa’s helper-elves, began climbing into his top bunk-bed bed when a paper stuck in his sleeve fluttered at his wrist.  Uh-oh.  He checked.  Uh-oh.  A list of toys he’d forgotten to pack up in Santa’s sleigh.  A mother had written and mailed to Santa the list for her children at a homeless shelter, a place families go when they can’t stay in their own home any more and don’t have any place else to go.  Staying there means they don’t have much room, and usually can’t bring more than just one little toy.\n" +
+                "\tThe letter she sent for them to Santa said that —", -1));
         segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(" and ", R.raw.space_alien_segment_2));
+        segments.add(new StoryText(" wanted first a soft fluffy stuffed ", -1));
+        segments.add(new StoryBlankIdentifier("DD"));
+        segments.add(new StoryText(" little enough to carry anywhere, and second a wooden ", -1));
+        segments.add(new StoryBlankIdentifier("EE"));
+        segments.add(new StoryText(" big enough to sit and rock on and pretend to ride far away. \n"
+                + "\t—The first request for  ", -1));
+        segments.add(new StoryBlankIdentifier("B-2"));
+        segments.add(new StoryText(" was a ", -1));
+        segments.add(new StoryBlankIdentifier("GG"));
+        segments.add(new StoryText(" like nobody else’s, and second a battery powered remote control ", -1));
+        segments.add(new StoryBlankIdentifier("JJ"));
+        segments.add(new StoryText(" to race across the floor and under chairs and tables and maybe chase a cat or scare-bump somebody’s shoes from behind.\n"
+                + "\t— ", -1));
         segments.add(new StoryBlankIdentifier("C-2"));
-        segments.add(new StoryText(" made a tent to camp out in the back "
-                + "yard.  They griped and whined and complained to each other about a school "
-                + "assignment due next week:  to stand in front of the whole class and show "
-                + "pictures and talk about a special place they had visited.  Neither one had "
-                + "any special pictures of any place special, and they both just knew the "
-                + "teacher would embarrass them, and the other kids would tease them, and Monday "
-                + "would be terrifishously, awfulishously, horrifishously bad.  "
-                + "Feeling glum, ", R.raw.space_alien_segment_3));
-        segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(" snuggled tight in some blankets and ", R.raw.space_alien_segment_4));
-        segments.add(new StoryBlankIdentifier("C-2"));
-        segments.add(new StoryText(" curled up in a sleeping bag, when about "
-                + "midnight a strange-shaped shadow flickered on their tent wall.  \n"
-                + "\t\"What’s that” asked ", R.raw.space_alien_segment_5));
-        segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(".   \"Maybe some ", R.raw.space_alien_segment_6));
-        segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(".\"", -1)); // no audio
-        segments.add(new StoryBlankIdentifier("AA"));
-        segments.add(new StoryText("\" Or a maybe some kind of \"", R.raw.space_alien_segment_7));
-        segments.add(new StoryBlankIdentifier("BB"));
-        segments.add(new StoryText(",\" guessed ", R.raw.space_alien_segment_8));
-        segments.add(new StoryBlankIdentifier("C-2"));
-        segments.add(new StoryText(" They stuck their noses outside to find a "
-                + "weird looking space alien just their size.", R.raw.space_alien_segment_9));
+        segments.add(new StoryText(" wanted a brand new ", -1));
+        segments.add(new StoryBlankIdentifier("KK"));
+        segments.add(new StoryText(" to show off and look pretty with, and a pretty white sweater with a picture of her very favorite animal, a ", -1));
+        segments.add(new StoryBlankIdentifier("LL"));
+        segments.add(new StoryText("Timid helper-elf Elmer felt terribly, horribly awful that he’d found the list so late and quickly raced around Santa’s big toy warehouse to gather the gifts, but poor Elmer’s sleepy eyes didn’t read the list’s words very well, and poor Elmer’s sleepy memory didn’t remember very well, and— oh no!— at the very last minute poor timid Elmer had mistakenly loaded into Santa’s sleigh—", -1));
 
         return new StoryPage(R.drawable.story_santas_elf_1, segments);
     }
@@ -64,23 +57,36 @@ public class Data_SantasMixedUpHelperElf {
     private static StoryPage sampleStoryPage2() {
         List<StorySegment> segments = new ArrayList<>();
 
-        //TODO: text segment 9 broken across 2 pages
-        segments.add(new StoryText("\"Please help me!\" \n"
-                + "\t\"How?\" \t\n"
-                + "\t\"For my school project I need pictures of earth stuff, and I took a few pictures but I need more.\"\n"
-                + "\t\"Show us.\" \n"
-                + "\tSpace Alien punched a shiny elbow button and twisted a fancy shoulder dial, and Space Alien’s tummy screen displayed a glowy", R.raw.space_alien_segment_9));
-        segments.add(new StoryBlankIdentifier("CC"));
-        segments.add(new StoryText(". \"That’s a strange looking earth planet", R.raw.space_alien_segment_10));
-        segments.add(new StoryBlankIdentifier("DD"));
-        segments.add(new StoryText("\"Nope.  Actually, a pretty nice", R.raw.space_alien_segment_11));
-        segments.add(new StoryBlankIdentifier("CC"));
-        segments.add(new StoryText("\"No!  Are you sure?\" \n"
-                + "\tBoth kids nodded yes. \"But my sister said— I just feel so ", R.raw.space_alien_segment_12));
-        segments.add(new StoryBlankIdentifier("FF"));
-        segments.add(new StoryText(".  It makes me want to", R.raw.space_alien_segment_13));
-        segments.add(new StoryBlankIdentifier("GG"));
-        segments.add(new StoryText(".\"", -1)); // no audio
+        segments.add(new StoryText("- for ", -1));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText(" -uh oh–a soft fluffy stuffed little ", -1));
+        segments.add(new StoryBlankIdentifier("RR"));
+        segments.add(new StoryText(" to carry and a big wooden ", -1));
+        segments.add(new StoryBlankIdentifier("SS"));
+        segments.add(new StoryText(" to ride,\n" +
+                "\t— for ", -1));
+        segments.add(new StoryBlankIdentifier("B-2"));
+        segments.add(new StoryText(" -uh uh oh–an RC ", -1));
+        segments.add(new StoryBlankIdentifier("VV"));
+        segments.add(new StoryText(" and ", -1));
+        segments.add(new StoryBlankIdentifier("WW"));
+        segments.add(new StoryText("- for ", -1));
+        segments.add(new StoryBlankIdentifier("C-2"));
+        segments.add(new StoryText(" -oh no–  one ", -1));
+        segments.add(new StoryBlankIdentifier("XX"));
+        segments.add(new StoryText(" and a pink sweater with a ", -1));
+        segments.add(new StoryBlankIdentifier("YY"));
+        segments.add(new StoryText(".\n"
+                + "\tSanta, just a tiny bit late as usual, loudly called out ‘Hi Ho’ and his team of reindeer swooshed off into the sky just at the very moment when poor timid Elmer looked at that list one more time—uh oh— and discovered —oh no!— he had made a mistake on every …  single … gift.  Elmer crumpled down on the floor and wanted to cry, because nothing hurts and saddens and breaks a helper-elf’s heart more than not making a child happy.  And sometimes they just can’t.  Poor Elmer felt so terrible he didn’t even want to think about it, and after a few minutes of feeling sad and horrible and not liking himself at all, the tired, exhausted little helper elf nodded off to sleep.\n"
+                + "\tOn Christmas morning poor timid Elmer woke up late, not on the warehouse floor where he’d fallen asleep, but in his own proper top bunk-bed bed.  Santa held a tray with ", -1));
+        segments.add(new StoryBlankIdentifier("NN"));
+        segments.add(new StoryText(" and ", -1));
+        segments.add(new StoryBlankIdentifier("PP"));
+        segments.add(new StoryText(" and ", -1));
+        segments.add(new StoryBlankIdentifier("QQ"));
+        segments.add(new StoryText("  ---  Elmer’s favorite breakfast.  \n"
+                + "\t\"Well, Elmer—\" Santa began. \t\n"
+                + "\tElmer cried now.  Ashamed.  Ashamed Santa would treat him so nicely after he had failed the children and Santa and Christmas ", -1));
 
         return new StoryPage(R.drawable.story_santas_elf_2, segments);
     }
@@ -88,15 +94,52 @@ public class Data_SantasMixedUpHelperElf {
     private static StoryPage sampleStoryPage3() {
         List<StorySegment> segments = new ArrayList<>();
 
-        segments.add(new StoryText("\"Well, what about my ", R.raw.space_alien_segment_14));
-        segments.add(new StoryBlankIdentifier("HH"));
-        segments.add(new StoryText("?\" \n\"Sorry.  But you’ve got a really nice ", R.raw.space_alien_segment_15));
-        segments.add(new StoryBlankIdentifier("JJ"));
-        segments.add(new StoryText(".\" \n\"I’ll fail my school project!\" \n"
-                + "\t\"No way!  We’ll help.\"\t\t\n"
-                + "\t\"What kinds of pictures do you need?\"  \t\t\n"
-                + "\t\"Anything!  Everything!\"\n"
-                + "\tWhile everyone else in the house slept tight, the kids showed Space Alien lots of things—some toys, some real.\n", R.raw.space_alien_segment_16));
+        segments.add(new StoryText("\"You know,\" Santa said, \"I didn’t bring three children the presents they asked for.\"\n"
+                + "\tPoor sad Elmer sobbed and wailed louder than ever.  \n\"", R.raw.space_alien_segment_14));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText("says that ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("RR"));
+        segments.add(new StoryText(" is boring,\" Santa said, \"and wants nothing to do with it, but really, really likes the new ", R.raw.space_alien_segment_16));
+        segments.add(new StoryBlankIdentifier("SS"));
+        segments.add(new StoryText(" and rides it everywhere...even to the potty.\n"
+                + "\t\"And ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("B-2"));
+        segments.add(new StoryText(" already has an old ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("VV"));
+        segments.add(new StoryText(", and won’t play with the new one, but really likes the ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("WW"));
+        segments.add(new StoryText(" which ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("B-2"));
+        segments.add(new StoryText(" says is now the very favoritest bestest toy of all.   \n"
+                + "\t\"", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("C-2"));
+        segments.add(new StoryText(" likes her pretty new ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("XX"));
+        segments.add(new StoryText(" well enough, but her mother says she can’t take it outside yet. She liked her pink sweater with the ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("YY"));
+        segments.add(new StoryText(" only okay until everyone said how pretty it is, and now it’s almost the only top she ever wants to wear anywhere.\"\n"
+                + "\t\"Ohhhh.\"  Elmer said.\n"
+                + "\t\"But—the boss at the shelter said she’s sorry, but there’s just not enough room and each child can keep only one present.\"\n"
+                + "\t\"Oh.....\" Elmer said.\n"
+                + "\t\"But three new children came to the shelter.  They didn’t have a home for Santa to visit Christmas Eve and on Christmas Day they found no presents at all.\"\n"
+                + "\t\"Oh!\"\n"
+                + "\t\"So ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText(" and ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("B-2"));
+        segments.add(new StoryText(" and ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("C-2"));
+        segments.add(new StoryText(" gave their extra gifts to those three children who were very surprised, and very, very happy and excited to get them\""
+                + "\"Oh!!!\" \n \"And ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("A-2"));
+        segments.add(new StoryText(" and ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("B-2"));
+        segments.add(new StoryText(" and ", R.raw.space_alien_segment_15));
+        segments.add(new StoryBlankIdentifier("C-2"));
+        segments.add(new StoryText(" discovered what you and I have always known.\"\n"
+                + "\t\"Oh?\"\n"
+                + "\"That getting a gift feels wonderful, but giving to someone who really needs it feels even better.\"\n"
+                + "\t\"Oh.\"  Elmer said.  \"Ohhhh.\"", R.raw.space_alien_segment_15));
 
         return new StoryPage(R.drawable.story_santas_elf_3, segments);
     }
@@ -105,15 +148,27 @@ public class Data_SantasMixedUpHelperElf {
         Map<String, StoryBlank> blanks = new HashMap<>();
 
         blanks.put("A-2", new StoryBlank("A-2"));
+        blanks.put("B-2", new StoryBlank("B-2"));
         blanks.put("C-2", new StoryBlank("C-2"));
-        blanks.put("AA",new StoryBlank("AA"));
-        blanks.put("BB",new StoryBlank("BB"));
-        blanks.put("CC",new StoryBlank("CC"));
         blanks.put("DD",new StoryBlank("DD"));
-        blanks.put("FF",new StoryBlank("FF"));
+        blanks.put("EE",new StoryBlank("EE"));
         blanks.put("GG",new StoryBlank("GG"));
-        blanks.put("HH",new StoryBlank("HH"));
         blanks.put("JJ",new StoryBlank("JJ"));
+        blanks.put("KK",new StoryBlank("KK"));
+        blanks.put("LL",new StoryBlank("LL"));
+        blanks.put("RR",new StoryBlank("RR"));
+        blanks.put("SS",new StoryBlank("SS"));
+        blanks.put("VV",new StoryBlank("VV"));
+        blanks.put("WW",new StoryBlank("WW"));
+        blanks.put("XX",new StoryBlank("XX"));
+        blanks.put("YY",new StoryBlank("YY"));
+        blanks.put("NN",new StoryBlank("NN"));
+        blanks.put("PP",new StoryBlank("PP"));
+        blanks.put("QQ",new StoryBlank("QQ"));
+
+
+
+
 
         return blanks;
     }

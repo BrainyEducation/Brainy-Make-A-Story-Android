@@ -168,10 +168,10 @@ public class DebugStoryRepository implements StoryRepository {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private Story[] sampleStories = {
-            Data_TheSpaceAlien.sampleStory(),
-            Data_SantasMixedUpHelperElf.sampleStory(),
             Data_TheSpecialInvention.sampleStory(),
-            Data_TheWackyCostumeParty.sampleStory()
+            Data_TheSpaceAlien.sampleStory(),
+            Data_TheWackyCostumeParty.sampleStory(),
+            Data_SantasMixedUpHelperElf.sampleStory(),
     };
 
     @Override

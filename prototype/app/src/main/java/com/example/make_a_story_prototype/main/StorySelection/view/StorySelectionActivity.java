@@ -7,9 +7,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Brainy.BrainyApplication;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.Home.vm.StoryContext;
+import com.example.make_a_story_prototype.main.Navigation.NavigationController;
 import com.example.make_a_story_prototype.main.StorySelection.vm.StorySelectionViewModel;
 import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
@@ -18,15 +22,16 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 /**
  * Class for Story Template Selection activities, including redirection to each story screen.
  */
 
-public class StorySelectionActivity extends AppCompatActivity {
-    private DebugStoryRepository storyRepo;
+public class StorySelectionActivity extends BaseActivity {
     private StorySelectionViewModel vm;
+    private int storyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +68,12 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SpecialInventionCardOnClick(View v) {
-//        Intent intent = new Intent(this, StoryTemplateActivity.class);
-//        intent.putExtra("source", "The Special Invention");
-//        this.startActivity(intent);
-        Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
+        storyId = vm.getStories().get(0).getStoryId();
+        StoryContext c = (StoryContext) getNavigationContext();
+        c.setStoryId(storyId);
+
+        Intent intent = new Intent(this, StoryTemplateActivity.class);
+        this.startActivity(intent);
     }
 
     /**
@@ -74,9 +81,12 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void WackyCostumePartyCardOnClick(View v) {
-//        Intent intent = new Intent(this, StoryTemplateActivity.class);
-//        intent.putExtra("source", "The Wacky Costume Party");
-//        this.startActivity(intent);
+        storyId = vm.getStories().get(2).getStoryId();
+        StoryContext c = (StoryContext) getNavigationContext();
+        c.setStoryId(storyId);
+
+        Intent intent = new Intent(this, StoryTemplateActivity.class);
+        this.startActivity(intent);
         Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
 
     }
@@ -86,9 +96,12 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SantasElfCardOnClick(View v) {
-//        Intent intent = new Intent(this, StoryTemplateActivity.class);
-//        intent.putExtra("source", "Santa's Mixed-up Helper Elf");
-//        this.startActivity(intent);
+        storyId = vm.getStories().get(3).getStoryId();
+        StoryContext c = (StoryContext) getNavigationContext();
+        c.setStoryId(storyId);
+
+        Intent intent = new Intent(this, StoryTemplateActivity.class);
+        this.startActivity(intent);
         Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
 
     }
@@ -98,8 +111,11 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SpaceAlienCardOnClick(View v) {
+        storyId = vm.getStories().get(1).getStoryId();
+        StoryContext c = (StoryContext) getNavigationContext();
+        c.setStoryId(storyId);
+
         Intent intent = new Intent(this, StoryTemplateActivity.class);
-        intent.putExtra("story", 1);
         this.startActivity(intent);
     }
 }
