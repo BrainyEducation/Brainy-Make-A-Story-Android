@@ -12,7 +12,6 @@ public class Word {
     private Category category;
     private int imageResource;
     private int audioResource;
-    private boolean locked;
 
     public Word(int id, String word, Category category, int imageResource, int audioResource) {
         this.id = id;
@@ -20,15 +19,10 @@ public class Word {
         this.category = category;
         this.imageResource = imageResource;
         this.audioResource = audioResource;
-        this.locked = true;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setLocked(boolean locked) {
-        this.locked = locked;
     }
 
     public int getId() {
@@ -49,7 +43,4 @@ public class Word {
         return audioResource;
     }
 
-    public boolean isLocked() {
-        return locked;
-    }
 }

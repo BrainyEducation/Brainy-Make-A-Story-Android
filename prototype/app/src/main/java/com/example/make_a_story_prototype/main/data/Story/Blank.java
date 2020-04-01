@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.data.StorySegments;
+package com.example.make_a_story_prototype.main.data.Story;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

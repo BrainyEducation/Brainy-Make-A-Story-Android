@@ -1,8 +1,4 @@
-package com.example.make_a_story_prototype.main.data.StorySegments;
-
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPage;
-
-import java.util.List;
+package com.example.make_a_story_prototype.main.data.Story;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

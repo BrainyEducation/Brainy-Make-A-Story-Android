@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import io.reactivex.Single;
+
 public class DebugWordRepository implements WordRepository {
 
     private static DebugWordRepository instance = new DebugWordRepository();
@@ -281,23 +283,23 @@ public class DebugWordRepository implements WordRepository {
     }
 
     @Override
-    public List<Category> getCategories() {
-        return Arrays.asList(categories);
+    public Single<List<Category>> getCategories() {
+        return Single.just(Arrays.asList(categories));
     }
 
     @Override
-    public Category getCategory(int id) {
+    public Single<Category> getCategory(int id) {
         for (Category category : categories) {
             if (category.getId() == id) {
-                return category;
+                return Single.just(category);
             }
         }
 
-        return null;
+        return Single.just(null);
     }
 
     @Override
-    public List<Word> getWordsForCategory(Category category) {
+    public Single<List<Word>> getWordsForCategory(Category category) {
         List<Word> results = new ArrayList<>();
         for (Word word : words) {
             if (word.getCategory().getId() == category.getId()) {
@@ -305,23 +307,23 @@ public class DebugWordRepository implements WordRepository {
             }
         }
 
-        return results;
+        return Single.just(results);
     }
 
     @Override
-    public Word getWord(int id) {
+    public Single<Word> getWord(int id) {
         for (Word word : words) {
             if (word.getId() == id) {
-                return word;
+                return Single.just(word);
             }
         }
 
-        return null;
+        return Single.just(null);
     }
 
     @Override
-    public Word[] getWords() {
-        return words;
+    public Single<List<Word>> getWords() {
+        return Single.just(Arrays.asList(words));
     }
 
 }

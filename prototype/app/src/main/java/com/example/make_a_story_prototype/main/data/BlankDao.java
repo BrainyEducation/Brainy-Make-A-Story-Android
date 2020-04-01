@@ -1,14 +1,11 @@
 package com.example.make_a_story_prototype.main.data;
 
-import com.example.make_a_story_prototype.main.data.StorySegments.Blank;
-
-import java.util.List;
+import com.example.make_a_story_prototype.main.data.Story.Blank;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
 import androidx.room.Update;
 
 @Dao

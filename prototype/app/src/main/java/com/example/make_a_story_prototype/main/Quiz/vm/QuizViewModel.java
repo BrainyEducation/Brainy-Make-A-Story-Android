@@ -3,8 +3,10 @@ package com.example.make_a_story_prototype.main.Quiz.vm;
 import com.example.make_a_story_prototype.main.Quiz.model.QuizOptions;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 import com.example.make_a_story_prototype.main.data.MasteredWords.DebugMasteredWordsRepository;
+import com.example.make_a_story_prototype.main.data.MasteredWords.MasteredWordsRepository;
 import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
 import com.example.make_a_story_prototype.main.data.Word.Word;
+import com.example.make_a_story_prototype.main.data.Word.WordRepository;
 
 import java.util.List;
 import java.util.Random;
@@ -19,6 +21,9 @@ public class QuizViewModel {
     public interface Callback {
         void onComplete();
     }
+
+    private WordRepository wordRepository = DebugWordRepository.getInstance();
+    private MasteredWordsRepository masteredWordsRepository = DebugMasteredWordsRepository.getInstance();
 
     public Callback callback;
 
@@ -98,10 +103,7 @@ public class QuizViewModel {
         ));
 
         if (correctAnswersCount.getValue() == 3) {
-            DebugMasteredWordsRepository.getInstance().setMastered(QuizOptions.getCorrectOption().getId());
-            DebugWordRepository.getInstance().getWord(QuizOptions.getCorrectOption().getId()).setLocked(false);
- //           WordbankViewModel.unlockWord(QuizOptions.getCorrectOption().toLowerCase());
-
+            masteredWordsRepository.setMastered(QuizOptions.getCorrectOption().getId());
             callback.onComplete();
         }
     }

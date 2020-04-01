@@ -28,6 +28,7 @@ import com.example.make_a_story_prototype.main.StoryTemplate.model.StorySegment;
 import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryText;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
 
 import java.util.List;
 
@@ -44,13 +45,14 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     private static int word1Resource = 0;
     private static int word2Resource = 0;
     private static int index = 0;
+    private int storyId;
 
     private StoryViewModel vm = StoryTemplateActivity.sVm;
+    private DebugStoryRepository storyRepo;
 
     private ImageView storyImageView;
     private TextView storyTextView;
     private ObservableScrollView scrollView = null;
-    private FrameLayout fl;
     private ImageView image1;
     private ImageView image2;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
@@ -64,6 +66,9 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_template);
+
+        storyId = getIntent().getIntExtra("story", 0);
+        storyRepo = DebugStoryRepository.getInstance();
 
         View view = findViewById(R.id.constraint_layout);
 
@@ -79,7 +84,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         progressBar = findViewById(R.id.progress_bar);
         image1 = findViewById(R.id.word_image1);
         image2 = findViewById(R.id.word_image2);
-        fl = findViewById(R.id.image_layout);
+        FrameLayout fl = findViewById(R.id.image_layout);
 
         scrollView = findViewById(R.id.story_scroll);
         scrollView.setScrollViewListener(this);
@@ -158,6 +163,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     public void updateTextView(int pageNum) {
         StoryPage currentPage = vm.getStory().getPages().get(pageNum);
         List<StorySegment> segments = currentPage.getSegments();
+        //List<TextSegment> segments = storyRepo.getTextSegmentsForStoryPage(storyId, 1);
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
 

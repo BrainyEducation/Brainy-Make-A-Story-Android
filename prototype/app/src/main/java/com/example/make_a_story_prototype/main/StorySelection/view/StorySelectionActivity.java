@@ -10,6 +10,7 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,12 +21,15 @@ import androidx.core.content.ContextCompat;
  */
 
 public class StorySelectionActivity extends AppCompatActivity {
+    private DebugStoryRepository storyRepo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_selection);
+
+        storyRepo = DebugStoryRepository.getInstance();
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -89,7 +93,7 @@ public class StorySelectionActivity extends AppCompatActivity {
      */
     public void SpaceAlienCardOnClick(View v) {
         Intent intent = new Intent(this, StoryTemplateActivity.class);
-        intent.putExtra("source", "The Space Alien");
+        intent.putExtra("story", 1);
         this.startActivity(intent);
     }
 }
