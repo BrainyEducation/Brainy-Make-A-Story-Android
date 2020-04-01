@@ -1,6 +1,6 @@
 package com.example.make_a_story_prototype.main.data;
 
-import com.example.make_a_story_prototype.main.data.Story.Blank;
+import com.example.make_a_story_prototype.main.data.Story.db.Blank;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

@@ -67,16 +67,13 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
         Util.addBackArrow(this);
 
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        title.setText(vm.getCategory().getName());
+        title.setText(vm.getCategory().blockingGet().getName());
 
         initRecyclerView();
 
-        vm.getCardListObservable().subscribe((list) -> {
-            recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, vm);
-            recyclerViewAdapter.handler = this;
-
-            recyclerView.setAdapter(recyclerViewAdapter);
-        });
+        recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, vm);
+        recyclerViewAdapter.handler = this;
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     @Override
@@ -119,7 +116,7 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
         NavigationController.NavigationContext context = getNavigationContext();
 
         if (context instanceof StoryContext) {
-            StoryContext storyContext = (StoryContext)context;
+            StoryContext storyContext = (StoryContext) context;
 
             if (vm.isUnlocked) {
                 Log.d("TAG", "tapped unlocked word card from story");
@@ -135,10 +132,10 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
             } else {
                 startQuiz(vm);
             }
-        } else  {
+        } else {
             if (vm.isUnlocked) {
                 Log.d("tag", "tapped unlocked word card from home");
-                Toast.makeText(this,"Let's review what you've learned!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Let's review what you've learned!", Toast.LENGTH_SHORT).show();
             }
             startQuiz(vm);
         }

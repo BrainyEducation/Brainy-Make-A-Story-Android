@@ -8,6 +8,7 @@ import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
 import com.example.make_a_story_prototype.main.data.Word.Word;
 import com.example.make_a_story_prototype.main.data.Word.WordRepository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -35,11 +36,10 @@ public class QuizViewModel {
 
     private Word wordBeingQuizzed;
 
-    public QuizViewModel(Word quizword, Word[] wordList) {
-
+    public QuizViewModel(Word quizword, List<Word> wordList) {
         wordBeingQuizzed = quizword;
         QuizOptions.setCorrectOption(quizword);
-        QuizOptions.setWordList(wordList);
+        QuizOptions.setWordList((Word[]) wordList.toArray());
         shuffle();
     }
 

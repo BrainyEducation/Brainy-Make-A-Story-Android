@@ -2,8 +2,8 @@ package com.example.make_a_story_prototype.main.data;
 
 import android.content.Context;
 
-import com.example.make_a_story_prototype.main.data.Story.Blank;
-import com.example.make_a_story_prototype.main.data.Story.TextSegment;
+import com.example.make_a_story_prototype.main.data.Story.db.Blank;
+import com.example.make_a_story_prototype.main.data.Story.db.TextSegment;
 
 import androidx.annotation.NonNull;
 import androidx.room.Room;

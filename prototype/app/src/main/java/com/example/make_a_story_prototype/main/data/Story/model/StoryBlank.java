@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.StoryTemplate.model;
+package com.example.make_a_story_prototype.main.data.Story.model;
 
 public class StoryBlank {
     class ImageLocation {

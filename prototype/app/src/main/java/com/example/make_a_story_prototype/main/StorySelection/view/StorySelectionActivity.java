@@ -8,9 +8,13 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.StorySelection.vm.StorySelectionViewModel;
 import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
+import com.example.make_a_story_prototype.main.data.Story.model.Story;
+
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +26,7 @@ import androidx.core.content.ContextCompat;
 
 public class StorySelectionActivity extends AppCompatActivity {
     private DebugStoryRepository storyRepo;
+    private StorySelectionViewModel vm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,8 @@ public class StorySelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_selection);
 
-        storyRepo = DebugStoryRepository.getInstance();
+        vm = new StorySelectionViewModel();
+        List<Story> storyList = vm.getStories();
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();

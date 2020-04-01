@@ -1,4 +1,4 @@
-package com.example.make_a_story_prototype.main.data.Story;
+package com.example.make_a_story_prototype.main.data.Story.db;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

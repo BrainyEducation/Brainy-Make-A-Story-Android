@@ -92,7 +92,7 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
 
         DebugMasteredWordsRepository masteredWordsRepo = DebugMasteredWordsRepository.getInstance();
 
-        boolean isMastered = masteredWordsRepo.isMastered(vm.word.getId());
+        boolean isMastered = masteredWordsRepo.isMastered(vm.word.getId()).blockingGet();
         int backgroundColor =  isMastered ? unlockedBackgroundColor : lockedBackgroundColor;
         int contrastColor = isMastered ? unlockedContrastColor : lockedContrastColor;
 

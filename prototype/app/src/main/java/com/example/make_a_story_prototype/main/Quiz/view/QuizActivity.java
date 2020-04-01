@@ -53,8 +53,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         setContentView(R.layout.activity_quiz);
         Intent intent = getIntent();
         //define values passed from word bank in WordBankActivity.java under selectWordCard method
+        // TODO: move these into viewmodels and use singles
         DebugWordRepository wordRepo = DebugWordRepository.getInstance();
-        wordBeingQuizzed = wordRepo.getWord(intent.getIntExtra("word", 0));
+        wordBeingQuizzed = wordRepo.getWord(intent.getIntExtra("word", 0)).blockingGet();
 
         int quizImageFile = wordBeingQuizzed.getImageResource();
         int quizAudioFile = wordBeingQuizzed.getAudioResource();
@@ -117,7 +118,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         buttons.add(buttonOption4);
 
         Resources res = getResources();
-        Word[] wordList = wordRepo.getWords();
+        List<Word> wordList = wordRepo.getWords().blockingGet();
         setViewModel(new QuizViewModel(wordBeingQuizzed, wordList));
     }
 

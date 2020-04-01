@@ -21,11 +21,11 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 import com.example.make_a_story_prototype.main.Media.AudioPlayer;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryBlankIdentifier;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPage;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPageSampleData;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StorySegment;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryText;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
+import com.example.make_a_story_prototype.main.data.Story.test_data.Data_TheSpaceAlien;
+import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryText;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
@@ -40,7 +40,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
 
     public static String BlankSelectionIntentKey = "BlankSelection";
     private static String BLANK_PLACEHOLDER = " BLANK ";
-    private static StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
+    private static StoryViewModel sVm = new StoryViewModel(Data_TheSpaceAlien.sampleStory());
     private static String currentIdentifier;
     private static int word1Resource = 0;
     private static int word2Resource = 0;

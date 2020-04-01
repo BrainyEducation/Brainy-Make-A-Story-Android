@@ -1,10 +1,9 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 
-import android.app.Application;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.make_a_story_prototype.main.StoryTemplate.model.Story;
+import com.example.make_a_story_prototype.main.data.Story.model.Story;
 
 import java.util.HashMap;
 import java.util.Map;

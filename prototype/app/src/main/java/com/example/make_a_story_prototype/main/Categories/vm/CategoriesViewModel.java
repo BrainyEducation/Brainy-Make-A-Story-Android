@@ -34,7 +34,7 @@ public class CategoriesViewModel {
         };
 
         DebugWordRepository wordRepo = DebugWordRepository.getInstance();
-        List<Category> categories = wordRepo.getCategories();
+        List<Category> categories = wordRepo.getCategories().blockingGet();
 
         for (int i = 0; i < categories.size(); i++) {
             Category category = categories.get(i);

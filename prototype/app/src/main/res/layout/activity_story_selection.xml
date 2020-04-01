@@ -24,6 +24,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/special_invention_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="SpecialInventionCardOnClick"
@@ -66,6 +67,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/space_alien_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="SpaceAlienCardOnClick"
@@ -108,6 +110,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/wacky_costume_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="WackyCostumePartyCardOnClick"
@@ -150,6 +153,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/santas_elf_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="SantasElfCardOnClick"
