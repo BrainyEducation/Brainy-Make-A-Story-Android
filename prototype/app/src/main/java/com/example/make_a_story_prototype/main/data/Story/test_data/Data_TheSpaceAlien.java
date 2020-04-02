@@ -23,10 +23,7 @@ public class Data_TheSpaceAlien {
         pages.add(sampleStoryPage4());
         pages.add(sampleStoryPage5());
 
-
-        Map<String, StoryBlank> blanks = blanks();
-
-        return new Story(1,"The Space Alien", pages, blanks);
+        return new Story(1,"The Space Alien", pages);
     }
 
     private static StoryPage sampleStoryPage1() {

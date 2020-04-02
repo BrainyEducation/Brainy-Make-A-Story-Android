@@ -18,9 +18,7 @@ public class Data_TheSpecialInvention {
         List<StoryPage> pages = new ArrayList<>();
         pages.add(sampleStoryPage1());
 
-        Map<String, StoryBlank> blanks = blanks();
-
-        return new Story(0,"The Special Invention", pages, blanks);
+        return new Story(0,"The Special Invention", pages);
     }
 
     private static StoryPage sampleStoryPage1() {

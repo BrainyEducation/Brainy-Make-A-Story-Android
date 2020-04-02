@@ -20,9 +20,7 @@ public class Data_SantasMixedUpHelperElf {
         pages.add(sampleStoryPage2());
         pages.add(sampleStoryPage3());
 
-        Map<String, StoryBlank> blanks = blanks();
-
-        return new Story(3,"Santa's Mixed-Up Helper Elf", pages, blanks);
+        return new Story(3,"Santa's Mixed-Up Helper Elf", pages);
     }
 
     private static StoryPage sampleStoryPage1() {

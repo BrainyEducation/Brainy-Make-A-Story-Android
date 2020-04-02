@@ -19,9 +19,7 @@ public class Data_TheWackyCostumeParty {
         pages.add(sampleStoryPage1());
         pages.add(sampleStoryPage2());
 
-        Map<String, StoryBlank> blanks = blanks();
-
-        return new Story(2,"The Wacky Costume Party", pages, blanks);
+        return new Story(2,"The Wacky Costume Party", pages);
     }
 
     private static StoryPage sampleStoryPage1() {

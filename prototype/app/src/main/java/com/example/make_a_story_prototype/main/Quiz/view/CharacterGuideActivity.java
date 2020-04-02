@@ -9,16 +9,13 @@ import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
-import com.example.make_a_story_prototype.main.Home.vm.StoryContext;
+import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
 import com.example.make_a_story_prototype.main.Navigation.NavigationController;
 import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
-import com.example.make_a_story_prototype.main.data.Word.Category;
 
 import java.util.Objects;
 import java.util.Random;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class CharacterGuideActivity extends BaseActivity {
 
@@ -59,8 +56,8 @@ public class CharacterGuideActivity extends BaseActivity {
 
             NavigationController.NavigationContext context = getNavigationContext();
 
-            if (context instanceof StoryContext) {
-                StoryContext storyContext = (StoryContext)context;
+            if (context instanceof StoryBlankSelectionContext) {
+                StoryBlankSelectionContext storyBlankSelectionContext = (StoryBlankSelectionContext)context;
 
                 Intent intent = new Intent(this,   WordbankActivity.class);
                 intent.putExtra("category", categoryId);

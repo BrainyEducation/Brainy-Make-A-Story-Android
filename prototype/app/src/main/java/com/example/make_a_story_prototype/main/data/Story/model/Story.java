@@ -7,13 +7,11 @@ public class Story {
     private int storyId;
     private String title;
     private List<StoryPage> pages;
-    private Map<String, StoryBlank> blanks;
 
-    public Story(int storyId, String title, List<StoryPage> pages, Map<String, StoryBlank> blanks) {
+    public Story(int storyId, String title, List<StoryPage> pages) {
         this.storyId = storyId;
         this.title = title;
         this.pages = pages;
-        this.blanks = blanks;
     }
 
     public int getStoryId() {
@@ -28,7 +26,4 @@ public class Story {
         return pages;
     }
 
-    public Map<String, StoryBlank> getBlanks() {
-        return blanks;
-    }
 }
