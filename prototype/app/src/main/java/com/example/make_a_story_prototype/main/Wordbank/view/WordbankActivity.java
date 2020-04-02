@@ -122,9 +122,7 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
                                 vm.word.getImageResource()
                         ));
 
-                Intent intent = new Intent(this, StoryTemplateActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId());
             } else {
                 startQuiz(vm);
             }

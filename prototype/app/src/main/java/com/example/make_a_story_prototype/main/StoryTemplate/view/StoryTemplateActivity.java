@@ -42,12 +42,13 @@ import androidx.appcompat.widget.Toolbar;
 public class StoryTemplateActivity extends BaseActivity implements ObservableScrollView.ScrollViewListener {
 
     private static String STORY_ID_EXTRA_KEY = "STORY_ID";
-    private static String MY_VM_KEY = WordbankActivity .class.getName() + ":VM_KEY";
+    private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
     private static String BLANK_PLACEHOLDER = " BLANK ";
 
     public static void start(Activity activity, int storyId) {
         Intent intent = new Intent(activity, StoryTemplateActivity.class);
         intent.putExtra(STORY_ID_EXTRA_KEY, storyId);
+
         activity.startActivity(intent);
     }
 
@@ -58,8 +59,6 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
     private TextView storyTextView;
     private ObservableScrollView scrollView = null;
     private ProgressBar progressBar;
-
-    private int storyId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +71,8 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         } else {
             vm = savedInstanceState.getParcelable(MY_VM_KEY);
         }
+
+        mediaController = new StoryMediaController(this, vm.getStory().getPages().get(0), vm);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -137,13 +138,13 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         Button noSaveButton = findViewById(R.id.no_save_button);
 
         saveButton.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Todo: Saving", Toast.LENGTH_SHORT).show();
 
             finish();
         });
 
         noSaveButton.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(),"Story not saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Story not saved", Toast.LENGTH_SHORT).show();
             vm.clearSelections();
             finish();
         });
@@ -187,8 +188,8 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
     private void onSelectedBlank(String blankIdentifier) {
         mediaController.pause();
 
-        setNavigationContext(new StoryBlankSelectionContext(storyId, blankIdentifier));
-        Intent intent = new Intent(this,   CategoriesActivity.class);
+        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), blankIdentifier));
+        Intent intent = new Intent(this, CategoriesActivity.class);
         StoryTemplateActivity.this.startActivity(intent);
     }
 

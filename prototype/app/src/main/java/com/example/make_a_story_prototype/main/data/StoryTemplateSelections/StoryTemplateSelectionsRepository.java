@@ -11,4 +11,6 @@ public interface StoryTemplateSelectionsRepository {
     void setSelectionsForStory(int storyId, Map<String, BlankSelection> selections);
 
     void setSelectionForStory(int storyId, String identifier, BlankSelection selection);
+
+    void clearSelectionsForStory(int storyId);
 }

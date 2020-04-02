@@ -68,7 +68,7 @@ public class WordbankItemRecyclerViewAdapter extends RecyclerView.Adapter<WordCa
         }
 
         vm.isSelected = true;
-        if (!mediaPlayer.isPlaying()) {
+        if (mediaPlayer == null || !mediaPlayer.isPlaying()) {
             mediaPlayer = android.media.MediaPlayer.create(context, vm.word.getAudioResource());
             mediaPlayer.start();
         }

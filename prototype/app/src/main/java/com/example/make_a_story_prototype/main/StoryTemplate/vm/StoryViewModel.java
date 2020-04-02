@@ -2,6 +2,7 @@ package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
 import com.example.make_a_story_prototype.main.data.Story.StoryRepository;
@@ -10,7 +11,6 @@ import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.Debu
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.StoryTemplateSelectionsRepository;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class StoryViewModel implements Parcelable {
@@ -22,6 +22,7 @@ public class StoryViewModel implements Parcelable {
     private Map<String, BlankSelection> selections;
 
     public StoryViewModel(int storyId) {
+        Log.d("StoryViewModel", "create with " + storyId);
         this.storyId = storyId;
 
         this.story = storyRepository.getStory(storyId);
@@ -37,7 +38,7 @@ public class StoryViewModel implements Parcelable {
     }
 
     public void clearSelections() {
-        selections = new HashMap<>();
+        selectionsRepository.clearSelectionsForStory(storyId);
     }
 
     @Override

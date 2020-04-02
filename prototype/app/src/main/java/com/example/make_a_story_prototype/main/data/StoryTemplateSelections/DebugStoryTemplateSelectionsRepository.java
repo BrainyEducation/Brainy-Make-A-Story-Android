@@ -40,4 +40,9 @@ public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSele
         Map<String, BlankSelection> storySelections = getSelectionsForStory(storyId);
         storySelections.put(identifier, selection);
     }
+
+    @Override
+    public void clearSelectionsForStory(int storyId) {
+        selections.remove(storyId);
+    }
 }
