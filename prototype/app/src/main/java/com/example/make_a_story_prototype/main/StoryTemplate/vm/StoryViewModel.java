@@ -2,83 +2,65 @@ package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
-import com.example.make_a_story_prototype.main.StoryTemplate.model.Story;
+import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
+import com.example.make_a_story_prototype.main.data.Story.StoryRepository;
+import com.example.make_a_story_prototype.main.data.Story.model.Story;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.DebugStoryTemplateSelectionsRepository;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.StoryTemplateSelectionsRepository;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class StoryViewModel {
-
-    public static class BlankSelection implements Parcelable {
-        private String text;
-        private int imageResource;
-
-        public BlankSelection(String text, int imageResource) {
-            this.text = text;
-            this.imageResource = imageResource;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public int getImageResource() {
-            return imageResource;
-        }
-
-        protected BlankSelection(Parcel in) {
-            text = in.readString();
-            imageResource = in.readInt();
-        }
-
-        public static final Creator<BlankSelection> CREATOR = new Creator<BlankSelection>() {
-            @Override
-            public BlankSelection createFromParcel(Parcel in) {
-                return new BlankSelection(in);
-            }
-
-            @Override
-            public BlankSelection[] newArray(int size) {
-                return new BlankSelection[size];
-            }
-        };
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(text);
-            dest.writeInt(imageResource);
-        }
-    }
+public class StoryViewModel implements Parcelable {
+    private StoryRepository storyRepository = DebugStoryRepository.getInstance();
+    private StoryTemplateSelectionsRepository selectionsRepository = DebugStoryTemplateSelectionsRepository.getInstance();
 
     private Story story;
+    private int storyId;
     private Map<String, BlankSelection> selections;
 
-    public Story getStory() {
-        return story;
-    }
+    public StoryViewModel(int storyId) {
+        Log.d("StoryViewModel", "create with " + storyId);
+        this.storyId = storyId;
 
-    public StoryViewModel(Story story) {
-        this.story = story;
-        this.selections = new HashMap<>();
+        this.story = storyRepository.getStory(storyId);
+        this.selections = selectionsRepository.getSelectionsForStory(storyId);
     }
 
     public Map<String, BlankSelection> getSelections() {
         return selections;
     }
 
-    public void setSelection(String blankIdentifier, BlankSelection selection) {
-        selections.put(blankIdentifier, selection);
-        // fire observable
+    public Story getStory() {
+        return story;
     }
 
     public void clearSelections() {
-        selections = new HashMap<String, BlankSelection>();
+        selectionsRepository.clearSelectionsForStory(storyId);
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(storyId);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<StoryViewModel> CREATOR = new Creator<StoryViewModel>() {
+        @Override
+        public StoryViewModel createFromParcel(Parcel in) {
+            return new StoryViewModel(in.readInt());
+        }
+
+        @Override
+        public StoryViewModel[] newArray(int size) {
+            return new StoryViewModel[size];
+        }
+    };
 
 }

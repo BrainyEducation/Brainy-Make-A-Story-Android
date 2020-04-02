@@ -1,8 +1,9 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
@@ -12,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,44 +21,44 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
-import com.example.make_a_story_prototype.main.Media.AudioPlayer;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryBlankIdentifier;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPage;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPageSampleData;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StorySegment;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryText;
+import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
+import com.example.make_a_story_prototype.main.StoryTemplate.controller.StoryMediaController;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
+import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
+import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryText;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class StoryTemplateActivity extends AppCompatActivity implements ObservableScrollView.ScrollViewListener {
+public class StoryTemplateActivity extends BaseActivity implements ObservableScrollView.ScrollViewListener {
 
-    public static String BlankSelectionIntentKey = "BlankSelection";
+    private static String STORY_ID_EXTRA_KEY = "STORY_ID";
+    private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
     private static String BLANK_PLACEHOLDER = " BLANK ";
-    private static StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
-    private static String currentIdentifier;
-    private static int word1Resource = 0;
-    private static int word2Resource = 0;
-    private static int index = 0;
 
-    private StoryViewModel vm = StoryTemplateActivity.sVm;
+    public static void start(Activity activity, int storyId) {
+        Intent intent = new Intent(activity, StoryTemplateActivity.class);
+        intent.putExtra(STORY_ID_EXTRA_KEY, storyId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        activity.startActivity(intent);
+    }
+
+    private StoryMediaController mediaController;
+    private StoryViewModel vm;
 
     private ImageView storyImageView;
     private TextView storyTextView;
     private ObservableScrollView scrollView = null;
-    private FrameLayout fl;
-    private ImageView image1;
-    private ImageView image2;
-    private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
-    private int quizAudioFile;
-
-    private String source = "template";
-
     private ProgressBar progressBar;
 
     @Override
@@ -66,7 +66,14 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_template);
 
-        View view = findViewById(R.id.constraint_layout);
+        if (savedInstanceState == null) {
+            int storyId = getIntent().getIntExtra(STORY_ID_EXTRA_KEY, -1);
+            vm = new StoryViewModel(storyId);
+        } else {
+            vm = savedInstanceState.getParcelable(MY_VM_KEY);
+        }
+
+        mediaController = new StoryMediaController(this, vm.getStory().getPages().get(0), vm);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,20 +81,11 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        Toolbar controlsbar = findViewById(R.id.controls_bar);
         storyImageView = findViewById(R.id.story_image);
         storyTextView = findViewById(R.id.story_text);
         progressBar = findViewById(R.id.progress_bar);
-        image1 = findViewById(R.id.word_image1);
-        image2 = findViewById(R.id.word_image2);
-        fl = findViewById(R.id.image_layout);
-
         scrollView = findViewById(R.id.story_scroll);
         scrollView.setScrollViewListener(this);
-
-        quizAudioFile =  R.raw.story_full_space_alien;
-        mediaPlayer = android.media.MediaPlayer.create(this, quizAudioFile);
-        //mediaPlayer.start();
 
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
@@ -95,18 +93,20 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         storyImageView.setImageResource(vm.getStory().getPages().get(0).getImageResource());
 
         updateTextView(0);
+    }
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            return;
-        }
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
 
-        StoryViewModel.BlankSelection selection = bundle.getParcelable(BlankSelectionIntentKey);
-        if (currentIdentifier != null && selection != null) {
-            vm.setSelection(currentIdentifier, selection);
-            updateTextView(0);
-            updateImageView(selection.getImageResource());
-        }
+        outState.putParcelable(MY_VM_KEY, vm);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        updateTextView(0);
     }
 
     // home icon
@@ -123,8 +123,10 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         switch (item.getItemId()) {
             case android.R.id.home:
                 showSaveDialog();
+                mediaController.pause();
                 return true;
             case R.id.home_menu_icon:
+                mediaController.pause();
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 return true;
             default:
@@ -138,23 +140,18 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         Button saveButton = findViewById(R.id.save_button);
         Button noSaveButton = findViewById(R.id.no_save_button);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+        saveButton.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(), "Todo: Saving", Toast.LENGTH_SHORT).show();
+
+            finish();
         });
 
-        noSaveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Not Saving", Toast.LENGTH_SHORT).show();
-                vm.clearSelections();
-                index = 0;
-                finish();
-            }
+        noSaveButton.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(), "Story not saved", Toast.LENGTH_SHORT).show();
+            vm.clearSelections();
+            finish();
         });
     }
-
 
     public void updateTextView(int pageNum) {
         StoryPage currentPage = vm.getStory().getPages().get(pageNum);
@@ -168,7 +165,7 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
                 builder.append(textSegment.getText());
             } else if (s instanceof StoryBlankIdentifier) {
                 StoryBlankIdentifier identifier = (StoryBlankIdentifier) s;
-                StoryViewModel.BlankSelection selection = vm.getSelections().get(identifier.get());
+                BlankSelection selection = vm.getSelections().get(identifier.get());
 
                 if (selection == null) {
                     builder.append(
@@ -191,59 +188,11 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         storyTextView.setText(builder);
     }
 
-    public void updateImageView(int resource) {
-//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-//                FrameLayout.LayoutParams.WRAP_CONTENT,
-//                FrameLayout.LayoutParams.WRAP_CONTENT);
-//
-//        image.setImageResource(resource);
-//
-//        // Adds image to layout
-//        fl.addView(image, params);
-//
-//        int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
-//        image.getLayoutParams().height = dimensionInDp;
-//        image.getLayoutParams().width = dimensionInDp;
-//
-//        image.setX(162);
-//        image.setY(255);
-//        image.requestLayout();
-
-        // TODO: fix this
-        // hard-coding for demo
-        if (index == 0) {
-            word1Resource = resource;
-
-            image1.setImageResource(word1Resource);
-            image1.setVisibility(View.VISIBLE);
-            image2.setVisibility(View.INVISIBLE);
-
-        } else if (index == 1) {
-            word2Resource = resource;
-            image1.setImageResource(word1Resource);
-            image2.setImageResource(word2Resource);
-
-            image1.setVisibility(View.VISIBLE);
-            image2.setVisibility(View.VISIBLE);
-        } else {
-            image1.setImageResource(word1Resource);
-            image2.setImageResource(word2Resource);
-
-            image1.setVisibility(View.VISIBLE);
-            image2.setVisibility(View.VISIBLE);
-        }
-
-        index++;
-    }
-
     private void onSelectedBlank(String blankIdentifier) {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-        }
+        mediaController.pause();
 
-        currentIdentifier = blankIdentifier;
-        Intent intent = new Intent(this,   CategoriesActivity.class);
-        intent.putExtra("source", source);
+        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), blankIdentifier));
+        Intent intent = new Intent(this, CategoriesActivity.class);
         StoryTemplateActivity.this.startActivity(intent);
     }
 
@@ -254,28 +203,15 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
     }
 
     public void onPauseTapped(View v) {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-        }
+        mediaController.pause();
     }
 
     public void onPlayTapped(View v) {
-        if (!mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-        }
+        mediaController.play();
     }
 
     public void onReplayTapped(View v) {
-        int rewindTime = 5000;
-
-        if (mediaPlayer.isPlaying()) {
-            int currentPosition = mediaPlayer.getCurrentPosition();
-            if (currentPosition - rewindTime >= 0) {
-                mediaPlayer.seekTo(currentPosition - rewindTime);
-                    } else {
-                mediaPlayer.seekTo(0);
-            }
-        }
+        mediaController.restart();
     }
 
 }

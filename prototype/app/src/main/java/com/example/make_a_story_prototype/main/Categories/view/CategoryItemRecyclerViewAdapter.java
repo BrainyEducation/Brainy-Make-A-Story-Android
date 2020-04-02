@@ -44,7 +44,24 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryCardHolder holder, final int position) {
         CategoryCardItemViewModel currentCard = vm.getCardList().get(position);
-        holder.setViewModel(currentCard);
+
+        int BackgroundColors[] = {
+                context.getResources().getColor(R.color.colorLightRed),
+                context.getResources().getColor(R.color.colorLightOrange),
+                context.getResources().getColor(R.color.colorLightGreen),
+                context.getResources().getColor(R.color.colorLightPurple),
+                context.getResources().getColor(R.color.colorLightBlue),
+        };
+
+        int DetailColors[] = {
+                context.getResources().getColor(R.color.colorContrastRed),
+                context.getResources().getColor(R.color.colorContrastOrange),
+                context.getResources().getColor(R.color.colorContrastGreen),
+                context.getResources().getColor(R.color.colorContrastPurple),
+                context.getResources().getColor(R.color.colorContrastBlue),
+        };
+
+        holder.setViewModel(currentCard, BackgroundColors[position % BackgroundColors.length], DetailColors[position % DetailColors.length]);
     }
 
     @Override
@@ -62,7 +79,7 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         notifyDataSetChanged();
 
         if (!mediaPlayer.isPlaying()) {
-            mediaPlayer = android.media.MediaPlayer.create(context, vm.cardItem.getImageAudio());
+            mediaPlayer = android.media.MediaPlayer.create(context, vm.category.getAudioResource());
             mediaPlayer.start();
         }
     }

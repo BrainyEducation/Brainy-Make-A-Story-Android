@@ -2,7 +2,14 @@ package com.example.make_a_story_prototype.main.Quiz.vm;
 
 import com.example.make_a_story_prototype.main.Quiz.model.QuizOptions;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
+import com.example.make_a_story_prototype.main.data.MasteredWords.DebugMasteredWordsRepository;
+import com.example.make_a_story_prototype.main.data.MasteredWords.MasteredWordsRepository;
+import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
+import com.example.make_a_story_prototype.main.data.Word.Word;
+import com.example.make_a_story_prototype.main.data.Word.WordRepository;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import io.reactivex.Observable;
@@ -16,34 +23,36 @@ public class QuizViewModel {
         void onComplete();
     }
 
+    private WordRepository wordRepository = DebugWordRepository.getInstance();
+    private MasteredWordsRepository masteredWordsRepository = DebugMasteredWordsRepository.getInstance();
+
     public Callback callback;
 
-    private BehaviorSubject<String[]> options = BehaviorSubject.create();
+    private BehaviorSubject<Word[]> options = BehaviorSubject.create();
     private BehaviorSubject<Integer> correctAnswersCount = BehaviorSubject.createDefault(0);
     private BehaviorSubject<Integer> maxCorrectAnswersCount = BehaviorSubject.createDefault(0);
 
     private int correctOptionIndex;
 
-    private String wordBeingQuizzed;
+    private Word wordBeingQuizzed;
 
-    public QuizViewModel(String quizword, String[] wordList) {
-
+    public QuizViewModel(Word quizword, List<Word> wordList) {
         wordBeingQuizzed = quizword;
         QuizOptions.setCorrectOption(quizword);
-        QuizOptions.setWordList(wordList);
+        QuizOptions.setWordList((Word[]) wordList.toArray());
         shuffle();
     }
 
     private void shuffle() {
-        String[] nextOptions = new String[4];
-        String[] availableIncorrectOptions = QuizOptions.getIncorrectOptions();
+        Word[] nextOptions = new Word[4];
+        Word[] availableIncorrectOptions = QuizOptions.getIncorrectOptions();
 
         Random random = new Random();
 
         // get random index of answer option
         int incorrectStartIndex = random.nextInt(availableIncorrectOptions.length);
         for (int i = 0; i < 4; i++) {
-            String incorrectOption = availableIncorrectOptions[
+            Word incorrectOption = availableIncorrectOptions[
                     (incorrectStartIndex + i) % availableIncorrectOptions.length
                     ];
 
@@ -59,7 +68,7 @@ public class QuizViewModel {
 
     // Observables
 
-    public Observable<String[]> getOptions() {
+    public Observable<Word[]> getOptions() {
         return options;
     }
 
@@ -94,8 +103,7 @@ public class QuizViewModel {
         ));
 
         if (correctAnswersCount.getValue() == 3) {
-            WordbankViewModel.instance().unlockWord(QuizOptions.getCorrectOption().toLowerCase());
-
+            masteredWordsRepository.setMastered(QuizOptions.getCorrectOption().getId());
             callback.onComplete();
         }
     }

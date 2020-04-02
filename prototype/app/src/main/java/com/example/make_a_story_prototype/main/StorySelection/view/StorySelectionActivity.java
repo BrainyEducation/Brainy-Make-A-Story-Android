@@ -8,10 +8,15 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
+import com.example.make_a_story_prototype.main.StorySelection.vm.StorySelectionViewModel;
 import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.data.Story.model.Story;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.List;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
@@ -19,13 +24,18 @@ import androidx.core.content.ContextCompat;
  * Class for Story Template Selection activities, including redirection to each story screen.
  */
 
-public class StorySelectionActivity extends AppCompatActivity {
+public class StorySelectionActivity extends BaseActivity {
+    private StorySelectionViewModel vm;
+    private int storyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_selection);
+
+        vm = new StorySelectionViewModel();
+        List<Story> storyList = vm.getStories();
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -45,7 +55,6 @@ public class StorySelectionActivity extends AppCompatActivity {
 
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         title.setText("Story Templates");
-
     }
 
     /**
@@ -53,34 +62,8 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SpecialInventionCardOnClick(View v) {
-//        Intent intent = new Intent(this, StoryTemplateActivity.class);
-//        intent.putExtra("source", "The Special Invention");
-//        this.startActivity(intent);
-        Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * goes to the story screen for "The Wacky Costume Party"
-     * @param v view
-     */
-    public void WackyCostumePartyCardOnClick(View v) {
-//        Intent intent = new Intent(this, StoryTemplateActivity.class);
-//        intent.putExtra("source", "The Wacky Costume Party");
-//        this.startActivity(intent);
-        Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
-
-    }
-
-    /**
-     * goes to the story screen for "Santa's Mixed-up Helper Elf"
-     * @param v view
-     */
-    public void SantasElfCardOnClick(View v) {
-//        Intent intent = new Intent(this, StoryTemplateActivity.class);
-//        intent.putExtra("source", "Santa's Mixed-up Helper Elf");
-//        this.startActivity(intent);
-        Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
-
+        storyId = vm.getStories().get(0).getStoryId();
+        StoryTemplateActivity.start(this, storyId);
     }
 
     /**
@@ -88,8 +71,26 @@ public class StorySelectionActivity extends AppCompatActivity {
      * @param v view
      */
     public void SpaceAlienCardOnClick(View v) {
-        Intent intent = new Intent(this, StoryTemplateActivity.class);
-        intent.putExtra("source", "The Space Alien");
-        this.startActivity(intent);
+        storyId = vm.getStories().get(1).getStoryId();
+        StoryTemplateActivity.start(this, storyId);
     }
+
+    /**
+     * goes to the story screen for "The Wacky Costume Party"
+     * @param v view
+     */
+    public void WackyCostumePartyCardOnClick(View v) {
+        storyId = vm.getStories().get(2).getStoryId();
+        StoryTemplateActivity.start(this, storyId);
+    }
+
+    /**
+     * goes to the story screen for "Santa's Mixed-up Helper Elf"
+     * @param v view
+     */
+    public void SantasElfCardOnClick(View v) {
+        storyId = vm.getStories().get(3).getStoryId();
+        StoryTemplateActivity.start(this, storyId);
+    }
+
 }

@@ -11,11 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.model.CategoryCardItem;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
+import com.example.make_a_story_prototype.main.data.Word.Category;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,19 +24,16 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CategoriesActivity extends AppCompatActivity implements CategoryItemRecyclerViewAdapter.CategoryAdapterHandler {
+public class CategoriesActivity extends BaseActivity implements CategoryItemRecyclerViewAdapter.CategoryAdapterHandler {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
     private CategoriesViewModel viewModel;
-    private String source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
-
-        source = getIntent().getStringExtra("source");
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -88,12 +86,10 @@ public class CategoriesActivity extends AppCompatActivity implements CategoryIte
 
     @Override
     public void selectCategoryCard(CategoryCardItemViewModel vm) {
-        CategoryCardItem item = vm.cardItem;
+        Category category = vm.category;
 
         Intent intent = new Intent(this, WordbankActivity.class);
-        intent.putExtra("category", item.getImageLabel());
-        Log.d("tag", "selectCategoryCard intent extra category: " + item.getImageLabel());
-        intent.putExtra("source", source);
+        intent.putExtra("category", category.getId());
         this.startActivity(intent);
         
     }
