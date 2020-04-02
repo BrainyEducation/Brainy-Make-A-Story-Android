@@ -8,6 +8,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -68,6 +69,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
 
         if (savedInstanceState == null) {
             int storyId = getIntent().getIntExtra(STORY_ID_EXTRA_KEY, -1);
+            Log.d("TAG", "onCreate in template: intent extra [storyId] --> " + storyId);
             vm = new StoryViewModel(storyId);
         } else {
             vm = savedInstanceState.getParcelable(MY_VM_KEY);

@@ -34,8 +34,8 @@ public class StorySelectionActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_selection);
 
-        vm = new StorySelectionViewModel();
-        List<Story> storyList = vm.getStories();
+       // vm = new StorySelectionViewModel();
+       // List<Story> storyList = vm.getStories();
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -62,7 +62,7 @@ public class StorySelectionActivity extends BaseActivity {
      * @param v view
      */
     public void SpecialInventionCardOnClick(View v) {
-        storyId = vm.getStories().get(0).getStoryId();
+       // storyId = vm.getStories().get(0).getStoryId();
         StoryTemplateActivity.start(this, storyId);
     }
 
@@ -71,7 +71,7 @@ public class StorySelectionActivity extends BaseActivity {
      * @param v view
      */
     public void SpaceAlienCardOnClick(View v) {
-        storyId = vm.getStories().get(1).getStoryId();
+        //storyId = vm.getStories().get(1).getStoryId();
         StoryTemplateActivity.start(this, storyId);
     }
 
@@ -80,7 +80,7 @@ public class StorySelectionActivity extends BaseActivity {
      * @param v view
      */
     public void WackyCostumePartyCardOnClick(View v) {
-        storyId = vm.getStories().get(2).getStoryId();
+       // storyId = vm.getStories().get(2).getStoryId();
         StoryTemplateActivity.start(this, storyId);
     }
 
@@ -89,7 +89,7 @@ public class StorySelectionActivity extends BaseActivity {
      * @param v view
      */
     public void SantasElfCardOnClick(View v) {
-        storyId = vm.getStories().get(3).getStoryId();
+        //storyId = vm.getStories().get(3).getStoryId();
         StoryTemplateActivity.start(this, storyId);
     }
 

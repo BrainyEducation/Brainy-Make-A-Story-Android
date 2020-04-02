@@ -19,9 +19,6 @@ public class CategoriesViewModel {
     public CategoriesViewModel(Context context) {
         DebugWordRepository wordRepo = DebugWordRepository.getInstance();
         List<Category> categories = wordRepo.getCategories().blockingGet();
-//        List<Category> categories = wordRepo.getCategories().subscribe(category -> {
-//            categories.add(category);
-//        });
 
         for (int i = 0; i < categories.size(); i++) {
             Category category = categories.get(i);

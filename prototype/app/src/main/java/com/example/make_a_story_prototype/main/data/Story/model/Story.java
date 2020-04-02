@@ -7,11 +7,13 @@ public class Story {
     private int storyId;
     private String title;
     private List<StoryPage> pages;
+    private int imageResource;
 
-    public Story(int storyId, String title, List<StoryPage> pages) {
+    public Story(int storyId, String title, List<StoryPage> pages, int imageResource) {
         this.storyId = storyId;
         this.title = title;
         this.pages = pages;
+        this.imageResource = imageResource;
     }
 
     public int getStoryId() {
@@ -26,4 +28,7 @@ public class Story {
         return pages;
     }
 
+    public int getImageResource() {
+        return imageResource;
+    }
 }

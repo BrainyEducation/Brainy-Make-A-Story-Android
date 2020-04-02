@@ -18,7 +18,7 @@ public class Data_TheSpecialInvention {
         List<StoryPage> pages = new ArrayList<>();
         pages.add(sampleStoryPage1());
 
-        return new Story(0,"The Special Invention", pages);
+        return new Story(0,"The Special Invention", pages, R.drawable.story_special_invention_compressed);
     }
 
     private static StoryPage sampleStoryPage1() {

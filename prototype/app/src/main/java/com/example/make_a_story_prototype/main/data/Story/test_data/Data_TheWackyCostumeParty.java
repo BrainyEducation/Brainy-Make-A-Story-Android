@@ -19,7 +19,7 @@ public class Data_TheWackyCostumeParty {
         pages.add(sampleStoryPage1());
         pages.add(sampleStoryPage2());
 
-        return new Story(2,"The Wacky Costume Party", pages);
+        return new Story(2,"The Wacky Costume Party", pages, R.drawable.story_wacky_party_square_compressed);
     }
 
     private static StoryPage sampleStoryPage1() {
