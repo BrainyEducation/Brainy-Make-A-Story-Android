@@ -60,7 +60,6 @@ public class StorySelectionActivity extends BaseActivity {
 
         TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         title.setText("Story Templates");
-
     }
 
     /**
@@ -103,7 +102,6 @@ public class StorySelectionActivity extends BaseActivity {
         Intent intent = new Intent(this, StoryTemplateActivity.class);
         this.startActivity(intent);
         Toast.makeText(this, "Not Available", Toast.LENGTH_SHORT).show();
-
     }
 
     /**

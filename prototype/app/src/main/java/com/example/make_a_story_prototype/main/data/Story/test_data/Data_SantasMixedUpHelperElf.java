@@ -166,10 +166,6 @@ public class Data_SantasMixedUpHelperElf {
         blanks.put("PP",new StoryBlank("PP"));
         blanks.put("QQ",new StoryBlank("QQ"));
 
-
-
-
-
         return blanks;
     }
 }

@@ -104,8 +104,6 @@ public class Data_TheSpecialInvention {
         return new StoryPage(R.drawable.story_special_invention, segments);
     }
 
-
-
     private static Map<String, StoryBlank> blanks() {
         Map<String, StoryBlank> blanks = new HashMap<>();
 
