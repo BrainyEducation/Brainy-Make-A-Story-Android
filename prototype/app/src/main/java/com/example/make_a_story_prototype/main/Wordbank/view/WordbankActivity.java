@@ -119,7 +119,8 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
                         storyBlankSelectionContext.getBlankId(),
                         new BlankSelection(
                                 vm.word.getWord(),
-                                vm.word.getImageResource()
+                                vm.word.getImageResource(),
+                                vm.word.getAudioResource()
                         ));
 
                 StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId());

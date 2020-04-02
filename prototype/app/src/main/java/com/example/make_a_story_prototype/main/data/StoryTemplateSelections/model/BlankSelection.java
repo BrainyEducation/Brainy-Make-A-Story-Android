@@ -3,10 +3,12 @@ package com.example.make_a_story_prototype.main.data.StoryTemplateSelections.mod
 public class BlankSelection {
     private String text;
     private int imageResource;
+    private int audioResource;
 
-    public BlankSelection(String text, int imageResource) {
+    public BlankSelection(String text, int imageResource, int audioResource) {
         this.text = text;
         this.imageResource = imageResource;
+        this.audioResource = audioResource;
     }
 
     public String getText() {
@@ -15,6 +17,10 @@ public class BlankSelection {
 
     public int getImageResource() {
         return imageResource;
+    }
+
+    public int getAudioResource() {
+        return audioResource;
     }
 
 }

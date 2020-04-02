@@ -62,8 +62,7 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
             if (selection == null) {
                 nextResource = R.raw.things;
             } else {
-                // TODO:
-                nextResource = R.raw.animals_camel;
+                nextResource = selection.getAudioResource();
             }
         }
 

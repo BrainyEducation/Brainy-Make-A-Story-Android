@@ -48,6 +48,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
     public static void start(Activity activity, int storyId) {
         Intent intent = new Intent(activity, StoryTemplateActivity.class);
         intent.putExtra(STORY_ID_EXTRA_KEY, storyId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         activity.startActivity(intent);
     }
@@ -122,8 +123,10 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         switch (item.getItemId()) {
             case android.R.id.home:
                 showSaveDialog();
+                mediaController.pause();
                 return true;
             case R.id.home_menu_icon:
+                mediaController.pause();
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 return true;
             default:
