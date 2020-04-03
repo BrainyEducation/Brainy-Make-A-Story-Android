@@ -66,6 +66,7 @@ public class CharacterActivity extends AppCompatActivity {
         findViewById(R.id.confirm_button).setOnClickListener(button -> {
             viewModel.confirmCharacter();
         });
+
         findViewById(R.id.cancel_button).setOnClickListener(button -> {
             viewModel.cancelConfirmingCharacter();
         });
@@ -81,32 +82,32 @@ public class CharacterActivity extends AppCompatActivity {
 
             // TODO: reconfigure
             TextView selectedName = confirmationDialog.findViewById(R.id.name_selected).findViewById(R.id.character_name);
-            selectedName.setText(character.name);
-            selectedName.setTextColor(character.nameContrastColor);
+            selectedName.setText(character.character.getName().getName());
+            //selectedName.setTextColor(character);
 
             CardView nameCard = confirmationDialog.findViewById(R.id.name_selected).findViewById(R.id.card_view);
             CardView imageCard = confirmationDialog.findViewById(R.id.image_selected).findViewById(R.id.card_view);
 
             ImageView selectedImage = confirmationDialog.findViewById(R.id.image_selected).findViewById(R.id.characterImage);
-            selectedImage.setImageResource(character.image);
+            selectedImage.setImageResource(character.character.getImageResource());
 
             Drawable imageBackground = imageCard.findViewById(R.id.parent_layout).getBackground();
-            Util.changeDrawableColor(imageBackground, character.imageBackgroundColor);
+           // Util.changeDrawableColor(imageBackground, character.imageBackgroundColor);
 
             Drawable nameBackground = nameCard.findViewById(R.id.parent_layout).getBackground();
-            Util.changeDrawableColor(nameBackground, character.nameBackgroundColor);
+           // Util.changeDrawableColor(nameBackground, character.nameBackgroundColor);
 
             ImageView speakerIcon = nameCard.findViewById(R.id.speaker_icon);
 
             Drawable speakerDrawable = DrawableCompat.wrap(speakerIcon.getDrawable());
-            Util.changeDrawableColor(speakerDrawable, character.nameContrastColor);
+           // Util.changeDrawableColor(speakerDrawable, character.nameContrastColor);
 
             Drawable nameBorder = nameCard.getBackground();
-            Util.changeDrawableColor(nameBorder, character.nameContrastColor);
+            //Util.changeDrawableColor(nameBorder, character.nameContrastColor);
             nameCard.setRadius(23);
 
             Drawable imageBorder = imageCard.getBackground();
-            Util.changeDrawableColor(imageBorder, character.imageContrastColor);
+           // Util.changeDrawableColor(imageBorder, character.imageContrastColor);
             imageCard.setRadius(23);
 
             blurredBackground.setVisibility(View.VISIBLE);
@@ -139,7 +140,7 @@ public class CharacterActivity extends AppCompatActivity {
     private void initNameRecyclerView() {
         nameRecyclerView = findViewById(R.id.character_name_recycler_view);
         nameRecyclerView.setHasFixedSize(true);
-        namesRecyclerViewAdapter = new CharacterNamesRecyclerViewAdapter(viewModel);
+        namesRecyclerViewAdapter = new CharacterNamesRecyclerViewAdapter(this, viewModel);
         nameRecyclerView.setAdapter(namesRecyclerViewAdapter);
         nameRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
     }
@@ -147,7 +148,7 @@ public class CharacterActivity extends AppCompatActivity {
     private void initImageRecyclerView() {
         imageRecyclerView = findViewById(R.id.character_image_recycler_view);
         imageRecyclerView.setHasFixedSize(true);
-        imagesRecyclerViewAdapter = new CharacterImagesRecyclerViewAdapter(viewModel);
+        imagesRecyclerViewAdapter = new CharacterImagesRecyclerViewAdapter(this, viewModel);
         imageRecyclerView.setAdapter(imagesRecyclerViewAdapter);
         imageRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
     }

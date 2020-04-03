@@ -26,6 +26,8 @@ public class CharacterNameCardHolder extends RecyclerView.ViewHolder {
     private TextView characterName;
     private RelativeLayout parentLayout;
     private NameCardViewModel vm;
+    private int backgroundColor;
+    private int contrastColor;
 
     public CharacterNameCardHolder(@NonNull View itemView) {
         super(itemView);
@@ -39,23 +41,25 @@ public class CharacterNameCardHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setViewModel(NameCardViewModel vm) {
+    public void setViewModel(NameCardViewModel vm, int contrastColor, int backgroundColor) {
         this.vm = vm;
+        this.backgroundColor = backgroundColor;
+        this.contrastColor = contrastColor;
 
-        characterName.setText(vm.name);
-        characterName.setTextColor(vm.contrastColor);
+        characterName.setText(vm.name.getName());
+        characterName.setTextColor(contrastColor);
 
         Drawable imageBackground = parentLayout.getBackground();
-        Util.changeDrawableColor(imageBackground, vm.backgroundColor);
+        Util.changeDrawableColor(imageBackground, backgroundColor);
 
         CardView cardView = itemView.findViewById(R.id.card_view);
         Drawable imageBorder = cardView.getBackground();
-        Util.changeDrawableColor(imageBorder, vm.contrastColor);
+        Util.changeDrawableColor(imageBorder, contrastColor);
         cardView.setRadius(23);
 
         ImageView speakerIcon = itemView.findViewById(R.id.speaker_icon);
 
         Drawable speakerDrawable = DrawableCompat.wrap(speakerIcon.getDrawable());
-        Util.changeDrawableColor(speakerDrawable, vm.contrastColor);
+        Util.changeDrawableColor(speakerDrawable, contrastColor);
     }
 }

@@ -68,15 +68,15 @@ public class StoryHolder extends RecyclerView.ViewHolder {
         Drawable imageBackground = parentLayout.getBackground();
         Util.changeDrawableColor(imageBackground, backgroundColor);
 
+        CardView storyCardView = itemView.findViewById(R.id.card_view);
 
-        CardView stroyCardView = itemView.findViewById(R.id.card_view);
-        Drawable cardBorder = stroyCardView.getBackground();
+        Drawable cardBorder = storyCardView.getBackground();
         Util.changeDrawableColor(cardBorder, strokeColor);
-        stroyCardView.setRadius(23);
+        storyCardView.setRadius(23);
 
-//        CardView imageCardView = itemView.findViewById(R.id.image_holder);
-//        Drawable imageBorder = imageCardView.getBackground();
-//        Util.changeDrawableColor(imageBorder, strokeColor);
-//        imageCardView.setRadius(23);
+        CardView imageCardView = itemView.findViewById(R.id.image_holder);
+        Drawable imageBorder = imageCardView.getBackground();
+        Util.changeDrawableColor(imageBorder, strokeColor);
+        imageCardView.setRadius(23);
     }
 }
