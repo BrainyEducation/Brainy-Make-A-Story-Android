@@ -1,20 +1,18 @@
-package com.example.make_a_story_prototype.main.data.Story.db;
+package com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "image_locations_table")
 public class ImageLocation {
 
-    @PrimaryKey
     private int locationId;
-    private float x;
-    private float y;
-    private float width;
-    private float height;
-    private float rotation;
+    private double x;
+    private double y;
+    private double width;
+    private double height;
+    private double rotation;
 
-    public ImageLocation(int locationId, float x, float y, float width, float height, float rotation) {
+    public ImageLocation(int locationId, double x, double y, double width, double height, double rotation) {
         this.locationId = locationId;
         this.x = x;
         this.y = y;
@@ -27,7 +25,7 @@ public class ImageLocation {
         return locationId;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
@@ -35,7 +33,7 @@ public class ImageLocation {
         this.x = x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
@@ -43,27 +41,27 @@ public class ImageLocation {
         this.y = y;
     }
 
-    public float getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public void setWidth(float width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public float getRotation() {
+    public double getRotation() {
         return rotation;
     }
 
-    public void setRotation(float rotation) {
+    public void setRotation(double rotation) {
         this.rotation = rotation;
     }
 }

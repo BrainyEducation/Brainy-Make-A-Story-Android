@@ -142,7 +142,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         Button noSaveButton = findViewById(R.id.no_save_button);
 
         saveButton.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(), "Todo: Saving", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Saving", Toast.LENGTH_SHORT).show();
 
             finish();
         });

@@ -1,8 +1,11 @@
 package com.example.make_a_story_prototype.main.data.StoryTemplateSelections;
 
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.ImageLocation;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSelectionsRepository {
@@ -12,6 +15,14 @@ public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSele
     public static DebugStoryTemplateSelectionsRepository getInstance() {
         return instance;
     }
+
+
+    ImageLocation[] imageLocations = {
+            new ImageLocation(0, 12.5, 12.5, 60, 60, 0),
+            new ImageLocation(1, 75, 75, 60, 60, 0),
+            new ImageLocation(3, 10, 60, 60, 60, 0),
+            new ImageLocation(4, 60, 60, 60, 60, 0),
+    };
 
     private Map<Integer, Map<String, BlankSelection>> selections;
 
@@ -28,6 +39,21 @@ public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSele
         }
 
         return storySelections;
+    }
+
+    @Override
+    public List<ImageLocation> getImageLocations() {
+        return Arrays.asList(imageLocations);
+    }
+
+    @Override
+    public ImageLocation getImageLocation(int id) {
+        for (ImageLocation location : imageLocations) {
+            if (location.getLocationId() == id) {
+                return location;
+            }
+        }
+        return null;
     }
 
     @Override
