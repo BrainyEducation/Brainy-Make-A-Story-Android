@@ -17,6 +17,10 @@ import io.reactivex.subjects.BehaviorSubject;
 
 public class CharacterScreenViewModel {
 
+    public interface CharacterAdapterHandler {
+        void selectCharacterCard(CharacterViewModel vm);
+    }
+    public CharacterAdapterHandler handler;
     //region Types
 
     public class NameCardViewModel {
@@ -41,6 +45,9 @@ public class CharacterScreenViewModel {
         public CharacterViewModel(StoryCharacter character) {
             this.character = character;
         }
+        public StoryCharacter getCharacter() {
+            return character;
+        }
     }
 
     //endregion
@@ -51,6 +58,7 @@ public class CharacterScreenViewModel {
     private BehaviorSubject<NameCardViewModel> _selectedCharacterName;
     private BehaviorSubject<ImageCardViewModel> _selectedCharacterImage;
     private BehaviorSubject<Optional<CharacterViewModel>> _selectedCharacter;
+    private CharacterViewModel vm;
 
     //endregion
     //region Public Properties
@@ -89,6 +97,11 @@ public class CharacterScreenViewModel {
 
     public void confirmCharacter() {
         // TODO: something
+        if (handler == null) {
+            return;
+        }
+        handler.selectCharacterCard(vm);
+
     }
 
     public void cancelConfirmingCharacter() {
@@ -104,7 +117,8 @@ public class CharacterScreenViewModel {
 
         if (nameCard != null && imageCard != null) {
             StoryCharacter character = new StoryCharacter(nameCard.name, imageCard.image);
-            _selectedCharacter.onNext(new Optional(new CharacterViewModel(character)));
+            vm = new CharacterViewModel(character);
+            _selectedCharacter.onNext(new Optional(vm));
         }
     }
 
