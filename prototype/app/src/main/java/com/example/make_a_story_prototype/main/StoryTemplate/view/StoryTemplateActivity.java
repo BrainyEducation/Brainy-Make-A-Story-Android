@@ -196,7 +196,6 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), blankIdentifier));
         //If Character selection blank (format "X-2"), intent is character activity
         if (blankIdentifier.length() > 2) {
-            Toast.makeText(getApplicationContext(), "Selected character blank", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, CharacterActivity.class);
             StoryTemplateActivity.this.startActivity(intent);
         }

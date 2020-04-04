@@ -28,7 +28,6 @@ import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.DebugStoryTemplateSelectionsRepository;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -68,6 +67,7 @@ public class CharacterActivity extends BaseActivity implements CharacterScreenVi
         viewModel = new CharacterScreenViewModel(this, new Characters());
         initNameRecyclerView();
         initImageRecyclerView();
+        viewModel.handler = this;
 
         blurredBackground = findViewById(R.id.blur);
 
@@ -153,12 +153,9 @@ public class CharacterActivity extends BaseActivity implements CharacterScreenVi
     public void selectCharacterCard(CharacterViewModel vm) {
         NavigationController.NavigationContext context = getNavigationContext();
 
+        //If comes from story blank, return to story template page with matched character
         if (context instanceof StoryBlankSelectionContext) {
             StoryBlankSelectionContext storyBlankSelectionContext = (StoryBlankSelectionContext) context;
-
-
-            Log.d("TAG", "confirmed selected character name and image");
-
             DebugStoryTemplateSelectionsRepository.getInstance().setSelectionForStory(
                     storyBlankSelectionContext.getStoryId(),
                     storyBlankSelectionContext.getBlankId(),
@@ -170,7 +167,7 @@ public class CharacterActivity extends BaseActivity implements CharacterScreenVi
 
             StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId());
         } else {
-            //return to home screen
+            //return to home screen otherwise. Shouldn't happen once the "Friends" button on home screen is removed
             Intent intent = new Intent(this, HomeActivity.class);
             CharacterActivity.this.startActivity(intent);
         }

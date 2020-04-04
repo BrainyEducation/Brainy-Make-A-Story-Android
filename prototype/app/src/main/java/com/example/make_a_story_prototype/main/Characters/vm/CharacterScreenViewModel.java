@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.Characters.vm;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.make_a_story_prototype.main.Characters.model.Characters;
 import com.example.make_a_story_prototype.main.Util.Optional;
@@ -96,10 +97,13 @@ public class CharacterScreenViewModel {
     }
 
     public void confirmCharacter() {
-        // TODO: something
+        //If there's no handler: no activity/screen to present this on. Return
         if (handler == null) {
+            Log.d("TAG","handler is null");
             return;
         }
+        //the handler set in "CharacterActivity" would call method implemented in "Character Activity"
+        Log.d("TAG","Selected character is confirmed");
         handler.selectCharacterCard(vm);
 
     }
