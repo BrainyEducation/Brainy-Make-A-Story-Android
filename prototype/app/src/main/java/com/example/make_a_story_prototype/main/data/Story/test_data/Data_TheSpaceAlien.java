@@ -7,6 +7,7 @@ import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdenti
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
 import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryText;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.ImageLocation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -179,10 +180,16 @@ public class Data_TheSpaceAlien {
     private static Map<String, StoryBlank> blanks() {
         Map<String, StoryBlank> blanks = new HashMap<>();
 
-        blanks.put("A-2", new StoryBlank("A-2"));
-        blanks.put("C-2", new StoryBlank("C-2"));
-        blanks.put("AA",new StoryBlank("AA"));
-        blanks.put("BB",new StoryBlank("BB"));
+        ImageLocation[] imageLocations = {
+                new ImageLocation(0, 12.5, 12.5, 60, 60, 0),
+                new ImageLocation(1, 75, 75, 60, 60, 0),
+                new ImageLocation(3, 10, 60, 60, 60, 0),
+                new ImageLocation(4, 60, 60, 60, 60, 0),
+        };
+        blanks.put("A-2", new StoryBlank("A-2", imageLocations[0]));
+        blanks.put("C-2", new StoryBlank("C-2", imageLocations[1]));
+        blanks.put("AA",new StoryBlank("AA", imageLocations[2]));
+        blanks.put("BB",new StoryBlank("BB", imageLocations[3]));
         blanks.put("CC",new StoryBlank("CC"));
         blanks.put("DD",new StoryBlank("DD"));
         blanks.put("FF",new StoryBlank("FF"));

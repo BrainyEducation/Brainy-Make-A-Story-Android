@@ -101,14 +101,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
 
         updateTextView(0);
 
-        ImageView img = new ImageView(getApplicationContext());
-        img.setImageResource(R.drawable.animals_ape);
-        img.setX(100);
-        img.setY(100);
-        img.setMaxWidth(20);
-        img.setMaxHeight(20);
-        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        coordinatorLayout.addView(img, lp);
+        addImageToScene();
     }
 
     @Override
@@ -210,6 +203,19 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), blankIdentifier));
         Intent intent = new Intent(this, CategoriesActivity.class);
         StoryTemplateActivity.this.startActivity(intent);
+    }
+
+    private void addImageToScene() {
+        ImageView img = new ImageView(getApplicationContext());
+        img.setImageResource(R.drawable.animals_ape);
+        img.setX(100);
+        img.setY(100);
+
+        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        coordinatorLayout.addView(img, lp);
+
+        img.getLayoutParams().height = 200;
+        img.getLayoutParams().width = 200;
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.data.StoryTemplateSelections;
 
+import com.example.make_a_story_prototype.main.data.Story.model.StoryBlank;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.ImageLocation;
 
@@ -16,15 +17,9 @@ public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSele
         return instance;
     }
 
-
-    ImageLocation[] imageLocations = {
-            new ImageLocation(0, 12.5, 12.5, 60, 60, 0),
-            new ImageLocation(1, 75, 75, 60, 60, 0),
-            new ImageLocation(3, 10, 60, 60, 60, 0),
-            new ImageLocation(4, 60, 60, 60, 60, 0),
-    };
-
     private Map<Integer, Map<String, BlankSelection>> selections;
+
+    private Map<Integer, Map<StoryBlank, BlankSelection>> blanks;
 
     private DebugStoryTemplateSelectionsRepository() {
         selections = new HashMap<>();
@@ -39,21 +34,6 @@ public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSele
         }
 
         return storySelections;
-    }
-
-    @Override
-    public List<ImageLocation> getImageLocations() {
-        return Arrays.asList(imageLocations);
-    }
-
-    @Override
-    public ImageLocation getImageLocation(int id) {
-        for (ImageLocation location : imageLocations) {
-            if (location.getLocationId() == id) {
-                return location;
-            }
-        }
-        return null;
     }
 
     @Override
@@ -72,3 +52,19 @@ public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSele
         selections.remove(storyId);
     }
 }
+
+//    @Override
+//    public List<ImageLocation> getImageLocations() {
+//        return Arrays.asList(imageLocations);
+//    }
+//
+//    @Override
+//    public ImageLocation getImageLocation(int id) {
+//        for (ImageLocation location : imageLocations) {
+//            if (location.getLocationId() == id) {
+//                return location;
+//            }
+//        }
+//        return null;
+//    }
+
