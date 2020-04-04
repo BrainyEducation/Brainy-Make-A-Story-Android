@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
+import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
 import com.example.make_a_story_prototype.main.StoryTemplate.controller.StoryMediaController;
@@ -193,8 +194,15 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         mediaController.pause();
 
         setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), blankIdentifier));
-        Intent intent = new Intent(this, CategoriesActivity.class);
-        StoryTemplateActivity.this.startActivity(intent);
+        //If Character selection blank (format "X-2"), intent is character activity
+        if (blankIdentifier.length() > 2) {
+            Intent intent = new Intent(this, CharacterActivity.class);
+            StoryTemplateActivity.this.startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, CategoriesActivity.class);
+            StoryTemplateActivity.this.startActivity(intent);
+        }
     }
 
     @Override
