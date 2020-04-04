@@ -2,6 +2,7 @@ package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.Spannable;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -38,6 +40,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams;
 
 public class StoryTemplateActivity extends BaseActivity implements ObservableScrollView.ScrollViewListener {
 
@@ -56,10 +60,11 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
     private StoryMediaController mediaController;
     private StoryViewModel vm;
 
-    private ImageView storyImageView;
+    private ImageView sceneImageView;
     private TextView storyTextView;
     private ObservableScrollView scrollView = null;
     private ProgressBar progressBar;
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,8 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        storyImageView = findViewById(R.id.story_image);
+        coordinatorLayout = findViewById(R.id.coordinator_layout);
+        sceneImageView = findViewById(R.id.scene_image);
         storyTextView = findViewById(R.id.story_text);
         progressBar = findViewById(R.id.progress_bar);
         scrollView = findViewById(R.id.story_scroll);
@@ -91,9 +97,18 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
 
-        storyImageView.setImageResource(vm.getStory().getPages().get(0).getImageResource());
+        sceneImageView.setImageResource(vm.getStory().getPages().get(0).getImageResource());
 
         updateTextView(0);
+
+        ImageView img = new ImageView(getApplicationContext());
+        img.setImageResource(R.drawable.animals_ape);
+        img.setX(100);
+        img.setY(100);
+        img.setMaxWidth(20);
+        img.setMaxHeight(20);
+        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        coordinatorLayout.addView(img, lp);
     }
 
     @Override
@@ -196,6 +211,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         Intent intent = new Intent(this, CategoriesActivity.class);
         StoryTemplateActivity.this.startActivity(intent);
     }
+
 
     @Override
     public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int prevX, int prevY) {

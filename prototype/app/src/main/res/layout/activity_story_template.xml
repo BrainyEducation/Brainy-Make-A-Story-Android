@@ -29,55 +29,66 @@
             android:id="@+id/image_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-        <ImageView
-            android:id="@+id/story_image"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginStart="9dp"
-            android:layout_marginEnd="9dp"
-            android:contentDescription="@string/story_image"
-            android:padding="0dp"
-            android:visibility="visible"
-            app:srcCompat="@drawable/story_space_alien_1" />
+<!--        <ImageView-->
+<!--            android:id="@+id/story_image"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="280dp"-->
+<!--            android:layout_marginTop="64dp"-->
+<!--            android:layout_marginStart="9dp"-->
+<!--            android:layout_marginEnd="9dp"-->
+<!--            android:contentDescription="@string/story_image"-->
+<!--            android:padding="0dp"-->
+<!--            android:visibility="visible"-->
+<!--            app:srcCompat="@drawable/story_space_alien_1" />-->
+
+            <include
+                layout="@layout/scene_image"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginEnd="9dp"
+                android:contentDescription="@string/story_image"
+                android:padding="0dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/story_space_alien_1" />
 
 
+                    </FrameLayout>
 
-        </FrameLayout>
+                    <com.example.make_a_story_prototype.main.StoryTemplate.view.ObservableScrollView
+                        android:id="@+id/story_scroll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_marginBottom="67dp"
+                        android:padding="2dp"
+                        android:scrollbars="none"
+                        android:background="@color/colorWhite">
+                    <TextView
+                        android:id="@+id/story_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:textSize="12pt"
+                        android:lineSpacingMultiplier="1.5"
+                        android:lineSpacingExtra="3dp"
+                        android:textColor="@color/colorAppBlack" />
 
-        <com.example.make_a_story_prototype.main.StoryTemplate.view.ObservableScrollView
-            android:id="@+id/story_scroll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="9dp"
-            android:layout_marginBottom="67dp"
-            android:padding="2dp"
-            android:scrollbars="none"
-            android:background="@color/colorWhite">
-        <TextView
-            android:id="@+id/story_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:textSize="12pt"
-            android:lineSpacingMultiplier="1.5"
-            android:lineSpacingExtra="3dp"
-            android:textColor="@color/colorAppBlack" />
+                    </com.example.make_a_story_prototype.main.StoryTemplate.view.ObservableScrollView>
 
-        </com.example.make_a_story_prototype.main.StoryTemplate.view.ObservableScrollView>
+                </LinearLayout>
 
-    </LinearLayout>
+                    <include
+                        android:id="@+id/popup_dialog"
+                        layout="@layout/popup"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="275dp"
+                        android:layout_marginStart="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:visibility="gone"/>
 
-        <include
-            android:id="@+id/popup_dialog"
-            layout="@layout/popup"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="275dp"
-            android:layout_marginStart="80dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone"/>
-
-</RelativeLayout>
+            </RelativeLayout>
