@@ -1,7 +1,6 @@
 package com.example.make_a_story_prototype.main.data.Story.test_data;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.data.Story.db.TextSegment;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlank;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;

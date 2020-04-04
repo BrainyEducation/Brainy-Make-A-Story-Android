@@ -1,7 +1,6 @@
 package com.example.make_a_story_prototype.main.Wordbank.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,9 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 import com.example.make_a_story_prototype.main.data.MasteredWords.DebugMasteredWordsRepository;
-import com.example.make_a_story_prototype.main.data.Word.Word;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.View.GONE;

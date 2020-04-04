@@ -1,7 +1,6 @@
 package com.example.make_a_story_prototype.main.data.Story.model;
 
 import java.util.List;
-import java.util.Map;
 
 public class Story {
     private int storyId;

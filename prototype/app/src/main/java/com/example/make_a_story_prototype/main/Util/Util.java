@@ -11,7 +11,6 @@ import android.view.WindowManager;
 
 import com.example.make_a_story_prototype.R;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 

@@ -1,7 +1,5 @@
 package com.example.make_a_story_prototype.main.StorySelection.vm;
 
-import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
-import com.example.make_a_story_prototype.main.data.Story.StoryRepository;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 
 public class StoryCardViewModel {

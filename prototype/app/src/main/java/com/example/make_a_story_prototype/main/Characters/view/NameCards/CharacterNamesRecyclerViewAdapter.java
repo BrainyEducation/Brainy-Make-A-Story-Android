@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.Characters.view.NameCards.CharacterNameCardHolder.CharacterNameCallback;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel.NameCardViewModel;
@@ -80,16 +79,8 @@ public class CharacterNamesRecyclerViewAdapter extends RecyclerView.Adapter<Char
 
     @Override
     public void nameTappedOn(NameCardViewModel vm) {
-
         this.vm.selectNameCard(vm);
 
-//        for (CategoryCardItemViewModel cardVm : this.vm.getCardList()) {
-//            cardVm.isSelected = false;
-//        }
-//
-//        vm.isSelected = true;
-//        notifyDataSetChanged();
-//
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer = android.media.MediaPlayer.create(context, vm.name.getAudioResource());
             mediaPlayer.start();

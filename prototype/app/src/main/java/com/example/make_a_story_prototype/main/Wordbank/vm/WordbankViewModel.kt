@@ -7,11 +7,7 @@ import com.example.make_a_story_prototype.main.data.MasteredWords.MasteredWordsR
 import com.example.make_a_story_prototype.main.data.Word.Category
 import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository
 import com.example.make_a_story_prototype.main.data.Word.WordRepository
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
-import java.util.stream.Collectors
 
 class WordbankViewModel(private val categoryId: Int) : Parcelable {
     private val wordRepository: WordRepository = DebugWordRepository.getInstance()

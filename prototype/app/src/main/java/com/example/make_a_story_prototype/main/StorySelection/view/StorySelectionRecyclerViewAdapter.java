@@ -5,13 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.view.CategoryItemRecyclerViewAdapter;
-import com.example.make_a_story_prototype.main.Categories.vm.CategoriesViewModel;
-import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
-import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import com.example.make_a_story_prototype.main.StorySelection.vm.StoryCardViewModel;
 import com.example.make_a_story_prototype.main.StorySelection.vm.StorySelectionViewModel;
 
@@ -41,8 +36,6 @@ public class StorySelectionRecyclerViewAdapter extends RecyclerView.Adapter<Stor
     private StorySelectionViewModel vm;
     private List<StoryCardViewModel> cardVms;
 
-        private TextView cardTitle;
-
         StorySelectionRecyclerViewAdapter(Context context, StorySelectionViewModel vm) {
             this.vm = vm;
             this.cardVms = vm.getCardList();
@@ -64,7 +57,7 @@ public class StorySelectionRecyclerViewAdapter extends RecyclerView.Adapter<Stor
             int textColor = ContextCompat.getColor(context, R.color.colorWhite);
             int strokeColor = ContextCompat.getColor(context, R.color.colorPrimaryDark);
 
-
+            Log.d("TAG", "onBindViewHolder: story -->" + currentCard.getStory().getTitle());
             holder.setViewModel(currentCard, backgroundColor, strokeColor, textColor);
 
             this.vm = vm;

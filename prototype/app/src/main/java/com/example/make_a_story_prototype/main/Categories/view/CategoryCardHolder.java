@@ -18,7 +18,6 @@ import com.example.make_a_story_prototype.main.data.Word.Category;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryCardHolder extends RecyclerView.ViewHolder {
@@ -102,6 +101,10 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
 
         // TODO: take another look at this
         d.setColorFilter(new PorterDuffColorFilter(contrastColor, PorterDuff.Mode.SRC_IN));
+    }
+
+    public void setColors(int backgroundColor, int contrastColor) {
+
     }
 
 }

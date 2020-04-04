@@ -2,15 +2,11 @@ package com.example.make_a_story_prototype.main.Categories.vm;
 
 import android.content.Context;
 
-import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
 import com.example.make_a_story_prototype.main.data.Word.Category;
-
+import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.core.content.ContextCompat;
 
 public class CategoriesViewModel {
 
