@@ -9,6 +9,7 @@
     <attr name="colorPrimaryLight" format="color" />
     <attr name="colorAppBlack" format="color" />
     <attr name="colorYellow" format="color" />
+    <attr name="colorLightGray" format="color" />
 
 
     <attr name="colorLightRed" format="color" />

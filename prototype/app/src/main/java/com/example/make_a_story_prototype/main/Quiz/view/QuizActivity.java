@@ -20,7 +20,6 @@ import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
-import com.example.make_a_story_prototype.main.data.Word.Category;
 import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
 import com.example.make_a_story_prototype.main.data.Word.Word;
 

@@ -8,6 +8,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,15 +24,14 @@ import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivit
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
 import com.example.make_a_story_prototype.main.StoryTemplate.controller.StoryMediaController;
+import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.BaseActivity;
+import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
-import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
 import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryText;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
-import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
 import java.util.List;
@@ -68,6 +68,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
 
         if (savedInstanceState == null) {
             int storyId = getIntent().getIntExtra(STORY_ID_EXTRA_KEY, -1);
+            Log.d("TAG", "onCreate in template: intent extra [storyId] --> " + storyId);
             vm = new StoryViewModel(storyId);
         } else {
             vm = savedInstanceState.getParcelable(MY_VM_KEY);

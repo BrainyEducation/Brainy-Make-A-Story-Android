@@ -2,10 +2,6 @@ package com.example.make_a_story_prototype.main.data.MasteredWords;
 
 import android.content.Context;
 
-import com.example.make_a_story_prototype.main.StoryTemplate.view.ObservableScrollView;
-import com.example.make_a_story_prototype.main.Wordbank.view.WordbankItemRecyclerViewAdapter;
-import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,13 +10,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.SingleOnSubscribe;
-import io.reactivex.subjects.BehaviorSubject;
 
 public class DebugMasteredWordsRepository implements MasteredWordsRepository {
 

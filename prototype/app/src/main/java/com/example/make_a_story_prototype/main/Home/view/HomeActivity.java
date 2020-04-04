@@ -9,7 +9,6 @@ import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivit
 import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
 import com.example.make_a_story_prototype.main.Home.vm.BrowseContext;
 import com.example.make_a_story_prototype.main.Home.vm.HomeContext;
-import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
 import com.example.make_a_story_prototype.main.StorySelection.view.StorySelectionActivity;
 import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
