@@ -1,18 +1,17 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
-import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
-import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
-import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
 import com.example.make_a_story_prototype.main.StoryTemplate.controller.StoryMediaController;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 
@@ -55,16 +54,24 @@ public class StoryPageView extends ConstraintLayout implements ObservableScrollV
         progressBar = findViewById(R.id.progress_bar);
         scrollView = findViewById(R.id.story_scroll);
         scrollView.setScrollViewListener(this);
+
+        ImageView playButton = findViewById(R.id.play_button);
+        ImageView pauseButton = findViewById(R.id.pause_button);
+        ImageView replayButton = findViewById(R.id.replay_button);
+
+        playButton.setOnClickListener(this::onPlayTapped);
+        pauseButton.setOnClickListener(this::onPauseTapped);
+        replayButton.setOnClickListener(this::onReplayTapped);
     }
 
     public void setViewModel(StoryViewModel vm, int pageNumber) {
         this.vm = vm;
         this.pageNumber = pageNumber;
 
-        sceneImage.setViewModel(vm, 0);
+        sceneImage.setViewModel(vm, pageNumber);
         mediaController = new StoryMediaController(
                 getContext(),
-                vm.getStory().getPages().get(0),
+                vm.getStory().getPages().get(pageNumber),
                 vm
         );
 

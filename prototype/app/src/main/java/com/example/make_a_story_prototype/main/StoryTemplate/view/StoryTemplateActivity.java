@@ -2,22 +2,14 @@ package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,24 +18,13 @@ import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivit
 import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
-import com.example.make_a_story_prototype.main.StoryTemplate.controller.StoryMediaController;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
-import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
-import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
-import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
-import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
-import com.example.make_a_story_prototype.main.data.Story.model.StoryText;
-import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
-import java.util.List;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams;
+import androidx.viewpager.widget.ViewPager;
 
 public class StoryTemplateActivity extends BaseActivity implements StoryViewModel.StoryViewModelCallback {
 
@@ -59,7 +40,8 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
     }
 
     private StoryViewModel vm;
-    private StoryPageView storyPageView;
+    private ViewPager storyPager;
+    private StoryPageAdapter storyPageAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,8 +61,9 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        storyPageView = findViewById(R.id.story_page);
-        storyPageView.setViewModel(vm, 0);
+        storyPager = findViewById(R.id.story_pager);
+        storyPageAdapter = new StoryPageAdapter(this, vm);
+        storyPager.setAdapter(storyPageAdapter);
 
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
@@ -106,13 +89,14 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO:
         switch (item.getItemId()) {
             case android.R.id.home:
                 showSaveDialog();
-                storyPageView.pause();
+//                storyPageView.pause();
                 return true;
             case R.id.home_menu_icon:
-                storyPageView.pause();
+//                storyPageView.pause();
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 return true;
             default:
@@ -141,7 +125,8 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
     @Override
     public void onSelectedBlank(String identifier) {
-        storyPageView.pause();
+        // TODO:
+//        storyPageView.pause();
 
         setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), identifier));
         //If Character selection blank (format "X-2"), intent is character activity
