@@ -45,11 +45,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams;
 
-public class StoryTemplateActivity extends BaseActivity implements ObservableScrollView.ScrollViewListener {
+public class StoryTemplateActivity extends BaseActivity implements StoryViewModel.StoryViewModelCallback, ObservableScrollView.ScrollViewListener {
 
     private static String STORY_ID_EXTRA_KEY = "STORY_ID";
     private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
-    private static String BLANK_PLACEHOLDER = " BLANK ";
 
     public static void start(Activity activity, int storyId) {
         Intent intent = new Intent(activity, StoryTemplateActivity.class);
@@ -62,13 +61,10 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
     private StoryMediaController mediaController;
     private StoryViewModel vm;
 
-    private ImageView sceneImageView;
     private TextView storyTextView;
     private ObservableScrollView scrollView = null;
     private ProgressBar progressBar;
-    private CoordinatorLayout coordinatorLayout;
-    private static int sceneImageHeight;
-    private static int sceneImageWidth;
+    private SceneImage sceneImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +79,8 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
             vm = savedInstanceState.getParcelable(MY_VM_KEY);
         }
 
+        vm.callback = this;
+
         mediaController = new StoryMediaController(this, vm.getStory().getPages().get(0), vm);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -91,8 +89,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        coordinatorLayout = findViewById(R.id.coordinator_layout);
-        sceneImageView = findViewById(R.id.scene_image);
+        sceneImage = findViewById(R.id.scene_image);
         storyTextView = findViewById(R.id.story_text);
         progressBar = findViewById(R.id.progress_bar);
         scrollView = findViewById(R.id.story_scroll);
@@ -101,7 +98,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
 
-        sceneImageView.setImageResource(vm.getStory().getPages().get(0).getImageResource());
+        sceneImage.setViewModel(vm, 0);
 
         updateTextView(0);
     }
@@ -118,15 +115,6 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         super.onResume();
 
         updateTextView(0);
-    }
-
-    @Override
-    public void onWindowFocusChanged (boolean hasFocus) {
-        // the height will be set at this point
-        sceneImageHeight = sceneImageView.getMeasuredHeight();
-        sceneImageWidth = sceneImageView.getMeasuredWidth();
-        Log.d("TAG", "onWindowFocusChanged: [" + sceneImageWidth + ", " + sceneImageHeight + "]");
-
     }
 
     // home icon
@@ -174,65 +162,13 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
     }
 
     public void updateTextView(int pageNum) {
-        StoryPage currentPage = vm.getStory().getPages().get(pageNum);
-        List<StorySegment> segments = currentPage.getSegments();
-
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-
-        for (StorySegment s : segments) {
-            if (s instanceof StoryText) {
-                StoryText textSegment = (StoryText) s;
-                builder.append(textSegment.getText());
-            } else if (s instanceof StoryBlankIdentifier) {
-                StoryBlankIdentifier identifier = (StoryBlankIdentifier) s;
-                BlankSelection selection = vm.getSelections().get(identifier.get());
-                ImageLocation imageLocation = vm.getImageLocationForSelection(pageNum, identifier.get());
-
-                if (selection == null) {
-                    builder.append(
-                            BLANK_PLACEHOLDER,
-                            new ClickableSpan() {
-                                @Override
-                                public void onClick(@NonNull View v) {
-                                    onSelectedBlank(identifier.get());
-                                }
-                            },
-                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                    );
-                } else {
-                    builder.append(selection.getText());
-                    if (imageLocation != null) {
-                        updateSceneImage(imageLocation, selection);
-                    }
-                }
-            }
-        }
+        Spannable text = vm.getTextForPage(pageNum);
 
         storyTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        storyTextView.setText(builder);
+        storyTextView.setText(text);
     }
 
-    public void updateSceneImage(ImageLocation location, BlankSelection selection) {
-        ImageView img = new ImageView(getApplicationContext());
-        img.setImageResource(selection.getImageResource());
-        Log.d("TAG", "updateSceneImage --> location: " + location.getLocationId());
-
-        Log.d("TAG", "sceneWidth: " + sceneImageWidth);
-        Log.d("TAG", "location X: " + location.getX() * .01f);
-
-
-        img.setX(sceneImageWidth * (location.getX() * .01f));
-        img.setY(sceneImageHeight * (location.getY() * .01f));
-
-        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        coordinatorLayout.addView(img, lp);
-
-        img.getLayoutParams().height = location.getHeight();
-        img.getLayoutParams().width = location.getWidth();
-    }
-
-
-    private void onSelectedBlank(String blankIdentifier) {
+    public void onSelectedBlank(String blankIdentifier) {
         mediaController.pause();
 
         setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), blankIdentifier));
@@ -240,8 +176,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         if (blankIdentifier.length() > 2) {
             Intent intent = new Intent(this, CharacterActivity.class);
             StoryTemplateActivity.this.startActivity(intent);
-        }
-        else {
+        } else {
             Intent intent = new Intent(this, CategoriesActivity.class);
             StoryTemplateActivity.this.startActivity(intent);
         }
