@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
 import com.example.make_a_story_prototype.main.data.Story.StoryRepository;
+import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.DebugStoryTemplateSelectionsRepository;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.StoryTemplateSelectionsRepository;
@@ -20,6 +21,7 @@ public class StoryViewModel implements Parcelable {
     private Story story;
     private int storyId;
     private Map<String, BlankSelection> selections;
+    private Map<String, ImageLocation> imageLocationsForPage;
 
     public StoryViewModel(int storyId) {
         Log.d("StoryViewModel", "create with " + storyId);
@@ -31,6 +33,23 @@ public class StoryViewModel implements Parcelable {
 
     public Map<String, BlankSelection> getSelections() {
         return selections;
+    }
+
+
+    // TODO
+    public ImageLocation getImageLocationForSelection(int page, String storyBlankId) {
+        imageLocationsForPage = story.getPages().get(page).getImageLocations();
+
+        ImageLocation location = imageLocationsForPage.get(storyBlankId);
+
+        if (location != null) {
+            Log.d("TAG", "getImageLocationForSelection --> storyBlankId = " + storyBlankId + " && location w/ id != null? " + location.getLocationId());
+            return location;
+        }
+        else {
+            Log.d("TAG", "getImageLocationForSelection: null location --- for storyBlankId " + storyBlankId);
+            return null;
+        }
     }
 
     public Story getStory() {

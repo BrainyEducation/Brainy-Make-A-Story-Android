@@ -1,18 +1,18 @@
-package com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model;
+package com.example.make_a_story_prototype.main.data.Story.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 public class ImageLocation {
 
-    private int locationId;
-    private double x;
-    private double y;
-    private double width;
-    private double height;
-    private double rotation;
+    private String locationId;
+    private float x;
+    private float y;
+    private int width;
+    private int height;
+    private int rotation;
 
-    public ImageLocation(int locationId, double x, double y, double width, double height, double rotation) {
+    public ImageLocation(String locationId, float x, float y, int width, int height, int rotation) {
         this.locationId = locationId;
         this.x = x;
         this.y = y;
@@ -21,11 +21,11 @@ public class ImageLocation {
         this.rotation = rotation;
     }
 
-    public int getLocationId() {
+    public String getLocationId() {
         return locationId;
     }
 
-    public double getX() {
+    public float getX() {
         return x;
     }
 
@@ -33,7 +33,7 @@ public class ImageLocation {
         this.x = x;
     }
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
@@ -41,27 +41,27 @@ public class ImageLocation {
         this.y = y;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public double getRotation() {
+    public int getRotation() {
         return rotation;
     }
 
-    public void setRotation(double rotation) {
+    public void setRotation(int rotation) {
         this.rotation = rotation;
     }
 }

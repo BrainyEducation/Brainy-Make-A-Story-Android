@@ -10,11 +10,5 @@
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:translationX="50dp"
-            android:translationY="100dp"
-            android:src="@drawable/food_sandwich"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>

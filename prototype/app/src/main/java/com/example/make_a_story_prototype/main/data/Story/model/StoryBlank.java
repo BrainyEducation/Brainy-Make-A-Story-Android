@@ -1,7 +1,5 @@
 package com.example.make_a_story_prototype.main.data.Story.model;
 
-import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.ImageLocation;
-
 public class StoryBlank {
     String identifier;
     ImageLocation imageLocation;

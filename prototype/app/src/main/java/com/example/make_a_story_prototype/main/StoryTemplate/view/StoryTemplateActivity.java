@@ -30,6 +30,7 @@ import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
+import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
 import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
@@ -65,6 +66,8 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
     private ObservableScrollView scrollView = null;
     private ProgressBar progressBar;
     private CoordinatorLayout coordinatorLayout;
+    private static int sceneImageHeight;
+    private static int sceneImageWidth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,8 +103,6 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         sceneImageView.setImageResource(vm.getStory().getPages().get(0).getImageResource());
 
         updateTextView(0);
-
-        addImageToScene();
     }
 
     @Override
@@ -116,6 +117,15 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         super.onResume();
 
         updateTextView(0);
+    }
+
+    @Override
+    public void onWindowFocusChanged (boolean hasFocus) {
+        // the height will be set at this point
+        sceneImageHeight = sceneImageView.getMeasuredHeight();
+        sceneImageWidth = sceneImageView.getMeasuredWidth();
+        Log.d("TAG", "onWindowFocusChanged: [" + sceneImageWidth + ", " + sceneImageHeight + "]");
+
     }
 
     // home icon
@@ -175,6 +185,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
             } else if (s instanceof StoryBlankIdentifier) {
                 StoryBlankIdentifier identifier = (StoryBlankIdentifier) s;
                 BlankSelection selection = vm.getSelections().get(identifier.get());
+                ImageLocation imageLocation = vm.getImageLocationForSelection(pageNum, identifier.get());
 
                 if (selection == null) {
                     builder.append(
@@ -189,6 +200,7 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
                     );
                 } else {
                     builder.append(selection.getText());
+                    updateSceneImage(imageLocation, selection);
                 }
             }
         }
@@ -196,6 +208,26 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
         storyTextView.setMovementMethod(LinkMovementMethod.getInstance());
         storyTextView.setText(builder);
     }
+
+    public void updateSceneImage(ImageLocation location, BlankSelection selection) {
+        ImageView img = new ImageView(getApplicationContext());
+        img.setImageResource(selection.getImageResource());
+        Log.d("TAG", "updateSceneImage --> location: " + location.getLocationId());
+
+        Log.d("TAG", "sceneWidth: " + sceneImageWidth);
+        Log.d("TAG", "location X: " + location.getX() * .01f);
+
+
+        img.setX(sceneImageWidth * (location.getX() * .01f));
+        img.setY(sceneImageHeight * (location.getY() * .01f));
+
+        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        coordinatorLayout.addView(img, lp);
+
+        img.getLayoutParams().height = location.getHeight();
+        img.getLayoutParams().width = location.getWidth();
+    }
+
 
     private void onSelectedBlank(String blankIdentifier) {
         mediaController.pause();
