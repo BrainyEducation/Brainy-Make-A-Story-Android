@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.Characters.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -139,7 +140,8 @@ public class CharacterActivity extends BaseActivity implements CharacterScreenVi
                 super.finish();
                 return true;
             case R.id.storybook:
-                Toast.makeText(this, "Todo: storybook button", Toast.LENGTH_SHORT).show();
+                // Storybook is simply the same as back arrow or ending current activity.
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
