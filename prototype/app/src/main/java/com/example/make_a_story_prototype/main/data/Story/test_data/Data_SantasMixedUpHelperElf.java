@@ -63,15 +63,17 @@ public class Data_SantasMixedUpHelperElf {
 
         Map<String, ImageLocation> imageLocations = new HashMap<>();
 
-        imageLocations.put("A-2", new ImageLocation("A-2", 12f, 60f, 250, 250, 0));
-        imageLocations.put("DD", new ImageLocation("DD", 75f, 10f, 250, 250, 0));
-        imageLocations.put("EE", new ImageLocation("EE", 75f, 10f, 250, 250, 0));
-        imageLocations.put("B-2", new ImageLocation("B-2", 45f, 60f, 250, 250, 0));
-        imageLocations.put("GG", new ImageLocation("GG", 75f, 10f, 250, 250, 0));
-        imageLocations.put("JJ", new ImageLocation("JJ", 75f, 10f, 250, 250, 0));
-        imageLocations.put("C-2", new ImageLocation("C-2", 60f, 60f, 250, 250, 0));
-        imageLocations.put("KK", new ImageLocation("KK", 75f, 10f, 250, 250, 0));
-        imageLocations.put("LL", new ImageLocation("LL", 75f, 10f, 250, 250, 0));
+        imageLocations.put("A-2", new ImageLocation("A-2", 15f, 64f, 250, 250, 0));
+        imageLocations.put("DD", new ImageLocation("DD", 8f, 24f, 150, 150, 0));
+        imageLocations.put("EE", new ImageLocation("EE", 22f, 34f, 150, 150, 0));
+        imageLocations.put("B-2", new ImageLocation("B-2", 39f, 58f, 250, 250, 0));
+
+        imageLocations.put("GG", new ImageLocation("GG", 42f, 15f, 150, 150, 0));
+        imageLocations.put("JJ", new ImageLocation("JJ", 57f, 10f, 150, 150, 0));
+
+        imageLocations.put("C-2", new ImageLocation("C-2", 63f, 64f, 250, 250, 0));
+        imageLocations.put("KK", new ImageLocation("KK", 68f, 40f, 150, 150, 0));
+        imageLocations.put("LL", new ImageLocation("LL", 80f, 25f, 150, 150, 0));
 
         return new StoryPage(R.drawable.story_santas_elf_1, segments, imageLocations);
     }

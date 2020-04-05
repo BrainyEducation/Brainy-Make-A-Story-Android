@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.data.Story.test_data;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlank;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
@@ -64,7 +65,8 @@ public class Data_TheWackyCostumeParty {
                 R.raw.wacky_party_segment_12));
         segments.add(new StoryBlankIdentifier("GG"));
         segments.add(new StoryText(" body and a ",R.raw.wacky_party_segment_13));
-        segments.add(new StoryBlankIdentifier("HH"));
+        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
+        segments.add(new StoryBlankIdentifier("GG"));
         segments.add(new StoryText(" tail.\n\n\t",R.raw.wacky_party_segment_14));
         // Third Paragraph
         segments.add(new StoryBlankIdentifier("G-2"));
@@ -75,7 +77,8 @@ public class Data_TheWackyCostumeParty {
         segments.add(new StoryText(" who looked great with a ",R.raw.wacky_party_segment_17));
         segments.add(new StoryBlankIdentifier("LL"));
         segments.add(new StoryText(" tail and a ",R.raw.wacky_party_segment_18));
-        segments.add(new StoryBlankIdentifier("MM"));
+        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
+        segments.add(new StoryBlankIdentifier("LL"));
         segments.add(new StoryText(" middle.\n\n\t",R.raw.wacky_party_segment_19));
         // Fourth Paragraph
         segments.add(new StoryBlankIdentifier("K-2"));
@@ -88,12 +91,36 @@ public class Data_TheWackyCostumeParty {
         segments.add(new StoryText(" with ", R.raw.wacky_party_segment_22));
         segments.add(new StoryBlankIdentifier("QQ"));
         segments.add(new StoryText(" tummy parts and a ", R.raw.wacky_party_segment_23));
-        segments.add(new StoryBlankIdentifier("RR"));
+        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
+        segments.add(new StoryBlankIdentifier("QQ"));
         //Leads to the beginning of second page
         segments.add(new StoryText(" tail part.\n\n\tAnd a wonderful time was had by all " +
                 "— until ", R.raw.wacky_party_segment_24));
 
-        return new StoryPage(R.drawable.story_wacky_costume_1, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        imageLocations.put("AA", null);
+        imageLocations.put("BB", null);
+        imageLocations.put("CC", null);
+        imageLocations.put("C-2", null);
+        imageLocations.put("D-2", null);
+        imageLocations.put("DD", new ImageLocation("BB", 48f, 26f, 200, 200, 0));
+        imageLocations.put("FF", null);
+        imageLocations.put("GG", new ImageLocation("BB", 56f, 46f, 200, 200, 0));
+        imageLocations.put("G-2", null);
+        imageLocations.put("II", new ImageLocation("BB", 56f, 46f, 200, 200, 0));
+        imageLocations.put("KK", null);
+        imageLocations.put("LL", new ImageLocation("BB", 56f, 46f, 200, 200, 0));
+        imageLocations.put("K-2", null);
+        imageLocations.put("NN", new ImageLocation("BB", 56f, 46f, 200, 200, 0));
+
+        imageLocations.put("PP", null);
+        imageLocations.put("QQ", null);
+        imageLocations.put("G-2", null);
+
+
+
+        return new StoryPage(R.drawable.story_wacky_costume_1, segments, imageLocations);
     }
 
     private static StoryPage sampleStoryPage2() {

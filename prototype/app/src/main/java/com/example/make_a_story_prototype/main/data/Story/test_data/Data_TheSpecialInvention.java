@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.data.Story.test_data;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlank;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
@@ -17,6 +18,8 @@ public class Data_TheSpecialInvention {
     public static Story sampleStory() {
         List<StoryPage> pages = new ArrayList<>();
         pages.add(sampleStoryPage1());
+        pages.add(sampleStoryPage2());
+
 
         return new Story(0,"The Special Invention", pages, R.drawable.story_special_invention_compressed);
     }
@@ -75,6 +78,32 @@ public class Data_TheSpecialInvention {
 //        segments.add(new StoryBlankIdentifier("GG"));
         segments.add(new StoryText("  that would tip to roll down a ramp and knock loose the ", R.raw.special_invention_segment_21));
         segments.add(new StoryBlankIdentifier("KK"));
+//        AUDIO SEGMENT SPLIT NEEDED --  "...into a bucket [SPLIT] with its handle..."
+        segments.add(new StoryText(" hooked to the stopper on an old plastic bottle filled with water that would start slowly trickling into a bucket with its handle rubber-banded to a stick taped to a toy ", R.raw.special_invention_segment_22));
+
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        imageLocations.put("A-2", null);
+        imageLocations.put("BB", new ImageLocation("BB", 56f, 46f, 85, 85, 0));
+        imageLocations.put("CC", new ImageLocation("CC", 63f, 42f, 85, 85, 0));
+        imageLocations.put("DD", new ImageLocation("DD", 62f, 84f, 85, 85, 0));
+        imageLocations.put("EE", null);
+        imageLocations.put("FF", null);
+        imageLocations.put("GG", null);
+        imageLocations.put("JJ", null);
+        imageLocations.put("KK", null);
+        imageLocations.put("LL", null);
+
+
+
+
+        return new StoryPage(R.drawable.story_special_invention_1, segments, imageLocations);
+    }
+
+    private static StoryPage sampleStoryPage2() {
+        List<StorySegment> segments = new ArrayList<>();
+
+//      SECOND HALF OF SPLIT SEGMENT
         segments.add(new StoryText(" hooked to the stopper on an old plastic bottle filled with water that would start slowly trickling into a bucket with its handle rubber-banded to a stick taped to a toy ", R.raw.special_invention_segment_22));
         segments.add(new StoryBlankIdentifier("LL"));
         segments.add(new StoryText("taped to a sharp pin on the end that would swing up to smack and pop a balloon that would for sure startle awake even sleepy ", R.raw.special_invention_segment_23));
@@ -100,7 +129,9 @@ public class Data_TheSpecialInvention {
         segments.add(new StoryBlankIdentifier("A-2"));
         segments.add(new StoryText(" swiped the cat away and jolted straight up and looked at the disrupted contraption— and thought: \"Even if everything didn’t go exactly perfectly according to plan, my stay-up-after-wake-up-in-the-morning invention worked!\"  And it did!",R.raw.special_invention_segment_33));
 
-        return new StoryPage(R.drawable.story_special_invention, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        return new StoryPage(R.drawable.story_special_invention_2, segments, imageLocations);
     }
 
     private static Map<String, StoryBlank> blanks() {

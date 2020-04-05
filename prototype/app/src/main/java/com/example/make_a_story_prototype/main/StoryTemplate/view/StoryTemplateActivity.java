@@ -201,7 +201,9 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
                     );
                 } else {
                     builder.append(selection.getText());
-                    updateSceneImage(imageLocation, selection);
+                    if (imageLocation != null) {
+                        updateSceneImage(imageLocation, selection);
+                    }
                 }
             }
         }
@@ -244,20 +246,6 @@ public class StoryTemplateActivity extends BaseActivity implements ObservableScr
             StoryTemplateActivity.this.startActivity(intent);
         }
     }
-
-    private void addImageToScene() {
-        ImageView img = new ImageView(getApplicationContext());
-        img.setImageResource(R.drawable.animals_ape);
-        img.setX(100);
-        img.setY(100);
-
-        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        coordinatorLayout.addView(img, lp);
-
-        img.getLayoutParams().height = 200;
-        img.getLayoutParams().width = 200;
-    }
-
 
     @Override
     public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int prevX, int prevY) {

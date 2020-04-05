@@ -63,10 +63,10 @@ public class Data_TheSpaceAlien {
 
         Map<String, ImageLocation> imageLocations = new HashMap<>();
 
-        imageLocations.put("AA", new ImageLocation("AA", 10f, 10f, 250, 250, 0));
-        imageLocations.put("BB", new ImageLocation("BB", 75f, 10f, 250, 250, 0));
-        imageLocations.put("A-2", new ImageLocation("A-2", 5f, 60f, 250, 250, 0));
-        imageLocations.put("C-2", new ImageLocation("C-2", 68f, 60f, 250, 250, 0));
+        imageLocations.put("AA", new ImageLocation("AA", 11f, 10f, 200, 200, 0));
+        imageLocations.put("BB", new ImageLocation("BB", 73f, 10f, 200, 200, 0));
+        imageLocations.put("A-2", new ImageLocation("A-2", 5f, 58f, 250, 250, 0));
+        imageLocations.put("C-2", new ImageLocation("C-2", 69f, 58f, 250, 250, 0));
 
         return new StoryPage(R.drawable.story_space_alien_1, segments, imageLocations);
     }
