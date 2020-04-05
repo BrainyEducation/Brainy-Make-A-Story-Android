@@ -123,7 +123,7 @@ public class WordbankActivity extends BaseActivity implements WordbankItemRecycl
                                 vm.word.getAudioResource()
                         ));
 
-                StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId());
+                StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId(), storyBlankSelectionContext.getPageNumber());
             } else {
                 startQuiz(vm);
             }

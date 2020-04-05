@@ -7,6 +7,7 @@ import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdenti
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
 import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryText;
+import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ public class Data_TheSpaceAlien {
 
         return new Story(1,"The Space Alien", pages, R.drawable.story_space_alien_5_compressed);
     }
+
+
 
     private static StoryPage sampleStoryPage1() {
         List<StorySegment> segments = new ArrayList<>();
@@ -58,7 +61,13 @@ public class Data_TheSpaceAlien {
         segments.add(new StoryText("\n\n\tThey stuck their noses outside to find a "
                         + "weird looking space alien just their size.", R.raw.space_alien_segment_9));
 
-        return new StoryPage(R.drawable.story_space_alien_1, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+        imageLocations.put("AA", new ImageLocation("AA", 11f, 10f, 200, 200, 0));
+        imageLocations.put("BB", new ImageLocation("BB", 73f, 10f, 200, 200, 0));
+        imageLocations.put("A-2", new ImageLocation("A-2", 5f, 58f, 250, 250, 0));
+        imageLocations.put("C-2", new ImageLocation("C-2", 69f, 58f, 250, 250, 0));
+
+        return new StoryPage(R.drawable.story_space_alien_1, segments, imageLocations);
     }
 
     private static StoryPage sampleStoryPage2() {
@@ -82,7 +91,17 @@ public class Data_TheSpaceAlien {
         segments.add(new StoryBlankIdentifier("GG"));
         segments.add(new StoryText(".\"\n\t", -1)); // no audio
 
-        return new StoryPage(R.drawable.story_space_alien_2, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+        imageLocations.put("CC", new ImageLocation("CC", 45f, 30f, 125, 125, 0));
+        imageLocations.put("DD", new ImageLocation("DD", 42f, 70f, 200, 200, 0));
+        imageLocations.put("A-2", new ImageLocation("A-2", 7f, 8f, 250, 250, 0));
+        imageLocations.put("C-2", new ImageLocation("C-2", 71f, 8f, 250, 250, 0));
+        imageLocations.put("FF", null);
+        imageLocations.put("GG", null);
+
+
+
+        return new StoryPage(R.drawable.story_space_alien_2, segments, imageLocations);
     }
 
     private static StoryPage sampleStoryPage3() {
@@ -99,7 +118,13 @@ public class Data_TheSpaceAlien {
                     + "\tWhile everyone else in the house slept tight, the kids showed Space " +
                 "Alien lots of things — some toys, some real.\n\n", R.raw.space_alien_segment_16));
 
-        return new StoryPage(R.drawable.story_space_alien_3, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+        imageLocations.put("HH", new ImageLocation("HH", 42f, 34f, 125, 125, 0));
+        imageLocations.put("JJ", new ImageLocation("JJ", 42f, 70f, 200, 200, 0));
+        imageLocations.put("A-2", new ImageLocation("A-2", 7f, 8f, 250, 250, 0));
+        imageLocations.put("C-2", new ImageLocation("C-2", 71f, 8f, 250, 250, 0));
+
+        return new StoryPage(R.drawable.story_space_alien_3, segments, imageLocations);
     }
 
     private static StoryPage sampleStoryPage4() {
@@ -138,7 +163,22 @@ public class Data_TheSpaceAlien {
                         + "\n\n\tSpace Alien clicked heels, and a weird unearthly contraption " +
                 "quick-scooted over and hovered in the air beside their ankles.", R.raw.space_alien_segment_24));
 
-        return new StoryPage(R.drawable.story_space_alien_4, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+        imageLocations.put("KK", new ImageLocation("KK", 18f, 4f, 200, 200, 0));
+        // missing in segments list?
+        imageLocations.put("LL", new ImageLocation("LL", 68f, 4f, 200, 200, 0));
+
+        imageLocations.put("MM", new ImageLocation("MM", 18f, 71f, 200, 200, 0));
+        imageLocations.put("NN", new ImageLocation("NN", 64f, 71f, 200, 200, 0));
+        imageLocations.put("OO", null);
+        imageLocations.put("PP", null);
+        imageLocations.put("QQ", null);
+        imageLocations.put("RR", null);
+
+        imageLocations.put("A-2", new ImageLocation("A-2", 3f, 33f, 250, 250, 0));
+        imageLocations.put("C-2", new ImageLocation("C-2", 72f, 33f, 250, 250, 0));
+
+        return new StoryPage(R.drawable.story_space_alien_4, segments, imageLocations);
     }
 
     private static StoryPage sampleStoryPage5() {
@@ -175,7 +215,21 @@ public class Data_TheSpaceAlien {
                 + "\t\"I’ll be back same time tomorrow night! Bring your cameras!\"\n"
                 + "\tAnd they did!", R.raw.space_alien_segment_32));
 
-        return new StoryPage(R.drawable.story_space_alien_5, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+        imageLocations.put("SS", new ImageLocation("SS", 12f, 56f, 150, 150, 0));
+        imageLocations.put("TT", new ImageLocation("TT", 32f, 56f, 150, 150, 0));
+        imageLocations.put("UU", new ImageLocation("UU", 51f, 56f, 150, 150, 0));
+        imageLocations.put("VV", new ImageLocation("VV", 71f, 56f, 150, 150, 0));
+
+        imageLocations.put("WW", new ImageLocation("WW", 12f, 77f, 150, 150, 0));
+        imageLocations.put("XX", new ImageLocation("XX", 33f, 77f, 150, 150, 0));
+        imageLocations.put("YY", new ImageLocation("YY", 51f, 77f, 150, 150, 0));
+        imageLocations.put("ZZ", new ImageLocation("ZZ", 71f, 77f, 150, 150, 0));
+
+        imageLocations.put("A-2", new ImageLocation("A-2", 9f, 10f, 275, 275, 0));
+        imageLocations.put("C-2", new ImageLocation("C-2", 56f, 10f, 275, 275, 0));
+
+        return new StoryPage(R.drawable.story_space_alien_5, segments, imageLocations);
     }
 
     private static Map<String, StoryBlank> blanks() {

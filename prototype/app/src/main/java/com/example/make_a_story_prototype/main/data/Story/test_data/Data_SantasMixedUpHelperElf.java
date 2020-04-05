@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.data.Story.test_data;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlank;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
@@ -60,7 +61,21 @@ public class Data_SantasMixedUpHelperElf {
                 + "remember very well, and — oh no! — at the very last minute poor timid Elmer had mistakenly loaded "
                 + "into Santa’s sleigh—\n\n\t", R.raw.santas_helper_elf_segment_10));
 
-        return new StoryPage(R.drawable.story_santas_elf_1, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        imageLocations.put("A-2", new ImageLocation("A-2", 15f, 64f, 250, 250, 0));
+        imageLocations.put("DD", new ImageLocation("DD", 8f, 24f, 150, 150, 0));
+        imageLocations.put("EE", new ImageLocation("EE", 22f, 34f, 150, 150, 0));
+        imageLocations.put("B-2", new ImageLocation("B-2", 39f, 58f, 250, 250, 0));
+
+        imageLocations.put("GG", new ImageLocation("GG", 42f, 15f, 150, 150, 0));
+        imageLocations.put("JJ", new ImageLocation("JJ", 57f, 10f, 150, 150, 0));
+
+        imageLocations.put("C-2", new ImageLocation("C-2", 63f, 64f, 250, 250, 0));
+        imageLocations.put("KK", new ImageLocation("KK", 68f, 40f, 150, 150, 0));
+        imageLocations.put("LL", new ImageLocation("LL", 80f, 25f, 150, 150, 0));
+
+        return new StoryPage(R.drawable.story_santas_elf_1, segments, imageLocations);
     }
 
     private static StoryPage sampleStoryPage2() {
@@ -106,7 +121,26 @@ public class Data_SantasMixedUpHelperElf {
                 + "\tElmer cried now. Ashamed. Ashamed Santa would treat him so nicely after he had failed the children and "
                 + "Santa and Christmas. ", R.raw.santas_helper_elf_segment_22));
 
-        return new StoryPage(R.drawable.story_santas_elf_2, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        imageLocations.put("A-2", null);
+        imageLocations.put("RR", new ImageLocation("RR", 31f, 42f, 150, 150, 0));
+        imageLocations.put("SS", new ImageLocation("SS", 31f, 65f, 150, 150, 0));
+
+        imageLocations.put("B-2", null);
+        imageLocations.put("VV", new ImageLocation("VV", 48f, 42f, 150, 150, 0));
+        imageLocations.put("WW", new ImageLocation("WW", 46f, 65f, 150, 150, 0));
+
+        imageLocations.put("C-2", null);
+        imageLocations.put("XX", new ImageLocation("XX", 61f, 44f, 150, 150, 0));
+        imageLocations.put("YY", new ImageLocation("YY", 59f, 64f, 150, 150, 0));
+
+        imageLocations.put("NN", null);
+        imageLocations.put("PP", null);
+        imageLocations.put("QQ", null);
+
+
+        return new StoryPage(R.drawable.story_santas_elf_2, segments, imageLocations);
     }
 
     private static StoryPage sampleStoryPage3() {
@@ -165,7 +199,25 @@ public class Data_SantasMixedUpHelperElf {
                 + "\"That getting a gift feels wonderful, but giving to someone who really needs it feels even better.\"\n"
                 + "\t\"Oh.\" Elmer said. \"Ohhhh.\"", R.raw.santas_helper_elf_segment_38));
 
-        return new StoryPage(R.drawable.story_santas_elf_3, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        imageLocations.put("A-2", new ImageLocation("A-2", 13f, 38f, 200, 200, 0));
+        imageLocations.put("RR", new ImageLocation("RR", 2f, 63f, 150, 150, 0));
+        imageLocations.put("SS", new ImageLocation("SS", 17f, 76f, 150, 150, 0));
+
+        imageLocations.put("B-2", new ImageLocation("B-2", 45f, 39f, 200, 200, 0));
+        imageLocations.put("VV", new ImageLocation("VV", 33f, 64f, 150, 150, 0));
+        imageLocations.put("WW", new ImageLocation("WW", 50f, 74f, 150, 150, 0));
+
+        imageLocations.put("C-2", new ImageLocation("C-2", 74f, 36f, 200, 200, 0));
+        imageLocations.put("XX", new ImageLocation("XX", 66f, 64f, 150, 150, 0));
+        imageLocations.put("YY", new ImageLocation("YY", 83f, 75f, 150, 150, 0));
+
+        imageLocations.put("NN", null);
+        imageLocations.put("PP", null);
+        imageLocations.put("QQ", null);
+
+        return new StoryPage(R.drawable.story_santas_elf_3, segments, imageLocations);
     }
 
     private static Map<String, StoryBlank> blanks() {

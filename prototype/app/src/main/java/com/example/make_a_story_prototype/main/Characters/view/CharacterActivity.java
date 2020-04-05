@@ -163,7 +163,8 @@ public class CharacterActivity extends BaseActivity implements CharacterScreenVi
                         vm.getCharacter().getName().getAudioResource()
                 ));
 
-        StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId());
+        StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId(), storyBlankSelectionContext.getPageNumber());
+
     }
 
     private void initNameRecyclerView() {

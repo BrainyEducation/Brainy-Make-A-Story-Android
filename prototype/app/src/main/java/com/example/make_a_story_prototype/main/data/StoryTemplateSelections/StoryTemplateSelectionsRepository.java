@@ -8,6 +8,10 @@ public interface StoryTemplateSelectionsRepository {
 
     Map<String, BlankSelection> getSelectionsForStory(int storyId);
 
+//    List<ImageLocation> getImageLocations();
+//
+//    ImageLocation getImageLocation(int id);
+
     void setSelectionsForStory(int storyId, Map<String, BlankSelection> selections);
 
     void setSelectionForStory(int storyId, String identifier, BlankSelection selection);

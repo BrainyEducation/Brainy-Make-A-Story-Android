@@ -1,14 +1,6 @@
 package com.example.make_a_story_prototype.main.data.Story.model;
 
 public class StoryBlank {
-    class ImageLocation {
-        float x;
-        float y;
-        float width;
-        float height;
-        float rotation;
-    }
-
     String identifier;
     ImageLocation imageLocation;
 

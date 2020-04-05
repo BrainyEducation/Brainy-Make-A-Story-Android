@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.data.StoryTemplateSelections;
 
+import com.example.make_a_story_prototype.main.data.Story.model.StoryBlank;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
 import java.util.HashMap;
@@ -14,6 +15,8 @@ public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSele
     }
 
     private Map<Integer, Map<String, BlankSelection>> selections;
+
+    private Map<Integer, Map<StoryBlank, BlankSelection>> blanks;
 
     private DebugStoryTemplateSelectionsRepository() {
         selections = new HashMap<>();
@@ -46,3 +49,19 @@ public class DebugStoryTemplateSelectionsRepository implements StoryTemplateSele
         selections.remove(storyId);
     }
 }
+
+//    @Override
+//    public List<ImageLocation> getImageLocations() {
+//        return Arrays.asList(imageLocations);
+//    }
+//
+//    @Override
+//    public ImageLocation getImageLocation(int id) {
+//        for (ImageLocation location : imageLocations) {
+//            if (location.getLocationId() == id) {
+//                return location;
+//            }
+//        }
+//        return null;
+//    }
+
