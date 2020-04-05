@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,48 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.make_a_story_prototype.main.StoryTemplate.view.SceneImage
-        android:id="@+id/scene_image"
+    <include
+        android:id="@+id/story_page"
+        layout="@layout/story_page"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1.46"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <com.example.make_a_story_prototype.main.StoryTemplate.view.ObservableScrollView
-        android:id="@+id/story_scroll"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorWhite"
-        android:padding="2dp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@id/controls_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_default="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scene_image">
-
-        <TextView
-            android:id="@+id/story_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:lineSpacingExtra="3dp"
-            android:lineSpacingMultiplier="1.5"
-            android:padding="15dp"
-            android:textColor="@color/colorAppBlack"
-            android:textSize="12pt" />
-
-    </com.example.make_a_story_prototype.main.StoryTemplate.view.ObservableScrollView>
-
-    <include
-        android:id="@+id/controls_bar"
-        layout="@layout/controls_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <include
         android:id="@+id/popup_dialog"

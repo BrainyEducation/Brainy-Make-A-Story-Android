@@ -45,7 +45,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams;
 
-public class StoryTemplateActivity extends BaseActivity implements StoryViewModel.StoryViewModelCallback, ObservableScrollView.ScrollViewListener {
+public class StoryTemplateActivity extends BaseActivity implements StoryViewModel.StoryViewModelCallback {
 
     private static String STORY_ID_EXTRA_KEY = "STORY_ID";
     private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
@@ -58,13 +58,8 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
         activity.startActivity(intent);
     }
 
-    private StoryMediaController mediaController;
     private StoryViewModel vm;
-
-    private TextView storyTextView;
-    private ObservableScrollView scrollView = null;
-    private ProgressBar progressBar;
-    private SceneImage sceneImage;
+    private StoryPageView storyPageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,26 +76,16 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
         vm.callback = this;
 
-        mediaController = new StoryMediaController(this, vm.getStory().getPages().get(0), vm);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        storyPageView = findViewById(R.id.story_page);
+        storyPageView.setViewModel(vm, 0);
+
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
-
-        sceneImage = findViewById(R.id.scene_image);
-        storyTextView = findViewById(R.id.story_text);
-        progressBar = findViewById(R.id.progress_bar);
-        scrollView = findViewById(R.id.story_scroll);
-        scrollView.setScrollViewListener(this);
-
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
-
-        sceneImage.setViewModel(vm, 0);
-
-        updateTextView(0);
     }
 
     @Override
@@ -108,13 +93,6 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
         super.onSaveInstanceState(outState, outPersistentState);
 
         outState.putParcelable(MY_VM_KEY, vm);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        updateTextView(0);
     }
 
     // home icon
@@ -131,10 +109,10 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
         switch (item.getItemId()) {
             case android.R.id.home:
                 showSaveDialog();
-                mediaController.pause();
+                storyPageView.pause();
                 return true;
             case R.id.home_menu_icon:
-                mediaController.pause();
+                storyPageView.pause();
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 return true;
             default:
@@ -161,19 +139,13 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
         });
     }
 
-    public void updateTextView(int pageNum) {
-        Spannable text = vm.getTextForPage(pageNum);
+    @Override
+    public void onSelectedBlank(String identifier) {
+        storyPageView.pause();
 
-        storyTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        storyTextView.setText(text);
-    }
-
-    public void onSelectedBlank(String blankIdentifier) {
-        mediaController.pause();
-
-        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), blankIdentifier));
+        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), identifier));
         //If Character selection blank (format "X-2"), intent is character activity
-        if (blankIdentifier.length() > 2) {
+        if (identifier.length() > 2) {
             Intent intent = new Intent(this, CharacterActivity.class);
             StoryTemplateActivity.this.startActivity(intent);
         } else {
@@ -181,25 +153,6 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
             StoryTemplateActivity.this.startActivity(intent);
         }
     }
-
-    @Override
-    public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int prevX, int prevY) {
-        float percentScrolled = (float) ((y / 3000.0) * 100);
-        progressBar.setProgress(Math.min((int) percentScrolled, 100));
-    }
-
-    public void onPauseTapped(View v) {
-        mediaController.pause();
-    }
-
-    public void onPlayTapped(View v) {
-        mediaController.play();
-    }
-
-    public void onReplayTapped(View v) {
-        mediaController.restart();
-    }
-
 }
 
 
