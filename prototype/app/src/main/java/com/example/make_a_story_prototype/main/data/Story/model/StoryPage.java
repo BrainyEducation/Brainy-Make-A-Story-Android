@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.data.Story.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,12 @@ public class StoryPage {
     public StoryPage(int imageResource, List<StorySegment> segments, Map<String, ImageLocation> imageLocations) {
         this.imageResource = imageResource;
         this.segments = segments;
-        this.imageLocations = imageLocations;
+
+        if (imageLocations != null) {
+            this.imageLocations = imageLocations;
+        } else {
+            this.imageLocations = new HashMap<>();
+        }
     }
 
 

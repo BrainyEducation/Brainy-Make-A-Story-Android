@@ -37,6 +37,10 @@ public class StoryPageAdapter extends PagerAdapter {
         return pageView;
     }
 
+    // on pagechangelistener
+    // tell vm page
+    // put current page in parcelable
+
     @Override
     public void destroyItem(ViewGroup collection, int position, Object view) {
         collection.removeView((View) view);

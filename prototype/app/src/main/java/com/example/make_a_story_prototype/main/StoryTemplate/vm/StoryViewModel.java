@@ -40,10 +40,12 @@ public class StoryViewModel implements Parcelable {
     private Story story;
     private int storyId;
     private Map<String, BlankSelection> selections;
+    private int pageNumber;
 
-    public StoryViewModel(int storyId) {
+    public StoryViewModel(int storyId, int pageNumber) {
         Log.d("StoryViewModel", "create with " + storyId);
         this.storyId = storyId;
+        this.pageNumber = pageNumber;
 
         this.story = storyRepository.getStory(storyId);
         this.selections = selectionsRepository.getSelectionsForStory(storyId);
@@ -55,6 +57,14 @@ public class StoryViewModel implements Parcelable {
 
     public Story getStory() {
         return story;
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
     }
 
     public Spannable getTextForPage(int pageNumber) {
@@ -106,6 +116,7 @@ public class StoryViewModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(storyId);
+        dest.writeInt(pageNumber);
     }
 
     @Override
@@ -116,7 +127,10 @@ public class StoryViewModel implements Parcelable {
     public static final Creator<StoryViewModel> CREATOR = new Creator<StoryViewModel>() {
         @Override
         public StoryViewModel createFromParcel(Parcel in) {
-            return new StoryViewModel(in.readInt());
+            int storyId = in.readInt();
+            int pageNumber = in.readInt();
+
+            return new StoryViewModel(storyId, pageNumber);
         }
 
         @Override

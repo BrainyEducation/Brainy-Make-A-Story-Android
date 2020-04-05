@@ -26,14 +26,16 @@ import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
-public class StoryTemplateActivity extends BaseActivity implements StoryViewModel.StoryViewModelCallback {
+public class StoryTemplateActivity extends BaseActivity implements StoryViewModel.StoryViewModelCallback, ViewPager.OnPageChangeListener {
 
     private static String STORY_ID_EXTRA_KEY = "STORY_ID";
+    private static String STORY_PAGE_EXTRA_KEY = "PAGE_NUMBER";
     private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
 
-    public static void start(Activity activity, int storyId) {
+    public static void start(Activity activity, int storyId, int pageNumber) {
         Intent intent = new Intent(activity, StoryTemplateActivity.class);
         intent.putExtra(STORY_ID_EXTRA_KEY, storyId);
+        intent.putExtra(STORY_PAGE_EXTRA_KEY, pageNumber);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         activity.startActivity(intent);
@@ -50,8 +52,8 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
         if (savedInstanceState == null) {
             int storyId = getIntent().getIntExtra(STORY_ID_EXTRA_KEY, -1);
-            Log.d("TAG", "onCreate in template: intent extra [storyId] --> " + storyId);
-            vm = new StoryViewModel(storyId);
+            int pageNumber = getIntent().getIntExtra(STORY_PAGE_EXTRA_KEY, 0);
+            vm = new StoryViewModel(storyId, pageNumber);
         } else {
             vm = savedInstanceState.getParcelable(MY_VM_KEY);
         }
@@ -63,7 +65,9 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
         storyPager = findViewById(R.id.story_pager);
         storyPageAdapter = new StoryPageAdapter(this, vm);
+        storyPager.addOnPageChangeListener(this);
         storyPager.setAdapter(storyPageAdapter);
+        storyPager.setCurrentItem(vm.getPageNumber());
 
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
@@ -128,7 +132,7 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
         // TODO:
 //        storyPageView.pause();
 
-        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), identifier));
+        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), identifier, vm.getPageNumber()));
         //If Character selection blank (format "X-2"), intent is character activity
         if (identifier.length() > 2) {
             Intent intent = new Intent(this, CharacterActivity.class);
@@ -137,6 +141,21 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
             Intent intent = new Intent(this, CategoriesActivity.class);
             StoryTemplateActivity.this.startActivity(intent);
         }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        //
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        vm.setPageNumber(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        //
     }
 }
 

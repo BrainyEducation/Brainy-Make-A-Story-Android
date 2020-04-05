@@ -165,7 +165,7 @@ public class CharacterActivity extends BaseActivity implements CharacterScreenVi
                             vm.getCharacter().getName().getAudioResource()
                     ));
 
-            StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId());
+            StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId(), storyBlankSelectionContext.getPageNumber());
         } else {
             //return to home screen otherwise. Shouldn't happen once the "Friends" button on home screen is removed
             Intent intent = new Intent(this, HomeActivity.class);
