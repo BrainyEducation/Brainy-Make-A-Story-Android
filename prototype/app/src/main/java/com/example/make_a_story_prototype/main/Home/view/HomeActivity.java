@@ -55,14 +55,4 @@ public class HomeActivity extends BaseActivity {
         this.startActivity(intent);
     }
 
-    /**
-     * temp card action to go to characters listing for demoing
-     * @param v view
-     */
-    public void homeCharacterOnClick(View v) {
-        setNavigationContext(null);
-        Intent intent = new Intent(this, CharacterActivity.class);
-        this.startActivity(intent);
-    }
-
 }
