@@ -94,12 +94,11 @@ public class Data_TheSpecialInvention {
         imageLocations.put("BB", new ImageLocation("BB", 56f, 46f, 85, 85, 0));
         imageLocations.put("CC", new ImageLocation("CC", 63f, 42f, 85, 85, 0));
         imageLocations.put("DD", new ImageLocation("DD", 62f, 84f, 85, 85, 0));
+        imageLocations.put("LL", null);
         imageLocations.put("EE", null);
-        imageLocations.put("FF", null);
         imageLocations.put("GG", null);
         imageLocations.put("JJ", null);
         imageLocations.put("KK", null);
-        imageLocations.put("LL", null);
 
 
 
@@ -111,19 +110,20 @@ public class Data_TheSpecialInvention {
         List<StorySegment> segments = new ArrayList<>();
 
 //      SECOND HALF OF SPLIT SEGMENT
-        segments.add(new StoryText(" hooked to the stopper on an old plastic bottle filled with water that would start slowly trickling into a bucket with its handle rubber-banded to a stick taped to a toy ", R.raw.special_invention_segment_22));
+        segments.add(new StoryText(" hooked to the stopper on an old plastic bottle filled with water that would start "
+                + "slowly trickling into a bucket with its handle rubber-banded to a stick taped to a toy ", R.raw.special_invention_segment_22));
         segments.add(new StoryBlankIdentifier("LL"));
-        segments.add(new StoryText(" taped to a sharp pin on the end that would swing up " +
-                "to smack and pop a balloon that would for sure startle awake even sleepy ", R.raw.special_invention_segment_23));
+        segments.add(new StoryText(" taped to a sharp pin on the end that would swing up "
+                + "to smack and pop a balloon that would for sure startle awake even sleepy ", R.raw.special_invention_segment_23));
         segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(".\n\n\tWho could sleep after creating such a magnificatious, " +
-                "splendificatory, brilliastonishing, phenomitastic invention?! Not ", R.raw.special_invention_segment_24));
+        segments.add(new StoryText(".\n\n\tWho could sleep after creating such a magnificatious, "
+                + "splendificatory, brilliastonishing, phenomitastic invention?! Not ", R.raw.special_invention_segment_24));
         segments.add(new StoryBlankIdentifier("A-2"));
         segments.add(new StoryText(", not until very late. "
                 + "Too late.\n\n\t", R.raw.special_invention_segment_25));
         segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(" didn’t wake when Mom opened the door and gently " +
-                "suggested, \"Wake up!\" Didn’t notice the toy ", R.raw.special_invention_segment_26));
+        segments.add(new StoryText(" didn’t wake when Mom opened the door and gently "
+                + "suggested, \"Wake up!\" Didn’t notice the toy ", R.raw.special_invention_segment_26));
         segments.add(new StoryBlankIdentifier("EE"));
         segments.add(new StoryText(" dropping on the teeter-totter lever that tossed the toy ", R.raw.special_invention_segment_27));
         segments.add(new StoryBlankIdentifier("GG"));
@@ -131,28 +131,38 @@ public class Data_TheSpecialInvention {
         segments.add(new StoryBlankIdentifier("JJ"));
         segments.add(new StoryText(" so hard that it slipped off the track but still bumped the ", R.raw.special_invention_segment_29));
         segments.add(new StoryBlankIdentifier("KK"));
-        segments.add(new StoryText(" loose, only smacking the stopper so hard the water " +
-                "didn’t trickle out but shot out like a squirt gun and soaked a toy stuffed ", R.raw.special_invention_segment_30));
+        segments.add(new StoryText(" loose, only smacking the stopper so hard the water "
+                + "didn’t trickle out but shot out like a squirt gun and soaked a toy stuffed ", R.raw.special_invention_segment_30));
         segments.add(new StoryBlankIdentifier("NN"));
-        segments.add(new StoryText(" on the edge of the shelf that got so wet heavy it " +
-                "fell on the cat that startled and screeched and leaped up high and knocked its hindquarters into the ", R.raw.special_invention_segment_31));
+        segments.add(new StoryText(" on the edge of the shelf that got so wet heavy it "
+                + "fell on the cat that startled and screeched and leaped up high and knocked its hindquarters into the ", R.raw.special_invention_segment_31));
         segments.add(new StoryBlankIdentifier("LL"));
-        segments.add(new StoryText(" .So the pin sharp stung the cat’s tail and it howled " +
-                "and claw snatched at the balloon that loud-popped, scaring the cat to twist land " +
-                "slap on guess-whose sleeping face. \n\n\t", R.raw.special_invention_segment_32));
+        segments.add(new StoryText(" .So the pin sharp stung the cat’s tail and it howled "
+                + "and claw snatched at the balloon that loud-popped, scaring the cat to twist land "
+                + "slap on guess-whose sleeping face. \n\n\t", R.raw.special_invention_segment_32));
         segments.add(new StoryBlankIdentifier("A-2"));
-        segments.add(new StoryText(" swiped the cat away and jolted straight up and looked " +
-                "at the disrupted contraption — and thought: \"Even if everything didn’t go " +
-                "exactly perfectly according to plan, my stay-up-after-wake-up-in-the-morning " +
-                "invention worked!\"  And it did!",R.raw.special_invention_segment_33));
+        segments.add(new StoryText(" swiped the cat away and jolted straight up and looked "
+                + "at the disrupted contraption — and thought: \"Even if everything didn’t go "
+                + "exactly perfectly according to plan, my stay-up-after-wake-up-in-the-morning "
+                + "invention worked!\"  And it did!",R.raw.special_invention_segment_33));
 
         Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        imageLocations.put("A-2", null);
+        imageLocations.put("KK", new ImageLocation("KK", 26f, 16f, 85, 85, 0));
+        imageLocations.put("LL", new ImageLocation("LL", 1f, 27f, 85, 85, 0));
+
+        imageLocations.put("EE", new ImageLocation("EE", 69f, 22f, 85, 85, 0));
+        imageLocations.put("GG", new ImageLocation("GG", 55f, 50f, 85, 85, 0));
+        imageLocations.put("JJ", new ImageLocation("JJ", 48f, 11f, 85, 85, 0));
+        imageLocations.put("NN", new ImageLocation("NN", 30f, 30f, 85, 85, 0));
 
         return new StoryPage(R.drawable.story_special_invention_2, segments, imageLocations);
     }
 
     private static Map<String, StoryBlank> blanks() {
         Map<String, StoryBlank> blanks = new HashMap<>();
+
 
         blanks.put("A-2", new StoryBlank("A-2"));
         blanks.put("BB",new StoryBlank("BB"));

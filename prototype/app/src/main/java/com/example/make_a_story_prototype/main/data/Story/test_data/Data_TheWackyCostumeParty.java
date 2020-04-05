@@ -104,18 +104,18 @@ public class Data_TheWackyCostumeParty {
         imageLocations.put("CC", null);
         imageLocations.put("C-2", null);
         imageLocations.put("D-2", null);
-        imageLocations.put("DD", new ImageLocation("BB", 48f, 26f, 200, 200, 0));
+        imageLocations.put("DD", new ImageLocation("DD", 40f, 20f, 200, 200, 0));
         imageLocations.put("FF", null);
-        imageLocations.put("GG", new ImageLocation("BB", 56f, 46f, 200, 200, 0));
+        imageLocations.put("GG", new ImageLocation("GG", 30f, 30f, 150, 200, 0));
         imageLocations.put("G-2", null);
-        imageLocations.put("II", new ImageLocation("BB", 56f, 46f, 200, 200, 0));
+        imageLocations.put("II", new ImageLocation("II", 69f, 26f, 200, 200, 0));
         imageLocations.put("KK", null);
-        imageLocations.put("LL", new ImageLocation("BB", 56f, 46f, 200, 200, 0));
+        imageLocations.put("LL", new ImageLocation("LL", 65f, 75f, 150, 150, 0));
         imageLocations.put("K-2", null);
-        imageLocations.put("NN", new ImageLocation("BB", 56f, 46f, 200, 200, 0));
+        imageLocations.put("NN", new ImageLocation("NN", 82f, 36f, 200, 200, 0));
 
         imageLocations.put("PP", null);
-        imageLocations.put("QQ", null);
+        imageLocations.put("QQ", new ImageLocation("QQ", 76f, 56f, 150, 150, 0));
         imageLocations.put("G-2", null);
 
 
@@ -123,6 +123,8 @@ public class Data_TheWackyCostumeParty {
         return new StoryPage(R.drawable.story_wacky_costume_1, segments, imageLocations);
     }
 
+
+    //TODO: figure out mapping for blanks. Filling scene image on previous page based on costume choices. This page uses character ids for costumes?
     private static StoryPage sampleStoryPage2() {
         List<StorySegment> segments = new ArrayList<>();
 
@@ -174,7 +176,26 @@ public class Data_TheWackyCostumeParty {
                 "fun to decide to scare anybody, whether they decided to be scared or not. ",
                 R.raw.wacky_party_segment_40));
 
-        return new StoryPage(R.drawable.story_wacky_costume_2, segments);
+
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        imageLocations.put("C-2", null);
+        imageLocations.put("D-2", null);
+        imageLocations.put("DD", new ImageLocation("DD", 48f, 26f, 200, 200, 0));
+        imageLocations.put("FF", null);
+        imageLocations.put("GG", new ImageLocation("GG", 56f, 46f, 200, 200, 0));
+        imageLocations.put("G-2", null);
+        imageLocations.put("II", new ImageLocation("II", 56f, 46f, 200, 200, 0));
+        imageLocations.put("KK", null);
+        imageLocations.put("LL", new ImageLocation("LL", 56f, 46f, 200, 200, 0));
+        imageLocations.put("K-2", null);
+        imageLocations.put("NN", new ImageLocation("NN", 56f, 46f, 200, 200, 0));
+
+        imageLocations.put("PP", null);
+        imageLocations.put("QQ", null);
+        imageLocations.put("G-2", null);
+
+        return new StoryPage(R.drawable.story_wacky_costume_2, segments, imageLocations);
     }
 
     private static Map<String, StoryBlank> blanks() {

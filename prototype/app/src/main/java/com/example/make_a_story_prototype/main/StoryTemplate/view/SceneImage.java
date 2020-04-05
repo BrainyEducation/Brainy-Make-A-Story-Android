@@ -91,6 +91,9 @@ public class SceneImage extends CoordinatorLayout {
         Map<String, ImageLocation> locations = page.getImageLocations();
         Map<String, BlankSelection> selections = vm.getSelections();
         for (Map.Entry<String, ImageLocation> entry : locations.entrySet()) {
+            if (entry.getValue() == null) {
+                continue;
+            }
             ImageLocation location = entry.getValue();
             BlankSelection selection = selections.get(location.getLocationId());
 
