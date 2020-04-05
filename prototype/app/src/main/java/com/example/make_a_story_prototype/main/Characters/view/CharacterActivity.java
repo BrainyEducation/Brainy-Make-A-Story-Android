@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +18,6 @@ import com.example.make_a_story_prototype.main.Characters.view.ImageCards.Charac
 import com.example.make_a_story_prototype.main.Characters.view.NameCards.CharacterNamesRecyclerViewAdapter;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel.CharacterViewModel;
-import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
 import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
 import com.example.make_a_story_prototype.main.Navigation.NavigationController;
 import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
@@ -142,7 +140,8 @@ public class CharacterActivity extends BaseActivity implements CharacterScreenVi
                 super.finish();
                 return true;
             case R.id.storybook:
-                Toast.makeText(this, "Todo: storybook button", Toast.LENGTH_SHORT).show();
+                // Storybook is simply the same as back arrow or ending current activity.
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -153,24 +152,19 @@ public class CharacterActivity extends BaseActivity implements CharacterScreenVi
     public void selectCharacterCard(CharacterViewModel vm) {
         NavigationController.NavigationContext context = getNavigationContext();
 
-        //If comes from story blank, return to story template page with matched character
-        if (context instanceof StoryBlankSelectionContext) {
-            StoryBlankSelectionContext storyBlankSelectionContext = (StoryBlankSelectionContext) context;
-            DebugStoryTemplateSelectionsRepository.getInstance().setSelectionForStory(
-                    storyBlankSelectionContext.getStoryId(),
-                    storyBlankSelectionContext.getBlankId(),
-                    new BlankSelection(
-                            vm.getCharacter().getName().getName(),
-                            vm.getCharacter().getImageResource(),
-                            vm.getCharacter().getName().getAudioResource()
-                    ));
+        //Always return to story template page with matched character since it's the only way to get to characters screen
+        StoryBlankSelectionContext storyBlankSelectionContext = (StoryBlankSelectionContext) context;
+        DebugStoryTemplateSelectionsRepository.getInstance().setSelectionForStory(
+                storyBlankSelectionContext.getStoryId(),
+                storyBlankSelectionContext.getBlankId(),
+                new BlankSelection(
+                        vm.getCharacter().getName().getName(),
+                        vm.getCharacter().getImageResource(),
+                        vm.getCharacter().getName().getAudioResource()
+                ));
 
-            StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId(), storyBlankSelectionContext.getPageNumber());
-        } else {
-            //return to home screen otherwise. Shouldn't happen once the "Friends" button on home screen is removed
-            Intent intent = new Intent(this, HomeActivity.class);
-            CharacterActivity.this.startActivity(intent);
-        }
+        StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId(), storyBlankSelectionContext.getPageNumber());
+
     }
 
     private void initNameRecyclerView() {
