@@ -24,7 +24,6 @@ public class StoryPage {
         }
     }
 
-
     public int getImageResource() {
         return imageResource;
     }

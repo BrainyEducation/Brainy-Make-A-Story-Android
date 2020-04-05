@@ -2,6 +2,7 @@ package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -23,6 +24,10 @@ public class SceneImage extends CoordinatorLayout {
 
     private StoryViewModel vm;
     private int pageNumber;
+
+    private static int sceneWidth;
+    private static int sceneHeight;
+
 
     public SceneImage(@NonNull Context context) {
         this(context, null);
@@ -53,12 +58,24 @@ public class SceneImage extends CoordinatorLayout {
         }
     }
 
+    @Override
+    public void onWindowFocusChanged (boolean hasFocus) {
+        // the height will be set at this point
+        // 1.469
+        sceneWidth = getMeasuredWidth();
+        sceneHeight = getMeasuredHeight();
+        Log.d("TAG", "onWindowFocusChanged: [" + sceneWidth + ", " + sceneHeight + "]");
+
+    }
+
+
     public void setViewModel(StoryViewModel vm, int pageNumber) {
         this.vm = vm;
         this.pageNumber = pageNumber;
 
         updateImages();
     }
+
 
     private void updateImages() {
         if (vm == null) {
@@ -87,8 +104,10 @@ public class SceneImage extends CoordinatorLayout {
         ImageView img = new ImageView(getContext());
 
         img.setImageResource(selection.getImageResource());
-        float x = getMeasuredWidth() * (location.getX() * .01f);
-        float y = getMeasuredHeight() * (location.getY() * .01f);
+        float x = sceneWidth * (location.getX() * .01f);
+        float y = sceneHeight * (location.getY() * .01f);
+
+        Log.d("tag", "measuredWidth: " + getMeasuredWidth());
 
         CoordinatorLayout.LayoutParams lp = new CoordinatorLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
