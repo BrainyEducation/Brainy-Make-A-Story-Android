@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.data.Story.test_data;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlank;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
@@ -60,7 +61,19 @@ public class Data_SantasMixedUpHelperElf {
                 + "remember very well, and— oh no!— at the very last minute poor timid Elmer had mistakenly loaded "
                 + "into Santa’s sleigh—", R.raw.santas_helper_elf_segment_10));
 
-        return new StoryPage(R.drawable.story_santas_elf_1, segments);
+        Map<String, ImageLocation> imageLocations = new HashMap<>();
+
+        imageLocations.put("A-2", new ImageLocation("A-2", 12f, 60f, 250, 250, 0));
+        imageLocations.put("DD", new ImageLocation("DD", 75f, 10f, 250, 250, 0));
+        imageLocations.put("EE", new ImageLocation("EE", 75f, 10f, 250, 250, 0));
+        imageLocations.put("B-2", new ImageLocation("B-2", 45f, 60f, 250, 250, 0));
+        imageLocations.put("GG", new ImageLocation("GG", 75f, 10f, 250, 250, 0));
+        imageLocations.put("JJ", new ImageLocation("JJ", 75f, 10f, 250, 250, 0));
+        imageLocations.put("C-2", new ImageLocation("C-2", 60f, 60f, 250, 250, 0));
+        imageLocations.put("KK", new ImageLocation("KK", 75f, 10f, 250, 250, 0));
+        imageLocations.put("LL", new ImageLocation("LL", 75f, 10f, 250, 250, 0));
+
+        return new StoryPage(R.drawable.story_santas_elf_1, segments, imageLocations);
     }
 
     private static StoryPage sampleStoryPage2() {
