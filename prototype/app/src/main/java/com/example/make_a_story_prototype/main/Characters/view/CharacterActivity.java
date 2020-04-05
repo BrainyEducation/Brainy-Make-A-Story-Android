@@ -1,8 +1,10 @@
 package com.example.make_a_story_prototype.main.Characters.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,9 +19,15 @@ import com.example.make_a_story_prototype.main.Characters.view.ImageCards.Charac
 import com.example.make_a_story_prototype.main.Characters.view.NameCards.CharacterNamesRecyclerViewAdapter;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel;
 import com.example.make_a_story_prototype.main.Characters.vm.CharacterScreenViewModel.CharacterViewModel;
+import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
+import com.example.make_a_story_prototype.main.Navigation.NavigationController;
+import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.DebugStoryTemplateSelectionsRepository;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -27,7 +35,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CharacterActivity extends AppCompatActivity {
+public class CharacterActivity extends BaseActivity implements CharacterScreenViewModel.CharacterAdapterHandler{
     private RecyclerView nameRecyclerView;
     private RecyclerView imageRecyclerView;
     private RecyclerView.Adapter namesRecyclerViewAdapter;
@@ -59,6 +67,7 @@ public class CharacterActivity extends AppCompatActivity {
         viewModel = new CharacterScreenViewModel(this, new Characters());
         initNameRecyclerView();
         initImageRecyclerView();
+        viewModel.handler = this;
 
         blurredBackground = findViewById(R.id.blur);
 
@@ -137,6 +146,30 @@ public class CharacterActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void selectCharacterCard(CharacterViewModel vm) {
+        NavigationController.NavigationContext context = getNavigationContext();
+
+        //If comes from story blank, return to story template page with matched character
+        if (context instanceof StoryBlankSelectionContext) {
+            StoryBlankSelectionContext storyBlankSelectionContext = (StoryBlankSelectionContext) context;
+            DebugStoryTemplateSelectionsRepository.getInstance().setSelectionForStory(
+                    storyBlankSelectionContext.getStoryId(),
+                    storyBlankSelectionContext.getBlankId(),
+                    new BlankSelection(
+                            vm.getCharacter().getName().getName(),
+                            vm.getCharacter().getImageResource(),
+                            vm.getCharacter().getName().getAudioResource()
+                    ));
+
+            StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId());
+        } else {
+            //return to home screen otherwise. Shouldn't happen once the "Friends" button on home screen is removed
+            Intent intent = new Intent(this, HomeActivity.class);
+            CharacterActivity.this.startActivity(intent);
         }
     }
 
