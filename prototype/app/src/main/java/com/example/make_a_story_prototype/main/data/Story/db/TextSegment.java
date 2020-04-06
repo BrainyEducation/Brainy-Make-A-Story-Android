@@ -1,40 +1,32 @@
 package com.example.make_a_story_prototype.main.data.Story.db;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "text_segments_table")
+@Entity(tableName = "text_segments_table",
+        foreignKeys = @ForeignKey(entity = StoryPage.class,
+            parentColumns = "textId", childColumns = "pageId"))
 public class TextSegment {
 
     @PrimaryKey(autoGenerate = false)
-    private int id;
+    private int textId;
+    private int pageId;
     private String text;
-    private int storyId;
-    private int pageNumber;
     private int audioResource;
 
-    public TextSegment(int storyId, int pageNumber, String text, int audioResource) {
-        this.storyId = storyId;
-        this.pageNumber = pageNumber;
+    public TextSegment(int textId, int pageId, String text, int audioResource) {
+        this.textId = textId;
+        this.pageId = pageId;
         this.text = text;
         this.audioResource = audioResource;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getTextId() {
+        return textId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public int getStoryId() {
-        return storyId;
-    }
-
-    public int getPageNumber() {
-        return pageNumber;
-    }
+    public int getPageId() { return pageId; }
 
     public String getText() {
         return text;
