@@ -21,7 +21,7 @@ public class Data_TheSpecialInvention {
         pages.add(sampleStoryPage2());
 
 
-        return new Story(0,"The Special Invention", pages, R.drawable.story_special_invention_compressed);
+        return new Story(0,"The Special Invention", pages, R.drawable.story_special_invention_background);
     }
 
     private static StoryPage sampleStoryPage1() {

@@ -35,7 +35,7 @@
                     android:background="@drawable/asymmetric_card_edge"
                     android:contentDescription="@string/story_image"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/story_space_alien_5_compressed" />
+                    app:srcCompat="@drawable/story_space_alien_background" />
 
                 <TextView
                     android:id="@+id/card_text"

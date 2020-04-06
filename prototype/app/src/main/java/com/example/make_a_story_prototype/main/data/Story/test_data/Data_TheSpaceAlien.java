@@ -23,7 +23,7 @@ public class Data_TheSpaceAlien {
         pages.add(sampleStoryPage4());
         pages.add(sampleStoryPage5());
 
-        return new Story(1,"The Space Alien", pages, R.drawable.story_space_alien_5_compressed);
+        return new Story(1,"The Space Alien", pages, R.drawable.story_space_alien_background);
     }
 
 
