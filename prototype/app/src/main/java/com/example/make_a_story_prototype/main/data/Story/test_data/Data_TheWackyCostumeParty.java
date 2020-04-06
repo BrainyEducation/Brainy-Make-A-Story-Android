@@ -103,19 +103,21 @@ public class Data_TheWackyCostumeParty {
         imageLocations.put("BB", null);
         imageLocations.put("CC", null);
         imageLocations.put("C-2", null);
-        imageLocations.put("D-2", null);
-        imageLocations.put("DD", new ImageLocation("DD", 40f, 20f, 200, 200, 0));
-        imageLocations.put("FF", null);
-        imageLocations.put("GG", new ImageLocation("GG", 30f, 30f, 150, 200, 0));
-        imageLocations.put("G-2", null);
-        imageLocations.put("II", new ImageLocation("II", 69f, 26f, 200, 200, 0));
-        imageLocations.put("KK", null);
-        imageLocations.put("LL", new ImageLocation("LL", 65f, 75f, 150, 150, 0));
-        imageLocations.put("K-2", null);
-        imageLocations.put("NN", new ImageLocation("NN", 82f, 36f, 200, 200, 0));
 
-        imageLocations.put("PP", null);
-        imageLocations.put("QQ", new ImageLocation("QQ", 76f, 56f, 150, 150, 0));
+        imageLocations.put("D-2", null); // costume DD
+        imageLocations.put("DD", new ImageLocation("DD", 40f, 20f, 200, 200, 0));
+        imageLocations.put("FF", null); // D-2's pet
+        imageLocations.put("GG", new ImageLocation("GG", 30f, 30f, 150, 200, 0)); // costume for FF (D-2's pet)
+
+        imageLocations.put("G-2", null); // costume II
+        imageLocations.put("II", new ImageLocation("II", 69f, 26f, 200, 200, 0));
+        imageLocations.put("KK", null); // G-2's pet
+        imageLocations.put("LL", new ImageLocation("LL", 65f, 75f, 150, 150, 0)); // costume for KK (G-2's pet)
+
+        imageLocations.put("K-2", null); // costume NN
+        imageLocations.put("NN", new ImageLocation("NN", 82f, 36f, 200, 200, 0));
+        imageLocations.put("PP", null); // K-2's pet
+        imageLocations.put("QQ", new ImageLocation("QQ", 76f, 56f, 150, 150, 0)); // costume for PP (K-2's pet)
         imageLocations.put("G-2", null);
 
 
@@ -179,21 +181,21 @@ public class Data_TheWackyCostumeParty {
 
         Map<String, ImageLocation> imageLocations = new HashMap<>();
 
+        // characters (costumed)
         imageLocations.put("C-2", null);
-        imageLocations.put("D-2", null);
-        imageLocations.put("DD", new ImageLocation("DD", 48f, 26f, 200, 200, 0));
-        imageLocations.put("FF", null);
-        imageLocations.put("GG", new ImageLocation("GG", 56f, 46f, 200, 200, 0));
-        imageLocations.put("G-2", null);
-        imageLocations.put("II", new ImageLocation("II", 56f, 46f, 200, 200, 0));
-        imageLocations.put("KK", null);
-        imageLocations.put("LL", new ImageLocation("LL", 56f, 46f, 200, 200, 0));
-        imageLocations.put("K-2", null);
-        imageLocations.put("NN", new ImageLocation("NN", 56f, 46f, 200, 200, 0));
+        imageLocations.put("D-2", new ImageLocation("DD", 0f, 53f, 200, 200, 0)); // behind SS
+        imageLocations.put("G-2", new ImageLocation("II", 70f, 68f, 200, 200, 0)); // peeking out of TT
+        imageLocations.put("K-2", new ImageLocation("NN", 83f, 68f, 200, 200, 0)); // under UU
 
-        imageLocations.put("PP", null);
-        imageLocations.put("QQ", null);
-        imageLocations.put("G-2", null);
+        // pets (costumed)
+        imageLocations.put("FF", new ImageLocation("GG", 40f, 13f, 150, 150, 0));
+        imageLocations.put("KK", new ImageLocation("LL", 25f, 22f, 150, 150, 0));
+        imageLocations.put("PP", new ImageLocation("QQ", 30f, 50f, 150, 150, 0));
+
+        // other scene objects
+        imageLocations.put("SS", new ImageLocation("SS", 0f, 75f, 150, 150, 0));
+        imageLocations.put("TT", null); // no spot in scene image
+        imageLocations.put("UU", new ImageLocation("UU", 80f, 50f, 150, 150, 0));
 
         return new StoryPage(R.drawable.story_wacky_costume_2, segments, imageLocations);
     }
