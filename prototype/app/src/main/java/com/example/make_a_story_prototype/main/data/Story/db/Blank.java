@@ -1,13 +1,20 @@
 package com.example.make_a_story_prototype.main.data.Story.db;
 
+import com.example.make_a_story_prototype.main.data.Character.db.Character;
+import com.example.make_a_story_prototype.main.data.Word.db.Word;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "blanks_table",
-        foreignKeys = @ForeignKey(entity = StoryPage.class,
-                parentColumns = "blankId", childColumns = "pageId"))
+        foreignKeys = { @ForeignKey(entity = StoryPage.class,
+                            parentColumns = "blankId", childColumns = "pageId"),
+                        @ForeignKey(entity = Word.class,
+                            parentColumns = "blankId", childColumns = "wordId"),
+                        @ForeignKey(entity = Character.class,
+                                parentColumns = "blankId", childColumns = "characterId")})
 public class Blank {
 
     @PrimaryKey
