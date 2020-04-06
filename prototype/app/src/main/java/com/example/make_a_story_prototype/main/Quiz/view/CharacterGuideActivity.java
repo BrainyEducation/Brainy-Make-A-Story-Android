@@ -9,17 +9,18 @@ import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
+import com.example.make_a_story_prototype.main.Navigation.NavigationController;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
 import java.util.Objects;
 import java.util.Random;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class CharacterGuideActivity extends BaseActivity {
 
-public class CharacterGuideActivity extends AppCompatActivity {
-
-    private String source;
-    private String category;
+    String messageType = "";
+    int categoryId;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -27,8 +28,7 @@ public class CharacterGuideActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.partialfade_in, R.anim.partialfade_out);
         setContentView(R.layout.activity_character_guide);
 
-        source = getIntent().getStringExtra("source");
-        category = getIntent().getStringExtra("category");
+        categoryId = getIntent().getIntExtra("category", 0);
 
 
         Resources res = getResources();
@@ -37,8 +37,8 @@ public class CharacterGuideActivity extends AppCompatActivity {
 
         Random rand = new Random();
 
-        TextView charTextMessage = findViewById(R.id.charTextMsg);
-        String messageType = getIntent().getStringExtra("msgType");
+        TextView charTextMessage = (TextView) findViewById(R.id.charTextMsg);
+        messageType = getIntent().getStringExtra("msgType");
         if (Objects.equals(messageType, "goodJob")) {
             charTextMessage.setText(goodJobMsg[rand.nextInt(goodJobMsg.length + 1)]);
             Log.d("debug", "set text to good job");
@@ -53,10 +53,14 @@ public class CharacterGuideActivity extends AppCompatActivity {
         int duration = 2000;
 
         new Handler().postDelayed(() -> {
-            if (source != null) {
+
+            NavigationController.NavigationContext context = getNavigationContext();
+
+            if (context instanceof StoryBlankSelectionContext) {
+                StoryBlankSelectionContext storyBlankSelectionContext = (StoryBlankSelectionContext)context;
+
                 Intent intent = new Intent(this,   WordbankActivity.class);
-                intent.putExtra("category", category);
-                intent.putExtra("source", source);
+                intent.putExtra("category", categoryId);
                 CharacterGuideActivity.this.startActivity(intent);
             } else {
                 Intent intent = new Intent(this, HomeActivity.class);

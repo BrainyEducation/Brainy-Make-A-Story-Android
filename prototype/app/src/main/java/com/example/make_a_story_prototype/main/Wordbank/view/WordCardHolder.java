@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.Wordbank.view;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
+import com.example.make_a_story_prototype.main.data.MasteredWords.DebugMasteredWordsRepository;
 
 import java.util.Objects;
 
@@ -37,10 +39,14 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
     private final RelativeLayout parentLayout;
     private WordCardItemViewModel vm;
 
+    private Context context;
+
     public WordCardCallback callback;
 
     public WordCardHolder(@NonNull View itemView) {
         super(itemView);
+
+        this.context = itemView.getContext();
         this.wordImage = itemView.findViewById(R.id.cardImage);
         this.wordText = itemView.findViewById(R.id.cardText);
         this.parentLayout = itemView.findViewById(R.id.parent_layout);
@@ -76,16 +82,27 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
     public void setViewModel(WordCardItemViewModel vm) {
         this.vm = vm;
 
-        wordImage.setImageResource(vm.cardItem.getImageResource());
-        wordText.setText(vm.cardItem.getImageLabel());
-        wordText.setTextColor(vm.contrastColor);
+        int lockedBackgroundColor = context.getResources().getColor(R.color.colorLockedBackground);
+        int unlockedBackgroundColor = context.getResources().getColor(R.color.colorWordBackground);
+        int lockedContrastColor = context.getResources().getColor(R.color.colorLockedContrast);
+        int unlockedContrastColor = context.getResources().getColor(R.color.colorWordContrast);
+
+        DebugMasteredWordsRepository masteredWordsRepo = DebugMasteredWordsRepository.getInstance();
+
+        boolean isMastered = masteredWordsRepo.isMastered(vm.word.getId()).blockingGet();
+        int backgroundColor =  isMastered ? unlockedBackgroundColor : lockedBackgroundColor;
+        int contrastColor = isMastered ? unlockedContrastColor : lockedContrastColor;
+
+        wordImage.setImageResource(vm.word.getImageResource());
+        wordText.setText(vm.word.getWord());
+        wordText.setTextColor(contrastColor);
 
         Drawable imageBackground = parentLayout.getBackground();
-        Util.changeDrawableColor(imageBackground, vm.backgroundColor);
+        Util.changeDrawableColor(imageBackground, backgroundColor);
 
         CardView cardView = itemView.findViewById(R.id.card_view);
         Drawable imageBorder = cardView.getBackground();
-        Util.changeDrawableColor(imageBorder, vm.contrastColor);
+        Util.changeDrawableColor(imageBorder, contrastColor);
         cardView.setRadius(23);
 
         ViewGroup buttons = itemView.findViewById(R.id.confirmation_buttons);
@@ -96,7 +113,7 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
             buttons.setVisibility(GONE);
         }
 
-        if (!vm.isUnlocked) {
+        if (!isMastered) {
             Drawable cardImage = wordImage.getDrawable();
             setDrawableToGrayscale(cardImage);
         }
@@ -105,6 +122,6 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
         TextView text = itemView.findViewById(R.id.cardText);
         Drawable drawableSpeaker = text
                 .getCompoundDrawables()[0];
-        changeDrawableColor(drawableSpeaker, vm.contrastColor);
+        changeDrawableColor(drawableSpeaker, contrastColor);
     }
 }

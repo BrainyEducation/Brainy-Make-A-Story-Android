@@ -41,18 +41,18 @@ public class CharacterImageCardHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setViewModel(ImageCardViewModel vm) {
+    public void setViewModel(ImageCardViewModel vm, int contrastColor, int backgroundColor) {
         this.vm = vm;
 
         characterImage.setImageResource(vm.image);
 
         Drawable imageBackground = parentLayout.getBackground();
-        Util.changeDrawableColor(imageBackground, vm.backgroundColor);
+        Util.changeDrawableColor(imageBackground, backgroundColor);
 
         CardView cardView = itemView.findViewById(R.id.card_view);
         Drawable imageBorder = cardView.getBackground();
 
-        Util.changeDrawableColor(imageBorder, vm.contrastColor);
+        Util.changeDrawableColor(imageBorder, contrastColor);
         cardView.setRadius(23);
     }
 

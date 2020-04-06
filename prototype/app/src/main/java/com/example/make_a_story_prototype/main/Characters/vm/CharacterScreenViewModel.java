@@ -1,79 +1,65 @@
 package com.example.make_a_story_prototype.main.Characters.vm;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Characters.model.Characters;
 import com.example.make_a_story_prototype.main.Util.Optional;
+import com.example.make_a_story_prototype.main.data.Character.CharacterName;
+import com.example.make_a_story_prototype.main.data.Character.CharacterRepository;
+import com.example.make_a_story_prototype.main.data.Character.DebugCharacterRepository;
+import com.example.make_a_story_prototype.main.data.Character.StoryCharacter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.core.content.ContextCompat;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
 public class CharacterScreenViewModel {
 
+    public interface CharacterAdapterHandler {
+        void selectCharacterCard(CharacterViewModel vm);
+    }
+    public CharacterAdapterHandler handler;
     //region Types
 
     public class NameCardViewModel {
-        public final String name;
+        public CharacterName name;
 
-        public final int contrastColor;
-        public final int backgroundColor;
-
-        NameCardViewModel(String name, int contrastColor, int backgroundColor) {
+        public NameCardViewModel (CharacterName name) {
             this.name = name;
-            this.contrastColor = contrastColor;
-            this.backgroundColor = backgroundColor;
         }
     }
 
     public class ImageCardViewModel {
-        public final int image;
+        public int image;
 
-        public final int contrastColor;
-        public final int backgroundColor;
-
-        ImageCardViewModel(int image, int contrastColor, int backgroundColor) {
+        public ImageCardViewModel(int image) {
             this.image = image;
-            this.contrastColor = contrastColor;
-            this.backgroundColor = backgroundColor;
         }
     }
 
     public class CharacterViewModel {
-        public final String name;
-        public final int image;
+        public StoryCharacter character;
 
-        public final int nameContrastColor;
-        public final int nameBackgroundColor;
-
-
-        public final int imageContrastColor;
-        public final int imageBackgroundColor;
-
-        CharacterViewModel(String name, int image, int nameContrastColor, int nameBackgroundColor,
-                int imageContrastColor, int imageBackgroundColor) {
-            this.name = name;
-            this.image = image;
-
-            this.nameContrastColor = nameContrastColor;
-            this.nameBackgroundColor = nameBackgroundColor;
-            this.imageContrastColor = imageContrastColor;
-            this.imageBackgroundColor = imageBackgroundColor;
+        public CharacterViewModel(StoryCharacter character) {
+            this.character = character;
+        }
+        public StoryCharacter getCharacter() {
+            return character;
         }
     }
 
     //endregion
     //region Private Properties
 
-    private final BehaviorSubject<List<NameCardViewModel>> _characterNames;
-    private final BehaviorSubject<List<ImageCardViewModel>> _characterImages;
-    private final BehaviorSubject<NameCardViewModel> _selectedCharacterName;
-    private final BehaviorSubject<ImageCardViewModel> _selectedCharacterImage;
-    private final BehaviorSubject<Optional<CharacterViewModel>> _selectedCharacter;
+    private BehaviorSubject<List<NameCardViewModel>> _characterNames;
+    private BehaviorSubject<List<ImageCardViewModel>> _characterImages;
+    private BehaviorSubject<NameCardViewModel> _selectedCharacterName;
+    private BehaviorSubject<ImageCardViewModel> _selectedCharacterImage;
+    private BehaviorSubject<Optional<CharacterViewModel>> _selectedCharacter;
+    private CharacterViewModel vm;
 
     //endregion
     //region Public Properties
@@ -111,7 +97,15 @@ public class CharacterScreenViewModel {
     }
 
     public void confirmCharacter() {
-        // TODO: something
+        //If there's no handler: no activity/screen to present this on. Return
+        if (handler == null) {
+            Log.d("TAG","handler is null");
+            return;
+        }
+        //the handler set in "CharacterActivity" would call method implemented in "Character Activity"
+        Log.d("TAG","Selected character is confirmed");
+        handler.selectCharacterCard(vm);
+
     }
 
     public void cancelConfirmingCharacter() {
@@ -126,64 +120,38 @@ public class CharacterScreenViewModel {
         ImageCardViewModel imageCard = _selectedCharacterImage.getValue();
 
         if (nameCard != null && imageCard != null) {
-            _selectedCharacter.onNext(new Optional(new CharacterViewModel(nameCard.name, imageCard.image, nameCard.contrastColor, nameCard.backgroundColor, imageCard.contrastColor, imageCard.backgroundColor)));
+            StoryCharacter character = new StoryCharacter(nameCard.name, imageCard.image);
+            vm = new CharacterViewModel(character);
+            _selectedCharacter.onNext(new Optional(vm));
         }
     }
 
     //endregion
     //region Constructor
 
+    CharacterRepository characterRepository = DebugCharacterRepository.getInstance();
+
     // TODO: fix this
     public CharacterScreenViewModel(Context context, Characters characters) {
-        int[] coolCardBackgroundColors = {
-                ContextCompat.getColor(context, R.color.colorLightGreen),
-                ContextCompat.getColor(context, R.color.colorLightPurple),
-                ContextCompat.getColor(context, R.color.colorLightBlue),
-        };
+        List<NameCardViewModel> characterNameVms = new ArrayList<>();
+        List<CharacterName> characterNames = characterRepository.getCharacterNames();
+        for (int i = 0; i < characterNames.size(); i++) {
+            CharacterName name = characterNames.get(i);
 
-        int[] coolCardDetailColors = {
-                ContextCompat.getColor(context, R.color.colorContrastGreen),
-                ContextCompat.getColor(context, R.color.colorContrastPurple),
-                ContextCompat.getColor(context, R.color.colorContrastBlue),
-        };
-
-        int[] warmCardBackgroundColors = {
-                ContextCompat.getColor(context, R.color.colorLightRed),
-                ContextCompat.getColor(context, R.color.colorLightOrange),
-        };
-
-        int[] warmCardDetailColors = {
-                ContextCompat.getColor(context, R.color.colorContrastRed),
-                ContextCompat.getColor(context, R.color.colorContrastOrange),
-        };
-
-        List<NameCardViewModel> characterNames = new ArrayList<>();
-        String[] characterNamesRaw = characters.getCharacterNames();
-        for (int i = 0; i < characterNamesRaw.length; i += 1) {
-            String name = characterNamesRaw[i];
-
-            characterNames.add(new NameCardViewModel(
-                    name,
-                    warmCardDetailColors[i % warmCardDetailColors.length],
-                    warmCardBackgroundColors[i % warmCardBackgroundColors.length]
-            ));
+            characterNameVms.add(new NameCardViewModel(name));
         }
 
 
-        List<ImageCardViewModel> characterImages = new ArrayList<>();
-        Integer[] characterImagesRaw = characters.getCharacterImages();
-        for (int i = 0; i < characterImagesRaw.length; i += 1) {
-            int image = characterImagesRaw[i];
+        List<ImageCardViewModel> characterImageVms = new ArrayList<>();
+        List<Integer> characterImages = characterRepository.getCharacterImages();
+        for (int i = 0; i < characterImages.size(); i += 1) {
+            int image = characterImages.get(i);
 
-            characterImages.add(new ImageCardViewModel(
-                    image,
-                    coolCardDetailColors[i % coolCardDetailColors.length],
-                    coolCardBackgroundColors[i % coolCardBackgroundColors.length]
-            ));
+            characterImageVms.add(new ImageCardViewModel(image));
         }
 
-        _characterNames = BehaviorSubject.createDefault(characterNames);
-        _characterImages = BehaviorSubject.createDefault(characterImages);
+        _characterNames = BehaviorSubject.createDefault(characterNameVms);
+        _characterImages = BehaviorSubject.createDefault(characterImageVms);
 
         _selectedCharacterName = BehaviorSubject.create();
         _selectedCharacterImage = BehaviorSubject.create();

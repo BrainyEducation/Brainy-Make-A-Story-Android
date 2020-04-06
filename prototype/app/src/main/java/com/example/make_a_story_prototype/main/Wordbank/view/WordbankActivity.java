@@ -2,6 +2,7 @@ package com.example.make_a_story_prototype.main.Wordbank.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,37 +12,42 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
+import com.example.make_a_story_prototype.main.Navigation.NavigationController;
 import com.example.make_a_story_prototype.main.Quiz.view.QuizActivity;
 import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
-import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.DebugStoryTemplateSelectionsRepository;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity.BlankSelectionIntentKey;
+public class WordbankActivity extends BaseActivity implements WordbankItemRecyclerViewAdapter.WordbankAdapterHandler {
+    private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
 
-public class WordbankActivity extends AppCompatActivity implements WordbankItemRecyclerViewAdapter.WordbankAdapterHandler {
-    private String category;
     private RecyclerView recyclerView;
     private WordbankItemRecyclerViewAdapter recyclerViewAdapter;
-    private RecyclerView.LayoutManager rvLayoutManager;
-    private WordbankViewModel viewModel;
-    private String source;
+    private WordbankViewModel vm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        Log.d("tag", "onCreate: VMKEY: " + MY_VM_KEY);
 
-        category = getIntent().getStringExtra("category");
-        Log.d("tag", "onCreate -- category: " + category);
-        source = getIntent().getStringExtra("source");
+        if (savedInstanceState == null) {
+            int categoryId = getIntent().getIntExtra("category", 0);
+            vm = new WordbankViewModel(categoryId);
+        } else {
+            vm = savedInstanceState.getParcelable(MY_VM_KEY);
+        }
+        // TODO: or crash
 
         View view = findViewById(R.id.relative_layout);
         View root = view.getRootView();
@@ -53,20 +59,21 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
 
-        TextView title = toolbar.findViewById(R.id.toolbar_title);
-        title.setText(category);
-
-        viewModel = WordbankViewModel.instance(this);
-        viewModel.setCategory(category);
+        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        title.setText(vm.getCategory().blockingGet().getName());
 
         initRecyclerView();
 
-        viewModel.getCardListObservable().subscribe((list) -> {
-            recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, viewModel);
-            recyclerViewAdapter.handler = this;
+        recyclerViewAdapter = new WordbankItemRecyclerViewAdapter(this, vm);
+        recyclerViewAdapter.handler = this;
+        recyclerView.setAdapter(recyclerViewAdapter);
+    }
 
-            recyclerView.setAdapter(recyclerViewAdapter);
-        });
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+        outState.putParcelable(MY_VM_KEY, vm);
     }
 
     // storybook icon
@@ -99,39 +106,40 @@ public class WordbankActivity extends AppCompatActivity implements WordbankItemR
 
     @Override
     public void selectWordCard(WordCardItemViewModel vm) {
-        if (vm.isUnlocked && source != null) {
-            Log.d("tag", "tapped unlocked word card from story");
+        NavigationController.NavigationContext context = getNavigationContext();
 
-            Intent intent = new Intent(this, StoryTemplateActivity.class);
-            intent.putExtra(BlankSelectionIntentKey,  new StoryViewModel.BlankSelection(
-                    vm.cardItem.getImageLabel(),
-                    vm.cardItem.getImageResource()
-            ));
+        if (context instanceof StoryBlankSelectionContext) {
+            StoryBlankSelectionContext storyBlankSelectionContext = (StoryBlankSelectionContext) context;
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        } else if (vm.isUnlocked) {
-            Log.d("tag", "tapped unlocked word card from home");
-            Toast.makeText(this,"Let's review what you've learned!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, QuizActivity.class);
-            intent.putExtra("word", vm.cardItem.getImageLabel());
-            intent.putExtra("audio", vm.cardItem.getAudioResource());
-            intent.putExtra("image", vm.cardItem.getImageResource());
-            intent.putExtra("category", category);
-            intent.putExtra("source", source);
-            this.startActivity(intent);
+            if (vm.isUnlocked) {
+                Log.d("TAG", "tapped unlocked word card from story");
 
-    //    } else if (vm.isUnlocked && source.equals("template")) {
+                DebugStoryTemplateSelectionsRepository.getInstance().setSelectionForStory(
+                        storyBlankSelectionContext.getStoryId(),
+                        storyBlankSelectionContext.getBlankId(),
+                        new BlankSelection(
+                                vm.word.getWord(),
+                                vm.word.getImageResource(),
+                                vm.word.getAudioResource()
+                        ));
 
-        }else {
-            Intent intent = new Intent(this, QuizActivity.class);
-            intent.putExtra("word", vm.cardItem.getImageLabel());
-            intent.putExtra("audio", vm.cardItem.getAudioResource());
-            intent.putExtra("image", vm.cardItem.getImageResource());
-            intent.putExtra("category", category);
-            intent.putExtra("source", source);
-            this.startActivity(intent);
+                StoryTemplateActivity.start(this, storyBlankSelectionContext.getStoryId(), storyBlankSelectionContext.getPageNumber());
+            } else {
+                startQuiz(vm);
+            }
+        } else {
+            if (vm.isUnlocked) {
+                Log.d("tag", "tapped unlocked word card from home");
+                Toast.makeText(this, "Let's review what you've learned!", Toast.LENGTH_SHORT).show();
+            }
+            startQuiz(vm);
         }
+    }
+
+    private void startQuiz(WordCardItemViewModel vm) {
+        Intent intent = new Intent(this, QuizActivity.class);
+        intent.putExtra("word", vm.word.getId());
+        this.startActivity(intent);
     }
 }
 

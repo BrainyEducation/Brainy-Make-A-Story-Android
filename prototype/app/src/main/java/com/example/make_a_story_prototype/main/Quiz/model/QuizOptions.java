@@ -1,43 +1,51 @@
 package com.example.make_a_story_prototype.main.Quiz.model;
 
+import android.util.Log;
+
+import com.example.make_a_story_prototype.main.data.Word.Word;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class QuizOptions {
-    private static String correctOption = "apple";
-    private static String[] incorrectOptions = {"able", "ape", "addle", "ate", "apply", "add"};
+    private static Word correctOption;
+    private static Word incorrectOptions[];
 
 
 
-    public static String[] getIncorrectOptions() {
+    public static Word[] getIncorrectOptions() {
         return incorrectOptions;
     }
 
-    public static String getCorrectOption() {
+    public static Word getCorrectOption() {
         return correctOption;
     }
 
-    public static void setCorrectOption(String newCorrectOption) {
+    public static void setCorrectOption(Word newCorrectOption) {
         correctOption = newCorrectOption;
+        Log.d("tag", "setCorrectOption: " + correctOption);
     }
 
-    public static void setWordList(String[] wordList) {
-        List<String> possibleIncorrects = new ArrayList<>();
+    public static void setWordList(Word[] wordList) {
+        List<Word> possibleIncorrects = new ArrayList<Word>();
 
-        for (String word: wordList) {
-            if(!word.equals(correctOption) && word.charAt(0) == correctOption.charAt(0)) {
+        for (Word word: wordList) {
+            if(word.getId() != correctOption.getId() && word.getWord().charAt(0) == correctOption.getWord().charAt(0)) {
                 possibleIncorrects.add(word);
             }
         }
+        Log.d("tag", "porssibleIncorrects size: " + possibleIncorrects.size());
+        Log.d("tag", "wordList size: " + wordList.length);
+
         while(possibleIncorrects.size() < 5) {
-            String word = wordList[new Random().nextInt(wordList.length)];
-            if(!word.equals(correctOption) && !possibleIncorrects.contains(word)){
+            Word word = wordList[new Random().nextInt(wordList.length)];
+            if(word.getId() != correctOption.getId() && !possibleIncorrects.contains(word)){
                 possibleIncorrects.add(word);
             }
         }
 
-        incorrectOptions =  possibleIncorrects.toArray(new String[possibleIncorrects.size()]);
+        incorrectOptions =  possibleIncorrects.toArray(new Word[possibleIncorrects.size()]);
     }
 }
 

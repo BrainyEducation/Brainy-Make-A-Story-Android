@@ -19,8 +19,9 @@ import android.widget.Toast;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Media.AudioPlayer;
 import com.example.make_a_story_prototype.main.Quiz.vm.QuizViewModel;
-import com.example.make_a_story_prototype.main.Quiz.vm.QuizWordViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.data.Word.DebugWordRepository;
+import com.example.make_a_story_prototype.main.data.Word.Word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +35,16 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
     private QuizViewModel vm;
 
+    private View rootView;
     private ImageView[] stars;
-    private QuizWordViewModel quizWordVM;
-    private final List<Button> buttons = new ArrayList<>();
-    private String source;
-    private String category;
+    private Button buttonOption1;
+    private Button buttonOption2;
+    private Button buttonOption3;
+    private Button buttonOption4;
+    private ImageView quizImage;
+    private List<Button> buttons = new ArrayList<>();
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
+    private Word wordBeingQuizzed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,14 +52,15 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         setContentView(R.layout.activity_quiz);
         Intent intent = getIntent();
         //define values passed from word bank in WordBankActivity.java under selectWordCard method
-        String wordBeingQuizzed = intent.getStringExtra("word");
-        int quizImageFile = intent.getIntExtra("image",0);
-        int quizAudioFile = intent.getIntExtra("audio", 0);
-        source = getIntent().getStringExtra("source");
-        category = getIntent().getStringExtra("category");
+        // TODO: move these into viewmodels and use singles
+        DebugWordRepository wordRepo = DebugWordRepository.getInstance();
+        wordBeingQuizzed = wordRepo.getWord(intent.getIntExtra("word", 0)).blockingGet();
+
+        int quizImageFile = wordBeingQuizzed.getImageResource();
+        int quizAudioFile = wordBeingQuizzed.getAudioResource();
 
         View view = findViewById(R.id.constraint_layout);
-        View rootView = view.getRootView();
+        rootView = view.getRootView();
 
         rootView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite));
 
@@ -68,16 +74,18 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         title.setText("Learn");
 
         //display quiz word image
-        ImageView quizImage = view.findViewById(R.id.quizImage);
+        quizImage = view.findViewById(R.id.quizImage);
         quizImage.setImageResource(quizImageFile);
 
         //set up MediaPlayer
         ImageView speaker = view.findViewById(R.id.speakerIcon);
         Context quizContext = this;
-        speaker.setOnClickListener(v -> {
-            if (!mediaPlayer.isPlaying()) {
-//                    mediaPlayer = android.media.MediaPlayer.create(quizContext, quizAudioFile);
-                mediaPlayer.start();
+        speaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.start();
+                }
             }
         });
 
@@ -91,10 +99,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
                 findViewById(R.id.star3)
         };
 
-        Button buttonOption1 = findViewById(R.id.option1);
-        Button buttonOption2 = findViewById(R.id.option2);
-        Button buttonOption3 = findViewById(R.id.option3);
-        Button buttonOption4 = findViewById(R.id.option4);
+        buttonOption1 = findViewById(R.id.option1);
+        buttonOption2 = findViewById(R.id.option2);
+        buttonOption3 = findViewById(R.id.option3);
+        buttonOption4 = findViewById(R.id.option4);
 
         // button listener
         buttonOption1.setOnClickListener(clickListenerForOption(0));
@@ -108,8 +116,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         buttons.add(buttonOption4);
 
         Resources res = getResources();
-        String [] wordList = res.getStringArray(R.array.WordList);
-        setViewModel(new QuizViewModel(wordBeingQuizzed,wordList));
+        List<Word> wordList = wordRepo.getWords().blockingGet();
+        setViewModel(new QuizViewModel(wordBeingQuizzed, wordList));
     }
 
     // storybook icon
@@ -141,14 +149,17 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
 
         Observable.combineLatest(
                 vm.getCorrectAnswerCount(),
-                vm.getMaxAnswerCount(), Pair::new)
-                .subscribe(value -> updateStars(value.first, value.second));
+                vm.getMaxAnswerCount(),
+                (current, max) -> new Pair<>(current, max))
+                .subscribe(value -> {
+                    updateStars(value.first, value.second);
+                });
 
         vm.getCorrectAnswerCount().subscribe();
 
-        vm.getOptions().subscribe((String[] options) -> {
+        vm.getOptions().subscribe((Word[] options) -> {
             for (int i = 0; i < 4; i++) {
-                buttons.get(i).setText(options[i]);
+                buttons.get(i).setText(options[i].getWord());
             }
         });
     }
@@ -190,9 +201,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewModel.Cal
         Log.d("debug", "entering display intent");
         Intent intent = new Intent(this,   CharacterGuideActivity.class);
         intent.putExtra("msgType", messageType);
-        intent.putExtra("source", source);
-        intent.putExtra("category", category);
+        intent.putExtra("category", wordBeingQuizzed.getCategory().getId());
         QuizActivity.this.startActivity(intent);
+
 
     }
 }

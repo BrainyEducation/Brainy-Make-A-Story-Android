@@ -1,5 +1,6 @@
 package com.example.make_a_story_prototype.main.Categories.view;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
@@ -13,8 +14,7 @@ import android.widget.TextView;
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.vm.CategoryCardItemViewModel;
 import com.example.make_a_story_prototype.main.Util.Util;
-
-import java.util.Objects;
+import com.example.make_a_story_prototype.main.data.Word.Category;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -27,20 +27,25 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         void confirmSelection(CategoryCardItemViewModel vm);
     }
 
-    private final ImageView categoryImage;
-    private final TextView categoryText;
-    private final RelativeLayout parentLayout;
+    private Context context;
+    private ImageView categoryImage;
+    private TextView categoryText;
+    private RelativeLayout parentLayout;
     private CategoryCardItemViewModel vm;
+    private Button confirmButton;
+    private Button cancelButton;
 
     public CategoryCardCallback callback;
 
     public CategoryCardHolder(@NonNull View itemView) {
         super(itemView);
+
+        this.context = itemView.getContext();
         this.categoryImage = itemView.findViewById(R.id.cardImage);
         this.categoryText = itemView.findViewById(R.id.cardText);
         this.parentLayout = itemView.findViewById(R.id.parent_layout);
-        Button confirmButton = itemView.findViewById(R.id.confirmButton);
-        Button cancelButton = itemView.findViewById(R.id.cancelButton);
+        this.confirmButton = itemView.findViewById(R.id.confirmButton);
+        this.cancelButton = itemView.findViewById(R.id.cancelButton);
 
         parentLayout.setOnClickListener(v -> {
             if (callback != null && vm != null) {
@@ -59,24 +64,26 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
                 return;
             }
 
-            Objects.requireNonNull(callback).hideConfirmationButtons(vm);
+            callback.hideConfirmationButtons(vm);
         });
     }
 
-    public void setViewModel(CategoryCardItemViewModel vm) {
+    public void setViewModel(CategoryCardItemViewModel vm, int backgroundColor, int contrastColor) {
         this.vm = vm;
 
-        categoryImage.setImageResource(vm.cardItem.getImageResource());
-        categoryText.setText(vm.cardItem.getImageLabel());
-        categoryText.setTextColor(vm.contrastColor);
+        Category category = vm.category;
+
+        categoryImage.setImageResource(category.getImageResource());
+        categoryText.setText(category.getName());
+        categoryText.setTextColor(contrastColor);
 
         Drawable imageBackground = parentLayout.getBackground();
-        Util.changeDrawableColor(imageBackground, vm.backgroundColor);
+        Util.changeDrawableColor(imageBackground, backgroundColor);
 
 
         CardView cardView = itemView.findViewById(R.id.card_view);
         Drawable imageBorder = cardView.getBackground();
-        Util.changeDrawableColor(imageBorder, vm.contrastColor);
+        Util.changeDrawableColor(imageBorder, contrastColor);
         cardView.setRadius(23);
 
         // setting color for drawableLeft
@@ -93,6 +100,11 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         }
 
         // TODO: take another look at this
-        d.setColorFilter(new PorterDuffColorFilter(vm.contrastColor, PorterDuff.Mode.SRC_IN));
+        d.setColorFilter(new PorterDuffColorFilter(contrastColor, PorterDuff.Mode.SRC_IN));
     }
+
+    public void setColors(int backgroundColor, int contrastColor) {
+
+    }
+
 }

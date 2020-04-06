@@ -2,83 +2,141 @@ package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ClickableSpan;
+import android.util.Log;
+import android.view.View;
 
-import com.example.make_a_story_prototype.main.StoryTemplate.model.Story;
+import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
+import com.example.make_a_story_prototype.main.data.Story.StoryRepository;
+import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
+import com.example.make_a_story_prototype.main.data.Story.model.Story;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
+import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
+import com.example.make_a_story_prototype.main.data.Story.model.StoryText;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.DebugStoryTemplateSelectionsRepository;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.StoryTemplateSelectionsRepository;
+import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class StoryViewModel {
+import androidx.annotation.NonNull;
 
-    public static class BlankSelection implements Parcelable {
-        private final String text;
-        private final int imageResource;
+public class StoryViewModel implements Parcelable {
+    private static String BLANK_PLACEHOLDER = " BLANK ";
 
-        public BlankSelection(String text, int imageResource) {
-            this.text = text;
-            this.imageResource = imageResource;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public int getImageResource() {
-            return imageResource;
-        }
-
-        BlankSelection(Parcel in) {
-            text = in.readString();
-            imageResource = in.readInt();
-        }
-
-        public static final Creator<BlankSelection> CREATOR = new Creator<BlankSelection>() {
-            @Override
-            public BlankSelection createFromParcel(Parcel in) {
-                return new BlankSelection(in);
-            }
-
-            @Override
-            public BlankSelection[] newArray(int size) {
-                return new BlankSelection[size];
-            }
-        };
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(text);
-            dest.writeInt(imageResource);
-        }
+    public interface StoryViewModelCallback {
+        void onSelectedBlank(String identifier);
     }
 
-    private final Story story;
+    private StoryRepository storyRepository = DebugStoryRepository.getInstance();
+    private StoryTemplateSelectionsRepository selectionsRepository = DebugStoryTemplateSelectionsRepository.getInstance();
+
+    public StoryViewModelCallback callback;
+
+    private Story story;
+    private int storyId;
     private Map<String, BlankSelection> selections;
+    private int pageNumber;
 
-    public Story getStory() {
-        return story;
-    }
+    public StoryViewModel(int storyId, int pageNumber) {
+        Log.d("StoryViewModel", "create with " + storyId);
+        this.storyId = storyId;
+        this.pageNumber = pageNumber;
 
-    public StoryViewModel(Story story) {
-        this.story = story;
-        this.selections = new HashMap<>();
+        this.story = storyRepository.getStory(storyId);
+        this.selections = selectionsRepository.getSelectionsForStory(storyId);
     }
 
     public Map<String, BlankSelection> getSelections() {
         return selections;
     }
 
-    public void setSelection(String blankIdentifier, BlankSelection selection) {
-        selections.put(blankIdentifier, selection);
-        // fire observable
+    public Story getStory() {
+        return story;
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public Spannable getTextForPage(int pageNumber) {
+        StoryPage currentPage = story.getPages().get(pageNumber);
+        List<StorySegment> segments = currentPage.getSegments();
+
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        for (StorySegment s : segments) {
+            if (s instanceof StoryText) {
+                StoryText textSegment = (StoryText) s;
+                builder.append(textSegment.getText());
+            } else if (s instanceof StoryBlankIdentifier) {
+                StoryBlankIdentifier identifier = (StoryBlankIdentifier) s;
+                BlankSelection selection = selections.get(identifier.get());
+
+                if (selection == null) {
+                    builder.append(
+                            BLANK_PLACEHOLDER,
+                            new ClickableSpan() {
+                                @Override
+                                public void onClick(@NonNull View v) {
+                                    onSelectedBlank(identifier.get());
+                                }
+                            },
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    );
+                } else {
+                    builder.append(selection.getText());
+                }
+            }
+        }
+
+        return builder;
     }
 
     public void clearSelections() {
-        selections = new HashMap<>();
+        selectionsRepository.clearSelectionsForStory(storyId);
     }
+
+    private void onSelectedBlank(String identifier) {
+        if (callback == null) {
+            return;
+        }
+
+        callback.onSelectedBlank(identifier);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(storyId);
+        dest.writeInt(pageNumber);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<StoryViewModel> CREATOR = new Creator<StoryViewModel>() {
+        @Override
+        public StoryViewModel createFromParcel(Parcel in) {
+            int storyId = in.readInt();
+            int pageNumber = in.readInt();
+
+            return new StoryViewModel(storyId, pageNumber);
+        }
+
+        @Override
+        public StoryViewModel[] newArray(int size) {
+            return new StoryViewModel[size];
+        }
+    };
 
 }

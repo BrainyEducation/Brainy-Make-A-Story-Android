@@ -1,105 +1,85 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
+import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
 import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
-import com.example.make_a_story_prototype.main.Media.AudioPlayer;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryBlankIdentifier;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPage;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryPageSampleData;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StorySegment;
-import com.example.make_a_story_prototype.main.StoryTemplate.model.StoryText;
+import com.example.make_a_story_prototype.main.Home.vm.StoryBlankSelectionContext;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
+import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
+import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
 
-import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
-public class StoryTemplateActivity extends AppCompatActivity implements ObservableScrollView.ScrollViewListener {
+public class StoryTemplateActivity extends BaseActivity implements StoryViewModel.StoryViewModelCallback, ViewPager.OnPageChangeListener {
 
-    public static final String BlankSelectionIntentKey = "BlankSelection";
-    private static final StoryViewModel sVm = new StoryViewModel(StoryPageSampleData.sampleStory());
-    private static String currentIdentifier;
-    private static int word1Resource = 0;
-    private static int word2Resource = 0;
-    private static int index = 0;
+    private static String STORY_ID_EXTRA_KEY = "STORY_ID";
+    private static String STORY_PAGE_EXTRA_KEY = "PAGE_NUMBER";
+    private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
 
-    private final StoryViewModel vm = StoryTemplateActivity.sVm;
+    public static void start(Activity activity, int storyId, int pageNumber) {
+        Intent intent = new Intent(activity, StoryTemplateActivity.class);
+        intent.putExtra(STORY_ID_EXTRA_KEY, storyId);
+        intent.putExtra(STORY_PAGE_EXTRA_KEY, pageNumber);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-    private TextView storyTextView;
-    private ImageView image1;
-    private ImageView image2;
-    private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
+        activity.startActivity(intent);
+    }
 
-    private ProgressBar progressBar;
+    private StoryViewModel vm;
+    private ViewPager storyPager;
+    private StoryPageAdapter storyPageAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_template);
 
-        View view = findViewById(R.id.constraint_layout);
+        if (savedInstanceState == null) {
+            int storyId = getIntent().getIntExtra(STORY_ID_EXTRA_KEY, -1);
+            int pageNumber = getIntent().getIntExtra(STORY_PAGE_EXTRA_KEY, 0);
+            vm = new StoryViewModel(storyId, pageNumber);
+        } else {
+            vm = savedInstanceState.getParcelable(MY_VM_KEY);
+        }
+
+        vm.callback = this;
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        storyPager = findViewById(R.id.story_pager);
+        storyPageAdapter = new StoryPageAdapter(this, vm);
+        storyPager.addOnPageChangeListener(this);
+        storyPager.setAdapter(storyPageAdapter);
+        storyPager.setCurrentItem(vm.getPageNumber());
+
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
-
-        Toolbar controlsbar = findViewById(R.id.controls_bar);
-        ImageView storyImageView = findViewById(R.id.story_image);
-        storyTextView = findViewById(R.id.story_text);
-        progressBar = findViewById(R.id.progress_bar);
-        image1 = findViewById(R.id.word_image1);
-        image2 = findViewById(R.id.word_image2);
-        FrameLayout fl = findViewById(R.id.image_layout);
-
-        ObservableScrollView scrollView = findViewById(R.id.story_scroll);
-        scrollView.setScrollViewListener(this);
-
-        int quizAudioFile = R.raw.story_full_space_alien;
-        mediaPlayer = android.media.MediaPlayer.create(this, quizAudioFile);
-        //mediaPlayer.start();
-
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(vm.getStory().getTitle());
+    }
 
-        storyImageView.setImageResource(vm.getStory().getPages().get(0).getImageResource());
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
 
-        updateTextView(0);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            return;
-        }
-
-        StoryViewModel.BlankSelection selection = bundle.getParcelable(BlankSelectionIntentKey);
-        if (currentIdentifier != null && selection != null) {
-            vm.setSelection(currentIdentifier, selection);
-            updateTextView(0);
-            updateImageView(selection.getImageResource());
-        }
+        outState.putParcelable(MY_VM_KEY, vm);
     }
 
     // home icon
@@ -113,11 +93,14 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO:
         switch (item.getItemId()) {
             case android.R.id.home:
                 showSaveDialog();
+//                storyPageView.pause();
                 return true;
             case R.id.home_menu_icon:
+//                storyPageView.pause();
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 return true;
             default:
@@ -125,151 +108,55 @@ public class StoryTemplateActivity extends AppCompatActivity implements Observab
         }
     }
 
-    private void showSaveDialog() {
+    public void showSaveDialog() {
         View saveDialog = findViewById(R.id.popup_dialog);
         saveDialog.setVisibility(View.VISIBLE);
         Button saveButton = findViewById(R.id.save_button);
         Button noSaveButton = findViewById(R.id.no_save_button);
 
         saveButton.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(),"Todo: Saving", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Saving", Toast.LENGTH_SHORT).show();
+
             finish();
         });
 
         noSaveButton.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(),"Not Saving", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Story not saved", Toast.LENGTH_SHORT).show();
             vm.clearSelections();
-            index = 0;
             finish();
         });
     }
 
+    @Override
+    public void onSelectedBlank(String identifier) {
+        // TODO:
+//        storyPageView.pause();
 
-    private void updateTextView(int pageNum) {
-        StoryPage currentPage = vm.getStory().getPages().get(pageNum);
-        List<StorySegment> segments = currentPage.getSegments();
-
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-
-        for (StorySegment s : segments) {
-            if (s instanceof StoryText) {
-                StoryText textSegment = (StoryText) s;
-                builder.append(textSegment.getText());
-            } else if (s instanceof StoryBlankIdentifier) {
-                StoryBlankIdentifier identifier = (StoryBlankIdentifier) s;
-                StoryViewModel.BlankSelection selection = vm.getSelections().get(identifier.get());
-
-                if (selection == null) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        String BLANK_PLACEHOLDER = " BLANK ";
-                        builder.append(BLANK_PLACEHOLDER,
-                                new ClickableSpan() {
-                                    @Override
-                                    public void onClick(@NonNull View v) {
-                                        onSelectedBlank(identifier.get());
-                                    }
-                                },
-                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                        );
-                    }
-                } else {
-                    builder.append(selection.getText());
-                }
-            }
-        }
-
-        storyTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        storyTextView.setText(builder);
-    }
-
-    private void updateImageView(int resource) {
-//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-//                FrameLayout.LayoutParams.WRAP_CONTENT,
-//                FrameLayout.LayoutParams.WRAP_CONTENT);
-//
-//        image.setImageResource(resource);
-//
-//        // Adds image to layout
-//        fl.addView(image, params);
-//
-//        int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
-//        image.getLayoutParams().height = dimensionInDp;
-//        image.getLayoutParams().width = dimensionInDp;
-//
-//        image.setX(162);
-//        image.setY(255);
-//        image.requestLayout();
-
-        // TODO: fix this
-        // hard-coding for demo
-        if (index == 0) {
-            word1Resource = resource;
-
-            image1.setImageResource(word1Resource);
-            image1.setVisibility(View.VISIBLE);
-            image2.setVisibility(View.INVISIBLE);
-
-        } else if (index == 1) {
-            word2Resource = resource;
-            image1.setImageResource(word1Resource);
-            image2.setImageResource(word2Resource);
-
-            image1.setVisibility(View.VISIBLE);
-            image2.setVisibility(View.VISIBLE);
+        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), identifier, vm.getPageNumber()));
+        //If Character selection blank (format "X-2"), intent is character activity
+        if (identifier.length() > 2) {
+            Intent intent = new Intent(this, CharacterActivity.class);
+            StoryTemplateActivity.this.startActivity(intent);
         } else {
-            image1.setImageResource(word1Resource);
-            image2.setImageResource(word2Resource);
-
-            image1.setVisibility(View.VISIBLE);
-            image2.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(this, CategoriesActivity.class);
+            StoryTemplateActivity.this.startActivity(intent);
         }
-
-        index++;
-    }
-
-    private void onSelectedBlank(String blankIdentifier) {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-        }
-
-        currentIdentifier = blankIdentifier;
-        Intent intent = new Intent(this,   CategoriesActivity.class);
-        String source = "template";
-        intent.putExtra("source", source);
-        StoryTemplateActivity.this.startActivity(intent);
     }
 
     @Override
-    public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int prevX, int prevY) {
-        float percentScrolled = (float) ((y / 3000.0) * 100);
-        progressBar.setProgress(Math.min((int) percentScrolled, 100));
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        //
     }
 
-    public void onPauseTapped(View v) {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-        }
+    @Override
+    public void onPageSelected(int position) {
+        vm.setPageNumber(position);
     }
 
-    public void onPlayTapped(View v) {
-        if (!mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-        }
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        //
     }
-
-    public void onReplayTapped(View v) {
-        int rewindTime = 5000;
-
-        if (mediaPlayer.isPlaying()) {
-            int currentPosition = mediaPlayer.getCurrentPosition();
-            if (currentPosition - rewindTime >= 0) {
-                mediaPlayer.seekTo(currentPosition - rewindTime);
-                    } else {
-                mediaPlayer.seekTo(0);
-            }
-        }
-    }
-
 }
 
 
