@@ -21,7 +21,7 @@ public class Data_SantasMixedUpHelperElf {
         pages.add(sampleStoryPage2());
         pages.add(sampleStoryPage3());
 
-        return new Story(3,"Santa's Mixed-Up Helper Elf", pages, R.drawable.story_santas_elf_compressed);
+        return new Story(3,"Santa's Mixed-Up Helper Elf", pages, R.drawable.story_santas_elf_background);
     }
 
     private static StoryPage sampleStoryPage1() {
