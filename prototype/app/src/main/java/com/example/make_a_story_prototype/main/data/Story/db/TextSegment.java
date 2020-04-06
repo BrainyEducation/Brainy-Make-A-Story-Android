@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "text_segments_table",
         foreignKeys = @ForeignKey(entity = StoryPage.class,
-        parentColumns = "textId", childColumns = "pageId"))
+            parentColumns = "textId", childColumns = "pageId"))
 public class TextSegment {
 
     @PrimaryKey(autoGenerate = false)
