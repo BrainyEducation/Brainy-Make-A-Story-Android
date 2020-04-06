@@ -11,11 +11,13 @@ public class TextSegment {
 
     @PrimaryKey(autoGenerate = false)
     private int textId;
+    private int pageId;
     private String text;
     private int audioResource;
 
-    public TextSegment(int textId, String text, int audioResource) {
+    public TextSegment(int textId, int pageId, String text, int audioResource) {
         this.textId = textId;
+        this.pageId = pageId;
         this.text = text;
         this.audioResource = audioResource;
     }
@@ -23,6 +25,8 @@ public class TextSegment {
     public int getTextId() {
         return textId;
     }
+
+    public int getPageId() { return pageId; }
 
     public String getText() {
         return text;

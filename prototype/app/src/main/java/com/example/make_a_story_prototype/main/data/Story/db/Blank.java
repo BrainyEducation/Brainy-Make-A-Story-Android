@@ -13,6 +13,7 @@ public class Blank {
     @PrimaryKey
     @NonNull
     private String blankId;
+    private int pageId;
     private float x;
     private float y;
     private int width;
@@ -21,8 +22,9 @@ public class Blank {
     // boolean for word or character blank
     private boolean word;
 
-    public Blank(String blankId, float x, float y, int width, int height, int rotation, boolean word) {
+    public Blank(String blankId, int pageId, float x, float y, int width, int height, int rotation, boolean word) {
         this.blankId = blankId;
+        this.pageId = pageId;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -34,6 +36,10 @@ public class Blank {
     @NonNull
     public String getBlankId() {
         return blankId;
+    }
+
+    public Integer getPageId() {
+        return pageId;
     }
 
     public float getX() {

@@ -12,16 +12,20 @@ public class StoryPage {
 
     @PrimaryKey
     private int pageId;
+    private int storyId;
     private int imageResource;
 
     public StoryPage(int pageId, int storyId, int imageResource, int pageNumber) {
         this.pageId = pageId;
+        this.storyId = storyId;
         this.imageResource = imageResource;
     }
 
     public int getPageId() {
         return pageId;
     }
+
+    public int getStoryId() { return storyId; }
 
     public int getImageResource() {
         return imageResource;
