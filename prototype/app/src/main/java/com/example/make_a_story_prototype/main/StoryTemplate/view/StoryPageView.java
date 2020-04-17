@@ -113,7 +113,7 @@ public class StoryPageView extends ConstraintLayout implements ObservableScrollV
         mediaController.play();
     }
 
-    public void onReplayTapped(View v) {
-        mediaController.restart();
-    }
+    // 4/17 Replaced Replay's restart functionality with rewind functionality
+    public void onReplayTapped(View v) { mediaController.rewind(mediaController.getCurrentPosition());
+    /*mediaController.restart();*/ }
 }
