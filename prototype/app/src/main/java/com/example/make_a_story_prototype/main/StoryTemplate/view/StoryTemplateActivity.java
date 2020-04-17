@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.util.Log;
+import android.text.SpannableStringBuilder;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -152,18 +153,44 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
     private void showShareDialogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        // Add the buttons
+
+        // share button allows the user to share story text
+        //TODO: allow user to share story images
         builder.setPositiveButton("Share", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Toast.makeText(getApplicationContext(), "share button clicked", Toast.LENGTH_SHORT).show();
+
+                // creating email intent with type
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("application/image");
+                String storyText = "";
+
+                for (int i = 0; i < vm.getStory().getPages().size(); i++) {
+                    //fetching story text based on pages
+                    SpannableStringBuilder pageText = (SpannableStringBuilder) (vm.getTextForPage(i));
+                    storyText = storyText + pageText.toString();
+
+                    //fetching story image based on pages
+//                    Uri path = Uri.parse("android.resource://com.example.make_a_story_prototype/" +
+//                            vm.getStory().getPages().get(i).getImageResource());
+//                    String imgPath = path.toString();
+//                    emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(imgPath));
+                }
+
+                // extra attributes to the email including subject and content text
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Brainy Make-A-Story Android: Completed Story Template");
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, vm.getStory().getTitle() + "\n\n" + storyText);
+                startActivity(Intent.createChooser(emailIntent, "Choose an Email client :"));
             }
         });
+
+        //cancel button directs user to home page with selections cleared
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 vm.clearSelections();
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             }
         });
+
         // Create the AlertDialog
         AlertDialog dialog = builder.create();
         dialog.setMessage("Congratulations! You finished the story.\nDo you want to share the completed story?");
