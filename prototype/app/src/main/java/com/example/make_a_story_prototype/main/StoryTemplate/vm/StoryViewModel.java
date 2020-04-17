@@ -30,6 +30,7 @@ public class StoryViewModel implements Parcelable {
 
     public interface StoryViewModelCallback {
         void onSelectedBlank(String identifier);
+        void finishStory();
     }
 
     private StoryRepository storyRepository = DebugStoryRepository.getInstance();
@@ -111,6 +112,14 @@ public class StoryViewModel implements Parcelable {
         }
 
         callback.onSelectedBlank(identifier);
+    }
+
+    public void finishStory() {
+        if (callback == null) {
+            return;
+        }
+
+        callback.finishStory();
     }
 
     @Override

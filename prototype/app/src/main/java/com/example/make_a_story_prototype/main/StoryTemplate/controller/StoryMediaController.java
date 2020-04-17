@@ -1,9 +1,13 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 
 import com.example.make_a_story_prototype.R;
+import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity;
+import com.example.make_a_story_prototype.main.Home.view.HomeActivity;
+import com.example.make_a_story_prototype.main.StoryTemplate.view.StoryTemplateActivity;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
@@ -17,14 +21,16 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
     private Context context;
     private StoryPage page;
     private StoryViewModel vm;
+    private boolean isLastPage;
 
     private int nextSegmentIndex;
 
-    public StoryMediaController(Context context, StoryPage page, StoryViewModel vm) {
+    public StoryMediaController(Context context, StoryPage page, StoryViewModel vm, boolean isLastPage) {
         this.context = context;
         this.page = page;
         this.vm = vm;
         this.nextSegmentIndex = 0;
+        this.isLastPage = isLastPage;
     }
 
     public void play() {
@@ -75,6 +81,10 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        playNextSegment();
+        if (isLastPage && (nextSegmentIndex >= page.getSegments().size())) {
+            vm.finishStory();
+        } else {
+            playNextSegment();
+        }
     }
 }

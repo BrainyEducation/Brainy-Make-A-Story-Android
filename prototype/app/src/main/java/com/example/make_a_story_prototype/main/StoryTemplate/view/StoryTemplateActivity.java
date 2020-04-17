@@ -144,6 +144,11 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
     }
 
     @Override
+    public void finishStory() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+    }
+
+    @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         //
     }
