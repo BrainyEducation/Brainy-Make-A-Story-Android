@@ -1,6 +1,8 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -145,7 +147,28 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
     @Override
     public void finishStory() {
-        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        showShareDialogue();
+    }
+
+    private void showShareDialogue() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Add the buttons
+        builder.setPositiveButton("Share", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(getApplicationContext(), "share button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                vm.clearSelections();
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+            }
+        });
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.setMessage("Congratulations! You finished the story.\nDo you want to share the completed story?");
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
     @Override
