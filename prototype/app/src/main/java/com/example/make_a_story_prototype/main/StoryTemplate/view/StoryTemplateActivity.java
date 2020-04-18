@@ -25,6 +25,10 @@ import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.view.WordbankActivity;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
+import com.example.make_a_story_prototype.main.Wordbank.vm.WordbankViewModel;
+
+import java.util.List;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
@@ -174,6 +178,25 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 //                            vm.getStory().getPages().get(i).getImageResource());
 //                    String imgPath = path.toString();
 //                    emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(imgPath));
+                }
+
+                storyText = storyText + "\n\n\nTotal Mastered Words:";
+                for (int i = 0; i < 17; i++) {
+                    WordbankViewModel wvm = new WordbankViewModel(i);
+                    List<WordCardItemViewModel> wordList = wvm.getCardList().blockingGet();
+                    storyText = storyText + "\n\n" + wvm.getCategory().blockingGet().getName() + ": ";
+                    boolean isFirst = true;
+                    for (int j = 0; j < wordList.size(); j++) {
+                        if (wordList.get(j).isUnlocked && isFirst) {
+                            storyText = storyText + wordList.get(j).word.getWord();
+                            isFirst = false;
+                        } else if (wordList.get(j).isUnlocked) {
+                            storyText = storyText + ", " + wordList.get(j).word.getWord();
+                        }
+                    }
+                    if (isFirst) {
+                        storyText = storyText + "No words mastered";
+                    }
                 }
 
                 // extra attributes to the email including subject and content text
