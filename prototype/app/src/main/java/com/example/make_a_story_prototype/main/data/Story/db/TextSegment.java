@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
             parentColumns = "textId", childColumns = "pageId"))
 public class TextSegment {
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     private int textId;
     private int pageId;
     private String text;

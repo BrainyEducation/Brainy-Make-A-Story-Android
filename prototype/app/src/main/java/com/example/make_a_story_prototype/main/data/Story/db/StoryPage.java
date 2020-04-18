@@ -15,7 +15,7 @@ public class StoryPage {
     private int storyId;
     private int imageResource;
 
-    public StoryPage(int pageId, int storyId, int imageResource, int pageNumber) {
+    public StoryPage(int pageId, int storyId, int imageResource) {
         this.pageId = pageId;
         this.storyId = storyId;
         this.imageResource = imageResource;

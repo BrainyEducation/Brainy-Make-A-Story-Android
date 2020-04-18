@@ -3,6 +3,7 @@ package com.example.make_a_story_prototype.main.data.Story.db;
 import java.util.List;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 @Dao
@@ -12,6 +13,9 @@ public interface StoryDao {
     List<Story> getStories();
 
     //returns a specific story by id
-//    @Query("SELECT * FROM story_table WHERE storyId = searchId")
-//    Story getStory(int searchId);
+    @Query("SELECT * FROM story_table WHERE storyId = :searchId")
+    Story getStory(int searchId);
+
+    @Insert
+    void insertStories(Story...stories);
 }
