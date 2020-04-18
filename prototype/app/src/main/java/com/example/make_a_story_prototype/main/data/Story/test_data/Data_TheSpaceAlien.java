@@ -52,9 +52,8 @@ public class Data_TheSpaceAlien {
         segments.add(new StoryBlankIdentifier("A-2"));
         segments.add(new StoryText(".\n\t\"Maybe some ", R.raw.space_alien_segment_6));
         segments.add(new StoryBlankIdentifier("AA"));
-        segments.add(new StoryText(".\"\n\t", -1)); // no audio
 
-        segments.add(new StoryText("\"Or a maybe some kind of \"", R.raw.space_alien_segment_7));
+        segments.add(new StoryText("\". Or a maybe some kind of \"", R.raw.space_alien_segment_7));
         segments.add(new StoryBlankIdentifier("BB"));
         segments.add(new StoryText(",\"\" guessed ", R.raw.space_alien_segment_8));
         segments.add(new StoryBlankIdentifier("C-2"));
@@ -89,7 +88,6 @@ public class Data_TheSpaceAlien {
         segments.add(new StoryBlankIdentifier("FF"));
         segments.add(new StoryText(". It makes me want to ", R.raw.space_alien_segment_13));
         segments.add(new StoryBlankIdentifier("GG"));
-        segments.add(new StoryText(".\"\n\t", -1)); // no audio
 
         Map<String, ImageLocation> imageLocations = new HashMap<>();
         imageLocations.put("CC", new ImageLocation("CC", 45f, 30f, 125, 125, 0));
@@ -130,7 +128,6 @@ public class Data_TheSpaceAlien {
     private static StoryPage sampleStoryPage4() {
         List<StorySegment> segments = new ArrayList<>();
 
-        segments.add(new StoryText("\"", -1)); // no audio
         segments.add(new StoryBlankIdentifier("KK"));
         segments.add(new StoryText(", I’m sure! My big brother told me.”\n\t\""
                     + "Big brother must have been teasing. Guess this.\"\n\t\"", R.raw.space_alien_segment_17));
@@ -153,7 +150,6 @@ public class Data_TheSpaceAlien {
                     + "\t\"And when you’re happy?\"\n"
                     + "\t\"Mostly we ", R.raw.space_alien_segment_22));
         segments.add(new StoryBlankIdentifier("RR"));
-        segments.add(new StoryText(".\"\n\t", -1)); // no audio
         segments.add(new StoryBlankIdentifier("A-2"));
         segments.add(new StoryText(" and ", R.raw.space_alien_segment_23));
         segments.add(new StoryBlankIdentifier("C-2"));

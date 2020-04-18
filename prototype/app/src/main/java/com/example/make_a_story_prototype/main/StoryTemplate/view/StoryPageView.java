@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,14 +18,13 @@ import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class StoryPageView extends ConstraintLayout implements ObservableScrollView.ScrollViewListener {
+public class StoryPageView extends ConstraintLayout implements StoryMediaController.ProgressListener {
 
     private StoryViewModel vm;
     private int pageNumber;
 
     private StoryMediaController mediaController;
     private TextView storyTextView;
-    private ObservableScrollView scrollView = null;
     private ProgressBar progressBar;
     private SceneImage sceneImage;
 
@@ -52,8 +52,6 @@ public class StoryPageView extends ConstraintLayout implements ObservableScrollV
         sceneImage = findViewById(R.id.scene_image);
         storyTextView = findViewById(R.id.story_text);
         progressBar = findViewById(R.id.progress_bar);
-        scrollView = findViewById(R.id.story_scroll);
-        scrollView.setScrollViewListener(this);
 
         ImageView playButton = findViewById(R.id.play_button);
         ImageView pauseButton = findViewById(R.id.pause_button);
@@ -75,17 +73,11 @@ public class StoryPageView extends ConstraintLayout implements ObservableScrollV
                 vm
         );
 
+        mediaController.setProgressListener(this);
+
         update();
 
         requestLayout();
-    }
-
-    public void pause() {
-        if (mediaController == null) {
-            return;
-        }
-
-        mediaController.pause();
     }
 
     private void update() {
@@ -99,12 +91,6 @@ public class StoryPageView extends ConstraintLayout implements ObservableScrollV
         storyTextView.setText(text);
     }
 
-    @Override
-    public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int prevX, int prevY) {
-        float percentScrolled = (float) ((y / 3000.0) * 100);
-        progressBar.setProgress(Math.min((int) percentScrolled, 100));
-    }
-
     public void onPauseTapped(View v) {
         mediaController.pause();
     }
@@ -113,7 +99,12 @@ public class StoryPageView extends ConstraintLayout implements ObservableScrollV
         mediaController.play();
     }
 
-    // 4/17 Replaced Replay's restart functionality with rewind functionality
-    public void onReplayTapped(View v) { mediaController.rewind(mediaController.getCurrentPosition());
-    /*mediaController.restart();*/ }
+    public void onReplayTapped(View v) {
+        mediaController.rewind();
+    }
+
+    @Override
+    public void onPlayerProgressChange(float progress) {
+        post(() -> progressBar.setProgress((int) (100 * progress)));
+    }
 }
