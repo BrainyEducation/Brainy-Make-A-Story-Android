@@ -1,4 +1,6 @@
-package com.example.make_a_story_prototype.main.data.Character.db;
+package com.example.make_a_story_prototype.main.data.db.dao;
+
+import com.example.make_a_story_prototype.main.data.db.entity.CharacterName;
 
 import java.util.List;
 

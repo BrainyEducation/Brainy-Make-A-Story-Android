@@ -1,4 +1,6 @@
-package com.example.make_a_story_prototype.main.data.Word.db;
+package com.example.make_a_story_prototype.main.data.db.dao;
+
+import com.example.make_a_story_prototype.main.data.db.entity.Word;
 
 import java.util.List;
 

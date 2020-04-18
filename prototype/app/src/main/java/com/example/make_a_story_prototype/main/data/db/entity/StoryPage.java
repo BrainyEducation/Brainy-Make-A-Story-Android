@@ -1,4 +1,6 @@
-package com.example.make_a_story_prototype.main.data.Story.db;
+package com.example.make_a_story_prototype.main.data.db.entity;
+
+import com.example.make_a_story_prototype.main.data.db.entity.Story;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
