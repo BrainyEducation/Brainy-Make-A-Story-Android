@@ -40,6 +40,15 @@ public class Util {
         }
     }
 
+    public static void addInfoIcon(AppCompatActivity activity) {
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            activity.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_face_black_24dp);
+            activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+    }
+
+
     public static void setDrawableToGrayscale(Drawable d) {
         if (d != null) {
             d.mutate();

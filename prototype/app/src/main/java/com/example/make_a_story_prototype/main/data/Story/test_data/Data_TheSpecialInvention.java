@@ -100,9 +100,6 @@ public class Data_TheSpecialInvention {
         imageLocations.put("JJ", null);
         imageLocations.put("KK", null);
 
-
-
-
         return new StoryPage(R.drawable.story_special_invention_1, segments, imageLocations);
     }
 

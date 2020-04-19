@@ -6,11 +6,13 @@ public class StoryBlankSelectionContext implements NavigationController.Navigati
     private int storyId;
     private String blankId;
     private int pageNumber;
+    private int audioIndex;
 
-    public StoryBlankSelectionContext(int storyId, String blankId, int pageNumber) {
+    public StoryBlankSelectionContext(int storyId, String blankId, int pageNumber, int audioIndex) {
         this.storyId = storyId;
         this.blankId = blankId;
         this.pageNumber = pageNumber;
+        this.audioIndex = audioIndex;
     };
 
     public int getStoryId() {
@@ -22,4 +24,6 @@ public class StoryBlankSelectionContext implements NavigationController.Navigati
     }
 
     public int getPageNumber() { return pageNumber; }
+
+    public int getAudioIndex() { return audioIndex; }
 }

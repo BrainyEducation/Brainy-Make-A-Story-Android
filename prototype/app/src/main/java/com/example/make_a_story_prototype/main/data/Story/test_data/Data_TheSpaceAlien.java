@@ -48,17 +48,17 @@ public class Data_TheSpaceAlien {
         segments.add(new StoryBlankIdentifier("C-2"));
         segments.add(new StoryText(" curled up in a sleeping bag, when about "
                         + "midnight a strange-shaped shadow flickered on their tent wall.\n"
-                        + "\n\n\t\"What’s that?” asked ", R.raw.space_alien_segment_5));
+                        + "\n\t\"What’s that?” asked ", R.raw.space_alien_segment_5));
         segments.add(new StoryBlankIdentifier("A-2"));
         segments.add(new StoryText(".\n\t\"Maybe some ", R.raw.space_alien_segment_6));
         segments.add(new StoryBlankIdentifier("AA"));
 
         segments.add(new StoryText("\". Or a maybe some kind of \"", R.raw.space_alien_segment_7));
         segments.add(new StoryBlankIdentifier("BB"));
-        segments.add(new StoryText(",\"\" guessed ", R.raw.space_alien_segment_8));
+        segments.add(new StoryText(",\" guessed ", R.raw.space_alien_segment_8));
         segments.add(new StoryBlankIdentifier("C-2"));
         segments.add(new StoryText("\n\n\tThey stuck their noses outside to find a "
-                        + "weird looking space alien just their size.", R.raw.space_alien_segment_9));
+                        + "weird looking space alien just their size.", R.raw.space_alien_segment_9_1));
 
         Map<String, ImageLocation> imageLocations = new HashMap<>();
         imageLocations.put("AA", new ImageLocation("AA", 11f, 10f, 200, 200, 0));
@@ -72,12 +72,11 @@ public class Data_TheSpaceAlien {
     private static StoryPage sampleStoryPage2() {
         List<StorySegment> segments = new ArrayList<>();
 
-        //TODO: text segment 9 broken across 2 pages
         segments.add(new StoryText("\t\"Please help me!\" \n"
                         + "\t\"How?\"\n"
                         + "\t\"For my school project I need pictures of earth stuff, and I took a few pictures but I need more.\"\n"
                         + "\t\"Show us.\"\n"
-                        + "\n\tSpace Alien punched a shiny elbow button and twisted a fancy shoulder dial, and Space Alien’s tummy screen displayed a glowy ", R.raw.space_alien_segment_9));
+                        + "\n\tSpace Alien punched a shiny elbow button and twisted a fancy shoulder dial, and Space Alien’s tummy screen displayed a glowy ", R.raw.space_alien_segment_9_2));
         segments.add(new StoryBlankIdentifier("CC"));
         segments.add(new StoryText(".\n\n\t\"That’s a strange looking earth planet ", R.raw.space_alien_segment_10));
         segments.add(new StoryBlankIdentifier("DD"));

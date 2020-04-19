@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
 
-import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
@@ -42,7 +41,13 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
         this.context = context;
         this.page = page;
         this.vm = vm;
-        this.nextSegmentIndex = 0;
+
+        int myPageNumber = vm.getStory().getPages().indexOf(page);
+        if (vm.getPageNumber() == myPageNumber) {
+            this.nextSegmentIndex = vm.getNextAudioSegmentIndex();
+        } else {
+            this.nextSegmentIndex = 0;
+        }
 
         calculateDurations();
     }
@@ -101,9 +106,9 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
             BlankSelection selection = vm.getSelections().get(identifier.get());
 
             if (selection == null) {
-                pause();
                 nextSegmentIndex = Math.max(0, nextSegmentIndex - 1);
                 nextSegmentSeekedPosition = 0;
+                pause();
                 return;
             } else {
                 nextResource = selection.getAudioResource();
@@ -121,6 +126,8 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
 
         nextSegmentIndex += 1;
         nextSegmentSeekedPosition = 0;
+
+        vm.setNextAudioSegmentIndex(nextSegmentIndex);
     }
 
     @Override
@@ -129,6 +136,7 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
     }
 
     private void calculateDurations() {
+        destroyCurrentPlayer();
         this.durationsMs = new ArrayList<>();
         this.totalDurationMs = 0;
 
@@ -136,8 +144,9 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
             if (segment instanceof StoryText) {
                 StoryText textSegment = (StoryText) segment;
                 int resource = textSegment.getAudioResource();
-
+                Log.d("CALCULATE DURATIONS", "calculateDurations: resource = " + resource);
                 MediaPlayer mp = MediaPlayer.create(context, resource);
+
                 int durationMs = mp.getDuration();
 
                 durationsMs.add(durationMs);

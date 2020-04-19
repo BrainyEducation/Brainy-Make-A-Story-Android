@@ -1,6 +1,7 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.view;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +31,13 @@ public class StoryPageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup collection, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
+        Log.d("TAG", "instantiateItem: vm info:" + vm.getStory().getTitle() + " on page " + vm.getPageNumber() + " and story audio resource " + vm.getNextAudioSegmentIndex() );
         StoryPageView pageView = (StoryPageView) inflater.inflate(R.layout.story_page, collection, false);
         pageView.setViewModel(vm, position);
         collection.addView(pageView);
 
         return pageView;
     }
-
-    // on pagechangelistener
-    // tell vm page
-    // put current page in parcelable
 
     @Override
     public void destroyItem(ViewGroup collection, int position, Object view) {

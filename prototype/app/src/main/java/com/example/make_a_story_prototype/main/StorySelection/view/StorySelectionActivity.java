@@ -66,6 +66,6 @@ public class StorySelectionActivity extends BaseActivity implements StorySelecti
     @Override
     public void selectStoryCard(StoryCardViewModel vm) {
         int storyId = vm.getStory().getStoryId();
-        StoryTemplateActivity.start(this, storyId, 0);
+        StoryTemplateActivity.start(this, storyId, 0, 0);
     }
 }

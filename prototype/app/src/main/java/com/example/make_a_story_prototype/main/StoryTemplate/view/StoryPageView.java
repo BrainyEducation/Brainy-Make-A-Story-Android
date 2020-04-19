@@ -5,11 +5,13 @@ import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
@@ -27,6 +29,7 @@ public class StoryPageView extends ConstraintLayout implements StoryMediaControl
     private TextView storyTextView;
     private ProgressBar progressBar;
     private SceneImage sceneImage;
+    private ScrollView scrollView;
 
     public StoryPageView(Context context) {
         this(context, null);
@@ -52,6 +55,7 @@ public class StoryPageView extends ConstraintLayout implements StoryMediaControl
         sceneImage = findViewById(R.id.scene_image);
         storyTextView = findViewById(R.id.story_text);
         progressBar = findViewById(R.id.progress_bar);
+        scrollView = findViewById(R.id.story_scroll);
 
         ImageView playButton = findViewById(R.id.play_button);
         ImageView pauseButton = findViewById(R.id.pause_button);

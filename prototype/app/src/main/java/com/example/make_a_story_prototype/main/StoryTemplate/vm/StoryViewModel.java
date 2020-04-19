@@ -1,12 +1,17 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.vm;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
 import com.example.make_a_story_prototype.main.data.Story.StoryRepository;
@@ -41,11 +46,13 @@ public class StoryViewModel implements Parcelable {
     private int storyId;
     private Map<String, BlankSelection> selections;
     private int pageNumber;
+    private int nextAudioSegmentIndex;
 
-    public StoryViewModel(int storyId, int pageNumber) {
+    public StoryViewModel(int storyId, int pageNumber, int nextAudioSegmentIndex) {
         Log.d("StoryViewModel", "create with " + storyId);
         this.storyId = storyId;
         this.pageNumber = pageNumber;
+        this.nextAudioSegmentIndex = nextAudioSegmentIndex;
 
         this.story = storyRepository.getStory(storyId);
         this.selections = selectionsRepository.getSelectionsForStory(storyId);
@@ -81,6 +88,8 @@ public class StoryViewModel implements Parcelable {
                 StoryBlankIdentifier identifier = (StoryBlankIdentifier) s;
                 BlankSelection selection = selections.get(identifier.get());
 
+                int startBlank = builder.length();
+
                 if (selection == null) {
                     builder.append(
                             BLANK_PLACEHOLDER,
@@ -92,8 +101,12 @@ public class StoryViewModel implements Parcelable {
                             },
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                     );
+                    builder.setSpan(new ForegroundColorSpan(Color.rgb(124, 85, 251)), startBlank, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                   // builder.setSpan(new BackgroundColorSpan(Color.rgb(124, 85, 251)), startBlank, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 } else {
                     builder.append(selection.getText());
+                    builder.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), startBlank, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
         }
@@ -113,10 +126,19 @@ public class StoryViewModel implements Parcelable {
         callback.onSelectedBlank(identifier);
     }
 
+    public int getNextAudioSegmentIndex() {
+        return nextAudioSegmentIndex;
+    }
+
+    public void setNextAudioSegmentIndex(int index) {
+        this.nextAudioSegmentIndex = index;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(storyId);
         dest.writeInt(pageNumber);
+        dest.writeInt(nextAudioSegmentIndex);
     }
 
     @Override
@@ -129,8 +151,9 @@ public class StoryViewModel implements Parcelable {
         public StoryViewModel createFromParcel(Parcel in) {
             int storyId = in.readInt();
             int pageNumber = in.readInt();
+            int nextAudioSegmentIndex = in.readInt();
 
-            return new StoryViewModel(storyId, pageNumber);
+            return new StoryViewModel(storyId, pageNumber, nextAudioSegmentIndex);
         }
 
         @Override
