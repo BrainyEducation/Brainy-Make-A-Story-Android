@@ -20,8 +20,8 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         void selectCategoryCard(CategoryCardItemViewModel vm);
     }
 
-    private Context context;
-    private CategoriesViewModel vm;
+    private final Context context;
+    private final CategoriesViewModel vm;
     private static android.media.MediaPlayer mediaPlayer = AudioPlayer.getInstance();
 
     public CategoryAdapterHandler handler;

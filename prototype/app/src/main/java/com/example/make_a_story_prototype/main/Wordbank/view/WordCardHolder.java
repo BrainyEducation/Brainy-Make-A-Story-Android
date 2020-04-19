@@ -14,6 +14,8 @@ import com.example.make_a_story_prototype.main.Util.Util;
 import com.example.make_a_story_prototype.main.Wordbank.vm.WordCardItemViewModel;
 import com.example.make_a_story_prototype.main.data.MasteredWords.DebugMasteredWordsRepository;
 
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,12 +34,10 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
 
     }
 
-    private ImageView wordImage;
-    private TextView wordText;
-    private RelativeLayout parentLayout;
+    private final ImageView wordImage;
+    private final TextView wordText;
+    private final RelativeLayout parentLayout;
     private WordCardItemViewModel vm;
-    private Button confirmButton;
-    private Button cancelButton;
 
     private Context context;
 
@@ -50,8 +50,8 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
         this.wordImage = itemView.findViewById(R.id.cardImage);
         this.wordText = itemView.findViewById(R.id.cardText);
         this.parentLayout = itemView.findViewById(R.id.parent_layout);
-        this.confirmButton = itemView.findViewById(R.id.confirmButton);
-        this.cancelButton = itemView.findViewById(R.id.cancelButton);
+        Button confirmButton = itemView.findViewById(R.id.confirmButton);
+        Button cancelButton = itemView.findViewById(R.id.cancelButton);
 
         parentLayout.setOnClickListener(v -> {
             if (callback != null && vm != null) {
@@ -70,7 +70,7 @@ public class WordCardHolder extends RecyclerView.ViewHolder {
                 return;
             }
 
-            callback.hideConfirmationButtons(vm);
+            Objects.requireNonNull(callback).hideConfirmationButtons(vm);
         });
     }
 

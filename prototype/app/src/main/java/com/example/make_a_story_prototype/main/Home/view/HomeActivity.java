@@ -3,6 +3,7 @@ package com.example.make_a_story_prototype.main.Home.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.Categories.view.CategoriesActivity;
@@ -10,8 +11,11 @@ import com.example.make_a_story_prototype.main.Characters.view.CharacterActivity
 import com.example.make_a_story_prototype.main.Home.vm.BrowseContext;
 import com.example.make_a_story_prototype.main.Home.vm.HomeContext;
 import com.example.make_a_story_prototype.main.StorySelection.view.StorySelectionActivity;
+import com.example.make_a_story_prototype.main.StorySelection.vm.StorySelectionViewModel;
 import com.example.make_a_story_prototype.main.Util.BaseActivity;
 import com.example.make_a_story_prototype.main.Util.Util;
+
+import androidx.appcompat.widget.Toolbar;
 
 /**
 * Class for Home page activities, including redirection to word bank and story screen.
@@ -26,6 +30,17 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         Util.themeStatusBar(this, true);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        Util.themeStatusBar(this, true);
+//        Util.addInfoIcon(this);
+//        toolbar.setNavigationOnClickListener(
+//                v -> startActivity(new Intent(getApplicationContext(), HomeActivity.class)));
+//
+//        TextView title = toolbar.findViewById(R.id.toolbar_title);
+//        title.setText("Brainy: Make-A-Story");
     }
 
     @Override

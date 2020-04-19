@@ -19,7 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CharacterNamesRecyclerViewAdapter extends RecyclerView.Adapter<CharacterNameCardHolder> implements CharacterNameCallback {
-    private CharacterScreenViewModel vm;
+    private final CharacterScreenViewModel vm;
     private List<NameCardViewModel> cardVms;
     private NameCardViewModel selectedCardVm;
     private Context context;

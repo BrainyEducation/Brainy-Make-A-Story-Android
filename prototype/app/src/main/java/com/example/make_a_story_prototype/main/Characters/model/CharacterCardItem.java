@@ -1,8 +1,8 @@
 package com.example.make_a_story_prototype.main.Characters.model;
 
-public class CharacterCardItem {
-    private int imageResource;
-    private String imageLabel;
+class CharacterCardItem {
+    private final int imageResource;
+    private final String imageLabel;
 
     public CharacterCardItem(int imageResource, String imageLabel) {
         this.imageResource = imageResource;

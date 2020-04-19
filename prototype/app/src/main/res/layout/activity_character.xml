@@ -31,9 +31,9 @@
                     android:id="@+id/character_image_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="70dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/border"
                     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
@@ -50,9 +50,9 @@
                     android:id="@+id/character_name_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="70dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginEnd="12dp"
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/border"
                     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
@@ -73,7 +73,8 @@
 
 
 
-            android:background="#AAFFFFFF"/>
+            android:background="#AAFFFFFF"
+            android:orientation="horizontal" />
 
         <LinearLayout
             android:id="@+id/confirmation_dialog"
@@ -111,7 +112,8 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/confirm" />
+                    app:srcCompat="@drawable/confirm"
+                    android:contentDescription="@string/confirmButtonDescription" />
 
                 <ImageButton
                     android:id="@+id/cancel_button"
@@ -120,7 +122,8 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/cancel" />
+                    app:srcCompat="@drawable/cancel"
+                    android:contentDescription="@string/cancelButtonDescription" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

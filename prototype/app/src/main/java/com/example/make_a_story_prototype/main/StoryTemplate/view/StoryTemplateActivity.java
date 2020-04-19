@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,12 +38,15 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
     private static String STORY_ID_EXTRA_KEY = "STORY_ID";
     private static String STORY_PAGE_EXTRA_KEY = "PAGE_NUMBER";
+    private static String STORY_AUDIO_INDEX_EXTRA_KEY = "AUDIO_INDEX";
+
     private static String MY_VM_KEY = WordbankActivity.class.getName() + ":VM_KEY";
 
-    public static void start(Activity activity, int storyId, int pageNumber) {
+    public static void start(Activity activity, int storyId, int pageNumber, int audioSegmentIndex) {
         Intent intent = new Intent(activity, StoryTemplateActivity.class);
         intent.putExtra(STORY_ID_EXTRA_KEY, storyId);
         intent.putExtra(STORY_PAGE_EXTRA_KEY, pageNumber);
+        intent.putExtra(STORY_AUDIO_INDEX_EXTRA_KEY, audioSegmentIndex);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         activity.startActivity(intent);
@@ -60,7 +64,9 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
         if (savedInstanceState == null) {
             int storyId = getIntent().getIntExtra(STORY_ID_EXTRA_KEY, -1);
             int pageNumber = getIntent().getIntExtra(STORY_PAGE_EXTRA_KEY, 0);
-            vm = new StoryViewModel(storyId, pageNumber);
+            int audioSegmentIndex = getIntent().getIntExtra(STORY_AUDIO_INDEX_EXTRA_KEY, 0);
+
+            vm = new StoryViewModel(storyId, pageNumber, audioSegmentIndex);
         } else {
             vm = savedInstanceState.getParcelable(MY_VM_KEY);
         }
@@ -139,7 +145,7 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
         // TODO:
 //        storyPageView.pause();
 
-        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), identifier, vm.getPageNumber()));
+        setNavigationContext(new StoryBlankSelectionContext(vm.getStory().getStoryId(), identifier, vm.getPageNumber(), vm.getNextAudioSegmentIndex()));
         //If Character selection blank (format "X-2"), intent is character activity
         if (identifier.length() > 2) {
             Intent intent = new Intent(this, CharacterActivity.class);
@@ -228,7 +234,12 @@ public class StoryTemplateActivity extends BaseActivity implements StoryViewMode
 
     @Override
     public void onPageSelected(int position) {
+        if (vm.getPageNumber() == position) {
+            return;
+        }
+
         vm.setPageNumber(position);
+        vm.setNextAudioSegmentIndex(0);
     }
 
     @Override

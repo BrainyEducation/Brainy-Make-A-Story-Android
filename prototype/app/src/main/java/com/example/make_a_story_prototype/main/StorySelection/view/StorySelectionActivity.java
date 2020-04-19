@@ -42,14 +42,10 @@ public class StorySelectionActivity extends BaseActivity implements StorySelecti
 
         Util.themeStatusBar(this, true);
         Util.addBackArrow(this);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-            }
-        });
+        toolbar.setNavigationOnClickListener(
+                v -> startActivity(new Intent(getApplicationContext(), HomeActivity.class)));
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        TextView title = toolbar.findViewById(R.id.toolbar_title);
         title.setText("Story Templates");
 
         vm = new StorySelectionViewModel(this);
@@ -70,6 +66,6 @@ public class StorySelectionActivity extends BaseActivity implements StorySelecti
     @Override
     public void selectStoryCard(StoryCardViewModel vm) {
         int storyId = vm.getStory().getStoryId();
-        StoryTemplateActivity.start(this, storyId, 0);
+        StoryTemplateActivity.start(this, storyId, 0, 0);
     }
 }

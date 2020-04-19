@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.911"
-        app:srcCompat="@drawable/charguide" />
+        app:srcCompat="@drawable/charguide"
+        android:contentDescription="@string/charGuideDescription" />
 
     <ImageView
         android:id="@+id/speechBubble"
@@ -32,22 +33,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.147"
-        app:srcCompat="@drawable/speechbubble" />
+        app:srcCompat="@drawable/speechbubble"
+        android:contentDescription="@string/speechBubbleDescription" />
 
     <TextView
         android:id="@+id/charTextMsg"
         android:layout_width="276dp"
-        android:layout_height="73dp"
+        android:layout_height="80dp"
         android:alpha="1"
         android:text=""
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/speechBubble"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/speechBubble"
-        app:layout_constraintHorizontal_bias="0.547"
-        app:layout_constraintStart_toStartOf="@+id/speechBubble"
-        app:layout_constraintTop_toTopOf="@+id/speechBubble"
-        app:layout_constraintVertical_bias="0.384" />
+        app:layout_constraintHorizontal_bias="0.806"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.264" />
 </androidx.constraintlayout.widget.ConstraintLayout>
