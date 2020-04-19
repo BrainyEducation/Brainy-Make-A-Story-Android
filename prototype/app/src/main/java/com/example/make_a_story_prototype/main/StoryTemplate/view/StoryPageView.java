@@ -74,7 +74,8 @@ public class StoryPageView extends ConstraintLayout implements StoryMediaControl
         mediaController = new StoryMediaController(
                 getContext(),
                 vm.getStory().getPages().get(pageNumber),
-                vm
+                vm,
+                (pageNumber == vm.getStory().getPages().size() - 1)
         );
 
         mediaController.setProgressListener(this);

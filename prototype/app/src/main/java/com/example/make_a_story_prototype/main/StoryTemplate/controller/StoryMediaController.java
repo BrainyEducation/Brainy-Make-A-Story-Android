@@ -3,7 +3,6 @@ package com.example.make_a_story_prototype.main.StoryTemplate.controller;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
-
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
@@ -28,6 +27,7 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
     private Context context;
     private StoryPage page;
     private StoryViewModel vm;
+    private boolean isLastPage;
 
     private List<Integer> durationsMs;
     private Integer totalDurationMs;
@@ -35,12 +35,14 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
     private int nextSegmentSeekedPosition;
     private int nextSegmentIndex;
 
+
     private ProgressListener listener;
 
-    public StoryMediaController(Context context, StoryPage page, StoryViewModel vm) {
+    public StoryMediaController(Context context, StoryPage page, StoryViewModel vm, boolean isLastPage) {
         this.context = context;
         this.page = page;
         this.vm = vm;
+        this.isLastPage = isLastPage;
 
         int myPageNumber = vm.getStory().getPages().indexOf(page);
         if (vm.getPageNumber() == myPageNumber) {
@@ -132,7 +134,11 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        playNextSegment();
+        if (isLastPage && (nextSegmentIndex >= page.getSegments().size())) {
+            vm.finishStory();
+        } else {
+            playNextSegment();
+        }
     }
 
     private void calculateDurations() {

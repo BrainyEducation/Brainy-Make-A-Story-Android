@@ -5,17 +5,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.make_a_story_prototype.main.data.Story.DebugStoryRepository;
 import com.example.make_a_story_prototype.main.data.Story.StoryRepository;
-import com.example.make_a_story_prototype.main.data.Story.model.ImageLocation;
 import com.example.make_a_story_prototype.main.data.Story.model.Story;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
@@ -35,6 +32,7 @@ public class StoryViewModel implements Parcelable {
 
     public interface StoryViewModelCallback {
         void onSelectedBlank(String identifier);
+        void finishStory();
     }
 
     private StoryRepository storyRepository = DebugStoryRepository.getInstance();
@@ -132,6 +130,14 @@ public class StoryViewModel implements Parcelable {
 
     public void setNextAudioSegmentIndex(int index) {
         this.nextAudioSegmentIndex = index;
+    }
+
+    public void finishStory() {
+        if (callback == null) {
+            return;
+        }
+
+        callback.finishStory();
     }
 
     @Override
