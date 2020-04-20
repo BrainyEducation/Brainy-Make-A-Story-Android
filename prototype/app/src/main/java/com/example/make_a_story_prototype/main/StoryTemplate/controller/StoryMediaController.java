@@ -150,7 +150,6 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
             if (segment instanceof StoryText) {
                 StoryText textSegment = (StoryText) segment;
                 int resource = textSegment.getAudioResource();
-                Log.d("CALCULATE DURATIONS", "calculateDurations: resource = " + resource);
                 MediaPlayer mp = MediaPlayer.create(context, resource);
 
                 int durationMs = mp.getDuration();

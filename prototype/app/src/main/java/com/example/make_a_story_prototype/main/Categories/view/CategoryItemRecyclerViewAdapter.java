@@ -82,20 +82,8 @@ public class CategoryItemRecyclerViewAdapter extends RecyclerView.Adapter<Catego
             mediaPlayer = android.media.MediaPlayer.create(context, vm.category.getAudioResource());
             mediaPlayer.start();
         }
-    }
 
-    @Override
-    public void hideConfirmationButtons(CategoryCardItemViewModel vm) {
-        vm.isSelected = false;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public void confirmSelection(CategoryCardItemViewModel vm) {
-        if (handler == null) {
-            Log.d("tag", "confirmSelection -- handler is null");
-            return;
-        }
         handler.selectCategoryCard(vm);
+
     }
 }
