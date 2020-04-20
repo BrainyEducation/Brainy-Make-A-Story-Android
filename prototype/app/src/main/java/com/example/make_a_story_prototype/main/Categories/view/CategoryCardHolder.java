@@ -23,8 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CategoryCardHolder extends RecyclerView.ViewHolder {
     public interface CategoryCardCallback {
         void cardTappedOn(CategoryCardItemViewModel vm);
-        void hideConfirmationButtons(CategoryCardItemViewModel vm);
-        void confirmSelection(CategoryCardItemViewModel vm);
     }
 
     private Context context;
@@ -32,8 +30,6 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
     private TextView categoryText;
     private RelativeLayout parentLayout;
     private CategoryCardItemViewModel vm;
-    private Button confirmButton;
-    private Button cancelButton;
 
     public CategoryCardCallback callback;
 
@@ -44,27 +40,11 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
         this.categoryImage = itemView.findViewById(R.id.cardImage);
         this.categoryText = itemView.findViewById(R.id.cardText);
         this.parentLayout = itemView.findViewById(R.id.parent_layout);
-        this.confirmButton = itemView.findViewById(R.id.confirmButton);
-        this.cancelButton = itemView.findViewById(R.id.cancelButton);
 
         parentLayout.setOnClickListener(v -> {
             if (callback != null && vm != null) {
                 callback.cardTappedOn(vm);
             }
-        });
-
-        confirmButton.setOnClickListener(v -> {
-            if (callback != null && vm != null) {
-                callback.confirmSelection(vm);
-            }
-        });
-
-        cancelButton.setOnClickListener(v -> {
-            if (callback == null && vm != null) {
-                return;
-            }
-
-            callback.hideConfirmationButtons(vm);
         });
     }
 
@@ -93,11 +73,7 @@ public class CategoryCardHolder extends RecyclerView.ViewHolder {
                 .mutate();
 
         ViewGroup buttons = itemView.findViewById(R.id.confirmation_buttons);
-        if (vm.isSelected) {
-            buttons.setVisibility(View.VISIBLE);
-        } else {
-            buttons.setVisibility(View.GONE);
-        }
+        buttons.setVisibility(View.GONE);
 
         // TODO: take another look at this
         d.setColorFilter(new PorterDuffColorFilter(contrastColor, PorterDuff.Mode.SRC_IN));
