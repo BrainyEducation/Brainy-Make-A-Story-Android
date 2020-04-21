@@ -33,7 +33,7 @@ An Android application to help children learn new words through fill-in-the-blan
 ## Install Guide 
 
 ### PRE-REQUISITES
-Download Android Studio and SDK Tools. See [here](https://developer.android.com/studio)
+Download Android Studio and SDK Tools. See [link](https://developer.android.com/studio)
 ### DEPENDENCIES
 Dependencies are included in gradle files from “DOWNLOAD”
 ### DOWNLOAD
@@ -41,8 +41,8 @@ Download or clone [link](https://github.com/adelventura/Brainy-Make-A-Story-Andr
 ### BUILD
 Build and run “Brainy-Make-A-Story-Android/prototype/” in Android Studio. See [link](https://developer.android.com/studio/run)
 ### INSTALLATION
-Connect an Android device via USB. See [link](https://developer.android.com/studio/run/device#connect) or 
-Create an AVD to use Android Emulator. See [link](https://developer.android.com/studio/run/managing-avds#createavd)
+- Connect an Android device via USB. See [link](https://developer.android.com/studio/run/device#connect) or 
+- Create an AVD to use Android Emulator. See [link](https://developer.android.com/studio/run/managing-avds#createavd)
 ### RUNNING APPLICATION
 The app will launch automatically in the chosen device
 ### TROUBLESHOOTING
