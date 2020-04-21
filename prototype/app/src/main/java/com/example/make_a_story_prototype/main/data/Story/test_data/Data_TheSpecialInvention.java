@@ -60,8 +60,6 @@ public class Data_TheSpecialInvention {
         segments.add(new StoryText(" needed a special stay-up-after-wake-up-in-the-morning invention. ", R.raw.special_invention_segment_11));
         segments.add(new StoryBlankIdentifier("A-2"));
 
-
-
         segments.add(new StoryText(" thought about the ", R.raw.special_invention_segment_12));
         segments.add(new StoryBlankIdentifier("EE"));
         segments.add(new StoryText(" part all through breakfast, and cogitated about the ", R.raw.special_invention_segment_13));

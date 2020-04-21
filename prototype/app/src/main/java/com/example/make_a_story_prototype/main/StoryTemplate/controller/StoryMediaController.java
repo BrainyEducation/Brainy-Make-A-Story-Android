@@ -263,7 +263,12 @@ public class StoryMediaController implements OnCompletionListener {
             e.printStackTrace();
         }
 
-        mediaPlayer.setOnPreparedListener(mp -> mediaPlayer.start());
+        mediaPlayer.setOnPreparedListener(new OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer.start();
+            }
+        });
 
         mediaPlayer.prepareAsync();
 
