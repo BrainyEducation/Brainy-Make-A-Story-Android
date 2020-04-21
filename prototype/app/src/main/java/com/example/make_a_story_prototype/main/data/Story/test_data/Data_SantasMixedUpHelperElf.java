@@ -59,7 +59,7 @@ public class Data_SantasMixedUpHelperElf {
                 + "list so late and quickly raced around Santa’s big toy warehouse to gather the gifts, but poor "
                 + "Elmer’s sleepy eyes didn’t read the list’s words very well, and poor Elmer’s sleepy memory didn’t "
                 + "remember very well, and — oh no! — at the very last minute poor timid Elmer had mistakenly loaded "
-                + "into Santa’s sleigh— for\n\n\t", R.raw.santas_helper_elf_segment_10));
+                + "into Santa’s sleigh—\n\n\t", R.raw.santas_helper_elf_segment_10));
 
         Map<String, ImageLocation> imageLocations = new HashMap<>();
 
