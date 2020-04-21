@@ -32,35 +32,43 @@
                 android:id="@+id/option1"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginBottom="50dp"
                 android:background="@color/colorButtonBlue"
                 android:text="@string/button"
                 android:textColor="@android:color/white"
-                app:layout_constraintBottom_toTopOf="@+id/option3"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8" />
 
             <Button
                 android:id="@+id/option2"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="55dp"
                 android:background="@color/colorButtonBlue"
                 android:text="@string/button"
                 android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/option1" />
+                app:layout_constraintHorizontal_bias="0.88"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8" />
 
             <Button
                 android:id="@+id/option3"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
                 android:background="@color/colorButtonBlue"
                 android:text="@string/button"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/option1" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.94" />
 
             <Button
                 android:id="@+id/option4"
@@ -69,8 +77,12 @@
                 android:background="@color/colorButtonBlue"
                 android:text="@string/button"
                 android:textColor="@android:color/white"
-                app:layout_constraintEnd_toEndOf="@+id/option2"
-                app:layout_constraintTop_toTopOf="@+id/option3" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.88"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.94" />
 
             <ImageView
                 android:id="@+id/quizImage"
@@ -78,11 +90,12 @@
                 android:layout_height="164dp"
                 android:layout_marginStart="129dp"
                 android:layout_marginEnd="129dp"
-                android:layout_marginBottom="25dp"
                 android:contentDescription="@string/word_image"
-                app:layout_constraintBottom_toTopOf="@+id/speakerIcon"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.32"
                 app:srcCompat="@drawable/ic_apple" />
 
             <ImageView
@@ -91,44 +104,50 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="180dp"
                 android:layout_marginEnd="181dp"
-                android:layout_marginBottom="25dp"
                 android:contentDescription="@string/speakerIconDescription"
-                app:layout_constraintBottom_toTopOf="@+id/option1"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.645"
                 app:srcCompat="@drawable/ic_volume_up_24dp" />
-
-            <ImageView
-                android:id="@+id/star1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="75dp"
-                android:layout_marginTop="20dp"
-                android:contentDescription="@string/star1Description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/star2"
-                app:srcCompat="@drawable/ic_star" />
 
             <ImageView
                 android:id="@+id/star2"
                 android:layout_width="67dp"
                 android:layout_height="67dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="35dp"
                 android:contentDescription="@string/star2Description"
-                app:layout_constraintStart_toEndOf="@+id/star1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.04000002"
+                app:srcCompat="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/star1Description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.07999998"
                 app:srcCompat="@drawable/ic_star" />
 
             <ImageView
                 android:id="@+id/star3"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
                 android:contentDescription="@string/star3Description"
-                app:layout_constraintStart_toEndOf="@+id/star2"
-                app:layout_constraintTop_toTopOf="@+id/star2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.060000002"
                 app:srcCompat="@drawable/ic_star" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
