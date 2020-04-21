@@ -24,8 +24,7 @@ Brainy: Make-A-Story is an Android app designed to help children learn new words
 ### KNOWN BUGS
 - Sharing feature currently only involves story text and mastered word list. 
 - No autoscroll. When returning to a story template from the word bank/character selection screens, the story text position resets to the beginning rather than the location of the blank.
-- Progress bar on story pages will momentarily be empty when returning to the story template screen from the word bank. Once audio resumes, progress bars will return to the correct fill percentage. 
-- Story audio files are much quieter than word and character name audio files.
+- Progress bar on story pages will momentarily be empty when returning to the story template screen from the word bank. Once audio resumes, progress bars will return to the correct state.
 - Mediaplayer isn’t shared across all pages of one story template.
     
 
