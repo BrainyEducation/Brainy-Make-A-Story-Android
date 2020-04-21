@@ -50,7 +50,9 @@ If many errors suddenly appear in the code or if the app keeps crashing, try
 - Build → Clean Project or
 - File → Sync Project with Gradle Files or
 - File → Invalidate Caches / Restart
+
 If the emulated device is not working (crashing, freezing, taking a long time to load), try
 - Open AVD Manager → Actions → Wipe Data
+
 If story audio cannot be heard
 - Make sure the laptop/computer volume is turned up enough, or try using earbuds
