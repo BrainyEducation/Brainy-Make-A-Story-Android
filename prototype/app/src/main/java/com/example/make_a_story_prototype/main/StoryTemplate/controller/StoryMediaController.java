@@ -1,8 +1,11 @@
 package com.example.make_a_story_prototype.main.StoryTemplate.controller;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.util.Log;
+
+import com.example.make_a_story_prototype.R;
 import com.example.make_a_story_prototype.main.StoryTemplate.vm.StoryViewModel;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryBlankIdentifier;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryPage;
@@ -10,12 +13,15 @@ import com.example.make_a_story_prototype.main.data.Story.model.StorySegment;
 import com.example.make_a_story_prototype.main.data.Story.model.StoryText;
 import com.example.make_a_story_prototype.main.data.StoryTemplateSelections.model.BlankSelection;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class StoryMediaController implements MediaPlayer.OnCompletionListener {
+import static android.media.MediaPlayer.*;
+
+public class StoryMediaController implements OnCompletionListener {
 
     public interface ProgressListener {
         void onPlayerProgressChange(float progress);
@@ -35,6 +41,7 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
     private int nextSegmentSeekedPosition;
     private int nextSegmentIndex;
 
+    private boolean isPrepared;
 
     private ProgressListener listener;
 
@@ -117,9 +124,16 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
             }
         }
 
-        mediaPlayer = MediaPlayer.create(context, nextResource);
-        mediaPlayer.setOnCompletionListener(this);
-        mediaPlayer.start();
+//        mediaPlayer = MediaPlayer.create(context, nextResource);
+//        mediaPlayer.setOnCompletionListener(this);
+//        mediaPlayer.start();
+
+        MediaPlayer mediaPlayer = prepareMediaPlayer(nextResource);
+
+//
+//        if (isPrepared) {
+//            mediaPlayer.start();
+//        }
         if (nextSegmentSeekedPosition != 0) {
             mediaPlayer.seekTo(nextSegmentSeekedPosition);
         }
@@ -150,7 +164,7 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
             if (segment instanceof StoryText) {
                 StoryText textSegment = (StoryText) segment;
                 int resource = textSegment.getAudioResource();
-                MediaPlayer mp = MediaPlayer.create(context, resource);
+                MediaPlayer mp = create(context, resource);
 
                 int durationMs = mp.getDuration();
 
@@ -235,5 +249,24 @@ public class StoryMediaController implements MediaPlayer.OnCompletionListener {
         timer.cancel();
         timer.purge();
         timer = null;
+    }
+
+    private MediaPlayer prepareMediaPlayer(int nextResource) {
+        AssetFileDescriptor afd = context.getResources().openRawResourceFd(nextResource);
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setOnCompletionListener(this);
+
+        try {
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            afd.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        mediaPlayer.setOnPreparedListener(mp -> mediaPlayer.start());
+
+        mediaPlayer.prepareAsync();
+
+        return mediaPlayer;
     }
 }

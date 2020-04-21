@@ -54,47 +54,47 @@ public class Data_TheWackyCostumeParty {
         segments.add(new StoryBlankIdentifier("C-2"));
         segments.add(new StoryText(" wasn't to blame. Uh-hunh. \n\n\t",
                 R.raw.wacky_costume_segment_9));
-         //Second Paragraph
-        segments.add(new StoryBlankIdentifier("D-2"));
-        segments.add(new StoryText(" went to the party as a ",R.raw.wacky_costume_segment_10));
-        segments.add(new StoryBlankIdentifier("DD"));
-        segments.add(new StoryText(" — and brought a pet ",R.raw.wacky_costume_segment_11));
-        segments.add(new StoryBlankIdentifier("FF"));
-        segments.add(new StoryText(" who looked very interesting with a ",
-                R.raw.wacky_costume_segment_12));
-        segments.add(new StoryBlankIdentifier("GG"));
-        segments.add(new StoryText(" body and a ",R.raw.wacky_costume_segment_13));
-        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
-        segments.add(new StoryBlankIdentifier("GG"));
-        segments.add(new StoryText(" tail.\n\n\t",R.raw.wacky_costume_segment_14));
-        // Third Paragraph
-        segments.add(new StoryBlankIdentifier("G-2"));
-        segments.add(new StoryText(" came costumed as a ",R.raw.wacky_costume_segment_15));
-        segments.add(new StoryBlankIdentifier("II"));
-        segments.add(new StoryText(", and had a pet ",R.raw.wacky_costume_segment_16));
-        segments.add(new StoryBlankIdentifier("KK"));
-        segments.add(new StoryText(" who looked great with a ",R.raw.wacky_costume_segment_17));
-        segments.add(new StoryBlankIdentifier("LL"));
-        segments.add(new StoryText(" tail and a ",R.raw.wacky_costume_segment_18));
-        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
-        segments.add(new StoryBlankIdentifier("LL"));
-        segments.add(new StoryText(" middle.\n\n\t",R.raw.wacky_costume_segment_19));
-        // Fourth Paragraph
-        segments.add(new StoryBlankIdentifier("K-2"));
-        segments.add(new StoryText(" thought and wondered and cogitated and finally " +
-                "decided to be a ",R.raw.wacky_costume_segment_20));
-        segments.add(new StoryBlankIdentifier("NN"));
-        segments.add(new StoryText(" and brought a strange pet ",
-                R.raw.wacky_costume_segment_21));
-        segments.add(new StoryBlankIdentifier("PP"));
-        segments.add(new StoryText(" with ", R.raw.wacky_costume_segment_22));
-        segments.add(new StoryBlankIdentifier("QQ"));
-        segments.add(new StoryText(" tummy parts and a ", R.raw.wacky_costume_segment_23));
-        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
-        segments.add(new StoryBlankIdentifier("QQ"));
-        //Leads to the beginning of second page
-        segments.add(new StoryText(" tail part.\n\n\tAnd a wonderful time was had by all " +
-                "— until ", R.raw.wacky_costume_segment_24));
+//         //Second Paragraph
+//        segments.add(new StoryBlankIdentifier("D-2"));
+//        segments.add(new StoryText(" went to the party as a ",R.raw.wacky_costume_segment_10));
+//        segments.add(new StoryBlankIdentifier("DD"));
+//        segments.add(new StoryText(" — and brought a pet ",R.raw.wacky_costume_segment_11));
+//        segments.add(new StoryBlankIdentifier("FF"));
+//        segments.add(new StoryText(" who looked very interesting with a ",
+//                R.raw.wacky_costume_segment_12));
+//        segments.add(new StoryBlankIdentifier("GG"));
+//        segments.add(new StoryText(" body and a ",R.raw.wacky_costume_segment_13));
+//        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
+//        segments.add(new StoryBlankIdentifier("GG"));
+//        segments.add(new StoryText(" tail.\n\n\t",R.raw.wacky_costume_segment_14));
+//        // Third Paragraph
+//        segments.add(new StoryBlankIdentifier("G-2"));
+//        segments.add(new StoryText(" came costumed as a ",R.raw.wacky_costume_segment_15));
+//        segments.add(new StoryBlankIdentifier("II"));
+//        segments.add(new StoryText(", and had a pet ",R.raw.wacky_costume_segment_16));
+//        segments.add(new StoryBlankIdentifier("KK"));
+//        segments.add(new StoryText(" who looked great with a ",R.raw.wacky_costume_segment_17));
+//        segments.add(new StoryBlankIdentifier("LL"));
+//        segments.add(new StoryText(" tail and a ",R.raw.wacky_costume_segment_18));
+//        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
+//        segments.add(new StoryBlankIdentifier("LL"));
+//        segments.add(new StoryText(" middle.\n\n\t",R.raw.wacky_costume_segment_19));
+//        // Fourth Paragraph
+//        segments.add(new StoryBlankIdentifier("K-2"));
+//        segments.add(new StoryText(" thought and wondered and cogitated and finally " +
+//                "decided to be a ",R.raw.wacky_costume_segment_20));
+//        segments.add(new StoryBlankIdentifier("NN"));
+//        segments.add(new StoryText(" and brought a strange pet ",
+//                R.raw.wacky_costume_segment_21));
+//        segments.add(new StoryBlankIdentifier("PP"));
+//        segments.add(new StoryText(" with ", R.raw.wacky_costume_segment_22));
+//        segments.add(new StoryBlankIdentifier("QQ"));
+//        segments.add(new StoryText(" tummy parts and a ", R.raw.wacky_costume_segment_23));
+//        // SWITCHING BODY & TAIL TO CORRESPOND TO SAME ID
+//        segments.add(new StoryBlankIdentifier("QQ"));
+//        //Leads to the beginning of second page
+//        segments.add(new StoryText(" tail part.\n\n\tAnd a wonderful time was had by all " +
+//                "— until ", R.raw.wacky_costume_segment_24));
 
         Map<String, ImageLocation> imageLocations = new HashMap<>();
 
@@ -125,7 +125,6 @@ public class Data_TheWackyCostumeParty {
     }
 
 
-    //TODO: figure out mapping for blanks. Filling scene image on previous page based on costume choices. This page uses character ids for costumes?
     private static StoryPage sampleStoryPage2() {
         List<StorySegment> segments = new ArrayList<>();
 

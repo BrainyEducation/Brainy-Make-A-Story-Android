@@ -59,13 +59,16 @@ public class Data_TheSpecialInvention {
         segments.add(new StoryBlankIdentifier("A-2"));
         segments.add(new StoryText(" needed a special stay-up-after-wake-up-in-the-morning invention. ", R.raw.special_invention_segment_11));
         segments.add(new StoryBlankIdentifier("A-2"));
+
+
+
         segments.add(new StoryText(" thought about the ", R.raw.special_invention_segment_12));
         segments.add(new StoryBlankIdentifier("EE"));
         segments.add(new StoryText(" part all through breakfast, and cogitated about the ", R.raw.special_invention_segment_13));
         segments.add(new StoryBlankIdentifier("FF"));
-        //2 lines below commented out bc of missing audio
-        //segments.add(new StoryText(" and the ", R.raw.special_invention_segment_??));
-        //segments.add(new StoryBlankIdentifier("GG"));
+//        2 lines below commented out bc of missing audio
+//        segments.add(new StoryText(" and the ", R.raw.special_invention_segment_??));
+//        segments.add(new StoryBlankIdentifier("GG"));
         segments.add(new StoryText(" section on the way to school, and devised the ", R.raw.special_invention_segment_14));
         segments.add(new StoryBlankIdentifier("JJ"));
         segments.add(new StoryText(" unit at school, and imagined the ", R.raw.special_invention_segment_15));
@@ -74,7 +77,7 @@ public class Data_TheSpecialInvention {
         segments.add(new StoryBlankIdentifier("LL"));
         segments.add(new StoryText(" made the final step and then knew exactly how to " +
                 "create it!\n\n\tEvery morning on her way to the kitchen Mom opened the bedroom door " +
-                "to politely say, \"Wake up!\"\n\n\t", R.raw.special_invention_segment_17)); // TODO: special_invention_segment_17 has mistake. Fix the audio
+                "to politely say, \"Wake up!\"\n\n\t", R.raw.special_invention_segment_17));
         segments.add(new StoryBlankIdentifier("A-2"));
         segments.add(new StoryText(" tied a string to the door knob, so when the door " +
                 "opened it would drop a toy ", R.raw.special_invention_segment_18));
@@ -94,11 +97,13 @@ public class Data_TheSpecialInvention {
         imageLocations.put("BB", new ImageLocation("BB", 56f, 46f, 85, 85, 0));
         imageLocations.put("CC", new ImageLocation("CC", 63f, 42f, 85, 85, 0));
         imageLocations.put("DD", new ImageLocation("DD", 62f, 84f, 85, 85, 0));
-        imageLocations.put("LL", null);
         imageLocations.put("EE", null);
-        imageLocations.put("GG", null);
+        imageLocations.put("FF", null);
+        //imageLocations.put("GG", null);
         imageLocations.put("JJ", null);
         imageLocations.put("KK", null);
+        imageLocations.put("LL", null);
+
 
         return new StoryPage(R.drawable.story_special_invention_1, segments, imageLocations);
     }
