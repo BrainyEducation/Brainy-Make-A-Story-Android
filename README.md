@@ -19,7 +19,7 @@ Brainy: Make-A-Story is an Android app designed to help children learn new words
 - Story audio will pause when a blank is reached rather than playing through to the end.
 - Story audio will resume from a blank upon returning from the word bank instead of starting back at the beginning. 
 - Rewind will go back 15 seconds rather than to the beginning of the story.
-- Updated view of home screen with client provided images. Took out "Friends" selection.
+- Updated view of home screen with client provided images. "Friends" section has been removed.
     
 ### KNOWN BUGS
 - Sharing feature currently only involves story text and mastered word list. 
