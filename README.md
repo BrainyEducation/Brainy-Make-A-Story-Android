@@ -1,7 +1,6 @@
 # Brainy: Make-A-Story 
-An Android application to help children learn new words through fill-in-the-blank, read-aloud stories. 
-
-## Release Notes version Brainy Make-A-Story 1.0
+Brainy: Make-A-Story is an Android app designed to help children learn new words through fill-in-the-blank, read-aloud stories.
+## Release Notes version Brainy Make-A-Story v1.0.0
 ### FEATURES
 - Choose from 4 story templates
 - Add words or characters to blanks in the story template
@@ -38,6 +37,13 @@ Download Android Studio and SDK Tools. See [link](https://developer.android.com/
 Dependencies are included in gradle files from “DOWNLOAD”
 ### DOWNLOAD
 Download or clone [link](https://github.com/adelventura/Brainy-Make-A-Story-Android.git) and open project in Android Studio
+##### Using Version Control:
+1. Open Android Studio
+2. Go to:
+File -> New -> Project from Version Control -> Git
+3. Paste the repository URL https://github.com/adelventura/Brainy-Make-A-Story-Android.git
+4. Choose a directory to clone the project into.
+5. Select Clone
 ### BUILD
 Build and run “Brainy-Make-A-Story-Android/prototype/” in Android Studio. See [link](https://developer.android.com/studio/run)
 ### INSTALLATION
